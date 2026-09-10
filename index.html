@@ -279,7 +279,7 @@ input:focus, select:focus, textarea:focus {
   overflow-wrap: break-word; 
 } 
 
-/* MARGENES SIMÉTRICOS EN PAGINAS SECUNDARIAS (PÁGINA 2 EN ADELANTE) */ 
+/* MARGENES SIMÉTRICOS EN PAGINAS SECUNDARIAS */ 
 .doc-preview-wrapper .a4-page:nth-of-type(n+2) { 
   padding-top: 2.5cm !important; 
 } 
@@ -301,8 +301,23 @@ input:focus, select:focus, textarea:focus {
 .sangria-dto { text-indent: 3.5cm !important; margin-bottom: 1em; text-align: justify; word-break: normal; } 
 .sangria-estandar { text-indent: 1.25cm !important; margin-bottom: 1em; text-align: justify; word-break: normal; } 
 .sangria-cero { text-indent: 0cm !important; margin-bottom: 1em; text-align: justify; word-break: normal; } 
-.doc-body ol { padding-left: 1.25cm; margin-bottom: 1em; } 
+.doc-body ol, .doc-body ul { padding-left: 1.25cm; margin-bottom: 1em; } 
 .doc-body li { margin-bottom: 0.5em; text-align: justify; } 
+
+table.doc-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+table.doc-table th, table.doc-table td {
+  border: 1px solid #000;
+  padding: 6px;
+  font-size: 10pt;
+  text-align: left;
+}
+table.doc-table th {
+  background-color: #f1f5f9;
+}
 
 /* ESTILOS DE CARÁTULA */ 
 .caratula-container-auto { 
@@ -319,7 +334,6 @@ input:focus, select:focus, textarea:focus {
 .caratula-label { font-weight: bold; text-decoration: underline; } 
 .caratula-value { font-weight: bold; } 
 
-/* OCULTAR ENCABEZADOS EN PÁGINAS PARES (2, 4, 6, ETC.) */ 
 .doc-preview-wrapper .a4-page:nth-of-type(even) .doc-header-logo { display: none !important; } 
 .doc-preview-wrapper .a4-page:nth-of-type(odd) .doc-header-logo { display: block !important; } 
 
@@ -356,7 +370,6 @@ input:focus, select:focus, textarea:focus {
     word-wrap: break-word !important; 
     overflow-wrap: break-word !important; 
   } 
-  /* AJUSTE ESPECÍFICO DE IMPRESIÓN PARA SEGUNDA PÁGINA EN ADELANTE */ 
   .doc-preview-wrapper .a4-page:nth-of-type(n+2) { 
     padding-top: 2.5cm !important; 
   } 
@@ -372,15 +385,21 @@ input:focus, select:focus, textarea:focus {
     <div class="top-navbar-title">GENERADOR DE NOTAS SUMARIALES PAR</div> 
   </div> 
   <ul class="nav-list-top"> 
-    <li class="nav-item-top active" onclick="switchTab('caratula_doc', this)">📄 2. Carátula</li> 
+    <li class="nav-item-top active" onclick="switchTab('caratula_doc', this)">📄 1. Carátula</li> 
+    <li class="nav-item-top" onclick="switchTab('decl_testimonial', this)">📄 2. Dec. Testimonial</li> 
     <li class="nav-item-top" onclick="switchTab('dto_recepcion', this)">📄 3. Dto. Recepción</li> 
     <li class="nav-item-top" onclick="switchTab('col_div', this)">📄 4. Col. DIV</li> 
-    <li class="nav-item-top" onclick="switchTab('col_existencia_ipp', this)">📄 5. Col. Existencia IPP</li> 
+    <li class="nav-item-top" onclick="switchTab('reg_institucional', this)">📄 5. Reg. Institucional</li> 
     <li class="nav-item-top" onclick="switchTab('star_existencia_cautelares', this)">📄 6. Existencia Cautelares</li> 
     <li class="nav-item-top" onclick="switchTab('col_cria_myf', this)">📄 7. Col. Cría MYF</li> 
     <li class="nav-item-top" onclick="switchTab('star_inf_anmac_repar', this)">📄 8. Inf. ANMAC / REPAR</li> 
     <li class="nav-item-top" onclick="switchTab('star_lep', this)">📄 9. Legajo Elec. (LEP)</li> 
-    <li class="nav-item-top" onclick="switchTab('decl_testimonial', this)">📄 10. Dec. Testimonial</li> 
+    <li class="nav-item-top" onclick="switchTab('col_existencia_ipp', this)">📄 10. Col. Existencia IPP</li> 
+    <li class="nav-item-top" onclick="switchTab('dto_inicio', this)">📄 11. Dto. Inicio</li> 
+    <li class="nav-item-top" onclick="switchTab('parte_escrito', this)">📄 12. Parte Escrito</li> 
+    <li class="nav-item-top" onclick="switchTab('dto_corre_agregado', this)">📄 13. Dto. Corre Agregado</li> 
+    <li class="nav-item-top" onclick="switchTab('informe_carpetas', this)">📄 14. Inf. Carpetas Médicas</li> 
+    <li class="nav-item-top" onclick="switchTab('indice_diligencias', this)">📄 15. Índice de Diligencias</li> 
   </ul> 
 </div> 
 
@@ -393,7 +412,7 @@ input:focus, select:focus, textarea:focus {
       <!-- SECCIÓN 1: FECHA DE LA NOTA --> 
       <div class="row-group-block"> 
         <div class="row-group-title"><span class="row-badge">Sección 1</span>FECHA DE LA NOTA</div> 
-        <div class="form-group"><label>DÍA</label><input type="number" id="f1_dia" value="10"></div> 
+        <div class="form-group"><label>DÍA</label><input type="number" id="f1_dia" value="2"></div> 
         <div class="form-group"><label>MES</label><input type="text" id="f1_mes" value="abril"></div> 
         <div class="form-group"><label>AÑO</label><input type="number" id="f1_anio" value="2026"></div> 
       </div> 
@@ -486,11 +505,12 @@ input:focus, select:focus, textarea:focus {
         <div class="form-group"><label>AÑO DEL HECHO</label><input type="number" id="f_hecho_anio" value="2026"></div> 
         <div class="form-group"><label>EXP. ELECTRONICO N°</label><input type="text" id="f_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP"></div> 
         <div class="form-group"><label>CARATULA</label><input type="text" id="f_caratula" value="21100 - 082162/2026 - DN154527"></div> 
+        <div class="form-group"><label>ENCUADRE ADMINISTRATIVO</label><input type="text" id="f_encuadre" value="-sin encuadre administrativo-"></div> 
         <div class="form-group"><label>INTERVENCION:</label><select id="f_intervencion" class="control-disciplinario-options"></select></div> 
-        <div class="form-group"><label>LUGAR DEL HECHO:</label><input type="text" id="f_lugar_hecho" value="CALLE 1 Y CALLE 2"></div> 
+        <div class="form-group"><label>LUGAR DEL HECHO:</label><input type="text" id="f_lugar_hecho" value="CALLE 1 N° 133"></div> 
         <div class="form-group"><label>LOCALIDAD DEL HECHO</label><input type="text" id="f_localidad_hecho" value="Los Hornos"></div> 
         <div class="form-group"><label>PARTIDO DEL HECHO</label><input type="text" id="f_partido_hecho" value="LA PLATA"></div> 
-        <div class="form-group"><label>SINTESIS DEL HECHO:</label><textarea id="f_sintesis_hecho" placeholder="Ingrese síntesis del hecho..."></textarea></div> 
+        <div class="form-group"><label>SINTESIS DEL HECHO:</label><textarea id="f_sintesis_hecho" placeholder="Ingrese síntesis del hecho...">el oficial ut-supra, encontrándose dirigiéndose al servicio a bordo de su motocicleta marca honda, modelo 110cc, dominio 123DCD, circulando por calle 1 entre calle 2 y calle 3 de Los hornos, pierde el control del rodado y cae, golpeandose brazo derecho sufriendo cortes y escoriaciones en miembro mencionado y politraumas varios (lesiones leves, salvo complicaciones). Consecuentemente, personal de Subsección Personal de esta  se comunica telefónicamente con ART Provincia, e impuestos de hecho, registran siniestro con denuncia N° 333333, designado a Clínica buena de Los Hornos para continuar el tratamiento por las lesiones padecidas.</textarea></div> 
       </div> 
       <!-- SECCIÓN 9: MAGISTRADO Y CAUSA PENAL --> 
       <div class="row-group-block"> 
@@ -519,13 +539,13 @@ input:focus, select:focus, textarea:focus {
   <!-- PANEL DERECHO: VISTA PREVIA --> 
   <div class="main-panel"> 
     <div class="card" id="card-desplegable-picker" style="display: none;"> 
-      <div class="card-title">SELECCIÓN DE DILIGENCIAS (DESPLEGABLE EXCLUSIVO COL. DIV)</div> 
-      <div class="dropdown-container"> 
+      <div class="card-title">SELECCIÓN Y CONFIGURACIÓN DINÁMICA DE ELEMENTOS</div> 
+      <div class="dropdown-container" id="container-picker-dynamic"> 
         <select id="dropdown-options-select"></select> 
-        <button class="btn btn-add" onclick="addSelectedPoint()">➕ Agregar Punto</button> 
+        <button class="btn btn-add" onclick="addSelectedPoint()">➕ Agregar Elemento</button> 
       </div> 
-      <label>PUNTOS SELECCIONADOS PARA LA NOTA:</label> 
-      <ol class="selected-list" id="selected-points-list"></ol> 
+      <label>ELEMENTOS CONFIGURADOS:</label> 
+      <div class="selected-list" id="selected-points-list"></div> 
     </div> 
     <div class="card"> 
       <div class="card-title"> 
@@ -582,11 +602,20 @@ const listaControlDisciplinarioColumnaE = [
   "AUDITORÍA GENERAL DE ASUNTOS INTERNOS (A.G.A.I.)" 
 ]; 
 
+const listaDestinatariosColumnaG = [
+  "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
+  "AL SEÑOR COORDINADOR DEL DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO",
+  "AL SEÑOR DIRECTOR DE LA DIRECCIÓN FUERZA BARRIAL DE APROXIMACIÓN (FBA)",
+  "AL SEÑOR DIRECTOR REGIMENES Y PERSONAL",
+  "AL SEÑOR JEFE DE CUERPO MEDICO"
+];
+
+// Opciones del Desplegable general (pestaña DESPLEGABLE de la planilla)
 const listaOpcionesDesplegableRaw = [ 
   "Informe de tipos, dias, horarios y modalidad de servicio del OFL 123123 IMPUTADO DEL HECHO", 
   "Concepto Funcional y Personal firmado por superior directo del causante OFL 123123 IMPUTADO DEL HECHO", 
-  "Copia certificada y legible con habilitación del Libro de Novedades de la guardia de fecha 10/abril/2026", 
-  "Copia certificada y legible con habilitación del Libro de Presentismo y Co.Re.S. de fecha 10/abril/2026", 
+  "Copia certificada y legible con habilitación del Libro de Novedades de la guardia de fecha 2/abril/2026", 
+  "Copia certificada y legible con habilitación del Libro de Presentismo y Co.Re.S. de fecha 2/abril/2026", 
   "Legajo Electrónico Personal (L.E.P.) de OFL 123123 IMPUTADO DEL HECHO", 
   "Certifica de Revista legible generado por el Sistema Informático del Personal (SIPP) del OFL 123123 IMPUTADO DEL HECHO", 
   "Adune informe de Comportamiento y Seguimiento tanto en la faz laboral por parte del superior directo del OFL 123123 IMPUTADO DEL HECHO", 
@@ -594,37 +623,93 @@ const listaOpcionesDesplegableRaw = [
   "Copia certificada y legible de denuncia de accidente de trabajo o enfermedad profesional a la Asegurador Provincia A.R.T del lesionado.", 
   "Declaración testimonial al OFL 123123 IMPUTADO DEL HECHO bajo juramento de decir la verdad donde narre el recorrido habitual que realiza habitualmente desde el domicilio al lugar donde presta servicio acompañado con croquis ilustrativo señalando el domicilio declarado del agente, lugar del siniestro y lugar de trabajo", 
   "Adune copia certificada y legible de orden de servicio vigente al momento de los hechos en investigación.", 
-  "Realice informe existencia de Procesos Penales vinculados a los presentes actuados. En caso de ser positivo informe número de causa, caratula, magistrado interviniente, estado en el que se encuentra y temperamento legal adoptado para con el personal policial interviniente. En caso de encontrarse archivadas, informe fecha, legajo y/o acompañe copia certificada del auto que así lo dispone. Solicito se disponga que la información producida y/o actividad desarrollada por el personal, sea volcada mediante Declaración Testimonial, bajo juramento de ley y demás prescripciones legales.", 
+  "Realice informe existencia de Procesos Penales vinculados a los presentes actuados. En caso de ser positivo informe número de causa, caratula, magistrado interviniente, estado en el que se encuentra y temperamento legal adoptado para con el personal policial interviniente.", 
   "Copia certificada y legible de CONSTANCIA DE ALTA/ FIN DE TRATAMIENTO de la Aseguradora de Riesgos del Trabajo (A.R.T.) del OFL 123123 VICTIMA DEL HECHO", 
   "Reconocimiento Médico Legal (RML) procticado sobre del OFL 123123 VICTIMA DEL HECHO", 
   "Copia certificada y legible de Licencia de conducir habilitante del conductor de la unidad policial.", 
   "Copia certificada y legible del Seguro Obligatorio para circular del momento del hecho del rodado.", 
   "Copia certificada y legible de Declaración Jurada (DDJJ) expedida por sistema informatico de Personal (SIPP) de vehículos firmada por el OFL 123123 IMPUTADO DEL HECHO", 
-  "Efectuar el pertinente contacto con la denunciante con el objetivo de incorporar a estos todos aquellos elementos que a su criterio tiendan a esclarecer el suceso ahora ventilado, pregunte si aún persisten los hechos denunciados, si tuvo contacto posterior con el denunciado, si volvió a sufrir hechos de violencia. Asimismo, se le pregunte si posee testigos presenciales o testigos de referencia (familiares, vecinas/os, personal de asistencia social, pero tengan conocimiento de los hechos de la Ley 12569). Y de ser así, se les recepcione declaración.", 
-  "Informe evaluación de riesgo y socio ambiental de las persona en situación de violencia, por razones de género y/o familiar y grupo familiar elaborado por el equipo Interdisciplinario de Comisaria de la Familia que corresponda por jurisdicción.", 
-  "Certificar denuncias anteriores con idéntica temática ante dicha Dependencia (Cría de la Familia), debiendo además consignarse el número de EE generado a raíz de cada uno de los oficios mencionados. En caso de ser positivo informe el estado actual de la causa de familia e IPP, debiendo informar situación procesal del agente involucrado (plasmar dicha diligencia mediante declaración testimonial y/o informe judicial).", 
-  "Solicitar Junta Medica Departamental (JMD), a efectos de establecer si: a. Se hallan en condiciones psicofísicas de continuar realizando tareas inherentes a su subescalafón, grado y cargo. b. Si se encuentran apto para portar armas de fuego. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. d. Establecer en su perfil psicológico signos de poseer problemas de consumo problemático de sustancias prohibidas.", 
-  "Acta rubricada por el causante con el objeto de establecer si posee en forma particular material incluido en la Ley Nacional 20429 de armas y explosivos y modificatorias, y si algún arma de las denunciadas se halla “homologada como armamento provisto”.", 
-  "Informe de ANMAC-REPAR, conforme artículo 13 Protocolo para el Abordaje, la Evaluación, y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en Situaciones de Violencia de Género y Violencia Familiar”, aprobado por Resolución del Ministerio de Seguridad Nº 581/2021” (en las actuaciones en que se empleen armas de fuego) a efectos de informar si posee además del armamento provisto y reglamentario, otra arma de fuego.", 
-  "Declaración Testimonial u Oficio Judicial, si siguen en vigencia las medidas restrictivas dispuestas por el Juzgado de Familia en turno.", 
-  "Informe de Visu realizado por personal idóneo, donde conste las causas del desperfecto mecánico en vehículo oficial.", 
-  "Declaración testimonial del encargado de Logística si poseía a cargo del bien patrimonial en cuestión.", 
+  "Efectuar el pertinente contacto con la denunciante con el objetivo de incorporar a estos todos aquellos elementos que a su criterio tiendan a esclarecer el suceso ahora ventilado...", 
+  "Informe evaluación de riesgo y socio ambiental de las persona en situación de violencia...", 
+  "Certificar denuncias anteriores con idéntica temática ante dicha Dependencia...", 
+  "Solicitar Junta Medica Departamental (JMD)...", 
+  "Acta rubricada por el causante...", 
+  "Informe de ANMAC-REPAR...", 
+  "Declaración Testimonial u Oficio Judicial, si siguen en vigencia las medidas restrictivas...", 
+  "Informe de Visu realizado por personal idóneo...", 
+  "Declaración testimonial del encargado de Logística...", 
   "Copia certificada y legible del cargo personal del elemento provisto.", 
   "Copia certificada y legible del cargo personal de chaleco de protección balística.", 
-  "Copia certificada y legible de Libre de Deuda de la vestimenta y elementos provistos por la institución. En caso de que se encuentren secuestrados en las actuaciones de mención, realice informe firmado por el titular del elemento adjuntando copia certificada y legible de solicitud de Libramiento y restitución al magistrado judicial interviniente.", 
+  "Copia certificada y legible de Libre de Deuda de la vestimenta y elementos provistos...", 
   "Copia certificada y legible de Licencia de conducir del OFL 123123 IMPUTADO DEL HECHO", 
   "Copia certificada y legible de denuncia a la aseguradora (DL6) de la unidad que nos ocupa.", 
   "Placas fotográficas del móvil del día de los hechos.", 
-  "Copia certificada y legible de resolución del chofer de la unidad de autorización para Manejo de Móviles Oficiales de la Dirección de Automotores Oficiales (D.A.O.).", 
-  "Declaración testimonial del Jefe de la Subsección Logística, informando puntualmente: origen patrimonial de la unidad; si la unidad fue radiada de servicio y/o dado de baja patrimonial. En el caso de haberse reparado el vehículo a la fecha, forma en que se ha efectuado tal tarea, como así mismo origen de los fondos y si ello ha generado erogación al fisco y su monto.", 
-  "Adune presupuesto de taller que cotice el costo de las reparaciones de los daños padecidos al móvil policial.", 
-  "Copia certificada y legible de Historia Clínica y/o constancia de atención del nosocomio que realizó la atención primaria del OFL 123123 VICTIMA DEL HECHO" 
+  "Copia certificada y legible de resolución del chofer de la unidad...", 
+  "Declaración testimonial del Jefe de la Subsección Logística...", 
+  "Adune presupuesto de taller que cotice el costo...", 
+  "Copia certificada y legible de Historia Clínica y/o constancia de atención...", 
+  "Stud. Registro Institucional", 
+  "Acta de constatación", 
+  "Denuncia a la aseguradora de riesgos del trabajo (A.R.T.)", 
+  "Decreto inicio actuaciones administrativas", 
+  "comunicación Administrativa -Parte Escrito-", 
+  "Corre agregado", 
+  "Captura del Sistema Informatico del Personal Policial (SIPP) - INFO DEL EFECTIVO", 
+  "Copia de Declaración Jurada (DDJJ) de Teléfonos firmada", 
+  "Copia de Declaración Jurada (DDJJ) de Vehiculos firmada", 
+  "Copia de Declaración Jurada (DDJJ) de Co.Re.S y Pol.Ad.", 
+  "Captura del Sistema Informatico del Personal Policial (SIPP) - PARTES DE ENFERMO", 
+  "Captura del Sistema Informatico del Personal Policial (SIPP) - SANCIONES DIRECTAS", 
+  "Vademecum - RP21100", 
+  "Situación de revista del efectivo generado por el Sistema Informatico del Personal Policial (SIPP)", 
+  "Stud. Legajo Electrónico Personal (L.E.P.)", 
+  "Legajo Electrónico Personal (L.E.P.)", 
+  "Concepto Funcional y Personal", 
+  "Informe de tipo, días y horario de servicio", 
+  "Copia certificada con habilitación del Libro de novedades de la guardia", 
+  "Copia certificada con habilitación Libro de presentismo y Co.Re.S.", 
+  "Acta de Inspección ocular del lugar de los hechos", 
+  "Croquis ilustrativo sin escalas del lugar de los hechos", 
+  "Placas fotográficas del lugar del hecho", 
+  "Declaración testimonial del Titular", 
+  "Declaración testimonial del Secretario de actuaciones", 
+  "Declaración testimonial del Encargado de Logistica", 
+  "Declaración testimonial del causante", 
+  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa.", 
+  "Controles Médicos del causante", 
+  "Certificados médicos del causante", 
+  "Historia Clinica del causante", 
+  "Copia certificado de constancia de ALTA / FIN DE TRATAMIENTO ART del causante.", 
+  "Alta médica de causante", 
+  "Stud. Reconocimiento Médico Legal (R.M.L.) al causante", 
+  "Reconocimiento Médico Legal (R.M.L.) del causante", 
+  "auto de imputación", 
+  "notificación de auto de imputación", 
+  "Stud. de Acogimiento a Procedimiento Abreviado", 
+  "Acta de Acuerdo de Procedimiento Abreviado", 
+  "Acta de Incomparecencia y Decaimiento de Derecho de Defensa.", 
+  "Presentacion de Defensa", 
+  "Resolucion de Defensa", 
+  "Auto de elevación", 
+  "Notificación de Auto de Elevacion", 
+  "Cierre de actuaciones administratativas", 
+  "Síntesis y conclusiones" 
 ]; 
 
 let appState = { 
   carga_datos: {}, 
   currentTab: "caratula_doc", 
-  puntosSeleccionadosIndices: [0, 1, 4, 5] 
+  puntosSeleccionadosIndices: [0, 1, 3, 4], 
+  destinatariosSeleccionados: [0, 1, 4], 
+  correAgregadoIndices: [52, 53, 50, 51, 54, 55], 
+  carpetasSeleccionadasIndices: [7], 
+  indiceItems: [ 
+    { idx: 36, folio: "1" }, 
+    { idx: 37, folio: "2" }, 
+    { idx: 38, folio: "3-4" }, 
+    { idx: 39, folio: "5" }, 
+    { idx: 40, folio: "6" } 
+  ] 
 }; 
 
 window.addEventListener('DOMContentLoaded', () => { 
@@ -644,13 +729,13 @@ function initFormSelects() {
       select.appendChild(opt); 
     }); 
   }); 
-  document.getElementById('f_imp_destino').value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)"; 
+  document.getElementById('f_imp_destino').value = "CIVIL"; 
   document.getElementById('f_dec_destino').value = "DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)"; 
   document.getElementById('f_proc_procedencia').value = "DIR. FUERZA BARRIAL DE APROX. (FBA)"; 
   document.getElementById('f_dest_dirigida_a').value = "DIV. FUERZA BARRIAL DE APROX. III (FBA QUILMES)"; 
-  document.getElementById('f_den_destino').value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)"; 
+  document.getElementById('f_den_destino').value = "CIVIL"; 
   document.getElementById('f_cau_destino').value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)"; 
-  document.getElementById('f_vic_destino').value = "DIV. FUERZA BARRIAL DE APROX. I (FBA LOMAS DE ZAMORA)"; 
+  document.getElementById('f_vic_destino').value = "CIVIL"; 
 
   const cdSelect = document.getElementById('f_intervencion'); 
   cdSelect.innerHTML = ''; 
@@ -672,10 +757,10 @@ function bindFormInputs() {
 
 function getFechaNotaFormatted(bold = true) { 
   const cd = appState.carga_datos; 
-  const dia = cd.f1_dia || '10'; 
+  const dia = cd.f1_dia || '2'; 
   const mes = (cd.f1_mes || 'abril').toLowerCase(); 
   const anio = cd.f1_anio || '2026'; 
-  const str = `${dia} de ${mes} de ${anio}`; 
+  const str = `${dia} de ${mes} del ${anio}`; 
   return bold ? `<b>${str}</b>` : str; 
 } 
 
@@ -684,25 +769,29 @@ function getFechaHechoFormatted(bold = true) {
   const dia = cd.f_hecho_dia || '2'; 
   const mes = (cd.f_hecho_mes || 'abril').toLowerCase(); 
   const anio = cd.f_hecho_anio || '2026'; 
-  const str = `${dia} de ${mes} de ${anio}`; 
+  const str = `${dia} de ${mes} del ${anio}`; 
   return bold ? `<b>${str}</b>` : str; 
 } 
 
 function getLugarFechaEncabezado(bold = true) { 
   const partidoNota = appState.carga_datos.f_imp_partido || 'LA PLATA'; 
   const fechaStr = getFechaNotaFormatted(bold); 
-  return `${partidoNota}, ${fechaStr}`; 
+  return `${partidoNota} ${fechaStr}`; 
 } 
 
 function formatPointText(rawText, htmlMode = true) { 
   if (!rawText) return ''; 
   const imputado = appState.carga_datos.f_imp_nombre || 'OFL 123123 IMPUTADO DEL HECHO'; 
+  const causante = appState.carga_datos.f_cau_nombre || 'OFL 123123 CAUSANTE DEL HECHO';
   const victima = appState.carga_datos.f_vic_nombre || 'OFL 123123 VICTIMA DEL HECHO'; 
   const fechaHecho = getFechaHechoFormatted(htmlMode); 
   return rawText 
     .replaceAll("OFL 123123 IMPUTADO DEL HECHO", imputado) 
+    .replaceAll("DATOS DEL CAUSANTE", causante)
     .replaceAll("OFL 123123 VICTIMA DEL HECHO", victima) 
-    .replaceAll("10/abril/2026", fechaHecho); 
+    .replaceAll("DATOS DE LA VICTIMA", victima)
+    .replaceAll("2/abril/2026", fechaHecho)
+    .replaceAll("2 de abril del 2026", fechaHecho); 
 } 
 
 function updateStateFromInputs() { 
@@ -718,32 +807,54 @@ function updateStateFromInputs() {
 function populateDropdownOptions() { 
   const select = document.getElementById('dropdown-options-select'); 
   if (!select) return; 
-  const currentSelected = select.value; 
   select.innerHTML = ''; 
-  listaOpcionesDesplegableRaw.forEach((rawText, index) => { 
-    const formattedTextOnly = formatPointText(rawText, false); 
-    const opt = document.createElement('option'); 
-    opt.value = index; 
-    opt.textContent = `${index + 1}. ${formattedTextOnly}`; 
-    select.appendChild(opt); 
-  }); 
-  if (currentSelected !== null && currentSelected !== undefined) { 
-    select.value = currentSelected; 
-  } 
+  
+  if (appState.currentTab === 'parte_escrito') {
+    listaDestinatariosColumnaG.forEach((dest, index) => {
+      const opt = document.createElement('option'); 
+      opt.value = index; 
+      opt.textContent = `${index + 1}. ${dest}`; 
+      select.appendChild(opt);
+    });
+  } else {
+    listaOpcionesDesplegableRaw.forEach((rawText, index) => { 
+      const formattedTextOnly = formatPointText(rawText, false); 
+      const opt = document.createElement('option'); 
+      opt.value = index; 
+      opt.textContent = `${index + 1}. ${formattedTextOnly}`; 
+      select.appendChild(opt); 
+    }); 
+  }
 } 
 
 function addSelectedPoint() { 
   const select = document.getElementById('dropdown-options-select'); 
   const idx = parseInt(select.value, 10); 
-  if (!isNaN(idx) && !appState.puntosSeleccionadosIndices.includes(idx)) { 
-    appState.puntosSeleccionadosIndices.push(idx); 
-    renderSelectedPointsList(); 
-    renderNotePreview(appState.currentTab); 
-  } 
+  if (isNaN(idx)) return;
+
+  if (appState.currentTab === 'col_div') {
+    if (!appState.puntosSeleccionadosIndices.includes(idx)) appState.puntosSeleccionadosIndices.push(idx);
+  } else if (appState.currentTab === 'parte_escrito') {
+    if (!appState.destinatariosSeleccionados.includes(idx)) appState.destinatariosSeleccionados.push(idx);
+  } else if (appState.currentTab === 'dto_corre_agregado') {
+    if (!appState.correAgregadoIndices.includes(idx)) appState.correAgregadoIndices.push(idx);
+  } else if (appState.currentTab === 'informe_carpetas') {
+    if (!appState.carpetasSeleccionadasIndices.includes(idx)) appState.carpetasSeleccionadasIndices.push(idx);
+  } else if (appState.currentTab === 'indice_diligencias') {
+    appState.indiceItems.push({ idx: idx, folio: "" });
+  }
+
+  renderSelectedPointsList(); 
+  renderNotePreview(appState.currentTab); 
 } 
 
 function removePoint(indexInSelected) { 
-  appState.puntosSeleccionadosIndices.splice(indexInSelected, 1); 
+  if (appState.currentTab === 'col_div') appState.puntosSeleccionadosIndices.splice(indexInSelected, 1);
+  else if (appState.currentTab === 'parte_escrito') appState.destinatariosSeleccionados.splice(indexInSelected, 1);
+  else if (appState.currentTab === 'dto_corre_agregado') appState.correAgregadoIndices.splice(indexInSelected, 1);
+  else if (appState.currentTab === 'informe_carpetas') appState.carpetasSeleccionadasIndices.splice(indexInSelected, 1);
+  else if (appState.currentTab === 'indice_diligencias') appState.indiceItems.splice(indexInSelected, 1);
+
   renderSelectedPointsList(); 
   renderNotePreview(appState.currentTab); 
 } 
@@ -752,13 +863,33 @@ function renderSelectedPointsList() {
   const listEl = document.getElementById('selected-points-list'); 
   if (!listEl) return; 
   listEl.innerHTML = ''; 
-  appState.puntosSeleccionadosIndices.forEach((rawIdx, listIdx) => { 
-    const rawText = listaOpcionesDesplegableRaw[rawIdx]; 
-    const formattedHtml = formatPointText(rawText, true); 
+
+  let activeList = [];
+  if (appState.currentTab === 'col_div') activeList = appState.puntosSeleccionadosIndices;
+  else if (appState.currentTab === 'parte_escrito') activeList = appState.destinatariosSeleccionados;
+  else if (appState.currentTab === 'dto_corre_agregado') activeList = appState.correAgregadoIndices;
+  else if (appState.currentTab === 'informe_carpetas') activeList = appState.carpetasSeleccionadasIndices;
+  else if (appState.currentTab === 'indice_diligencias') activeList = appState.indiceItems;
+
+  const ul = document.createElement('ul');
+  ul.className = 'selected-list';
+
+  activeList.forEach((item, listIdx) => { 
+    let formattedHtml = "";
+    if (appState.currentTab === 'parte_escrito') {
+      formattedHtml = listaDestinatariosColumnaG[item];
+    } else if (appState.currentTab === 'indice_diligencias') {
+      formattedHtml = `<span>${formatPointText(listaOpcionesDesplegableRaw[item.idx], true)}</span> 
+        <input type="text" placeholder="Folio/s" value="${item.folio}" oninput="appState.indiceItems[${listIdx}].folio=this.value; renderNotePreview(appState.currentTab);" style="width:100px; display:inline-block; margin-left:10px;">`;
+    } else {
+      formattedHtml = formatPointText(listaOpcionesDesplegableRaw[item], true);
+    }
+
     const li = document.createElement('li'); 
     li.innerHTML = `<span><strong>${listIdx + 1}.</strong> ${formattedHtml}</span> <button class="btn btn-danger" onclick="removePoint(${listIdx})">❌ Quitar</button>`; 
-    listEl.appendChild(li); 
+    ul.appendChild(li); 
   }); 
+  listEl.appendChild(ul);
 } 
 
 function switchTab(tabKey, element) { 
@@ -766,13 +897,18 @@ function switchTab(tabKey, element) {
   if (element) element.classList.add('active'); 
   appState.currentTab = tabKey; 
   const pickerCard = document.getElementById('card-desplegable-picker'); 
-  pickerCard.style.display = (tabKey === 'col_div') ? 'block' : 'none'; 
+  const showPicker = ['col_div', 'parte_escrito', 'dto_corre_agregado', 'informe_carpetas', 'indice_diligencias'].includes(tabKey);
+  pickerCard.style.display = showPicker ? 'block' : 'none'; 
+  
+  populateDropdownOptions();
+  renderSelectedPointsList();
   renderNotePreview(tabKey); 
 } 
 
 function getSingleDocHtml(tabKey) { 
   const cd = appState.carga_datos; 
   const fechaHechoHtml = getFechaHechoFormatted(true); 
+  const fechaNotaHtml = getFechaNotaFormatted(true);
   const lugarFechaEncabezadoHtml = getLugarFechaEncabezado(true); 
   const logoHtml = `<div class="doc-header-logo"><img src="${LOGO_HEADER_BASE64}"></div>`; 
 
@@ -788,8 +924,8 @@ function getSingleDocHtml(tabKey) {
           <div class="caratula-grid-auto"> 
             <div class="caratula-row-item"><div class="caratula-label">EXPEDIENTE ELECTRONICO:</div><div class="caratula-value">${cd.f_exp_elec || 'EX-2026-16420475- -GDEBA-DDPRYGEMSGP'}</div></div> 
             <div class="caratula-row-item"><div class="caratula-label">FECHA DEL HECHO:</div><div class="caratula-value">${fechaHechoHtml}</div></div> 
-            <div class="caratula-row-item"><div class="caratula-label">CAUSANTE:</div><div class="caratula-value">${cd.f_imp_nombre || 'OFL 123123 IMPUTADO DEL HECHO'}</div></div> 
-            <div class="caratula-row-item"><div class="caratula-label">DESTINO DEL CAUSANTE:</div><div class="caratula-value">${cd.f_imp_destino || 'DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)'}</div></div> 
+            <div class="caratula-row-item"><div class="caratula-label">CAUSANTE:</div><div class="caratula-value">${cd.f_cau_nombre || 'OFL 123123 CAUSANTE DEL HECHO'} (${cd.f_cau_destino})</div></div> 
+            <div class="caratula-row-item"><div class="caratula-label">DESTINO DEL CAUSANTE:</div><div class="caratula-value">${cd.f_cau_destino || 'DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)'}</div></div> 
             <div class="caratula-row-item"><div class="caratula-label">CTROL. DISCIPLINARIO INTERV.:</div><div class="caratula-value">${cd.f_intervencion || 'DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO'}</div></div> 
             <div class="caratula-row-item"><div class="caratula-label">INSTRUCTOR:</div><div class="caratula-value">${cd.f_proc_instructor || 'COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN'}</div></div> 
             <div class="caratula-row-item"><div class="caratula-label">SECRETARIO DE ACTUACION:</div><div class="caratula-value">${cd.f_proc_secretario || 'OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR'}</div></div> 
@@ -807,11 +943,11 @@ function getSingleDocHtml(tabKey) {
           Corresponde a expediente ${cd.f_caratula || '21100 - 082162/2026 - DN154527'} 
         </div> 
         <div style="font-weight: bold; font-size: 11pt; margin-bottom: 0.8cm;"> 
-          ${cd.f_proc_procedencia || 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}, a los ${cd.f1_dia || '10'} del mes de ${(cd.f1_mes || 'abril').toLowerCase()} de año ${cd.f1_anio || '2026'} 
+          ${cd.f_proc_procedencia || 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}, a los ${cd.f1_dia || '2'} del mes de ${(cd.f1_mes || 'abril').toLowerCase()} de año ${cd.f1_anio || '2026'} 
         </div> 
         <div class="doc-body"> 
           <p class="sangria-dto"> 
-            <strong>RECIBIDO:</strong> En la fecha, previo registro en los libros correspondientes y, atento a su contenido en el marco de <strong>expediente ${cd.f_caratula}</strong> en donde resulta denunciante: <strong>${cd.f_den_nombre || 'OFL 123123 DENUNCIANTE DEL HECHO'}</strong>, en la cual se analiza la conducta del <strong>${cd.f_imp_nombre || 'OFL 123123 IMPUTADO DEL HECHO'}</strong>, numeraria de la <strong>${cd.f_imp_destino}</strong>, en trámite ante la <strong>${cd.f_intervencion}</strong>, el suscripto <strong>${cd.f_proc_instructor}</strong>, en mis funciones inherentes como <strong>${cd.f_proc_funcion}</strong> de la <strong>${cd.f_proc_procedencia}</strong>, a párrafo seguido. 
+            <strong>RECIBIDO:</strong> En la fecha, previo registro en los libros correspondientes y, atento a su contenido en el marco de expediente <strong>${cd.f_encuadre}</strong>, caratulado: <strong>${cd.f_caratula}</strong>, donde resulta denunciante: <strong>${cd.f_den_nombre} (${cd.f_den_destino})</strong>, víctima: <strong>${cd.f_vic_nombre} (${cd.f_vic_destino})</strong>, causante: <strong>${cd.f_cau_nombre} (${cd.f_cau_destino})</strong>, imputado: <strong>${cd.f_imp_nombre} (${cd.f_imp_destino})</strong>, con intervención de <strong>${cd.f_intervencion}</strong>, el suscripto <strong>${cd.f_proc_instructor}</strong>, en mis funciones inherentes como <strong>${cd.f_proc_funcion}</strong> de la <strong>${cd.f_proc_procedencia}</strong>, a párrafo seguido. 
           </p> 
           <p class="sangria-dto" style="font-size: 11pt; margin-bottom: 1.5em;">Por ello;</p> 
           <div style="font-weight: bold; font-size: 11pt; margin-bottom: 1em;">RESUELVO:</div> 
@@ -831,13 +967,13 @@ function getSingleDocHtml(tabKey) {
           Tomo conocimiento y daré estricto cumplimiento a lo ordenado por usted. CONSTE. 
         </div> 
         <div style="font-weight: bold; font-size: 11pt;"> 
-          ${cd.f_proc_procedencia}, a los ${cd.f1_dia || '10'} del mes de ${(cd.f1_mes || 'abril').toLowerCase()} del año ${cd.f1_anio || '2026'} 
+          ${cd.f_proc_procedencia}, a los ${cd.f1_dia || '2'} del mes de ${(cd.f1_mes || 'abril').toLowerCase()} del año ${cd.f1_anio || '2026'} 
         </div> 
       </div>`; 
   } 
 
   if (tabKey === 'decl_testimonial') { 
-    const textoCorridoDeclara = `En la localidad de <strong>${cd.f_proc_localidad || 'González Catán'}</strong>, partido de <strong>${cd.f_proc_partido || 'La Matanza'}</strong>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <strong>${cd.f_proc_procedencia || 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}</strong>, sita en calle <strong>${cd.f_proc_dir_dependencia || 'San Matías (Ruta provincial 1001) sin número'}</strong>, entre calle <strong>${cd.f_proc_entre_calles || 'Achupallas y B. Llorente'}</strong> del mismo medio, a los <strong>${cd.f1_dia || '10'}</strong> días del mes de <strong>${(cd.f1_mes || 'abril').toLowerCase()}</strong> del año <strong>${cd.f1_anio || '2026'}</strong>, siendo las 16:58 horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa'. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <strong>${cd.f_dec_nombres || 'DECLARANTE'}</strong>, de <strong>${cd.f_dec_edad || '45'}</strong> años de edad, nacionalidad <strong>${cd.f_dec_nacionalidad || 'ARGENTINA'}</strong>, estado civil <strong>${cd.f_dec_estado_civil || 'SOLTERO'}</strong>, profesión u ocupación <strong>${cd.f_dec_profesion || 'EMPLEADO POLICIAL'}</strong>, instruido, domicilio en calle <strong>${cd.f_dec_domicilio || 'CALLE 1 N° 23'}</strong>, entre calle <strong>${cd.f_dec_entre_calles || 'CALLE 2 Y CALLE 3'}</strong> del mismo medio, Documento Nacional de Identidad Nº <strong>${cd.f_dec_dni || '45000123'}</strong>, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, manifiesta NO estar comprendido en las referidas prohibiciones, ni abstenciones. Que, preguntado para que diga si posee vínculo de parentesco o de interés con las mismas, como así también de cualquier otra circunstancia que sirva para apreciar su veracidad de sus dichos, manifiesta que NO. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires, seguidamente es invitado a manifestar respecto al hecho en cuestión por lo que seguidamente DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de <strong>${cd.f_dec_jerarquia || 'OFICIAL'}</strong>, del escalafón <strong>${cd.f_dec_subescalafon || 'GENERAL'}</strong>, legajo personal N° <strong>${cd.f_dec_legajo || '123456'}</strong>, cumpliendo en la actualidad sus servicios en el <strong>${cd.f_dec_destino || 'DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)'}</strong>, como <strong>${cd.f_dec_funcion || 'DISPONIBLE'}</strong>. En la fecha, se hace presente a los fines de prestar declaración testimonial en <strong>${cd.f_caratula || '21100 - 082162/2026 - DN154527'}</strong>, donde se analiza la conducta del <strong>${cd.f_imp_nombre || 'OFL 123123 IMPUTADO DEL HECHO'}</strong>, en trámite ante <strong>${cd.f_intervencion || 'DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO'}</strong>, incoadas el <strong>${fechaHechoHtml}</strong>. En esa intelligence relata ${cd.f_dec_declara || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.`; 
+    const textoCorridoDeclara = `En la localidad de <strong>${cd.f_proc_localidad || 'González Catán'}</strong>, partido de <strong>${cd.f_proc_partido || 'La Matanza'}</strong>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <strong>${cd.f_proc_procedencia || 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}</strong>, sita en calle <strong>${cd.f_proc_dir_dependencia || 'San Matías (Ruta provincial 1001) sin número'}</strong>, entre calle <strong>${cd.f_proc_entre_calles || 'Achupallas y B. Llorente'}</strong> del mismo medio, a los <strong>${cd.f1_dia || '2'}</strong> días del mes de <strong>${(cd.f1_mes || 'abril').toLowerCase()}</strong> del año <strong>${cd.f1_anio || '2026'}</strong>, siendo las 16:58 horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa'. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <strong>${cd.f_dec_nombres || 'DECLARANTE'}</strong>, de <strong>${cd.f_dec_edad || '45'}</strong> años de edad, nacionalidad <strong>${cd.f_dec_nacionalidad || 'ARGENTINA'}</strong>, estado civil <strong>${cd.f_dec_estado_civil || 'SOLTERO'}</strong>, profesión u ocupación <strong>${cd.f_dec_profesion || 'EMPLEADO POLICIAL'}</strong>, instruido, domicilio en calle <strong>${cd.f_dec_domicilio || 'CALLE 1 N° 23'}</strong>, entre calle <strong>${cd.f_dec_entre_calles || 'CALLE 2 Y CALLE 3'}</strong> del mismo medio, Documento Nacional de Identidad Nº <strong>${cd.f_dec_dni || '45000123'}</strong>, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, manifiesta NO estar comprendido en las referidas prohibiciones, ni abstenciones. Que, preguntado para que diga si posee vínculo de parentesco o de interés con las mismas, como así también de cualquier otra circunstancia que sirva para apreciar su veracidad de sus dichos, manifiesta que NO. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires, seguidamente es invitado a manifestar respecto al hecho en cuestión por lo que seguidamente DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de <strong>${cd.f_dec_jerarquia || 'OFICIAL'}</strong>, del escalafón <strong>${cd.f_dec_subescalafon || 'GENERAL'}</strong>, legajo personal N° <strong>${cd.f_dec_legajo || '123456'}</strong>, cumpliendo en la actualidad sus servicios en el <strong>${cd.f_dec_destino || 'DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)'}</strong>, como <strong>${cd.f_dec_funcion || 'DISPONIBLE'}</strong>. En la fecha, se hace presente a los fines de prestar declaración testimonial en <strong>${cd.f_exp_elec}</strong>, caratulado <strong>${cd.f_encuadre}</strong>, donde se analiza la conducta del <strong>${cd.f_imp_nombre}</strong> de la <strong>${cd.f_imp_destino}</strong>, en trámite ante <strong>${cd.f_intervencion || 'DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO'}</strong>, incoadas el <strong>${fechaHechoHtml}</strong>. En esa inteligencia relata ${cd.f_dec_declara || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.`; 
     
     return ` 
       <div class="a4-page auto-flow-page"> 
@@ -868,8 +1004,74 @@ function getSingleDocHtml(tabKey) {
       </div> 
       <div class="doc-addressee">AL SEÑOR JEFE<br>${cd.f_dest_dirigida_a}</div> 
       <div class="doc-body"> 
-        <p class="sangria-estandar">Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de Expediente ${cd.f_caratula} en trámite ante ${cd.f_intervencion}, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan más abajo:</p> 
+        <p class="sangria-estandar">Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de ${cd.f_caratula} en trámite ante ${cd.f_intervencion}, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan más abajo:</p> 
         ${listHtml} 
+        <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
+      </div>`; 
+  } else if (tabKey === 'reg_institucional') {
+    htmlInner += `
+      <div class="doc-mid-section"> 
+        <div><strong>REF.:</strong> Star. Registro Institucional</div> 
+        <div>${lugarFechaEncabezadoHtml}</div> 
+      </div> 
+      <div class="doc-addressee">AL SEÑOR JEFE<br>MESA GENERAL DE ENTRADAS, SALIDAS Y ARCHIVO</div> 
+      <div class="doc-body"> 
+        <p class="sangria-estandar">Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas ${cd.f_encuadre}, caratulado: ${cd.f_caratula}, donde resulta denunciante: ${cd.f_den_nombre} (${cd.f_den_destino}), víctima: ${cd.f_vic_nombre} (${cd.f_vic_destino}), causante: ${cd.f_cau_nombre} (${cd.f_cau_destino}), imputado: ${cd.f_imp_nombre} (${cd.f_imp_destino}), con intervención de ${cd.f_intervencion}, el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: “Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”.</p> 
+        <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
+      </div>`;
+  } else if (tabKey === 'star_existencia_cautelares') { 
+    htmlInner += ` 
+      <div class="doc-mid-section"> 
+        <div><strong>REF.:</strong> Star. Informe existencia de IPP, estado de causa y temperamento adoptado</div> 
+        <div>${lugarFechaEncabezadoHtml}</div> 
+      </div> 
+      <div class="doc-addressee">AL SEÑOR AGENTE FISCAL<br>${cd.f_magistrado}<br>DEPARTAMENTO JUDICIAL ${cd.f_dpto_judicial}</div> 
+      <div class="doc-body"> 
+        <p class="sangria-estandar">Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas ${cd.f_encuadre}, caratulado: ${cd.f_caratula}, donde resulta denunciante: ${cd.f_den_nombre} (${cd.f_den_destino}), víctima: ${cd.f_vic_nombre} (${cd.f_vic_destino}), causante: ${cd.f_cau_nombre} (${cd.f_cau_destino}), imputado: ${cd.f_imp_nombre} (${cd.f_imp_destino}), con intervención de ${cd.f_intervencion}, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:</p> 
+        <ol style="list-style-type: disc;"> 
+          <li>si existe registro de alguna Medica Cautelar vigente donde resulte causante el ${cd.f_imp_nombre}, edad: ${cd.f_imp_edad}, Documento Nacional de Identidad N°: ${cd.f_imp_dni} en la víspera del ${fechaHechoHtml}, o posteriores, en la arteria ${cd.f_lugar_hecho}, localidad de ${cd.f_localidad_hecho}, partido de ${cd.f_partido_hecho}.</li> 
+          <li>Asimismo solicito informe la existencia de denuncias de igual tenor con respecto a Infracción con la Ley 12569.</li> 
+        </ol> 
+        <p class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TERMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad y son vitales para la resolución administrativa del causante. Sirva adelantar el resultado a este mismo correo electrónico.</p> 
+        <p class="sangria-estandar">Lo expuesto es todo en cuando solicito a usted.</p> 
+      </div>`; 
+  } else if (tabKey === 'col_cria_myf') { 
+    htmlInner += ` 
+      <div class="doc-mid-section"> 
+        <div><strong>REF.:</strong> Star. colaboración</div> 
+        <div>${lugarFechaEncabezadoHtml}</div> 
+      </div> 
+      <div class="doc-body"> 
+        <p class="sangria-estandar">Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.</p> 
+        <p class="sangria-estandar">Para mayor ilustración, se hace saber la síntesis del hecho descripto en la denuncia: ${cd.f_sintesis_hecho}</p> 
+        <p class="sangria-estandar">Asimismo Informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En caso de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.</p> 
+        <p class="sangria-estandar">Lo expuesto es todo en cuento solicito a usted.</p> 
+        <br>
+        <p class="sangria-cero"><strong>Nombres completos:</strong> DATOS DE LA VICTIMA</p>
+        <p class="sangria-cero"><strong>Edad:</strong> ${cd.f_vic_edad}</p>
+        <p class="sangria-cero"><strong>DNI:</strong> ${cd.f_vic_dni}</p>
+        <p class="sangria-cero"><strong>Domicilio:</strong> ${cd.f_vic_domicilio}, localidad de ${cd.f_vic_localidad}, partido de ${cd.f_vic_partido}</p>
+      </div>`; 
+  } else if (tabKey === 'star_inf_anmac_repar') { 
+    htmlInner += ` 
+      <div class="doc-mid-section"> 
+        <div><strong>REF.:</strong> Star. colaboración</div> 
+        <div>${lugarFechaEncabezadoHtml}</div> 
+      </div> 
+      <div class="doc-body"> 
+        <p class="sangria-cero"><strong>MONBRES:</strong> ${cd.f_imp_nombre}</p> 
+        <p class="sangria-cero"><strong>DNI N°:</strong> ${cd.f_imp_dni}</p> 
+        <p class="sangria-cero"><strong>DOMICILIO:</strong> ${cd.f_imp_domicilio}, localidad de ${cd.f_imp_localidad}, partido de ${cd.f_imp_partido}</p> 
+      </div>`; 
+  } else if (tabKey === 'star_lep') { 
+    htmlInner += ` 
+      <div class="doc-mid-section"> 
+        <div><strong>REF.:</strong> Star. Legajo Electronico Personal (LEP).</div> 
+        <div>${lugarFechaEncabezadoHtml}</div> 
+      </div> 
+      <div class="doc-body"> 
+        <p class="sangria-estandar">Me dirijo a usted en el marco de las Actuaciones Sumariales Administrativas caratuladas <strong>${cd.f_caratula}</strong>, que se instruyen por ante el <strong>${cd.f_intervencion}</strong>, a efectos de solicitarle tenga a bien remitir copia del Legajo Electrónico Personal (L.E.P.) correspondiente al personal policial:</p> 
+        <p class="sangria-cero"><strong>${cd.f_imp_nombre}</strong>, DNI N° ${cd.f_imp_dni}, Domicilio: ${cd.f_imp_domicilio}, localidad de ${cd.f_imp_localidad}, partido de ${cd.f_imp_partido}.</p>
         <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
       </div>`; 
   } else if (tabKey === 'col_existencia_ipp') { 
@@ -880,75 +1082,101 @@ function getSingleDocHtml(tabKey) {
       </div> 
       <div class="doc-addressee">AL SEÑOR AGENTE FISCAL<br>${cd.f_magistrado}<br>DEPARTAMENTO JUDICIAL ${cd.f_dpto_judicial}</div> 
       <div class="doc-body"> 
-        <p class="sangria-estandar">Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de Expediente ${cd.f_caratula} en trámite ante ${cd.f_intervencion}, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan más abajo:</p> 
-        <ol> 
-          <li>si existe registro de algún Proceso Penal en trámite donde resulte denunciado el ${cd.f_imp_nombre}, edad: ${cd.f_imp_edad}, Documento Nacional de Identidad N°: ${cd.f_imp_dni} en la víspera del ${fechaHechoHtml} o posteriores, en la arteria ${cd.f_lugar_hecho}, localidad de ${cd.f_localidad_hecho}, partido de ${cd.f_partido_hecho}.</li> 
+        <p class="sangria-estandar">Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas ${cd.f_encuadre}, caratulado: ${cd.f_caratula}, donde resulta denunciante: ${cd.f_den_nombre} (${cd.f_den_destino}), víctima: ${cd.f_vic_nombre} (${cd.f_vic_destino}), causante: ${cd.f_cau_nombre} (${cd.f_cau_destino}), imputado: ${cd.f_imp_nombre} (${cd.f_imp_destino}), con intervención de ${cd.f_intervencion}, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:</p> 
+        <ol style="list-style-type: disc;"> 
+          <li>si existe registro de algún Proceso Penal en trámite donde resulte denunciado el ${cd.f_imp_nombre}, edad: ${cd.f_imp_edad}, Documento Nacional de Identidad N°: ${cd.f_imp_dni} en la víspera del ${fechaHechoHtml}, o posteriores, en la arteria ${cd.f_lugar_hecho}, localidad de ${cd.f_localidad_hecho}, partido de ${cd.f_partido_hecho}.</li> 
           <li>Asimismo solicito informe la existencia de denuncias de igual tenor con respecto a Infracción con la Ley 12569.</li> 
         </ol> 
-        <p class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TÉRMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad y son vitales para la resolución administrativa del causante. Sirva adelantar el resultado a este mismo correo electrónico.</p> 
-        <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
+        <p class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TERMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad y son vitales para la resolución administrativa del causante. Sirva adelantar el resultado a este mismo correo electrónico.</p> 
+        <p class="sangria-estandar">Lo expuesto es todo en cuando solicito a usted.</p> 
       </div>`; 
-  } else if (tabKey === 'star_existencia_cautelares') { 
-    htmlInner += ` 
+  } else if (tabKey === 'dto_inicio') {
+    htmlInner += `
+      <div style="text-align: right; font-weight: bold; font-size: 11pt; margin-bottom: 0.3cm;"> 
+        Corresponde a expediente ${cd.f_caratula || '21100 - 082162/2026 - DN154527'} 
+      </div> 
+      <div style="font-weight: bold; font-size: 11pt; margin-bottom: 0.8cm;"> 
+        ${cd.f_proc_procedencia || 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}, a los ${cd.f1_dia || '2'} del mes de ${(cd.f1_mes || 'abril').toLowerCase()} del año ${cd.f1_anio || '2026'} 
+      </div> 
+      <div class="doc-body"> 
+        <p class="sangria-dto"><strong>AUTOS Y VISTOS:</strong> Las presentes Actuaciones Sumariales Administrativas registradas bajo la carátula de: <strong>${cd.f_caratula}</strong> incoadas con motivo de dar génesis a la investigación administrativa con el fin de dilucidar la conducta mantenida por el numerario <strong>${cd.f_imp_nombre}</strong> prestando servicios en la <strong>${cd.f_imp_destino}</strong>.</p> 
+        <p class="sangria-dto"><strong>CONSIDERANDO:</strong> Que por lo expuesto ut-supra, el suscripto <strong>${cd.f_proc_instructor}</strong> en su carácter de <strong>${cd.f_proc_funcion}</strong> de la <strong>${cd.f_proc_procedencia}</strong> en uso de sus facultades.</p> 
+        <div style="font-weight: bold; font-size: 11pt; margin-bottom: 0.8em; margin-top: 0.8em;">RESUELVO:</div> 
+        <p class="sangria-dto"><strong>ARTICULO 1°:</strong> Dar inicio a las presentes Actuaciones Sumariales Administrativas conforme a lo establecido en la reglamentación vigente Decreto Reglamentario N° 1050/09 de la Ley 13982.</p> 
+        <p class="sangria-dto"><strong>ARTICULO 2°:</strong> Procédase a recibir la correspondiente declaración al personal involucrado, recepcionar testimoniales, requerir informes y producir todas las diligencias probatorias tendientes al esclarecimiento del hecho que nos ocupa.</p> 
+        <p class="sangria-dto"><strong>ARTICULO 3°:</strong> Cúmplase, regístrese y archívese la presente resolución en el legajo de actuaciones correspondientes.</p> 
+        <div style="font-weight: bold; font-size: 11pt; margin-top: 2.5em; text-align: center;">CUMPLA EL ACTUARIO</div> 
+      </div>`;
+  } else if (tabKey === 'parte_escrito') {
+    let destsHtml = '';
+    appState.destinatariosSeleccionados.forEach(dIdx => {
+      destsHtml += `<div style="margin-bottom: 4px;">• <strong>${listaDestinatariosColumnaG[dIdx]}</strong></div>`;
+    });
+    htmlInner += `
       <div class="doc-mid-section"> 
-        <div><strong>REF.:</strong> Pcir. Informe</div> 
+        <div><strong>REF.:</strong> Ccar. inicio de Actuaciones Sumariales Administrativas</div> 
         <div>${lugarFechaEncabezadoHtml}</div> 
       </div> 
-      <div class="doc-addressee">AL SEÑOR AGENTE FISCAL<br>${cd.f_magistrado}<br>DEPARTAMENTO JUDICIAL ${cd.f_dpto_judicial}</div> 
+      <div class="doc-addressee" style="text-transform: uppercase;">${destsHtml}</div> 
       <div class="doc-body"> 
-        <p class="sangria-estandar">Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de Expediente ${cd.f_caratula} en trámite ante ${cd.f_intervencion}, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan más abajo:</p> 
-        <ol> 
-          <li>si existe registro de algún Proceso Penal en trámite que tenga vinculación, donde resulte denunciado el ${cd.f_imp_nombre}, edad: ${cd.f_imp_edad}, Documento Nacional de Identidad N°: ${cd.f_imp_dni} en la víspera del ${fechaHechoHtml} o posteriores, en la arteria ${cd.f_lugar_hecho}, partido de ${cd.f_partido_hecho}.</li> 
-          <li>Asimismo solicito informe la existencia de denuncias de igual tenor con respecto a Infracción con la Ley 12569.</li> 
-        </ol> 
-        <p class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TÉRMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad y son vitales para la resolución administrativa del causante. Sirva adelantar el resultado a este mismo correo electrónico.</p> 
-        <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
-      </div>`; 
-  } else if (tabKey === 'col_cria_myf') { 
-    htmlInner += ` 
+        <p class="sangria-estandar">SINTESIS DEL HECHO: Los presentes actuados tienen su génesis en ${fechaNotaHtml}, cuando ${cd.f_sintesis_hecho}</p> 
+        <p class="sangria-estandar">Atento a lo narrado se labran Actuaciones conforme al Decreto 1050/09 Reglamentario de la Ley del Personal 13982.</p> 
+        <p class="sangria-estandar">Lo expuesto es todo en cuanto informo a usted.</p> 
+      </div>`;
+  } else if (tabKey === 'dto_corre_agregado') {
+    let listHtml = '<ul style="list-style-type: disc;">'; 
+    appState.correAgregadoIndices.forEach(idx => { 
+      const raw = listaOpcionesDesplegableRaw[idx]; 
+      listHtml += `<li>${formatPointText(raw, true)}</li>`; 
+    }); 
+    listHtml += '</ul>'; 
+    htmlInner += `
+      <div style="text-align: right; font-weight: bold; font-size: 11pt; margin-bottom: 0.5cm;">Corresponde a expediente ${cd.f_caratula}</div>
+      <div style="font-weight: bold; font-size: 11pt; margin-bottom: 0.8cm;"> 
+        ${cd.f_proc_procedencia || 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}, a los ${cd.f1_dia || '2'} del mes de ${(cd.f1_mes || 'abril').toLowerCase()} del año ${cd.f1_anio || '2026'} 
+      </div>
+      <div class="doc-body"> 
+        <p class="sangria-dto">Téngase por agregado a las presentes actuaciones las siguientes diligencias:</p> 
+        ${listHtml} 
+        <div style="font-weight: bold; font-size: 11pt; margin-top: 2.5em; text-align: center;">CUMPLA EL ACTUARIO</div> 
+      </div>`;
+  } else if (tabKey === 'informe_carpetas') {
+    let listHtml = '<ul style="list-style-type: disc;">';
+    appState.carpetasSeleccionadasIndices.forEach(idx => {
+      const raw = listaOpcionesDesplegableRaw[idx];
+      listHtml += `<li>${formatPointText(raw, true)}</li>`;
+    });
+    listHtml += '</ul>';
+    htmlInner += `
       <div class="doc-mid-section"> 
-        <div><strong>REF.:</strong> Star. colaboración</div> 
+        <div><strong>REF.:</strong> Pcir. Informe de Carpetas médicas</div> 
         <div>${lugarFechaEncabezadoHtml}</div> 
       </div> 
-      <div class="doc-addressee">AL SEÑOR/A SUPERINTENDENTE/A<br>SUPERINTENDENCIA DE POLÍTICAS DE GÉNERO</div> 
       <div class="doc-body"> 
-        <p class="sangria-cero"><strong>Nombre:</strong> ${cd.f_vic_nombre}</p> 
-        <p class="sangria-cero"><strong>Edad:</strong> ${cd.f_vic_edad}</p> 
-        <p class="sangria-cero"><strong>Documento Nacional de Identidad N°:</strong> ${cd.f_vic_dni}</p> 
-        <p class="sangria-cero"><strong>Domicilio en:</strong> ${cd.f_vic_domicilio}, localidad de ${cd.f_vic_localidad}, partido de ${cd.f_vic_partido}</p> 
-        <br> 
-        <p class="sangria-estandar">Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.</p> 
-        <p class="sangria-estandar">Para mayor ilustración, se hace saber la síntesis del hecho descripto en la denuncia: ${cd.f_sintesis_hecho || 'No especificado'}</p> 
-        <p class="sangria-estandar">Asimismo Informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En caso de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.</p> 
+        ${listHtml}
         <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
-      </div>`; 
-  } else if (tabKey === 'star_inf_anmac_repar') { 
-    htmlInner += ` 
-      <div class="doc-mid-section"> 
-        <div><strong>REF.:</strong> Pcir. Informe</div> 
-        <div>${lugarFechaEncabezadoHtml}</div> 
-      </div> 
-      <div class="doc-addressee">AL SEÑOR DIRECTOR<br>REGISTRO PROVINCIAL DE ARMAS (R.E.P.A.R.)</div> 
+      </div>`;
+  } else if (tabKey === 'indice_diligencias') {
+    let rowsHtml = "";
+    appState.indiceItems.forEach(item => {
+      rowsHtml += `<tr><td>${formatPointText(listaOpcionesDesplegableRaw[item.idx], true)}</td><td style="text-align:center;">${item.folio}</td></tr>`;
+    });
+    htmlInner += `
+      <div style="text-align: center; font-weight: bold; font-size: 13pt; margin-bottom: 0.8cm;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
       <div class="doc-body"> 
-        <p class="sangria-estandar">Me dirijo a usted en el marco de las Actuaciones Sumariales Administrativas caratuladas <strong>${cd.f_caratula}</strong>, en trámite ante el <strong>${cd.f_intervencion}</strong>, a efectos de solicitarle tenga a bien informar si registra antecedentes el agente policial que a continuación se detalla:</p> 
-        <p class="sangria-cero"><strong>NOMBRES:</strong> ${cd.f_imp_nombre}</p> 
-        <p class="sangria-cero"><strong>DNI N°:</strong> ${cd.f_imp_dni}</p> 
-        <p class="sangria-cero"><strong>DOMICILIO:</strong> ${cd.f_imp_domicilio}, entre calles ${cd.f_imp_entre_calles}, localidad de ${cd.f_imp_localidad}, partido de ${cd.f_imp_partido}, TE: ${cd.f_imp_contacto}</p> 
-        <br> 
-        <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
-      </div>`; 
-  } else if (tabKey === 'star_lep') { 
-    htmlInner += ` 
-      <div class="doc-mid-section"> 
-        <div><strong>REF.:</strong> Star. Legajo Electronico Personal (LEP).</div> 
-        <div>${lugarFechaEncabezadoHtml}</div> 
-      </div> 
-      <div class="doc-addressee">AL SEÑOR DIRECTOR<br>DIRECCIÓN DE PERSONAL - REGÍMENES POLICIALES</div> 
-      <div class="doc-body"> 
-        <p class="sangria-estandar">Me dirijo a usted en el marco de las Actuaciones Sumariales Administrativas caratuladas <strong>${cd.f_caratula}</strong>, que se instruyen por ante el <strong>${cd.f_intervencion}</strong>, a efectos de solicitarle tenga a bien remitir copia del Legajo Electrónico Personal (L.E.P.) correspondiente a <strong>${cd.f_imp_nombre}</strong>.</p> 
-        <p class="sangria-estandar">Lo expuesto es todo en cuanto solicito a usted.</p> 
-      </div>`; 
-  } 
+        <table class="doc-table">
+          <thead>
+            <tr>
+              <th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th>
+              <th style="width: 100px; text-align:center;">Folio/s</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsHtml}
+          </tbody>
+        </table>
+      </div>`;
+  }
 
   return `<div class="a4-page">${htmlInner}</div>`; 
 } 
@@ -1011,8 +1239,8 @@ function downloadWordDocument() {
     const caratulaData = [ 
       ["EXPEDIENTE ELECTRONICO:", cd.f_exp_elec || 'EX-2026-16420475- -GDEBA-DDPRYGEMSGP'], 
       ["FECHA DEL HECHO:", getFechaHechoFormatted(false)], 
-      ["CAUSANTE:", cd.f_imp_nombre || 'OFL 123123 IMPUTADO DEL HECHO'], 
-      ["DESTINO DEL CAUSANTE:", cd.f_imp_destino || 'DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)'], 
+      ["CAUSANTE:", `${cd.f_cau_nombre || 'OFL 123123 CAUSANTE DEL HECHO'} (${cd.f_cau_destino})`], 
+      ["DESTINO DEL CAUSANTE:", cd.f_cau_destino || 'DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)'], 
       ["CTROL. DISCIPLINARIO INTERV.:", cd.f_intervencion || 'DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO'], 
       ["INSTRUCTOR:", cd.f_proc_instructor || 'COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN'], 
       ["SECRETARIO DE ACTUACION:", cd.f_proc_secretario || 'OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR'], 
@@ -1048,49 +1276,22 @@ function downloadWordDocument() {
         new Table({ width: { size: 100, type: WidthType.PERCENTAGE }, rows: gridRows }) 
       ] 
     }); 
-  } else if (key === 'decl_testimonial') { 
-    const fechaHechoHtml = getFechaHechoFormatted(true); 
-    const textoCorridoDeclara = `En la localidad de <b>${cd.f_proc_localidad || 'González Catán'}</b>, partido de <b>${cd.f_proc_partido || 'La Matanza'}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${cd.f_proc_procedencia || 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}</b>, sita en calle <b>${cd.f_proc_dir_dependencia || 'San Matías (Ruta provincial 1001) sin número'}</b>, entre calle <b>${cd.f_proc_entre_calles || 'Achupallas y B. Llorente'}</b> del mismo medio, a los <b>${cd.f1_dia || '10'}</b> días del mes de <b>${(cd.f1_mes || 'abril').toLowerCase()}</b> del año <b>${cd.f1_anio || '2026'}</b>, siendo las 16:58 horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudico para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa'. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>${cd.f_dec_nombres || 'DECLARANTE'}</b>, de <b>${cd.f_dec_edad || '45'}</b> años de edad, nacionalidad <b>${cd.f_dec_nacionalidad || 'ARGENTINA'}</b>, estado civil <b>${cd.f_dec_estado_civil || 'SOLTERO'}</b>, profesión u ocupación <b>${cd.f_dec_profesion || 'EMPLEADO POLICIAL'}</b>, instruido, domicilio en calle <b>${cd.f_dec_domicilio || 'CALLE 1 N° 23'}</b>, entre calle <b>${cd.f_dec_entre_calles || 'CALLE 2 Y CALLE 3'}</b> del mismo medio, Documento Nacional de Identidad Nº <b>${cd.f_dec_dni || '45000123'}</b>, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, manifiesta NO estar comprendido en las referidas prohibiciones, ni abstenciones. Que, preguntado para que diga si posee vínculo de parentesco o de interés con las mismas, como así también de cualquier otra circunstancia que sirva para apreciar su veracidad de sus dichos, manifiesta que NO. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires, seguidamente es invitado a manifestar respecto al hecho en cuestión por lo que seguidamente DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de <b>${cd.f_dec_jerarquia || 'OFICIAL'}</b>, del escalafón <b>${cd.f_dec_subescalafon || 'GENERAL'}</b>, legajo personal N° <b>${cd.f_dec_legajo || '123456'}</b>, cumpliendo en la actualidad sus servicios en el <b>${cd.f_dec_destino || 'DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)'}</b>, como <b>${cd.f_dec_funcion || 'DISPONIBLE'}</b>. En la fecha, se hace presente a los fines de prestar declaración testimonial en <b>${cd.f_caratula || '21100 - 082162/2026 - DN154527'}</b>, donde se analiza la conducta del <b>${cd.f_imp_nombre || 'OFL 123123 IMPUTADO DEL HECHO'}</b>, en trámite ante <b>${cd.f_intervencion || 'DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO'}</b>, incoadas el <b>${fechaHechoHtml}</b>. En esa inteligencia relata ${cd.f_dec_declara || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.`; 
-
-    sections.push({ 
-      properties: { 
-        page: { 
-          size: { width: Math.round(21.0 * 566.929), height: Math.round(29.7 * 566.929) }, 
-          margin: { top: topMarginTwips, bottom: bottomMarginTwips, left: leftMarginTwips, right: rightMarginTwips } 
-        } 
-      }, 
-      children: [ 
-        new Paragraph({ alignment: AlignmentType.CENTER, spacing: { before: 100, after: 300 }, children: [new TextRun({ text: "DECLARACIÓN TESTIMONIAL", bold: true, size: 26, font: "Arial" })] }), 
-        new Paragraph({ alignment: AlignmentType.JUSTIFY, spacing: { line: 360, after: 200 }, children: createWordRunsFromHtml(textoCorridoDeclara) }) 
-      ] 
-    }); 
   } else { 
     const lugarFechaHeaderWord = getLugarFechaEncabezado(true); 
     const mainPars = [ 
       new Paragraph({ alignment: AlignmentType.LEFT, indent: { left: mitadPaginaTwips }, spacing: { line: 360, after: 200 }, children: createWordRunsFromHtml(lugarFechaHeaderWord) }) 
     ]; 
 
-    if (key === 'col_div') { 
-      mainPars.push(new Paragraph({ spacing: { line: 360, after: 250 }, children: [new TextRun({ text: `AL SEÑOR JEFE\n${cd.f_dest_dirigida_a}`, bold: true, font: "Arial", size: 22 })] })); 
-      mainPars.push(new Paragraph({ alignment: AlignmentType.JUSTIFY, indent: { firstLine: sangria125cmTwips }, spacing: { line: 360, after: 200 }, children: createWordRunsFromHtml(`Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de Expediente ${cd.f_caratula} en trámite ante ${cd.f_intervencion}, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan más abajo:`) })); 
-      appState.puntosSeleccionadosIndices.forEach((rawIdx, listIdx) => { 
-        const raw = listaOpcionesDesplegableRaw[rawIdx]; 
-        const pointFormattedHtml = `${listIdx + 1}. ${formatPointText(raw, true)}`; 
-        mainPars.push(new Paragraph({ indent: { left: Math.round(1.0 * 566.929) }, spacing: { line: 360, after: 120 }, children: createWordRunsFromHtml(pointFormattedHtml) })); 
+    const tempDiv = document.createElement('div'); 
+    tempDiv.innerHTML = getSingleDocHtml(key); 
+    const pNodes = tempDiv.querySelectorAll('.doc-body p, .doc-body div, .doc-body ul li, .doc-body ol li'); 
+    if (pNodes.length > 0) { 
+      pNodes.forEach(pNode => { 
+        mainPars.push(new Paragraph({ alignment: AlignmentType.JUSTIFY, indent: { firstLine: sangria125cmTwips }, spacing: { line: 360, after: 200 }, children: createWordRunsFromHtml(pNode.innerHTML) })); 
       }); 
-      mainPars.push(new Paragraph({ alignment: AlignmentType.JUSTIFY, indent: { firstLine: sangria125cmTwips }, spacing: { line: 360, before: 200, after: 300 }, children: [new TextRun({ text: "Lo expuesto es todo en cuanto solicito a usted.", font: "Arial", size: 22 })] })); 
     } else { 
-      const tempDiv = document.createElement('div'); 
-      tempDiv.innerHTML = getSingleDocHtml(key); 
-      const pNodes = tempDiv.querySelectorAll('.doc-body p'); 
-      if (pNodes.length > 0) { 
-        pNodes.forEach(pNode => { 
-          mainPars.push(new Paragraph({ alignment: AlignmentType.JUSTIFY, indent: { firstLine: sangria125cmTwips }, spacing: { line: 360, after: 200 }, children: createWordRunsFromHtml(pNode.innerHTML) })); 
-        }); 
-      } else { 
-        const plainText = tempDiv.querySelector('.doc-body')?.innerText || ""; 
-        mainPars.push(new Paragraph({ alignment: AlignmentType.JUSTIFY, indent: { firstLine: sangria125cmTwips }, spacing: { line: 360, after: 200 }, children: [new TextRun({ text: plainText, font: "Arial", size: 22 })] })); 
-      } 
+      const plainText = tempDiv.querySelector('.doc-body')?.innerText || ""; 
+      mainPars.push(new Paragraph({ alignment: AlignmentType.JUSTIFY, indent: { firstLine: sangria125cmTwips }, spacing: { line: 360, after: 200 }, children: [new TextRun({ text: plainText, font: "Arial", size: 22 })] })); 
     } 
 
     sections.push({ 
