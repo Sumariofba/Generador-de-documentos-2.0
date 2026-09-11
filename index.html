@@ -245,6 +245,27 @@ body {
   gap: 12px;
 }
 
+/* DISTRIBUCIÓN ESPECÍFICA PARA BLOQUE 7 */
+.grid-bloque-7 {
+  display: grid !important;
+  grid-template-columns: repeat(12, 1fr) !important;
+  gap: 12px !important;
+}
+
+.grid-bloque-7 .fila-5-cols {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+
+.grid-bloque-7 .fila-2-cols {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
 .sheet-card-block.collapsed .sheet-card-body {
   display: none !important;
 }
@@ -487,7 +508,9 @@ body {
           </div>
           <div class="sheet-row-single col-span-6">
             <label>DEPENDENCIA INSTRUCTORA:</label>
-            <input type="text" id="f_01_dependencia" value="DIR. FUERZA BARRIAL DE APROX. (FBA)">
+            <select id="f_01_dependencia" class="select-dependencia">
+              <!-- Carga dinámicamente -->
+            </select>
           </div>
 
           <div class="fila-5-cols">
@@ -533,10 +556,8 @@ body {
 
           <div class="sheet-row-single col-span-12">
             <label>COLABORACION A:</label>
-            <select id="f_12_colaboracion">
-              <option value="DIV. FUERZA BARRIAL DE APROX. III (FBA QUILMES)">DIV. FUERZA BARRIAL DE APROX. III (FBA QUILMES)</option>
-              <option value="DIV. FUERZA BARRIAL DE APROX. I (FBA LOMAS DE ZAMORA)">DIV. FUERZA BARRIAL DE APROX. I (FBA LOMAS DE ZAMORA)</option>
-              <option value="DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)">DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)</option>
+            <select id="f_12_colaboracion" class="select-destino">
+              <!-- Carga dinámicamente -->
             </select>
           </div>
 
@@ -558,7 +579,9 @@ body {
           <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_18_cau_localidad" value="Los Hornos"></div>
           <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_19_cau_partido" value="LA PLATA"></div>
           <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_20_cau_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label><input type="text" id="f_21_cau_destino" value="DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)"></div>
+          <div class="sheet-row-single"><label>DESTINO</label>
+            <select id="f_21_cau_destino" class="select-destino"></select>
+          </div>
         </div>
       </div>
 
@@ -570,7 +593,6 @@ body {
         </div>
         <div class="sheet-card-body grid-bloque-3">
           
-          <!-- Primera línea: 5 elementos -->
           <div class="fila-5-cols">
             <div class="sheet-row-single">
               <label>FECHA DEL HECHO:</label>
@@ -597,7 +619,6 @@ body {
             </div>
           </div>
 
-          <!-- Segunda línea: 4 elementos -->
           <div class="fila-4-cols">
             <div class="sheet-row-single">
               <label>LUGAR DEL HECHO:</label>
@@ -617,7 +638,6 @@ body {
             </div>
           </div>
 
-          <!-- Tercera línea: 4 elementos -->
           <div class="fila-4-cols">
             <div class="sheet-row-single">
               <label>ENTRE CALLE 1</label>
@@ -637,7 +657,6 @@ body {
             </div>
           </div>
 
-          <!-- Cuarta línea: 4 elementos -->
           <div class="fila-4-cols">
             <div class="sheet-row-single">
               <label>ENTRE CALLE 2</label>
@@ -657,7 +676,6 @@ body {
             </div>
           </div>
 
-          <!-- Quinta línea: 2 elementos -->
           <div class="fila-2-cols">
             <div class="sheet-row-single">
               <label>LOCALIDAD</label>
@@ -669,7 +687,6 @@ body {
             </div>
           </div>
 
-          <!-- Sexta línea: 1 elemento (Ancho completo) -->
           <div class="sheet-row-single col-span-12">
             <label>SINTESIS DEL HECHO:</label>
             <textarea id="f_41_sintesis">el oficial ut-supra, encontrándose dirigiéndose al servicio a bordo de su motocicleta marca honda, modelo 110cc, dominio 123DCD, circulando por calle 1 entre calle 2 y calle 3 de Los hornos, pierde el control del rodado y cae, golpeandose brazo derecho sufriendo cortes y escoriaciones en miembro mencionado y politraumas varios (lesiones leves, salvo complicaciones)...</textarea>
@@ -693,7 +710,9 @@ body {
           <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_47_imp_localidad" value="Los Hornos"></div>
           <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_48_imp_partido" value="LA PLATA"></div>
           <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_49_imp_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label><input type="text" id="f_50_imp_destino" value="CIVIL"></div>
+          <div class="sheet-row-single"><label>DESTINO</label>
+            <select id="f_50_imp_destino" class="select-destino"></select>
+          </div>
         </div>
       </div>
 
@@ -712,7 +731,9 @@ body {
           <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_56_vic_localidad" value="Los Hornos"></div>
           <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_57_vic_partido" value="LA PLATA"></div>
           <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_58_vic_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label><input type="text" id="f_59_vic_destino" value="CIVIL"></div>
+          <div class="sheet-row-single"><label>DESTINO</label>
+            <select id="f_59_vic_destino" class="select-destino"></select>
+          </div>
         </div>
       </div>
 
@@ -731,38 +752,56 @@ body {
           <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_65_den_localidad" value="Los Hornos"></div>
           <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_66_den_partido" value="LA PLATA"></div>
           <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_67_den_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label><input type="text" id="f_68_den_destino" value="CIVIL"></div>
+          <div class="sheet-row-single"><label>DESTINO</label>
+            <select id="f_68_den_destino" class="select-destino"></select>
+          </div>
         </div>
       </div>
 
-      <!-- Bloque 7 -->
+      <!-- Bloque 7: DATOS DEL DECLARANTE (TESTIMONIAL) -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
           <span>📝 7. DATOS DEL DECLARANTE (TESTIMONIAL)</span>
           <span class="toggle-icon">▼</span>
         </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>NOMBRES COMPLETOS</label><input type="text" id="f_69_dec_nombre" value="DATOS DECLARANTE"></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_70_dec_edad" value="45"></div>
-          <div class="sheet-row-single"><label>NACIONALIDAD</label><input type="text" id="f_71_dec_nacionalidad" value="ARGENTINA"></div>
-          <div class="sheet-row-single"><label>ESTADO CIVIL</label><input type="text" id="f_72_dec_estado_civil" value="SOLTERO"></div>
-          <div class="sheet-row-single"><label>PROFESION U OCUPACION</label><input type="text" id="f_73_dec_profesion" value="EMPLEADO POLICIAL"></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_74_dec_domicilio" value="CALLE 1 N° 23"></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_75_dec_entre_calles" value="CALLE 2 Y CALLE 3"></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_76_dec_localidad" value="Los Hornos"></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_77_dec_partido" value="LA PLATA"></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_78_dec_dni" value="45.000.123"></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_79_dec_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>MAIL</label><input type="text" id="f_80_dec_mail" value=""></div>
-          <div class="sheet-row-single"><label>JERARQUIA</label><input type="text" id="f_81_dec_jerarquia" value="OFICIAL"></div>
-          <div class="sheet-row-single"><label>SUBESCALAFON</label><input type="text" id="f_82_dec_subescalafon" value="GENERAL"></div>
-          <div class="sheet-row-single"><label>LEGAJO PERSONAL</label><input type="text" id="f_83_dec_legajo" value="123456"></div>
-          <div class="sheet-row-single"><label>DESTINO</label><input type="text" id="f_84_dec_destino" value="DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)"></div>
-          <div class="sheet-row-single"><label>FUNCION</label><input type="text" id="f_85_dec_funcion" value="DISPONIBLE"></div>
-          <div class="sheet-row-single" style="grid-column: 1 / -1;">
+        <div class="sheet-card-body grid-bloque-7">
+          
+          <div class="fila-5-cols">
+            <div class="sheet-row-single"><label>NOMBRES COMPLETOS</label><input type="text" id="f_69_dec_nombre" value="DATOS DECLARANTE"></div>
+            <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_70_dec_edad" value="45"></div>
+            <div class="sheet-row-single"><label>NACIONALIDAD</label><input type="text" id="f_71_dec_nacionalidad" value="ARGENTINA"></div>
+            <div class="sheet-row-single"><label>ESTADO CIVIL</label><input type="text" id="f_72_dec_estado_civil" value="SOLTERO"></div>
+            <div class="sheet-row-single"><label>PROFESION U OCUPACION</label><input type="text" id="f_73_dec_profesion" value="EMPLEADO POLICIAL"></div>
+          </div>
+
+          <div class="fila-5-cols">
+            <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_74_dec_domicilio" value="CALLE 1 N° 23"></div>
+            <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_75_dec_entre_calles" value="CALLE 2 Y CALLE 3"></div>
+            <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_76_dec_localidad" value="Los Hornos"></div>
+            <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_77_dec_partido" value="LA PLATA"></div>
+            <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_78_dec_dni" value="45.000.123"></div>
+          </div>
+
+          <div class="fila-2-cols">
+            <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_79_dec_contacto" value="11-2257-9393"></div>
+            <div class="sheet-row-single"><label>MAIL</label><input type="text" id="f_80_dec_mail" value=""></div>
+          </div>
+
+          <div class="fila-5-cols">
+            <div class="sheet-row-single"><label>JERARQUIA</label><input type="text" id="f_81_dec_jerarquia" value="OFICIAL"></div>
+            <div class="sheet-row-single"><label>SUBESCALAFON</label><input type="text" id="f_82_dec_subescalafon" value="GENERAL"></div>
+            <div class="sheet-row-single"><label>LEGAJO PERSONAL</label><input type="text" id="f_83_dec_legajo" value="123456"></div>
+            <div class="sheet-row-single"><label>DESTINO</label>
+              <select id="f_84_dec_destino" class="select-destino"></select>
+            </div>
+            <div class="sheet-row-single"><label>FUNCION</label><input type="text" id="f_85_dec_funcion" value="DISPONIBLE"></div>
+          </div>
+
+          <div class="sheet-row-single col-span-12">
             <label>DECLARA:</label>
             <textarea id="f_86_dec_declara">a fin de tramitar las diligencias solicitadas con el fin de establecer la existencia de Actuaciones Penales...</textarea>
           </div>
+
         </div>
       </div>
 
@@ -831,6 +870,121 @@ document.addEventListener('DOMContentLoaded', function() {
 
   let activeTabKey = 'tab-caratula';
   let configuredItems = [];
+
+  // LISTADO DE DESTINOS / DEPENDENCIAS
+  const listaDestinos = [
+    "DIR. FUERZA BARRIAL DE APROX. (FBA)",
+    "DIV. FUERZA BARRIAL DE APROX. I (FBA LOMAS DE ZAMORA)",
+    "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)",
+    "DIV. FUERZA BARRIAL DE APROX. III (FBA QUILMES)",
+    "DIV. FUERZA BARRIAL DE APROX. IV (FBA FLORENCIO VARELA)",
+    "DIV. FUERZA BARRIAL DE APROX. V (FBA LA PLATA)",
+    "DIV. FUERZA BARRIAL DE APROX. VI (FBA SAN MARTIN)",
+    "DIV. FUERZA BARRIAL DE APROX. VII (FBA TRES DE FEBRERO)",
+    "DIV. FUERZA BARRIAL DE APROX. VIII (FBA ITUZAINGO)",
+    "DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)",
+    "DIV. FUERZA BARRIAL DE APROX. X (FBA MORON)",
+    "DIV. FUERZA BARRIAL DE APROX. XI (FBA MERLO)",
+    "DIV. FUERZA BARRIAL DE APROX. XII (FBA MORENO)",
+    "DIV. FUERZA BARRIAL DE APROX. XIII (FBA MAR DEL PLATA)",
+    "DIV. FUERZA BARRIAL DE APROX. XIV (FBA AVELLANEDA)",
+    "DIV. FUERZA BARRIAL DE APROX. XV (FBA LANUS)",
+    "DIV. FUERZA BARRIAL DE APROX. XVI (FBA MALVINAS ARGENTINAS)",
+    "DIV. FUERZA BARRIAL DE APROX. XVII (FBA EZEIZA)",
+    "DIV. FUERZA BARRIAL DE APROX. XVIII (FBA LA MATANZA SUR)",
+    "DIV. FUERZA BARRIAL DE APROX. XIX (FBA LA MATANZA CENTRO)",
+    "DIV. FUERZA BARRIAL DE APROX. XX (FBA SAN ISIDRO)",
+    "DIV. FUERZA BARRIAL DE APROX. XXI (FBA ESTEBAN ECHEVERRIA)",
+    "DIV. FUERZA BARRIAL DE APROX. XXII (FBA BERISSO)",
+    "DIV. FUERZA BARRIAL DE APROX. XXIII (FBA SAN VICENTE)",
+    "DIV. FUERZA BARRIAL DE APROX. XXIV (FBA PILAR)",
+    "DIV. FUERZA BARRIAL DE APROX. XXV (FBA ENSENADA)",
+    "DIV. FUERZA BARRIAL DE APROX. XXVI (FBA LA MATANZA NORTE)",
+    "DIV. FUERZA BARRIAL DE APROX. XXVII (FBA GRAL RODRIGUEZ)",
+    "DIV. FUERZA BARRIAL DE APROX. XXVIII (FBA BRANDSEN)",
+    "DIV. FUERZA BARRIAL DE APROX. XXIX (FBA BERAZATEGUI)",
+    "DIV. FUERZA BARRIAL DE APROX. XXX (FBA CORONEL ROSALES)",
+    "CRIA MYF FLORENCIO VARELA",
+    "CRIA SAN MARTIN SECC 05 - BILLINGHURST",
+    "CRIA LANUS SECC 08 - VILLA OBRERA",
+    "CRIA HURLINGHAM SECC 01 - HURLINGHAM",
+    "CRIA LA MATANZA CENTRO SECC 03 - CIUDAD EVITA",
+    "CRIA ALMIRANTE BROWN SECC 05 - RAFAEL CALZADA",
+    "CRIA LA MATANZA SUR SECC 02 - GONZALEZ CATAN",
+    "CRIA LA MATANZA NORTE SECC 06 - VILLA MADERO",
+    "CRIA ITUZAINGO SECC 01 - ITUZAINGO",
+    "CRIA TRES DE FEBRERO SECC 04 - VILLA PINERAL",
+    "CRIA FLORENCIO VARELA SECC 06 - INGENIERO J ALLAN",
+    "CRIA SAN MARTIN SECC 02 - VILLA BALLESTER",
+    "CRIA MYF AVELLANEDA",
+    "CRIA TRES DE FEBRERO SECC 01 - CASEROS",
+    "CRIA BERAZATEGUI SECC 01 - BERAZATEGUI",
+    "DTO PILAR MONTERREY",
+    "CRIA BERAZATEGUI SECC 04 - HUDSON",
+    "CRIA MERLO SECC 02 - S A PADUA",
+    "CRIA QUILMES SECC 06 - EZPELETA",
+    "CRIA ALMIRANTE BROWN SECC 02 - BURZACO",
+    "CRIA LA MATANZA CENTRO SECC 07 - ALTOS DE LAFERRERE",
+    "CRIA MERLO SECC 01 - MERLO",
+    "CRIA LANUS SECC 06 - MONTE CHINGOLO",
+    "CRIA TRES DE FEBRERO SECC 11 - REMEDIOS DE ESCALADA",
+    "CRIA QUILMES SECC 09 - BARRIO PARQUE CALCHAQUI",
+    "CRIA LA PLATA SECC 07 - ABASTO",
+    "CRIA OLAVARRIA SECC 01 - OLAVARRIA",
+    "CRIA TRES DE FEBRERO SECC 08 - JOSE INGENIEROS",
+    "CRIA ALMIRANTE BROWN SECC 03 - SAN JOSE",
+    "CRIA SAN MIGUEL SECC 02 - BELLA VISTA",
+    "CRIA MERLO SECC 03 - PARQUE SAN MARTIN",
+    "CRIA MORON SECC 07 - CASTELAR NORTE",
+    "CRIA ALMIRANTE BROWN SECC 06 - CLAYPOLE",
+    "CRIA SAN ISIDRO SECC 11 - LA CAVA",
+    "CRIA LA PLATA SECC 03 - LOS HORNOS",
+    "CRIA ALMIRANTE BROWN SECC 04 - LONGCHAMPS",
+    "CRIA LOMAS DE ZAMORA SECC 09 - PARQUE BARON",
+    "CRIA AVELLANEDA SECC 06 - ECHENAGUCIA",
+    "CRIA LA MATANZA CENTRO SECC 01 - RAFAEL CASTILLO",
+    "CRIA MYF TRES DE FEBRERO",
+    "CRIA LA PLATA SECC 06 - TOLOZA",
+    "CRIA GRAL RODRIGUEZ SECC 02 - LAS MALVINAS ALMAFUERTE",
+    "CRIA AVELLANEDA SECC 03 - DOCK SUD",
+    "CRIA LANUS SECC 10 - VILLA BARCELO",
+    "CRIA MORENO SECC 02 - TRUJUI",
+    "CRIA JOSE C PAZ SECC 03 - POTOSI",
+    "CRIA FLORENCIO VARELA SECC 03 - CRUCE DE VARELA",
+    "CONFIDENCIAL",
+    "CIVIL"
+  ];
+
+  // POBLAR DESPLEGABLES DE DEPENDENCIA INSTRUCTORA
+  document.querySelectorAll('.select-dependencia').forEach(select => {
+    select.innerHTML = '';
+    listaDestinos.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = item;
+      opt.textContent = item;
+      select.appendChild(opt);
+    });
+  });
+
+  // POBLAR DESPLEGABLES DE DESTINO
+  document.querySelectorAll('.select-destino').forEach(select => {
+    select.innerHTML = '';
+    listaDestinos.forEach(item => {
+      const opt = document.createElement('option');
+      opt.value = item;
+      opt.textContent = item;
+      select.appendChild(opt);
+    });
+  });
+
+  // VALORES POR DEFECTO
+  if (document.getElementById('f_01_dependencia')) document.getElementById('f_01_dependencia').value = "DIR. FUERZA BARRIAL DE APROX. (FBA)";
+  if (document.getElementById('f_12_colaboracion')) document.getElementById('f_12_colaboracion').value = "DIV. FUERZA BARRIAL DE APROX. III (FBA QUILMES)";
+  if (document.getElementById('f_21_cau_destino')) document.getElementById('f_21_cau_destino').value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)";
+  if (document.getElementById('f_50_imp_destino')) document.getElementById('f_50_imp_destino').value = "CIVIL";
+  if (document.getElementById('f_59_vic_destino')) document.getElementById('f_59_vic_destino').value = "CIVIL";
+  if (document.getElementById('f_68_den_destino')) document.getElementById('f_68_den_destino').value = "CIVIL";
+  if (document.getElementById('f_84_dec_destino')) document.getElementById('f_84_dec_destino').value = "DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)";
 
   // ACORDEÓN DESPLEGABLE INDIVIDUAL
   const headers = document.querySelectorAll('.sheet-card-header');
