@@ -298,7 +298,9 @@ body {
 /* HOJA DE IMPRESIÓN OFICIAL A4 */
 .doc-preview-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
   width: 100%;
 }
 
@@ -342,7 +344,7 @@ body {
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
-  .a4-page { width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; padding: 3.5cm 1.5cm 2.5cm 3cm !important; }
+  .a4-page { width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; padding: 3.5cm 1.5cm 2.5cm 3cm !important; page-break-after: always; }
 }
 </style>
 </head>
@@ -748,6 +750,13 @@ document.addEventListener('DOMContentLoaded', function() {
           <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Cumplir con toda diligencia que sea de menester y/o surja de lo actuado.</p>
           <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Cumplidas todas las diligencias requeridas por el ente y vuelva para su prosecución.</p>
           <div style="text-align: center; font-weight: bold; margin-top: 2em;">CUMPLA EL ACTUARIO</div>
+        </div>
+        
+        <!-- PÁGINA 2 (SIN ENCABEZADO NI LOGO) -->
+        <div class="a4-page">
+          <div style="text-align: left; font-weight: bold; margin-bottom: 1em;">SEÑOR INSTRUCTOR:</div>
+          <div style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Tomo conocimiento y daré estricto cumplimiento a lo ordenado por usted. CONSTE.</div>
+          <div style="text-align: left; font-weight: bold; margin-top: 1em;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
         </div>`;
 
       case 'tab-corre_agregado':
