@@ -9,42 +9,38 @@
 :root {
   --primary: #0284c7;
   --primary-dark: #0369a1;
-  --bg-body: #f1f5f9;
+  --bg-body: #f8fafc;
   --sidebar-bg: #0f172a;
   --sidebar-hover: #1e293b;
   --card-bg: #ffffff;
   --border: #cbd5e1;
-  --text-dark: #1e293b;
+  --text-dark: #334155;
 }
 
 * {
   box-sizing: border-box !important;
-  font-family: 'Segoe UI', Arial, sans-serif !important;
+  font-family: Arial, sans-serif !important;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  margin: 0px;
+  padding: 0px;
   background-color: var(--bg-body);
   color: var(--text-dark);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* BARRA SUPERIOR DE NAV DE SOLAPAS */
+/* BARRA SUPERIOR DE NAVEGACIÓN DE SOLAPAS */
 .top-navbar {
   background-color: var(--sidebar-bg);
   display: flex;
   flex-direction: column;
-  border-bottom: 3px solid var(--primary);
+  border-bottom: 2px solid var(--primary);
   flex-shrink: 0;
   padding: 6px 12px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
 }
 
 .top-navbar-header {
@@ -55,262 +51,106 @@ body {
 }
 
 .top-navbar-title {
-  color: #fff;
-  font-weight: 800;
-  font-size: 0.9rem;
-  padding: 4px 12px;
+  color: rgb(255, 255, 255);
+  font-weight: bold;
+  font-size: 0.95rem;
+  padding: 4px 10px;
   background: var(--primary);
   border-radius: 4px;
+  white-space: nowrap;
 }
 
 .nav-list-top {
   list-style: none;
-  padding: 0;
-  margin: 4px 0 0 0;
+  padding: 0px;
+  margin: 4px 0px 0px;
   display: flex;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
 }
 
 .nav-item-top {
-  padding: 6px 10px;
+  padding: 6px 12px;
   cursor: pointer;
-  font-size: 0.78rem;
-  color: #94a3b8;
-  background-color: #1e293b;
-  border-radius: 4px 4px 0 0;
-  transition: all 0.2s ease;
+  font-size: 0.82rem;
+  color: rgb(148, 163, 184);
+  background-color: rgb(30, 41, 59);
+  border-radius: 4px;
+  transition: 0.2s;
   display: flex;
   align-items: center;
-  gap: 5px;
-  border: 1px solid #334155;
-  border-bottom: none;
+  gap: 6px;
+  white-space: nowrap;
+  border: 1px solid rgb(51, 65, 85);
 }
 
 .nav-item-top:hover {
   background-color: var(--sidebar-hover);
-  color: #fff;
+  color: rgb(255, 255, 255);
 }
 
 .nav-item-top.active {
   background-color: var(--primary);
-  color: #fff;
-  font-weight: 700;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
   border-color: var(--primary-dark);
 }
 
-/* CONTENEDOR PRINCIPAL */
+/* ESTRUCTURA Y SOLAPAS DE LA APLICACIÓN */
 .app-container {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1 1 0%;
+  overflow: hidden;
   position: relative;
-  width: 100%;
 }
 
 .tab-view {
   display: none;
   width: 100%;
+  height: 100%;
 }
 
 .tab-view.active-view {
   display: flex;
 }
 
-/* CARGA DE DATOS */
+/* SOLAPA 1: CARGA DE DATOS (CENTRADA Y ANCHA) */
 #view-carga_datos {
-  width: 100%;
-  padding: 16px;
+  justify-content: center;
   background: var(--bg-body);
-  display: flex;
-  flex-direction: column;
+  overflow-y: auto;
+  padding: 20px 0;
 }
 
-.global-controls {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 12px;
-}
-
-.btn-secondary {
-  background-color: #64748b;
-  color: white;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.btn-secondary:hover {
-  background-color: #475569;
-}
-
-.accordion-container {
+.full-width-form-container {
   width: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding-bottom: 40px;
-}
-
-.sheet-card-block {
+  max-width: 950px;
   background: var(--card-bg);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-  width: 100%;
-}
-
-.sheet-card-header {
-  background-color: #e2e8f0;
-  color: #0f172a;
-  font-weight: 800;
-  font-size: 0.85rem;
-  padding: 12px 16px;
-  text-transform: uppercase;
-  border-bottom: 2px solid var(--primary);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  user-select: none;
-  transition: background-color 0.2s ease;
-}
-
-.sheet-card-header:hover {
-  background-color: #cbd5e1;
-}
-
-.sheet-card-header .toggle-icon {
-  font-size: 0.85rem;
-  font-weight: bold;
-  color: var(--primary-dark);
-  transition: transform 0.2s ease;
-}
-
-.sheet-card-body {
-  padding: 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 12px;
-  background: #ffffff;
-  height: auto;
-}
-
-/* GRIDS ESPECÍFICOS DE DISTRIBUCIÓN */
-.grid-bloque-1 {
-  display: grid !important;
-  grid-template-columns: repeat(12, 1fr) !important;
-  gap: 12px !important;
-}
-
-.col-span-6 { grid-column: span 6; }
-.col-span-12 { grid-column: span 12; }
-
-.grid-bloque-1 .fila-5-cols {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-}
-
-.grid-bloque-3 {
-  display: grid !important;
-  grid-template-columns: repeat(12, 1fr) !important;
-  gap: 12px !important;
-}
-
-.grid-bloque-3 .fila-5-cols {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-}
-
-.grid-bloque-3 .fila-4-cols {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-}
-
-.grid-bloque-3 .fila-2-cols {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.grid-bloque-7 {
-  display: grid !important;
-  grid-template-columns: repeat(12, 1fr) !important;
-  gap: 12px !important;
-}
-
-.grid-bloque-7 .fila-5-cols {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-}
-
-.grid-bloque-7 .fila-2-cols {
-  grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.sheet-card-block.collapsed .sheet-card-body {
-  display: none !important;
-}
-
-.sheet-card-block.collapsed .toggle-icon {
-  transform: rotate(-90deg);
-}
-
-.sheet-row-single {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  background-color: #f8fafc;
-  border: 1px solid #e2e8f0;
-  padding: 8px 12px;
-  border-radius: 4px;
-  height: auto;
 }
 
-.sheet-row-single label {
-  font-size: 0.72rem;
+.sidebar-form-header {
+  padding: 14px 20px;
+  font-size: 1rem;
   font-weight: 800;
-  color: #475569;
-  text-transform: uppercase;
-  white-space: normal;
-  word-break: break-word;
+  background-color: var(--primary-dark);
+  color: rgb(255, 255, 255);
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
 
-.sheet-row-single input, 
-.sheet-row-single select, 
-.sheet-row-single textarea {
-  padding: 6px 10px;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  font-size: 0.82rem;
-  background: #fff;
-  width: 100%;
-  box-sizing: border-box;
+.sidebar-form-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
-.sheet-row-single textarea {
-  min-height: 100px;
-  height: auto;
-  resize: vertical;
-}
-
-/* PREVISUALIZACIÓN */
+/* MARGEN IZQUIERDO Y DERECHO PARA RESTO DE SOLAPAS */
 .left-sidebar-controls {
   width: 420px;
   background: var(--card-bg);
@@ -319,25 +159,84 @@ body {
   flex-direction: column;
   flex-shrink: 0;
   padding: 16px;
-  height: calc(100vh - 65px);
-  position: sticky;
-  top: 65px;
   overflow-y: auto;
 }
 
 .left-sidebar-controls.hidden-picker {
-  display: none !important;
+  display: none;
 }
 
 .right-preview-panel {
   flex: 1 1 0%;
   padding: 16px;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 16px;
   background: var(--bg-body);
-  overflow-y: auto;
-  height: calc(100vh - 65px);
+}
+
+/* COMPONENTES DE FORMULARIO Y TABLAS */
+.row-group-block {
+  background-color: rgb(241, 245, 249);
+  border: 1px solid rgb(203, 213, 225);
+  border-radius: 6px;
+  padding: 12px;
+  margin-bottom: 6px;
+}
+
+.row-group-title {
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--primary-dark);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 4px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgb(71, 85, 105);
+  text-transform: uppercase;
+}
+
+.row-badge {
+  background: rgb(15, 23, 42);
+  color: rgb(255, 255, 255);
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  margin-right: 6px;
+}
+
+input, select, textarea {
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 0.82rem;
+  outline: none;
+  background: rgb(255, 255, 255);
+  width: 100%;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.4;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary);
+  box-shadow: rgba(2, 132, 199, 0.15) 0px 0px 0px 3px;
 }
 
 .card {
@@ -360,33 +259,50 @@ body {
   align-items: center;
 }
 
-.actions-bar { display: flex; gap: 8px; }
+.actions-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
 
 .btn {
   border: none;
   padding: 8px 14px;
   border-radius: 5px;
-  font-size: 0.82rem;
+  font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  transition: background 0.2s;
+  white-space: nowrap;
 }
 
 .btn-primary { background-color: var(--primary); color: white; }
 .btn-primary:hover { background-color: var(--primary-dark); }
-.btn-print { background-color: #475569; color: white; }
-.btn-print:hover { background-color: #334155; }
-.btn-add { background-color: #10b981; color: white; }
-.btn-danger { background-color: #ef4444; color: white; padding: 2px 6px; font-size: 0.75rem; border-radius: 3px; }
+.btn-print { background-color: rgb(71, 85, 105); color: white; }
+.btn-print:hover { background-color: rgb(51, 65, 85); }
+.btn-add { background-color: rgb(16, 185, 129); color: white; flex-shrink: 0; }
 
-.dropdown-container { display: flex; gap: 8px; margin-bottom: 10px; width: 100%; }
-.dropdown-container select { flex: 1; }
+.dropdown-container {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  width: 100%;
+  align-items: center;
+}
 
-.selected-list { list-style: none; padding: 0; margin-top: 10px; }
+.dropdown-container select { flex: 1 1 0%; }
+
+.selected-list {
+  list-style: none;
+  padding: 0px;
+  margin-top: 10px;
+}
+
 .selected-list li {
-  background: #f8fafc;
+  background: rgb(248, 250, 252);
   border: 1px solid var(--border);
   border-radius: 5px;
   padding: 8px;
@@ -394,80 +310,104 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 0.82rem;
 }
 
-/* HOJA A4 */
+/* FORMATO Y HOJA A4 DE DOCUMENTO */
 .doc-preview-wrapper {
-  background: #64748b;
+  background: rgb(100, 116, 139);
   padding: 20px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  overflow-x: auto;
 }
 
 .a4-page {
   background: white;
   width: 210mm;
   min-height: 297mm;
-  padding: 4cm 1.5cm 2.5cm 3cm;
+  padding: 5cm 1.5cm 2.5cm 4cm;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 25px;
   font-size: 11pt;
   line-height: 1.45;
-  color: #000;
+  color: rgb(0, 0, 0);
   position: relative;
+  overflow-wrap: break-word;
   box-sizing: border-box !important;
 }
 
-.a4-page.caratula-page-fixed { overflow: hidden; height: 297mm !important; }
-.doc-header-logo { text-align: left; margin-bottom: 0.5cm; }
-.doc-header-logo img { max-height: 55px; width: auto; }
-.doc-mid-section { margin-left: 45%; width: 55%; margin-bottom: 1.2em; text-align: right; }
-.doc-addressee { font-weight: bold; margin-bottom: 1.2em; text-transform: uppercase; }
-.sangria-dto { margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important; }
-.sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.25cm !important; }
-.sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
+.a4-page.caratula-page-fixed {
+  overflow: hidden;
+  height: 297mm !important;
+}
 
-.caratula-container-auto { display: flex; flex-direction: column; justify-content: space-between; height: calc(100% - 75px); width: 100%; }
-.caratula-title-main { text-align: center; font-size: 16pt; font-weight: 900; text-transform: uppercase; margin-top: 10px; }
-.caratula-isa-box { border: 2px solid #000; padding: 12px; text-align: center; font-size: 15pt; font-weight: bold; margin: 15px 0px; }
-.caratula-grid-auto { display: flex; flex-direction: column; justify-content: space-between; flex: 1 1 0%; font-size: 10.5pt; text-transform: uppercase; padding-bottom: 10px; }
-.caratula-row-item { display: grid; grid-template-columns: 210px 1fr; column-gap: 15px; align-items: center; }
+.doc-header-logo { text-align: left; margin-bottom: 0.3cm; }
+.doc-header-logo img { max-height: 60px; width: auto; object-fit: contain; }
+
+.caratula-container-auto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100% - 75px);
+  width: 100%;
+}
+
+.caratula-title-main {
+  text-align: center;
+  font-size: 16pt;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+.caratula-isa-box {
+  border: 2px solid rgb(0, 0, 0);
+  padding: 12px;
+  text-align: center;
+  font-size: 15pt;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.caratula-grid-auto {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 0%;
+  font-size: 10.5pt;
+  text-transform: uppercase;
+  padding-bottom: 10px;
+}
+
+.caratula-row-item {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  column-gap: 15px;
+  align-items: center;
+}
+
 .caratula-label { font-weight: bold; text-decoration: underline; }
 .caratula-value { font-weight: bold; }
 
-/* FIRMAS DECLARACIÓN TESTIMONIAL */
-.signature-section {
-  margin-top: 60px;
-  display: flex;
-  flex-direction: column;
-}
-.signature-box-left {
-  width: 50%;
-  text-align: center;
-  border-top: 1px dashed #000;
-  padding-top: 5px;
-  font-size: 9.5pt;
-}
-
 @media print {
-  @page { size: a4; margin: 0; }
+  @page { size: a4; margin: 0px; }
   html, body { background: white !important; overflow: visible !important; height: auto !important; width: 210mm !important; }
-  .top-navbar, .left-sidebar-controls, .card-title, .actions-bar { display: none !important; }
-  .app-container { display: block !important; width: 100% !important; margin: 0 !important; padding: 0 !important; }
-  .right-preview-panel { padding: 0 !important; overflow: visible !important; background: transparent !important; width: 100% !important; height: auto !important; }
-  .card { border: none !important; box-shadow: none !important; padding: 0 !important; background: transparent !important; width: 100% !important; }
-  .doc-preview-wrapper { background: white !important; padding: 0 !important; gap: 0 !important; width: 100% !important; }
-  .a4-page { break-after: page; width: 210mm !important; max-width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; padding: 4cm 1.5cm 2.5cm 3cm !important; margin: 0 !important; }
+  .top-navbar, .left-sidebar-controls, .card-title, .actions-bar, #card-desplegable-picker, #note-preview-title { display: none !important; }
+  .app-container { display: block !important; width: 100% !important; margin: 0px !important; padding: 0px !important; }
+  .right-preview-panel { padding: 0px !important; overflow: visible !important; background: transparent !important; width: 100% !important; }
+  .card { border: none !important; box-shadow: none !important; padding: 0px !important; background: transparent !important; width: 100% !important; }
+  .doc-preview-wrapper { background: white !important; padding: 0px !important; gap: 0px !important; overflow: visible !important; width: 100% !important; }
+  .a4-page { break-after: page; width: 210mm !important; max-width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; padding: 5cm 1.5cm 2.5cm 4cm !important; margin: 0px !important; display: block !important; box-sizing: border-box !important; }
 }
 </style>
 </head>
 
 <body> 
 
-<!-- BARRA SUPERIOR DE NAV DE SOLAPAS --> 
+<!-- BARRA SUPERIOR DE SOLAPAS --> 
 <div class="top-navbar"> 
   <div class="top-navbar-header"> 
     <div class="top-navbar-title">GENERADOR DE NOTAS SUMARIALES PAR</div> 
@@ -492,371 +432,141 @@ body {
   </ul> 
 </div> 
 
-<!-- CONTENEDOR PRINCIPAL --> 
+<!-- CONTENEDOR PRINCIPAL DE CONTENIDOS --> 
 <div class="app-container"> 
   
-  <!-- VISTA 1: CARGA DE DATOS -->
+  <!-- VISTA 1: CARGA DE DATOS COMPLETA -->
   <div class="tab-view active-view" id="view-carga_datos">
-    
-    <!-- CONTROLES GLOBALES DE ACORDEÓN -->
-    <div class="global-controls">
-      <button class="btn-secondary" id="btn-expand-all">📂 Expandir Todos</button>
-      <button class="btn-secondary" id="btn-collapse-all">📁 Contraer Todos</button>
-    </div>
+    <div class="full-width-form-container">
+      <div class="sidebar-form-header">📝 CARGA DE DATOS COMPLETA DE ACTUACIONES</div>
+      <div class="sidebar-form-content">
+        
+        <!-- SECCIÓN 1: FECHA DE LA NOTA --> 
+        <div class="row-group-block"> 
+          <div class="row-group-title"><span class="row-badge">Sección 1</span>FECHA DE LA NOTA</div> 
+          <div class="form-group"><label>DÍA</label><input type="number" id="f1_dia" value="2" title="2"></div> 
+          <div class="form-group"><label>MES</label><input type="text" id="f1_mes" value="abril" title="abril"></div> 
+          <div class="form-group"><label>AÑO</label><input type="number" id="f1_anio" value="2026" title="2026"></div> 
+        </div> 
 
-    <div class="accordion-container">
-      
-      <!-- Bloque 1: PROCEDENCIA Y DEPENDENCIA INSTRUCTORA -->
-      <div class="sheet-card-block">
-        <div class="sheet-card-header">
-          <span>🏛️ 1. PROCEDENCIA Y DEPENDENCIA INSTRUCTORA</span>
-          <span class="toggle-icon">▼</span>
+        <!-- SECCIÓN 2: DATOS DEL IMPUTADO --> 
+        <div class="row-group-block"> 
+          <div class="row-group-title"><span class="row-badge">Sección 2</span>DATOS DEL IMPUTADO</div> 
+          <div class="form-group"><label>JERARQUIA, AGRUPACION, LEGAJO Y NOMBRE</label><input type="text" id="f_imp_nombre" value="OFL 123123 IMPUTADO DEL HECHO" title="OFL 123123 IMPUTADO DEL HECHO"></div> 
+          <div class="form-group"><label>EDAD</label><input type="number" id="f_imp_edad" value="45" title="45"></div> 
+          <div class="form-group"><label>DNI</label><input type="text" id="f_imp_dni" value="45000123" title="45000123"></div> 
+          <div class="form-group"><label>DOMICILIO</label><input type="text" id="f_imp_domicilio" value="CALLE 1 N° 24" title="CALLE 1 N° 24"></div> 
+          <div class="form-group"><label>ENTRE CALLES</label><input type="text" id="f_imp_entre_calles" value="CALLE 2 Y CALLE 3" title="CALLE 2 Y CALLE 3"></div> 
+          <div class="form-group"><label>LOCALIDAD</label><input type="text" id="f_imp_localidad" value="Los Hornos" title="Los Hornos"></div> 
+          <div class="form-group"><label>PARTIDO</label><input type="text" id="f_imp_partido" value="LA PLATA" title="LA PLATA"></div> 
+          <div class="form-group"><label>CONTACTO</label><input type="text" id="f_imp_contacto" value="11-2257-9393" title="11-2257-9393"></div> 
+          <div class="form-group"><label>DESTINO</label>
+            <select id="f_imp_destino">
+              <option value="DIR. FUERZA BARRIAL DE APROX. (FBA)">DIR. FUERZA BARRIAL DE APROX. (FBA)</option>
+              <option value="DIV. FUERZA BARRIAL DE APROX. I (FBA LOMAS DE ZAMORA)">DIV. FUERZA BARRIAL DE APROX. I (FBA LOMAS DE ZAMORA)</option>
+              <option value="DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)">DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)</option>
+              <option value="DIV. FUERZA BARRIAL DE APROX. V (FBA LA PLATA)">DIV. FUERZA BARRIAL DE APROX. V (FBA LA PLATA)</option>
+            </select>
+          </div> 
+        </div> 
+
+        <!-- SECCIÓN 3: DATOS DEL DECLARANTE --> 
+        <div class="row-group-block"> 
+          <div class="row-group-title"><span class="row-badge">Sección 3</span>DATOS DEL DECLARANTE (TESTIMONIAL)</div> 
+          <div class="form-group"><label>NOMBRES COMPLETOS</label><input type="text" id="f_dec_nombres" value="DECLARANTE" title="DECLARANTE"></div> 
+          <div class="form-group"><label>EDAD</label><input type="number" id="f_dec_edad" value="45" title="45"></div> 
+          <div class="form-group"><label>NACIONALIDAD</label><input type="text" id="f_dec_nacionalidad" value="ARGENTINA" title="ARGENTINA"></div> 
+          <div class="form-group"><label>ESTADO CIVIL</label><input type="text" id="f_dec_estado_civil" value="SOLTERO" title="SOLTERO"></div> 
+          <div class="form-group"><label>PROFESION U OCUPACION</label><input type="text" id="f_dec_profesion" value="EMPLEADO POLICIAL" title="EMPLEADO POLICIAL"></div> 
+          <div class="form-group"><label>DOMICILIO</label><input type="text" id="f_dec_domicilio" value="CALLE 1 N° 23" title="CALLE 1 N° 23"></div> 
+          <div class="form-group"><label>LOCALIDAD</label><input type="text" id="f_dec_localidad" value="Los Hornos" title="Los Hornos"></div> 
+          <div class="form-group"><label>PARTIDO</label><input type="text" id="f_dec_partido" value="LA PLATA" title="LA PLATA"></div> 
+          <div class="form-group"><label>DNI</label><input type="text" id="f_dec_dni" value="45000123" title="45000123"></div> 
+          <div class="form-group"><label>LEGAJO PERSONAL</label><input type="text" id="f_dec_legajo" value="123456" title="123456"></div> 
+          <div class="form-group"> 
+            <label>DECLARA:</label> 
+            <textarea id="f_dec_declara">a fin de tramitar las diligencias solicitadas con el fin de establecer la existencia de Actuaciones Penales...</textarea> 
+          </div> 
+        </div> 
+
+        <!-- SECCIÓN 4: PROCEDENCIA Y PERSONAL ACTUANTE --> 
+        <div class="row-group-block"> 
+          <div class="row-group-title"><span class="row-badge">Sección 4</span>PROCEDENCIA Y PERSONAL ACTUANTE</div> 
+          <div class="form-group"><label>INSTRUCTOR</label><input type="text" id="f_proc_instructor" value="COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN"></div> 
+          <div class="form-group"><label>SECRETARIO</label><input type="text" id="f_proc_secretario" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div> 
+        </div> 
+
+        <!-- SECCIÓN 8: EXPEDIENTE Y LUGAR DEL HECHO --> 
+        <div class="row-group-block"> 
+          <div class="row-group-title"><span class="row-badge">Sección 8</span>EXPEDIENTE Y LUGAR DEL HECHO</div> 
+          <div class="form-group"><label>DÍA DEL HECHO</label><input type="number" id="f_hecho_dia" value="2"></div> 
+          <div class="form-group"><label>MES DEL HECHO</label><input type="text" id="f_hecho_mes" value="abril"></div> 
+          <div class="form-group"><label>AÑO DEL HECHO</label><input type="number" id="f_hecho_anio" value="2026"></div> 
+          <div class="form-group"><label>EXP. ELECTRONICO N°</label><input type="text" id="f_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP"></div> 
+          <div class="form-group"><label>CARATULA</label><input type="text" id="f_caratula" value="21100 - 082162/2026 - DN154527"></div> 
+          <div class="form-group"><label>SINTESIS DEL HECHO:</label><textarea id="f_sintesis_hecho">el oficial ut-supra, encontrándose dirigiéndose al servicio a bordo de su motocicleta...</textarea></div> 
         </div>
-        <div class="sheet-card-body grid-bloque-1">
-          
-          <div class="sheet-row-single col-span-6">
-            <label>FECHA DE RECEPCION:</label>
-            <input type="text" id="f_00_fecha_recepcion" value="2 de abril del 2026">
-          </div>
-          <div class="sheet-row-single col-span-6">
-            <label>DEPENDENCIA INSTRUCTORA:</label>
-            <select id="f_01_dependencia" class="select-dependencia"></select>
-          </div>
 
-          <div class="fila-5-cols">
-            <div class="sheet-row-single">
-              <label>DIRECCIÓN:</label>
-              <input type="text" id="f_02_direccion" value="San Matías (Ruta provincial 1001) sin número ">
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 1</label>
-              <input type="text" id="f_03_entre_calle_1" value="Achupallas">
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 2</label>
-              <input type="text" id="f_04_entre_calle_2" value="B. Llorente">
-            </div>
-            <div class="sheet-row-single">
-              <label>LOCALIDAD</label>
-              <input type="text" id="f_05_localidad" value="González Catán">
-            </div>
-            <div class="sheet-row-single">
-              <label>PARTIDO</label>
-              <input type="text" id="f_06_partido" value="La Matanza">
-            </div>
-          </div>
-
-          <div class="sheet-row-single col-span-6">
-            <label>INSTRUCTOR SUMARIAL</label>
-            <input type="text" id="f_07_instructor" value="COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN">
-          </div>
-          <div class="sheet-row-single col-span-6">
-            <label>CARGO INSTRUCTOR</label>
-            <input type="text" id="f_08_cargo_instructor" value="SUBDIRECTOR">
-          </div>
-
-          <div class="sheet-row-single col-span-6">
-            <label>SECRETARIO ACTUACIONES</label>
-            <input type="text" id="f_09_secretario" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR">
-          </div>
-          <div class="sheet-row-single col-span-6">
-            <label>CARGO SECRETARIO</label>
-            <input type="text" id="f_10_cargo_secretario" value="DISPONIBLE">
-          </div>
-
-          <div class="sheet-row-single col-span-12">
-            <label>COLABORACION A:</label>
-            <select id="f_12_colaboracion" class="select-destino"></select>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Bloque 2 -->
-      <div class="sheet-card-block">
-        <div class="sheet-card-header">
-          <span>👤 2. DATOS DEL CAUSANTE</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_13_cau_nombre" value="DATOS DEL CAUSANTE"></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_14_cau_edad" value="45"></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_15_cau_dni" value="45.000.123"></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_16_cau_domicilio" value="CALLE 1 N° 24"></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_17_cau_entre_calles" value="CALLE 2 Y CALLE 3"></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_18_cau_localidad" value="Los Hornos"></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_19_cau_partido" value="LA PLATA"></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_20_cau_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label>
-            <select id="f_21_cau_destino" class="select-destino"></select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bloque 3: EXPEDIENTE Y LUGAR DEL HECHO -->
-      <div class="sheet-card-block">
-        <div class="sheet-card-header">
-          <span>📂 3. EXPEDIENTE Y LUGAR DEL HECHO</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body grid-bloque-3">
-          
-          <div class="fila-5-cols">
-            <div class="sheet-row-single">
-              <label>FECHA DEL HECHO:</label>
-              <input type="text" id="f_22_hecho_fecha" value="2 de abril del 2026">
-            </div>
-            <div class="sheet-row-single">
-              <label>EXP. ELECTRONICO N°</label>
-              <input type="text" id="f_23_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP">
-            </div>
-            <div class="sheet-row-single">
-              <label>CARATULA ADMINISTRATIVA</label>
-              <input type="text" id="f_24_caratula" value="21100 - 082162/2026 - DN154527">
-            </div>
-            <div class="sheet-row-single">
-              <label>ENCUADRE ADMINISTRATIVO</label>
-              <input type="text" id="f_25_encuadre" value="-sin encuadre administrativo-">
-            </div>
-            <div class="sheet-row-single">
-              <label>INTERVENCION:</label>
-              <select id="f_26_intervencion">
-                <option value="DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO">DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO</option>
-                <option value="AUDITORÍA GENERAL DE ASUNTOS INTERNOS (A.G.A.I.)">AUDITORÍA GENERAL DE ASUNTOS INTERNOS (A.G.A.I.)</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="fila-4-cols">
-            <div class="sheet-row-single">
-              <label>LUGAR DEL HECHO:</label>
-              <input type="text" id="f_27_hecho_lugar" value="Ruta Provincial 1001">
-            </div>
-            <div class="sheet-row-single">
-              <label>TIPO DE CALZADA</label>
-              <input type="text" id="f_28_calzada_tipo" value="asfalto">
-            </div>
-            <div class="sheet-row-single">
-              <label>ESTADO DE LA CALZADA</label>
-              <input type="text" id="f_29_calzada_estado" value="bueno">
-            </div>
-            <div class="sheet-row-single">
-              <label>SENTIDO DE CIRCULACION</label>
-              <input type="text" id="f_30_calzada_sentido" value="doble">
-            </div>
-          </div>
-
-          <div class="fila-4-cols">
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 1</label>
-              <input type="text" id="f_31_ec1" value="Achupallas">
-            </div>
-            <div class="sheet-row-single">
-              <label>TIPO DE CALZADA (EC1)</label>
-              <input type="text" id="f_32_ec1_tipo" value="asfalto">
-            </div>
-            <div class="sheet-row-single">
-              <label>ESTADO DE LA CALZADA (EC1)</label>
-              <input type="text" id="f_33_ec1_estado" value="bueno">
-            </div>
-            <div class="sheet-row-single">
-              <label>SENTIDO DE CIRCULACION (EC1)</label>
-              <input type="text" id="f_34_ec1_sentido" value="doble">
-            </div>
-          </div>
-
-          <div class="fila-4-cols">
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 2</label>
-              <input type="text" id="f_35_ec2" value="B. Llorente">
-            </div>
-            <div class="sheet-row-single">
-              <label>TIPO DE CALZADA (EC2)</label>
-              <input type="text" id="f_36_ec2_tipo" value="asfalto">
-            </div>
-            <div class="sheet-row-single">
-              <label>ESTADO DE LA CALZADA (EC2)</label>
-              <input type="text" id="f_37_ec2_estado" value="regular">
-            </div>
-            <div class="sheet-row-single">
-              <label>SENTIDO DE CIRCULACION (EC2)</label>
-              <input type="text" id="f_38_ec2_sentido" value="doble">
-            </div>
-          </div>
-
-          <div class="fila-2-cols">
-            <div class="sheet-row-single">
-              <label>LOCALIDAD</label>
-              <input type="text" id="f_39_hecho_loc" value="González Catán">
-            </div>
-            <div class="sheet-row-single">
-              <label>PARTIDO</label>
-              <input type="text" id="f_40_hecho_partido" value="La Matanza">
-            </div>
-          </div>
-
-          <div class="sheet-row-single col-span-12">
-            <label>SINTESIS DEL HECHO:</label>
-            <textarea id="f_41_sintesis">el oficial ut-supra, encontrándose dirigiéndose al servicio a bordo de su motocicleta marca honda, modelo 110cc, dominio 123DCD, circulando por calle 1 entre calle 2 y calle 3 de Los hornos, pierde el control del rodado y cae...</textarea>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Bloque 4 -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>⚖️ 4. DATOS DEL IMPUTADO</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_42_imp_nombre" value="DATOS DEL IMPUTADO"></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_43_imp_edad" value="45"></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_44_imp_dni" value="45.000.123"></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_45_imp_domicilio" value="CALLE 1 N° 24"></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_46_imp_entre_calles" value="CALLE 2 Y CALLE 3"></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_47_imp_localidad" value="Los Hornos"></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_48_imp_partido" value="LA PLATA"></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_49_imp_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label>
-            <select id="f_50_imp_destino" class="select-destino"></select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bloque 5 -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>🩺 5. DATOS DE LA VICTIMA</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_51_vic_nombre" value="DATOS DE LA VICTIMA"></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_52_vic_edad" value="45"></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_53_vic_dni" value="45.000.123"></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_54_vic_domicilio" value="CALLE 1 N° 24"></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_55_vic_entre_calles" value="CALLE 2 Y CALLE 3"></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_56_vic_localidad" value="Los Hornos"></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_57_vic_partido" value="LA PLATA"></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_58_vic_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label>
-            <select id="f_59_vic_destino" class="select-destino"></select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bloque 6 -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>📢 6. DATOS DEL DENUNCIANTE</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_60_den_nombre" value="DATOS DEL DENUNCIANTE"></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_61_den_edad" value="45"></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_62_den_dni" value="45.000.123"></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_63_den_domicilio" value="CALLE 1 N° 24"></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_64_den_entre_calles" value="CALLE 2 Y CALLE 3"></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_65_den_localidad" value="Los Hornos"></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_66_den_partido" value="LA PLATA"></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_67_den_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label>
-            <select id="f_68_den_destino" class="select-destino"></select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Bloque 7: DATOS DEL DECLARANTE (TESTIMONIAL) -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>📝 7. DATOS DEL DECLARANTE (TESTIMONIAL)</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body grid-bloque-7">
-          
-          <div class="fila-5-cols">
-            <div class="sheet-row-single"><label>NOMBRES COMPLETOS</label><input type="text" id="f_69_dec_nombre" value="DATOS DECLARANTE"></div>
-            <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_70_dec_edad" value="45"></div>
-            <div class="sheet-row-single"><label>NACIONALIDAD</label><input type="text" id="f_71_dec_nacionalidad" value="ARGENTINA"></div>
-            <div class="sheet-row-single"><label>ESTADO CIVIL</label><input type="text" id="f_72_dec_estado_civil" value="SOLTERO"></div>
-            <div class="sheet-row-single"><label>PROFESION U OCUPACION</label><input type="text" id="f_73_dec_profesion" value="EMPLEADO POLICIAL"></div>
-          </div>
-
-          <div class="fila-5-cols">
-            <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_74_dec_domicilio" value="CALLE 1 N° 23"></div>
-            <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_75_dec_entre_calles" value="CALLE 2 Y CALLE 3"></div>
-            <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_76_dec_localidad" value="Los Hornos"></div>
-            <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_77_dec_partido" value="LA PLATA"></div>
-            <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_78_dec_dni" value="45000123"></div>
-          </div>
-
-          <div class="fila-2-cols">
-            <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_79_dec_contacto" value="11-2257-9393"></div>
-            <div class="sheet-row-single"><label>MAIL</label><input type="text" id="f_80_dec_mail" value=""></div>
-          </div>
-
-          <div class="fila-5-cols">
-            <div class="sheet-row-single"><label>JERARQUIA</label><input type="text" id="f_81_dec_jerarquia" value="OFICIAL "></div>
-            <div class="sheet-row-single"><label>SUBESCALAFON</label><input type="text" id="f_82_dec_subescalafon" value="GENERAL"></div>
-            <div class="sheet-row-single"><label>LEGAJO PERSONAL</label><input type="text" id="f_83_dec_legajo" value="123456"></div>
-            <div class="sheet-row-single"><label>DESTINO</label>
-              <select id="f_84_dec_destino" class="select-destino"></select>
-            </div>
-            <div class="sheet-row-single"><label>FUNCION</label><input type="text" id="f_85_dec_funcion" value="DISPONIBLE"></div>
-          </div>
-
-          <div class="sheet-row-single col-span-12">
-            <label>DECLARA:</label>
-            <textarea id="f_86_dec_declara">a fin de tramitar las diligencias solicitadas con el fin de establecer la existencia de Actuaciones Penales, y en caso de ser afirmativo se informe número de causa, fiscalía interviniente, temperamento adoptado contra el personal policial actuante.</textarea>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Bloque 8 -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>⚖️ 8. MAGISTRADO Y CAUSA PENAL</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>MAGISTRADO JUDICIAL</label><input type="text" id="f_87_magistrado" value="FISCALIA GENERAL DEPARTAMENTAL"></div>
-          <div class="sheet-row-single"><label>DPTO JUDICIAL</label><input type="text" id="f_88_dpto_judicial" value="MORON"></div>
-          <div class="sheet-row-single"><label>PROCESO PENAL N°</label><input type="text" id="f_89_proceso_penal" value="PP-00-00-000000-26/00"></div>
-          <div class="sheet-row-single"><label>CARATULA PENAL</label><input type="text" id="f_90_caratula_penal" value="Lesiones culposas"></div>
-        </div>
-      </div>
-
+      </div> 
     </div>
   </div>
 
-  <!-- VISTA 2: RESTO DE SOLAPAS -->
+  <!-- VISTA 2: RESTO DE SOLAPAS (MARGEN IZQUIERDO = CONTROLES / MARGEN DERECHO = PREVISUALIZACIÓN) -->
   <div class="tab-view" id="view-resto-solapas">
     
-    <!-- MARGEN IZQUIERDO DESPLEGABLES -->
+    <!-- MARGEN IZQUIERDO: DESPLEGABLE Y CONTROLES DE CARGA DE ÍTEM -->
     <div class="left-sidebar-controls" id="left-controls-container">
       <div class="card" id="card-desplegable-picker"> 
-        <div class="card-title">SELECCIÓN DE ELEMENTOS (82 ÍTEMS)</div> 
-        <div class="dropdown-container"> 
-          <select id="dropdown-options-select"></select> 
-          <button class="btn btn-add" id="btn-add-item">➕ Agregar</button> 
+        <div class="card-title">SELECCIÓN DE ELEMENTOS</div> 
+        <div class="dropdown-container" id="container-picker-dynamic"> 
+          <select id="dropdown-options-select">
+            <option value="0">1. Informe de tipos, dias, horarios y modalidad de servicio del OFL 123123 IMPUTADO DEL HECHO</option>
+            <option value="1">2. Concepto Funcional y Personal firmado por superior directo del causante</option>
+            <option value="2">3. Copia certificada y legible con habilitación del Libro de Novedades</option>
+            <option value="3">4. Copia certificada y legible con habilitación del Libro de Presentismo</option>
+            <option value="4">5. Legajo Electrónico Personal (L.E.P.)</option>
+            <option value="5">6. Certifica de Revista legible generado por (SIPP)</option>
+          </select> 
+          <button class="btn btn-add">➕ Agregar</button> 
         </div> 
         <label>ELEMENTOS CONFIGURADOS:</label> 
-        <ul class="selected-list" id="selected-points-list"></ul> 
+        <div class="selected-list" id="selected-points-list"><ul class="selected-list"></ul></div> 
       </div>
     </div>
 
-    <!-- MARGEN DERECHO PREVISUALIZACIÓN -->
+    <!-- MARGEN DERECHO: PREVISUALIZACIÓN DE DOCUMENTO -->
     <div class="right-preview-panel">
       <div class="card"> 
         <div class="card-title"> 
           <span id="note-preview-title">DOCUMENTO GENERADO</span> 
           <div class="actions-bar"> 
-            <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
+            <button class="btn btn-print">🖨️ Imprimir Documento</button> 
             <button class="btn btn-primary">📥 Descargar en Word (.docx)</button> 
           </div> 
         </div> 
-        <div class="doc-preview-wrapper" id="doc-preview-wrapper-container"></div> 
+        <div class="doc-preview-wrapper" id="doc-preview-wrapper-container"> 
+          <div class="a4-page caratula-page-fixed"> 
+            <div class="doc-header-logo">
+              <img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27400%27%20height%3D%2760%27%20viewBox%3D%270%200%20400%2060%27%3E%3Crect%20width%3D%27110%27%20height%3D%2735%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%277%27%20y%3D%2716%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%277%27%20y%3D%2727%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2718%27%20font-family%3D%27Arial%27%20font-size%3D%2710%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2736%27%20font-family%3D%27Arial%27%20font-size%3D%2718%27%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E">
+            </div> 
+            <div class="caratula-container-auto"> 
+              <div> 
+                <div class="caratula-title-main">ACTUACION SUMARIAL ADMINISTRATIVA</div> 
+                <div class="caratula-isa-box">21100 - 082162/2026 - DN154527</div> 
+              </div> 
+              <div class="caratula-grid-auto"> 
+                <div class="caratula-row-item"><div class="caratula-label">EXPEDIENTE ELECTRONICO:</div><div class="caratula-value">EX-2026-16420475- -GDEBA-DDPRYGEMSGP</div></div> 
+                <div class="caratula-row-item"><div class="caratula-label">FECHA DEL HECHO:</div><div class="caratula-value"><b>2 de abril del 2026</b></div></div> 
+                <div class="caratula-row-item"><div class="caratula-label">CAUSANTE:</div><div class="caratula-value">OFL 123123 CAUSANTE DEL HECHO</div></div> 
+                <div class="caratula-row-item"><div class="caratula-label">DESTINO DEL CAUSANTE:</div><div class="caratula-value">DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)</div></div> 
+                <div class="caratula-row-item"><div class="caratula-label">CTROL. DISCIPLINARIO INTERV.:</div><div class="caratula-value">DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO</div></div> 
+                <div class="caratula-row-item"><div class="caratula-label">INSTRUCTOR:</div><div class="caratula-value">COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN</div></div> 
+                <div class="caratula-row-item"><div class="caratula-label">SECRETARIO DE ACTUACION:</div><div class="caratula-value">OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR</div></div> 
+                <div class="caratula-row-item"><div class="caratula-label">DEPENDENCIA INSTRUCTORA:</div><div class="caratula-value">DIR. FUERZA BARRIAL DE APROX. (FBA)</div></div> 
+              </div> 
+            </div> 
+          </div> 
+        </div> 
       </div>
     </div>
 
@@ -864,6 +574,7 @@ body {
 
 </div> 
 
+<!-- LÓGICA DE INTERACCIÓN Y NAVEGACIÓN ENTRE SOLAPAS -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
   const tabs = document.querySelectorAll('#main-tabs-nav .nav-item-top');
@@ -871,405 +582,45 @@ document.addEventListener('DOMContentLoaded', function() {
   const viewResto = document.getElementById('view-resto-solapas');
   const leftControls = document.getElementById('left-controls-container');
   const previewTitle = document.getElementById('note-preview-title');
-  const previewContainer = document.getElementById('doc-preview-wrapper-container');
-  const itemsList = document.getElementById('selected-points-list');
-  const btnAdd = document.getElementById('btn-add-item');
-  const dropdownSelect = document.getElementById('dropdown-options-select');
 
-  let activeTabKey = 'tab-caratula';
-  let configuredItems = [];
-
-  const listaDestinos = [
-    "DIR. FUERZA BARRIAL DE APROX. (FBA)",
-    "DIV. FUERZA BARRIAL DE APROX. I (FBA LOMAS DE ZAMORA)",
-    "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)",
-    "DIV. FUERZA BARRIAL DE APROX. III (FBA QUILMES)",
-    "DIV. FUERZA BARRIAL DE APROX. IV (FBA FLORENCIO VARELA)",
-    "DIV. FUERZA BARRIAL DE APROX. V (FBA LA PLATA)",
-    "DIV. FUERZA BARRIAL DE APROX. VI (FBA SAN MARTIN)",
-    "DIV. FUERZA BARRIAL DE APROX. VII (FBA TRES DE FEBRERO)",
-    "DIV. FUERZA BARRIAL DE APROX. VIII (FBA ITUZAINGO)",
-    "DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)",
-    "DIV. FUERZA BARRIAL DE APROX. X (FBA MORON)",
-    "DIV. FUERZA BARRIAL DE APROX. XI (FBA MERLO)",
-    "DIV. FUERZA BARRIAL DE APROX. XII (FBA MORENO)",
-    "DIV. FUERZA BARRIAL DE APROX. XIII (FBA MAR DEL PLATA)",
-    "DIV. FUERZA BARRIAL DE APROX. XIV (FBA AVELLANEDA)",
-    "DIV. FUERZA BARRIAL DE APROX. XV (FBA LANUS)",
-    "DIV. FUERZA BARRIAL DE APROX. XVI (FBA MALVINAS ARGENTINAS)",
-    "DIV. FUERZA BARRIAL DE APROX. XVII (FBA EZEIZA)",
-    "DIV. FUERZA BARRIAL DE APROX. XVIII (FBA LA MATANZA SUR)",
-    "DIV. FUERZA BARRIAL DE APROX. XIX (FBA LA MATANZA CENTRO)",
-    "DIV. FUERZA BARRIAL DE APROX. XX (FBA SAN ISIDRO)",
-    "DIV. FUERZA BARRIAL DE APROX. XXI (FBA ESTEBAN ECHEVERRIA)",
-    "DIV. FUERZA BARRIAL DE APROX. XXII (FBA BERISSO)",
-    "DIV. FUERZA BARRIAL DE APROX. XXIII (FBA SAN VICENTE)",
-    "DIV. FUERZA BARRIAL DE APROX. XXIV (FBA PILAR)",
-    "DIV. FUERZA BARRIAL DE APROX. XXV (FBA ENSENADA)",
-    "DIV. FUERZA BARRIAL DE APROX. XXVI (FBA LA MATANZA NORTE)",
-    "DIV. FUERZA BARRIAL DE APROX. XXVII (FBA GRAL RODRIGUEZ)",
-    "DIV. FUERZA BARRIAL DE APROX. XXVIII (FBA BRANDSEN)",
-    "DIV. FUERZA BARRIAL DE APROX. XXIX (FBA BERAZATEGUI)",
-    "DIV. FUERZA BARRIAL DE APROX. XXX (FBA CORONEL ROSALES)",
-    "CRIA MYF FLORENCIO VARELA",
-    "CRIA SAN MARTIN SECC 05 - BILLINGHURST",
-    "CRIA LANUS SECC 08 - VILLA OBRERA",
-    "CRIA HURLINGHAM SECC 01 - HURLINGHAM",
-    "CRIA LA MATANZA CENTRO SECC 03 - CIUDAD EVITA",
-    "CRIA ALMIRANTE BROWN SECC 05 - RAFAEL CALZADA",
-    "CRIA LA MATANZA SUR SECC 02 - GONZALEZ CATAN",
-    "CRIA LA MATANZA NORTE SECC 06 - VILLA MADERO",
-    "CRIA ITUZAINGO SECC 01 - ITUZAINGO",
-    "CRIA TRES DE FEBRERO SECC 04 - VILLA PINERAL",
-    "CRIA FLORENCIO VARELA SECC 06 - INGENIERO J ALLAN",
-    "CRIA SAN MARTIN SECC 02 - VILLA BALLESTER",
-    "CRIA MYF AVELLANEDA",
-    "CRIA TRES DE FEBRERO SECC 01 - CASEROS",
-    "CRIA BERAZATEGUI SECC 01 - BERAZATEGUI",
-    "DTO PILAR MONTERREY",
-    "CRIA BERAZATEGUI SECC 04 - HUDSON",
-    "CRIA MERLO SECC 02 - S A PADUA",
-    "CRIA QUILMES SECC 06 - EZPELETA",
-    "CRIA ALMIRANTE BROWN SECC 02 - BURZACO",
-    "CRIA LA MATANZA CENTRO SECC 07 - ALTOS DE LAFERRERE",
-    "CRIA MERLO SECC 01 - MERLO",
-    "CRIA LANUS SECC 06 - MONTE CHINGOLO",
-    "CRIA TRES DE FEBRERO SECC 11 - REMEDIOS DE ESCALADA",
-    "CRIA QUILMES SECC 09 - BARRIO PARQUE CALCHAQUI",
-    "CRIA LA PLATA SECC 07 - ABASTO",
-    "CRIA OLAVARRIA SECC 01 - OLAVARRIA",
-    "CRIA TRES DE FEBRERO SECC 08 - JOSE INGENIEROS",
-    "CRIA ALMIRANTE BROWN SECC 03 - SAN JOSE",
-    "CRIA SAN MIGUEL SECC 02 - BELLA VISTA",
-    "CRIA MERLO SECC 03 - PARQUE SAN MARTIN",
-    "CRIA MORON SECC 07 - CASTELAR NORTE",
-    "CRIA ALMIRANTE BROWN SECC 06 - CLAYPOLE",
-    "CRIA SAN ISIDRO SECC 11 - LA CAVA",
-    "CRIA LA PLATA SECC 03 - LOS HORNOS",
-    "CRIA ALMIRANTE BROWN SECC 04 - LONGCHAMPS",
-    "CRIA LOMAS DE ZAMORA SECC 09 - PARQUE BARON",
-    "CRIA AVELLANEDA SECC 06 - ECHENAGUCIA",
-    "CRIA LA MATANZA CENTRO SECC 01 - RAFAEL CASTILLO",
-    "CRIA MYF TRES DE FEBRERO",
-    "CRIA LA PLATA SECC 06 - TOLOZA",
-    "CRIA GRAL RODRIGUEZ SECC 02 - LAS MALVINAS ALMAFUERTE",
-    "CRIA AVELLANEDA SECC 03 - DOCK SUD",
-    "CRIA LANUS SECC 10 - VILLA BARCELO",
-    "CRIA MORENO SECC 02 - TRUJUI",
-    "CRIA JOSE C PAZ SECC 03 - POTOSI",
-    "CRIA FLORENCIO VARELA SECC 03 - CRUCE DE VARELA",
-    "CONFIDENCIAL",
-    "CIVIL"
+  // Definición de solapas que requieren panel desplegable en el margen izquierdo
+  const tabsConDesplegable = [
+    'tab-col_div', 
+    'tab-col_cria', 
+    'tab-col_ipp', 
+    'tab-indice_diligencias'
   ];
-
-  document.querySelectorAll('.select-dependencia').forEach(select => {
-    select.innerHTML = '';
-    listaDestinos.forEach(item => {
-      const opt = document.createElement('option');
-      opt.value = item;
-      opt.textContent = item;
-      select.appendChild(opt);
-    });
-  });
-
-  document.querySelectorAll('.select-destino').forEach(select => {
-    select.innerHTML = '';
-    listaDestinos.forEach(item => {
-      const opt = document.createElement('option');
-      opt.value = item;
-      opt.textContent = item;
-      select.appendChild(opt);
-    });
-  });
-
-  if (document.getElementById('f_01_dependencia')) document.getElementById('f_01_dependencia').value = "DIR. FUERZA BARRIAL DE APROX. (FBA)";
-  if (document.getElementById('f_12_colaboracion')) document.getElementById('f_12_colaboracion').value = "DIV. FUERZA BARRIAL DE APROX. III (FBA QUILMES)";
-  if (document.getElementById('f_21_cau_destino')) document.getElementById('f_21_cau_destino').value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)";
-  if (document.getElementById('f_50_imp_destino')) document.getElementById('f_50_imp_destino').value = "CIVIL";
-  if (document.getElementById('f_59_vic_destino')) document.getElementById('f_59_vic_destino').value = "CIVIL";
-  if (document.getElementById('f_68_den_destino')) document.getElementById('f_68_den_destino').value = "CIVIL";
-  if (document.getElementById('f_84_dec_destino')) document.getElementById('f_84_dec_destino').value = "DIV. FUERZA BARRIAL DE APROX. IX (FBA ESCOBAR)";
-
-  const headers = document.querySelectorAll('.sheet-card-header');
-  headers.forEach(header => {
-    header.addEventListener('click', function() {
-      const parentBlock = this.parentElement;
-      parentBlock.classList.toggle('collapsed');
-    });
-  });
-
-  document.getElementById('btn-expand-all').addEventListener('click', function() {
-    document.querySelectorAll('.sheet-card-block').forEach(block => {
-      block.classList.remove('collapsed');
-    });
-  });
-
-  document.getElementById('btn-collapse-all').addEventListener('click', function() {
-    document.querySelectorAll('.sheet-card-block').forEach(block => {
-      block.classList.add('collapsed');
-    });
-  });
-
-  const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27400%27%20height%3D%2760%27%20viewBox%3D%270%200%20400%2060%27%3E%3Crect%20width%3D%27110%27%20height%3D%2735%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%277%27%20y%3D%2716%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%277%27%20y%3D%2727%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2718%27%20font-family%3D%27Arial%27%20font-size%3D%2710%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2736%27%20font-family%3D%27Arial%27%20font-size%3D%2718%27%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E"></div>`;
-
-  const dropdownArguments = [
-    "Informe de tipos, dias, horarios y modalidad de servicio del {CAUSANTE}",
-    "Concepto Funcional y Personal firmado por superior directo del {CAUSANTE}",
-    "Copia certificada y legible con habilitación del Libro de Novedades de la guardia de fecha {FECHA_HECHO}",
-    "Copia certificada y legible con habilitación del Libro de Presentismo y Co.Re.S. de fecha {FECHA_HECHO}",
-    "Legajo Electrónico Personal (L.E.P.) del {CAUSANTE}",
-    "Certifica de Revista legible generado por el Sistema Informático del Personal (SIPP) del {CAUSANTE}",
-    "Adune informe de Comportamiento y Seguimiento tanto en la faz laboral por parte del superior directo del {CAUSANTE}",
-    "Informe si el efectivo usufructuó licencia médica por el evento en estudio...",
-    "Copia certificada y legible de denuncia de accidente de trabajo o enfermedad profesional...",
-    "Declaración testimonial al {CAUSANTE} bajo juramento...",
-    "Adune copia certificada y legible de orden de servicio vigente..."
-  ];
-
-  dropdownArguments.forEach((itemText, idx) => {
-    const opt = document.createElement('option');
-    opt.value = idx;
-    opt.textContent = `${idx + 1}. ${itemText}`;
-    dropdownSelect.appendChild(opt);
-  });
-
-  function getFormValues() {
-    return {
-      fechaRecepcion: document.getElementById('f_00_fecha_recepcion') ? document.getElementById('f_00_fecha_recepcion').value : '',
-      dependencia: document.getElementById('f_01_dependencia') ? document.getElementById('f_01_dependencia').value : '',
-      direccion: document.getElementById('f_02_direccion') ? document.getElementById('f_02_direccion').value : '',
-      entreCalle1: document.getElementById('f_03_entre_calle_1') ? document.getElementById('f_03_entre_calle_1').value : '',
-      entreCalle2: document.getElementById('f_04_entre_calle_2') ? document.getElementById('f_04_entre_calle_2').value : '',
-      localidad: document.getElementById('f_05_localidad') ? document.getElementById('f_05_localidad').value : '',
-      partido: document.getElementById('f_06_partido') ? document.getElementById('f_06_partido').value : '',
-      instructor: document.getElementById('f_07_instructor') ? document.getElementById('f_07_instructor').value : '',
-      cargoInstructor: document.getElementById('f_08_cargo_instructor') ? document.getElementById('f_08_cargo_instructor').value : '',
-      secretario: document.getElementById('f_09_secretario') ? document.getElementById('f_09_secretario').value : '',
-      cargoSecretario: document.getElementById('f_10_cargo_secretario') ? document.getElementById('f_10_cargo_secretario').value : '',
-      
-      cauNombre: document.getElementById('f_13_cau_nombre') ? document.getElementById('f_13_cau_nombre').value : '',
-      cauDestino: document.getElementById('f_21_cau_destino') ? document.getElementById('f_21_cau_destino').value : '',
-      
-      fechaHecho: document.getElementById('f_22_hecho_fecha') ? document.getElementById('f_22_hecho_fecha').value : '',
-      exp: document.getElementById('f_23_exp_elec') ? document.getElementById('f_23_exp_elec').value : '',
-      caratula: document.getElementById('f_24_caratula') ? document.getElementById('f_24_caratula').value : '',
-      encuadre: document.getElementById('f_25_encuadre') ? document.getElementById('f_25_encuadre').value : '',
-      intervencion: document.getElementById('f_26_intervencion') ? document.getElementById('f_26_intervencion').value : '',
-      sintesis: document.getElementById('f_41_sintesis') ? document.getElementById('f_41_sintesis').value : '',
-
-      impNombre: document.getElementById('f_42_imp_nombre') ? document.getElementById('f_42_imp_nombre').value : '',
-      impDestino: document.getElementById('f_50_imp_destino') ? document.getElementById('f_50_imp_destino').value : '',
-      vicNombre: document.getElementById('f_51_vic_nombre') ? document.getElementById('f_51_vic_nombre').value : '',
-      denNombre: document.getElementById('f_60_den_nombre') ? document.getElementById('f_60_den_nombre').value : '',
-
-      // DECLARANTE
-      decNombre: document.getElementById('f_69_dec_nombre') ? document.getElementById('f_69_dec_nombre').value : '',
-      decEdad: document.getElementById('f_70_dec_edad') ? document.getElementById('f_70_dec_edad').value : '',
-      decNacionalidad: document.getElementById('f_71_dec_nacionalidad') ? document.getElementById('f_71_dec_nacionalidad').value : '',
-      decEstadoCivil: document.getElementById('f_72_dec_estado_civil') ? document.getElementById('f_72_dec_estado_civil').value : '',
-      decProfesion: document.getElementById('f_73_dec_profesion') ? document.getElementById('f_73_dec_profesion').value : '',
-      decDomicilio: document.getElementById('f_74_dec_domicilio') ? document.getElementById('f_74_dec_domicilio').value : '',
-      decEntreCalles: document.getElementById('f_75_dec_entre_calles') ? document.getElementById('f_75_dec_entre_calles').value : '',
-      decLocalidad: document.getElementById('f_76_dec_localidad') ? document.getElementById('f_76_dec_localidad').value : '',
-      decPartido: document.getElementById('f_77_dec_partido') ? document.getElementById('f_77_dec_partido').value : '',
-      decDni: document.getElementById('f_78_dec_dni') ? document.getElementById('f_78_dec_dni').value : '',
-      decContacto: document.getElementById('f_79_dec_contacto') ? document.getElementById('f_79_dec_contacto').value : '',
-      decMail: document.getElementById('f_80_dec_mail') ? document.getElementById('f_80_dec_mail').value : '',
-      decJerarquia: document.getElementById('f_81_dec_jerarquia') ? document.getElementById('f_81_dec_jerarquia').value : '',
-      decSubescalafon: document.getElementById('f_82_dec_subescalafon') ? document.getElementById('f_82_dec_subescalafon').value : '',
-      decLegajo: document.getElementById('f_83_dec_legajo') ? document.getElementById('f_83_dec_legajo').value : '',
-      decDestino: document.getElementById('f_84_dec_destino') ? document.getElementById('f_84_dec_destino').value : '',
-      decFuncion: document.getElementById('f_85_dec_funcion') ? document.getElementById('f_85_dec_funcion').value : '',
-      declara: document.getElementById('f_86_dec_declara') ? document.getElementById('f_86_dec_declara').value : ''
-    };
-  }
-
-  function resolveVariables(text) {
-    const d = getFormValues();
-    return text.replace('{CAUSANTE}', d.cauNombre)
-               .replace('{IMPUTADO}', d.impNombre)
-               .replace('{VICTIMA}', d.vicNombre)
-               .replace('{FECHA_HECHO}', d.fechaHecho);
-  }
-
-  function renderDocumentTemplate(tabKey) {
-    const d = getFormValues();
-
-    switch(tabKey) {
-      case 'tab-caratula':
-        let rowsHtml = '';
-
-        if (d.cauNombre && d.cauNombre.trim() !== '') {
-          rowsHtml += `
-            <div class="caratula-row-item">
-              <div class="caratula-label"><u><b>CAUSANTE:</b></u></div>
-              <div class="caratula-value">${d.cauNombre}</div>
-            </div>`;
-        }
-
-        if (d.impNombre && d.impNombre.trim() !== '') {
-          rowsHtml += `
-            <div class="caratula-row-item">
-              <div class="caratula-label"><u><b>IMPUTADO:</b></u></div>
-              <div class="caratula-value">${d.impNombre}</div>
-            </div>`;
-        }
-
-        if (d.vicNombre && d.vicNombre.trim() !== '') {
-          rowsHtml += `
-            <div class="caratula-row-item">
-              <div class="caratula-label"><u><b>VICTIMA:</b></u></div>
-              <div class="caratula-value">${d.vicNombre}</div>
-            </div>`;
-        }
-
-        if (d.denNombre && d.denNombre.trim() !== '') {
-          rowsHtml += `
-            <div class="caratula-row-item">
-              <div class="caratula-label"><u><b>DENUNCIANTE:</b></u></div>
-              <div class="caratula-value">${d.denNombre}</div>
-            </div>`;
-        }
-
-        return `
-        <div class="a4-page caratula-page-fixed">
-          ${logoSVG}
-          <div class="caratula-container-auto">
-            <div>
-              <div class="caratula-title-main">ACTUACION SUMARIAL ADMINISTRATIVA</div>
-              <div class="caratula-isa-box">${d.caratula}</div>
-            </div>
-            <div class="caratula-grid-auto">
-              <div class="caratula-row-item"><div class="caratula-label">EXPEDIENTE ELECTRONICO:</div><div class="caratula-value">${d.exp}</div></div>
-              <div class="caratula-row-item"><div class="caratula-label">FECHA DEL HECHO:</div><div class="caratula-value"><b>${d.fechaHecho}</b></div></div>
-              
-              ${rowsHtml}
-
-              <div class="caratula-row-item"><div class="caratula-label">DESTINO DEL CAUSANTE:</div><div class="caratula-value">${d.cauDestino}</div></div>
-              <div class="caratula-row-item"><div class="caratula-label">INSTRUCTOR:</div><div class="caratula-value">${d.instructor}</div></div>
-              <div class="caratula-row-item"><div class="caratula-label">SECRETARIO DE ACTUACION:</div><div class="caratula-value">${d.secretario}</div></div>
-              <div class="caratula-row-item"><div class="caratula-label">DEPENDENCIA INSTRUCTORA:</div><div class="caratula-value">${d.dependencia}</div></div>
-              
-              <div class="caratula-row-item" style="margin-top: 15px;">
-                <div class="caratula-label">FECHA DE INICIO:</div>
-                <div class="caratula-value"><b>${d.fechaRecepcion}</b></div>
-              </div>
-            </div>
-          </div>
-        </div>`;
-
-      case 'tab-testimonial':
-        const imputadoNombre = (d.impNombre && d.impNombre.trim() !== '') ? d.impNombre : (d.cauNombre || 'DATOS DEL IMPUTADO');
-        const imputadoDestino = d.impDestino || 'CIVIL';
-        const entreCallesDec = d.decEntreCalles ? ` entre calle ${d.decEntreCalles}` : '';
-        const entreCalle1Dep = d.entreCalle1 ? ` entre calle ${d.entreCalle1}` : '';
-
-        return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div class="sangria-cero" style="text-align:center; font-weight:bold; font-size: 13pt; text-decoration:underline; margin-bottom: 1.5em;">DECLARACIÓN TESTIMONIAL</div>
-          
-          <div class="sangria-cero">
-            En la localidad de <b>${d.partido}</b>, partido de <b>${d.localidad}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>${entreCalle1Dep} del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 10:58 horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa'. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>${d.decNombre}</b>, de <b>${d.decEdad}</b> años de edad, nacionalidad <b>${d.decNacionalidad}</b>, estado civil <b>${d.decEstadoCivil}</b>, profesión u ocupación <b>${d.decProfesion}</b>, instruido, domicilio en calle <b>${d.decDomicilio}</b>${entreCallesDec} y <b>${d.decLocalidad}</b> del mismo medio, Documento Nacional de Identidad Nº <b>${d.decDni}</b>, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de <b>${d.decJerarquia}</b>, del escalafón <b>${d.decSubescalafon}</b>, legajo personal N° <b>${d.decLegajo}</b>, cumpliendo en la actualidad sus servicios en el <b>${d.decDestino}</b>, como <b>${d.decFuncion}</b>. En la fecha, se hace presente a los fines de prestar declaración testimonial en <b>${d.exp}</b>, caratulado <b>${d.encuadre || d.caratula}</b>, donde se analiza la conducta del <b>${imputadoNombre}</b> de la <b>${imputadoDestino}</b>, en trámite ante <b>${d.intervencion}</b>, incoadas el <b>${d.fechaRecepcion}</b>. En esa inteligencia relata <b>${d.declara}</b> Que, en fecha 31 de agosto del corriente, el dicente procedió a mandar nota escrita al correo electrónico a mesafg.ql@mpba.gov.ar, perteneciente a Mesa de Entradas y salidas del Departamento Judicial de Quilmes, a fin de que informe si se registró denuncia con los datos filiatorios del agente que dio génesis a la pieza administrativa. Que, en fecha 02 del corriente mes y año, le respondieron mediante oficio judicial que surge Proceso Penal PP-13-02-009986-26/00 en trámite ante la FV – UFIyJ N° 10 que “al efectuar una compulsa de las actuaciones en el sistema informático del ministerio público (simp), se advierte que el Sr. Agente Fiscal interviniente ha dispuesto EL ARCHIVO DE LAS ACTUACIONES a tenor del art. 268, 4° párrafo del C.P.P., con fecha 18/05/2026.” sic, observando que se encuentra firmado por VAZQUEZ Gaston Mariano secretario de Ministerio Publico de Primera Instancia, entregado copia de oficio judicial junto con nota enviada para mejor ilustración y proveer de lo narrado. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
-          </div>
-
-          <div class="signature-section">
-            <div class="signature-box-left">
-              <b>Firma del Declarante</b><br>
-              ${d.decNombre}<br>
-              DNI N° ${d.decDni}
-            </div>
-          </div>
-        </div>`;
-
-      case 'tab-recepcion':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div class="doc-mid-section">LA PLATA, ${d.fechaRecepcion}</div>
-          <div class="doc-addressee">SEÑOR INSTRUCTOR:</div>
-          <div class="sangria-dto">Tomo conocimiento y daré estricto cumplimiento a lo ordenado por usted en las actuaciones caratuladas ${d.caratula}. CONSTE.</div>
-        </div>`;
-
-      case 'tab-col_div':
-      case 'tab-col_cria':
-      case 'tab-col_ipp':
-      case 'tab-indice_diligencias':
-        let listHtml = configuredItems.length > 0 
-          ? `<ol style="padding-left:1.5cm;">${configuredItems.map(item => `<li>${resolveVariables(item)}</li>`).join('')}</ol>`
-          : `<p style="font-style:italic; color:#666;">(Agregue elementos desde el menú desplegable del margen izquierdo)</p>`;
-        
-        return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div class="doc-mid-section">LA PLATA, ${d.fechaRecepcion}</div>
-          <div class="doc-addressee">AL SEÑOR JEFE DE DEPENDENCIA</div>
-          <div class="sangria-estandar">Me dirijo a usted en el marco del Expediente <b>${d.exp}</b>, caratulado <b>${d.caratula}</b>, a fin de solicitarle se cumplimenten los siguientes ítems requeridos:</div>
-          ${listHtml}
-        </div>`;
-
-      default:
-        return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div class="doc-mid-section">LA PLATA, ${d.fechaRecepcion}</div>
-          <div class="sangria-estandar">Documento administrativo oficial correspondiente a las actuaciones <b>${d.caratula}</b>.</div>
-        </div>`;
-    }
-  }
-
-  const tabsConDesplegable = ['tab-col_div', 'tab-col_cria', 'tab-col_ipp', 'tab-indice_diligencias'];
 
   tabs.forEach(tab => {
     tab.addEventListener('click', function() {
+      // 1. Marcar solapa activa
       tabs.forEach(t => t.classList.remove('active'));
       this.classList.add('active');
 
-      activeTabKey = this.getAttribute('data-tab');
+      const targetTab = this.getAttribute('data-tab');
       const tabText = this.textContent.trim();
 
-      if (activeTabKey === 'tab-carga_datos') {
+      if (targetTab === 'tab-carga_datos') {
+        // Mostrar vista exclusiva de Carga de Datos
         viewCarga.classList.add('active-view');
         viewResto.classList.remove('active-view');
       } else {
+        // Mostrar vista split para el resto de solapas
         viewCarga.classList.remove('active-view');
         viewResto.classList.add('active-view');
-
+        
+        // Actualizar título del documento en el margen derecho
         previewTitle.textContent = `DOCUMENTO GENERADO - ${tabText}`;
 
-        if (tabsConDesplegable.includes(activeTabKey)) {
+        // Determinar si en el margen izquierdo se visualiza el desplegable
+        if (tabsConDesplegable.includes(targetTab)) {
           leftControls.classList.remove('hidden-picker');
         } else {
           leftControls.classList.add('hidden-picker');
         }
-
-        previewContainer.innerHTML = renderDocumentTemplate(activeTabKey);
       }
     });
   });
-
-  btnAdd.addEventListener('click', function() {
-    const selectedText = dropdownSelect.options[dropdownSelect.selectedIndex].text.replace(/^\d+\.\s*/, '');
-
-    configuredItems.push(selectedText);
-    updateItemsList();
-    previewContainer.innerHTML = renderDocumentTemplate(activeTabKey);
-  });
-
-  function updateItemsList() {
-    itemsList.innerHTML = '';
-    configuredItems.forEach((item, idx) => {
-      const li = document.createElement('li');
-      li.innerHTML = `<span>${resolveVariables(item)}</span> <button class="btn btn-danger" onclick="removeItem(${idx})">✕</button>`;
-      itemsList.appendChild(li);
-    });
-  }
-
-  window.removeItem = function(index) {
-    configuredItems.splice(index, 1);
-    updateItemsList();
-    previewContainer.innerHTML = renderDocumentTemplate(activeTabKey);
-  };
 });
 </script>
 
