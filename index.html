@@ -393,14 +393,42 @@ body {
 }
 .table-oficial th { background-color: #f2f2f2; font-weight: bold; }
 
+.input-folio {
+  width: 100%;
+  border: 1px solid transparent;
+  background: transparent;
+  text-align: center;
+  font-size: 9.5pt;
+}
+.input-folio:hover, .input-folio:focus {
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  outline: none;
+}
+
+.btn-del-row {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  border-radius: 3px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 0.75rem;
+}
+.btn-del-row:hover {
+  background-color: #dc2626;
+}
+
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .btn-del-row { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
   .a4-page { width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; padding: 3.5cm 1.5cm 2.5cm 3cm !important; page-break-after: always; }
+  .input-folio { border: none !important; background: transparent !important; }
 }
 </style>
 </head>
@@ -683,6 +711,67 @@ document.addEventListener('DOMContentLoaded', function() {
     "CONFIDENCIAL", "CIVIL"
   ];
 
+  // Opciones completas disponibles desde la Columna M (Desplegable)
+  const listaDesplegableColumnaM = [
+    "Stud. Registro Institucional",
+    "Acta de constatación",
+    "Denuncia a la aseguradora de riesgos del trabajo (A.R.T.)",
+    "Decreto inicio actuaciones administrativas",
+    "Comunicación Administrativa -Parte Escrito-",
+    "Corre agregado",
+    "Captura del Sistema Informático del Personal Policial (SIPP) - INFO DEL EFECTIVO",
+    "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
+    "Vademécum - RP21100",
+    "Concepto Funcional y Personal",
+    "Informe de tipo, días y horario de servicio",
+    "Stud. Legajo Electrónico Personal (L.E.P.)",
+    "Legajo Electrónico Personal (L.E.P.)",
+    "Copia certificada con habilitación del Libro de novedades de la guardia",
+    "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
+    "Acta de Inspección ocular del lugar de los hechos",
+    "Croquis ilustrativo sin escalas del lugar de los hechos",
+    "Placas fotográficas del lugar del hecho",
+    "Declaración testimonial del Encargado de Logística",
+    "Declaración testimonial del causante",
+    "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa",
+    "Historia Clínica del causante",
+    "Copia certificado de constancia de ALTA / FIN DE TRATAMIENTO ART del causante",
+    "Stud. Reconocimiento Médico Legal (R.M.L.) al causante",
+    "Reconocimiento Médico Legal (R.M.L.) del causante",
+    "Cierre de actuaciones administrativas",
+    "Síntesis y conclusiones"
+  ];
+
+  // Estado dinámico para el Índice (Guardando objeto con texto y folio)
+  let indiceItems = listaDesplegableColumnaM.map(texto => ({ texto, folio: '' }));
+
+  window.actualizarFolioIndice = function(index, valor) {
+    if (indiceItems[index]) {
+      indiceItems[index].folio = valor;
+    }
+  };
+
+  window.agregarItemIndice = function() {
+    const select = document.getElementById('select-columna-m');
+    if (!select) return;
+    const valor = select.value;
+    if (valor) {
+      indiceItems.push({ texto: valor, folio: '' });
+      const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+      if (activeTab && activeTab.getAttribute('data-tab') === 'tab-indice_diligencias') {
+        previewContainer.innerHTML = renderDocumentTemplate('tab-indice_diligencias');
+      }
+    }
+  };
+
+  window.quitarItemIndice = function(index) {
+    indiceItems.splice(index, 1);
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-indice_diligencias') {
+      previewContainer.innerHTML = renderDocumentTemplate('tab-indice_diligencias');
+    }
+  };
+
   document.querySelectorAll('.select-dependencia, .select-destino').forEach(select => {
     select.innerHTML = '';
     listaDestinos.forEach(item => {
@@ -918,46 +1007,47 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida officially al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
 
       case 'tab-indice_diligencias':
+        let optionsHtml = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        let rowsIndiceHtml = indiceItems.map((item, idx) => `
+          <tr>
+            <td>${item.texto}</td>
+            <td style="text-align: center;">
+              <input type="text" class="input-folio" value="${item.folio || ''}" oninput="actualizarFolioIndice(${idx}, this.value)" placeholder="...">
+            </td>
+            <td style="width: 40px; text-align: center;" class="indice-controls">
+              <button class="btn-del-row" onclick="quitarItemIndice(${idx})" title="Quitar de la lista">✕</button>
+            </td>
+          </tr>
+        `).join('');
+
         return `
         <div class="a4-page">
           ${logoSVG}
           <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
+          
+          <div class="indice-controls" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
+            <select id="select-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+              ${optionsHtml}
+            </select>
+            <button class="btn-secondary" onclick="agregarItemIndice()" style="white-space: nowrap;">➕ Agregar a la Lista</button>
+          </div>
+
           <table class="table-oficial">
-            <thead><tr><th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th><th style="width: 80px; text-align: center;">Folio/s</th></tr></thead>
+            <thead>
+              <tr>
+                <th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th>
+                <th style="width: 80px; text-align: center;">Folio/s</th>
+                <th style="width: 40px; text-align: center;" class="indice-controls">Acción</th>
+              </tr>
+            </thead>
             <tbody>
-              <tr><td>Stud. Registro Institucional</td><td></td></tr>
-              <tr><td>Acta de constatación</td><td></td></tr>
-              <tr><td>Denuncia a la aseguradora de riesgos del trabajo (A.R.T.)</td><td></td></tr>
-              <tr><td>Decreto inicio actuaciones administrativas</td><td></td></tr>
-              <tr><td>Comunicación Administrativa -Parte Escrito-</td><td></td></tr>
-              <tr><td>Corre agregado</td><td></td></tr>
-              <tr><td>Captura del Sistema Informático del Personal Policial (SIPP) - INFO DEL EFECTIVO</td><td></td></tr>
-              <tr><td>Situación de revista del efectivo generado por el Sistema Informático (SIPP)</td><td></td></tr>
-              <tr><td>Vademécum - RP21100</td><td></td></tr>
-              <tr><td>Concepto Funcional y Personal</td><td></td></tr>
-              <tr><td>Informe de tipo, días y horario de servicio</td><td></td></tr>
-              <tr><td>Stud. Legajo Electrónico Personal (L.E.P.)</td><td></td></tr>
-              <tr><td>Legajo Electrónico Personal (L.E.P.)</td><td></td></tr>
-              <tr><td>Copia certificada con habilitación del Libro de novedades de la guardia</td><td></td></tr>
-              <tr><td>Copia certificada con habilitación Libro de presentismo y Co.Re.S.</td><td></td></tr>
-              <tr><td>Acta de Inspección ocular del lugar de los hechos</td><td></td></tr>
-              <tr><td>Croquis ilustrativo sin escalas del lugar de los hechos</td><td></td></tr>
-              <tr><td>Placas fotográficas del lugar del hecho</td><td></td></tr>
-              <tr><td>Declaración testimonial del Encargado de Logística</td><td></td></tr>
-              <tr><td>Declaración testimonial del causante</td><td></td></tr>
-              <tr><td>Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa</td><td></td></tr>
-              <tr><td>Historia Clínica del causante</td><td></td></tr>
-              <tr><td>Copia certificado de constancia de ALTA / FIN DE TRATAMIENTO ART del causante</td><td></td></tr>
-              <tr><td>Stud. Reconocimiento Médico Legal (R.M.L.) al causante</td><td></td></tr>
-              <tr><td>Reconocimiento Médico Legal (R.M.L.) del causante</td><td></td></tr>
-              <tr><td>Cierre de actuaciones administrativas</td><td></td></tr>
-              <tr><td>Síntesis y conclusiones</td><td></td></tr>
+              ${rowsIndiceHtml}
             </tbody>
           </table>
         </div>`;
