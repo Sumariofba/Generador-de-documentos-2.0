@@ -646,7 +646,7 @@ body {
           <div class="sheet-row-single"><label>DATOS DE QUIEN SECUNDA</label><input type="text" id="f_108_secunda_datos" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
           <div class="sheet-row-single"><label>FUNCION DE QUIEN SECUNDA</label><input type="text" id="f_109_secunda_funcion" value="DISPONIBLE"></div>
           <div class="sheet-row-single"><label>DESTINO SECUNDA</label><select id="f_110_secunda_destino" class="select-destino"></select></div>
-          <div class="sheet-row-single" style="grid-column: 1 / -1;"><label>RELATO DEL ACTA</label><textarea id="f_111_acta_relato">Tomamos conocimiento que el OFICIAL (E.G.) LEGAJO 425.747 FARIAS DIEGO JAVIER... En consecuencia, se da inicio a Actuaciones Sumariales Administrativas conforme a lo estatuido en el Decreto N° 1050/09 reglamentario de la Ley N° 13982.</textarea></div>
+          <div class="sheet-row-single" style="grid-column: 1 / -1;"><label>RELATO DEL ACTA</label><textarea id="f_111_acta_relato">Tomamos conocimiento que el OFICIAL (E.G.) LEGAJO 425.747 FARIAS DIEGO JAVIER, de 27 años de edad, fecha de nacimiento 11/11/1997, nacionalidad argentina, estado civil soltero, instruido, profesión u ocupación empleado policial, domicilio en calle Tierra del fuego N° 2423, localidad de Rafael Calzada, partido de Almirante Brown, provincia de Buenos Aires, Documento Nacional de Identidad N° 40.856.980, teléfono N° 1134495029. Que, en la fecha, siendo aproximadamente las 21.20 horas, hallándose realizando recorrida a pie por el barrio Ejército de los Andes, localidad de Ciudadela, partido de Tres de Febrero, circulando por la Avenida Militar al llegar a la calle Barragán, trastabilla tras pisa un pozo que se encontraba sobre la vereda de la Avenida Militar, producto de trastabillar se lesiona la rodilla izquierda y comienza a sentir un fuerte dolor agudo en la zona. Consecuentemente y debido al fuerte dolor que poseía en la zona el oficial de mención, da aviso a la superioridad de su destino quienes comisionan móvil policial al lugar. Que, siendo las 21.35 horas, se hace presente móvil O.I 31.322 conducido por el OFICIAL (E.G.) LEGAJO ….. , secundado en la oportunidad por el OFICIAL (E.G.) LEGAJO ….. , quienes la trasladaron hasta la Clínica Modelo de Caseros, sita en Lisandro Medina N° 2285, localidad de Caseros, donde lo atiende el Dr. Mario Pacheco Matrícula Nacional Nº 163846, quien tras asistir y evaluarla le diagnosticó traumatismo de rodilla y la derivó a un médico especialista en traumatología. Seguidamente, ante lo antes narrado personal de la Subsección Personal, mantiene comunicación telefónica con la Aseguradora de Riesgo del Trabajo Provincia A.R.T. a su abonado gratuito 0800-333-1333, a quienes en conocimiento de lo sucedido, registra la el siniestro bajo N° 1631925, designando la Clínica IMA de Adrogue para continuar el tratamiento por las lesiones padecidas. En consecuencia, se da inicio a Actuaciones Sumariales Administrativas conforme a lo estatuido en el Decreto N° 1050/09 reglamentario de la Ley N° 13982.</textarea></div>
         </div>
       </div>
 
@@ -782,6 +782,12 @@ document.addEventListener('DOMContentLoaded', function() {
       select.appendChild(opt);
     });
   });
+
+  // Establecer selecciones por defecto exactas de la fuente
+  const selSuscripto = document.getElementById('f_107_suscripto_destino');
+  const selSecunda = document.getElementById('f_110_secunda_destino');
+  if (selSuscripto) selSuscripto.value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)";
+  if (selSecunda) selSecunda.value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)";
 
   /* ACORDEÓN DE CARGA DE DATOS */
   const headers = document.querySelectorAll('.sheet-card-header');
@@ -1008,7 +1014,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida officially al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
@@ -1088,7 +1094,7 @@ document.addEventListener('DOMContentLoaded', function() {
           ${logoSVG}
           <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
           <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; text-indent: 0cm !important;">
-            En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, a los <b>${d.fechaRecepcion}</b>, el suscripto <b>${d.suscriptoDatos}</b> en su carácter de <b>${d.suscriptoFuncion}</b> de <b>${d.suscriptoDestino}</b>, en la sede física de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b> entre calle <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, acompañado por <b>${d.secundaDatos}</b>, <b>${d.secundaFuncion}</b> de <b>${d.secundaDestino}</b>, hace constar que: ${d.actaRelato}
+            En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, a los <b>${d.fechaRecepcion}</b>, el suscripto <b>${d.suscriptoDatos}</b>, en su carácter de <b>${d.suscriptoFuncion}</b> de <b>${d.suscriptoDestino}</b>, constituidos en la sede de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre las calles <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, acompañado por <b>${d.secundaDatos}</b>, <b>${d.secundaFuncion}</b> de <b>${d.secundaDestino}</b> ${d.actaRelato} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
           </div>
         </div>`;
 
