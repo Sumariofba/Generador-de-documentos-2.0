@@ -786,8 +786,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Establecer selecciones por defecto exactas de la fuente
   const selSuscripto = document.getElementById('f_107_suscripto_destino');
   const selSecunda = document.getElementById('f_110_secunda_destino');
-  if (selSuscripto) selSuscripto.value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)";
-  if (selSecunda) selSecunda.value = "DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)";
+  if (selSuscripto) selSuscripto.value = "DIR. FUERZA BARRIAL DE APROX. (FBA)";
+  if (selSecunda) selSecunda.value = "DIR. FUERZA BARRIAL DE APROX. (FBA)";
 
   /* ACORDEÓN DE CARGA DE DATOS */
   const headers = document.querySelectorAll('.sheet-card-header');
@@ -1094,7 +1094,7 @@ document.addEventListener('DOMContentLoaded', function() {
           ${logoSVG}
           <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
           <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; text-indent: 0cm !important;">
-            En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, a los <b>${d.fechaRecepcion}</b>, el suscripto <b>${d.suscriptoDatos}</b>, en su carácter de <b>${d.suscriptoFuncion}</b> de <b>${d.suscriptoDestino}</b>, constituidos en la sede de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre las calles <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, acompañado por <b>${d.secundaDatos}</b>, <b>${d.secundaFuncion}</b> de <b>${d.secundaDestino}</b> ${d.actaRelato} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+            En la localidad de <b>${d.partido}</b>, partido de <b>${d.localidad}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 18:23 horas, el suscripto <b>${d.suscriptoDatos} (${d.suscriptoFuncion})</b>, secundado por el <b>${d.secundaDatos} (${d.secundaFuncion})</b>, ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. ${d.actaRelato} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
           </div>
         </div>`;
 
