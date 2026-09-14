@@ -909,19 +909,25 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div class="doc-mid-section">REF.: ${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="sangria-cero"><b>Star. Registro Institucional</b></div>
-          <div class="sangria-estandar" style="margin-top: 1.5em;">
+          <div class="doc-mid-section" style="margin-top: 1cm; line-height: 1.4;">
+            <b>REF.:</b> Star. Registro Institucional<br>
+            ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
+          </div>
+          <div class="sangria-cero" style="margin-top: 2em; margin-bottom: 2em;">
+            <b>AL SEÑOR JEFE</b><br>
+            <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
+          </div>
+          <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
             Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
-          <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
+          <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
 
       case 'tab-indice_diligencias':
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 12pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
+          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
           <table class="table-oficial">
             <thead><tr><th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th><th style="width: 80px; text-align: center;">Folio/s</th></tr></thead>
             <tbody>
