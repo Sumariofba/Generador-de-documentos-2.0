@@ -1008,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida officially al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
@@ -1086,9 +1086,9 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">ACTA DE CONSTATACIÓN</div>
-          <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
-            En la localidad de ${d.localidad}, partido de ${d.partido}, a los ${d.fechaRecepcion}, el suscripto <b>${d.suscriptoDatos}</b> en su carácter de <b>${d.suscriptoFuncion}</b> de <b>${d.suscriptoDestino}</b>, acompañado por <b>${d.secundaDatos}</b>, <b>${d.secundaFuncion}</b> de <b>${d.secundaDestino}</b>, hace constar que: ${d.actaRelato}
+          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
+          <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; text-indent: 0cm !important;">
+            En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, a los <b>${d.fechaRecepcion}</b>, el suscripto <b>${d.suscriptoDatos}</b> en su carácter de <b>${d.suscriptoFuncion}</b> de <b>${d.suscriptoDestino}</b>, en la sede física de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b> entre calle <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, acompañado por <b>${d.secundaDatos}</b>, <b>${d.secundaFuncion}</b> de <b>${d.secundaDestino}</b>, hace constar que: ${d.actaRelato}
           </div>
         </div>`;
 
