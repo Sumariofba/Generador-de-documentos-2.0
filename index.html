@@ -317,6 +317,7 @@ body {
   box-sizing: border-box !important;
   display: flex;
   flex-direction: column;
+  page-break-after: always;
 }
 
 .doc-header-logo { text-align: left; margin-bottom: 0.5cm; }
@@ -1007,50 +1008,80 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida officially al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
 
       case 'tab-indice_diligencias':
         let optionsHtml = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-        let rowsIndiceHtml = indiceItems.map((item, idx) => `
-          <tr>
-            <td>${item.texto}</td>
-            <td style="text-align: center;">
-              <input type="text" class="input-folio" value="${item.folio || ''}" oninput="actualizarFolioIndice(${idx}, this.value)" placeholder="...">
-            </td>
-            <td style="width: 40px; text-align: center;" class="indice-controls">
-              <button class="btn-del-row" onclick="quitarItemIndice(${idx})" title="Quitar de la lista">✕</button>
-            </td>
-          </tr>
-        `).join('');
+        
+        const ITEMS_POR_PAGINA_PRIMERA = 18;
+        const ITEMS_POR_PAGINA_SIGUIENTES = 22;
+        
+        let paginasIndiceHtml = '';
+        let totalItems = indiceItems.length;
+        let itemIndex = 0;
+        let numPagina = 1;
 
-        return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
+        while (itemIndex < totalItems || totalItems === 0) {
+          let limite = (numPagina === 1) ? ITEMS_POR_PAGINA_PRIMERA : ITEMS_POR_PAGINA_SIGUIENTES;
+          let itemsPagina = indiceItems.slice(itemIndex, itemIndex + limite);
           
-          <div class="indice-controls" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
-            <select id="select-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">
-              ${optionsHtml}
-            </select>
-            <button class="btn-secondary" onclick="agregarItemIndice()" style="white-space: nowrap;">➕ Agregar a la Lista</button>
-          </div>
-
-          <table class="table-oficial">
-            <thead>
+          let rowsIndiceHtml = itemsPagina.map((item, idxAbs) => {
+            let actualIndex = itemIndex + idxAbs;
+            return `
               <tr>
-                <th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th>
-                <th style="width: 80px; text-align: center;">Folio/s</th>
-                <th style="width: 40px; text-align: center;" class="indice-controls">Acción</th>
+                <td>${item.texto}</td>
+                <td style="text-align: center;">
+                  <input type="text" class="input-folio" value="${item.folio || ''}" oninput="actualizarFolioIndice(${actualIndex}, this.value)" placeholder="...">
+                </td>
+                <td style="width: 40px; text-align: center;" class="indice-controls">
+                  <button class="btn-del-row" onclick="quitarItemIndice(${actualIndex})" title="Quitar de la lista">✕</button>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              ${rowsIndiceHtml}
-            </tbody>
-          </table>
-        </div>`;
+            `;
+          }).join('');
+
+          let encabezadoPagina = numPagina === 1 ? `
+            <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
+            
+            <div class="indice-controls" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
+              <select id="select-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+                ${optionsHtml}
+              </select>
+              <button class="btn-secondary" onclick="agregarItemIndice()" style="white-space: nowrap;">➕ Agregar a la Lista</button>
+            </div>
+          ` : `
+            <div style="text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 1em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS (Continuación)</div>
+          `;
+
+          paginasIndiceHtml += `
+            <div class="a4-page">
+              ${logoSVG}
+              ${encabezadoPagina}
+              <table class="table-oficial">
+                <thead>
+                  <tr>
+                    <th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th>
+                    <th style="width: 80px; text-align: center;">Folio/s</th>
+                    <th style="width: 40px; text-align: center;" class="indice-controls">Acción</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${rowsIndiceHtml}
+                </tbody>
+              </table>
+              <div style="margin-top: auto; text-align: right; font-size: 8pt; color: #64748b; font-weight: bold; padding-top: 10px;">Hoja ${numPagina}</div>
+            </div>
+          `;
+
+          itemIndex += limite;
+          numPagina++;
+          if (totalItems === 0) break;
+        }
+
+        return paginasIndiceHtml;
 
       case 'tab-acta_constatacion':
         return `
