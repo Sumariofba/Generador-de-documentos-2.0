@@ -1017,7 +1017,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let optionsHtml = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
         
         const ITEMS_POR_PAGINA_PRIMERA = 18;
-        const ITEMS_POR_PAGINA_SIGUIENTES = 22;
+        const ITEMS_POR_PAGINA_SIGUIENTES = 24;
         
         let paginasIndiceHtml = '';
         let totalItems = indiceItems.length;
@@ -1052,13 +1052,13 @@ document.addEventListener('DOMContentLoaded', function() {
               </select>
               <button class="btn-secondary" onclick="agregarItemIndice()" style="white-space: nowrap;">➕ Agregar a la Lista</button>
             </div>
-          ` : `
-            <div style="text-align: center; font-weight: bold; font-size: 14pt; margin-bottom: 1em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS (Continuación)</div>
-          `;
+          ` : '';
+
+          let logoHtml = (numPagina % 2 !== 0) ? logoSVG : '';
 
           paginasIndiceHtml += `
             <div class="a4-page">
-              ${logoSVG}
+              ${logoHtml}
               ${encabezadoPagina}
               <table class="table-oficial">
                 <thead>
@@ -1072,7 +1072,6 @@ document.addEventListener('DOMContentLoaded', function() {
                   ${rowsIndiceHtml}
                 </tbody>
               </table>
-              <div style="margin-top: auto; text-align: right; font-size: 8pt; color: #64748b; font-weight: bold; padding-top: 10px;">Hoja ${numPagina}</div>
             </div>
           `;
 
@@ -1179,7 +1178,7 @@ document.addEventListener('DOMContentLoaded', function() {
               <tr><td><b>ORGANIZACIÓN</b> (A los efectos de una respuesta rápida a la tarea cotidiana)</td><td></td><td style="text-align: center; font-weight: bold;">X</td><td></td></tr>
             </tbody>
           </table>
-          <div class="sangria-estandar" style="margin-top: 1.5em;">Lo expuesto es todo en cuanto informo a usted.</div>
+          <div class="sangria-estandar" style="margin-top: 1.5em;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
 
       case 'tab-tdh':
