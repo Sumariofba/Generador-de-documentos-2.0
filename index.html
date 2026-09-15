@@ -514,6 +514,7 @@ body {
         </div>
         <div class="sheet-card-body">
           <div class="sheet-row-single"><label>FECHA DEL HECHO:</label><input type="text" id="f_22_hecho_fecha" value="2 de abril del 2026"></div>
+          <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
           <div class="sheet-row-single"><label>EXP. ELECTRONICO N°</label><input type="text" id="f_23_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP"></div>
           <div class="sheet-row-single"><label>CARATULA ADMINISTRATIVA</label><input type="text" id="f_24_caratula" value="ISA 21100-085949/2026, DN154728"></div>
           <div class="sheet-row-single"><label>ENCUADRE ADMINISTRATIVO</label><input type="text" id="f_25_encuadre" value="SIN ENCUADRE ADMINISTRATIVO"></div>
@@ -770,7 +771,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Estado para la hora
   let horaParteEscrito = "21.20 hs";
-  let horaActaConstatacion = "18:23";
 
   window.agregarDestinatarioParte = function() {
     const select = document.getElementById('select-destinatario-g');
@@ -875,6 +875,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27400%27%20height%3D%2760%27%20viewBox%3D%270%200%20400%2060%27%3E%3Crect%20width%3D%27110%27%20height%3D%2735%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%277%27%20y%3D%2716%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%277%27%20y%3D%2727%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2718%27%20font-family%3D%27Arial%27%20font-size%3D%2710%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2736%27%20font-family%3D%27Arial%27%20font-size%3D%2718%27%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E"></div>`;
 
   function getFormValues() {
+    const elemHoraHecho = document.getElementById('f_18_hecho_hora');
     return {
       fechaRecepcion: document.getElementById('f_00_fecha_recepcion').value,
       dependencia: document.getElementById('f_01_dependencia').value,
@@ -903,6 +904,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cauModalidad: document.getElementById('f_21e_cau_modalidad').value,
       cauCircunstancias: document.getElementById('f_21f_cau_circunstancias').value,
       fechaHecho: document.getElementById('f_22_hecho_fecha').value,
+      horaHecho: elemHoraHecho ? elemHoraHecho.value : '08.30 horas',
       exp: document.getElementById('f_23_exp_elec').value,
       caratula: document.getElementById('f_24_caratula').value,
       encuadre: document.getElementById('f_25_encuadre').value,
@@ -991,7 +993,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ${logoSVG}
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
       <div style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0; text-indent: 0cm;">
-        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${horaActaConstatacion}</b> horas, el suscripto <b>${d.suscriptoDatos}</b> (<b>${d.suscriptoFuncion}</b>) , secundado por el <b>${d.secundaDatos}</b> (<b>${d.secundaFuncion}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${d.horaHecho}</b> horas, el suscripto <b>${d.suscriptoDatos}</b> (<b>${d.suscriptoFuncion}</b>) , secundado por el <b>${d.secundaDatos}</b> (<b>${d.secundaFuncion}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
       </div>
     `;
   }
@@ -1292,11 +1294,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>HORA DEL ACTA:</label>
-                <input type="text" value="${horaActaConstatacion}" oninput="horaActaConstatacion = this.value; actualizarActaEnVivo();" placeholder="Ej: 18:23">
-              </div>
-
-              <div class="sheet-row-single">
                 <label>DATOS DEL SUSCRIPTO:</label>
                 <input type="text" value="${d.suscriptoDatos}" oninput="document.getElementById('f_105_suscripto_datos').value = this.value; actualizarActaEnVivo();">
               </div>
@@ -1585,7 +1582,7 @@ document.addEventListener('DOMContentLoaded', function() {
           ${logoSVG}
           <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
           <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
-            En la localidad de ${d.partido}, partido de ${d.hechoPartido}, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en ${d.direccion}, entre calle ${d.entre1} del mismo medio, a los ${d.fechaRecepcion}, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: <i>“Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”</i>, y artículo 205 inciso “k” del mismo texto legal que reza: <i>“Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio... cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia”</i>. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del C.P.P.BA y bajo juramento de decir la verdad bajo la fórmula: <b>“LO JURO”</b>. Seguidamente se lo enteró de los Arts. 275 y 276 del C.P. Nación sobre Falso Testimonio. Preguntado por sus datos manifiesta ser: <b>${d.decNombre}</b>, de ${d.decEdad} años de edad, nacionalidad ${d.decNac}, estado civil ${d.decEstCivil}, profesión u ocupación ${d.decProf}, instruido, domicilio en ${d.decDom}, entre calles ${d.decEntreCalles}, localidad de ${d.decLoc}, DNI N° ${d.decDni}. Preguntado por las generales de la ley (Arts. 234, 235 y 236 C.P.P.), manifiesta NO LE CABER LAS GENERALES DE LA LEY. SEGUIDAMENTE INTERROGADO Y EN USO DE LA PALABRA DECLARA: Que resulta ser empleado policial ostentando la jerarquía de ${d.decJerarquia}, Legajo ${d.decLegajo}, prestando servicios en ${d.decDestino} como ${d.decFuncion}. Que en la fecha presta declaración en marco de exp. ${d.exp}, caratulado ${d.encuadre}. ${d.decDeclara}. Es todo cuanto declara. Leída la presente firma de conformidad.
+            En la localidad de ${d.partido}, partido de ${d.hechoPartido}, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en ${d.direccion}, entre calle ${d.entre1} del mismo medio, a los ${d.fechaRecepcion}, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: <i>“Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”</i>, y artículo 205 inciso “k” del mismo texto legal que reza: <i>“Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio... cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia”</i>. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del C.P.P.BA y bajo juramento de decir la verdad bajo la fórmula: <b>“LO JURO”</b>. Seguidamente se lo enteró de los Arts. 275 y 276 del C.P. Nación sobre Falso Testimonio. Preguntado por sus datos manifiesta ser: <b>${d.decNombre}</b>, de ${d.decEdad} años de edad, nacionalidad ${d.decNac}, estado civil ${d.decEstCivil}, profesión u ocupación ${d.decProf}, instruido, domicilio en ${d.decDom}, entre calles ${d.decEntreCalles}, localidad de ${d.decLoc}, DNI N° ${d.decDni}. Preguntado por las generales de la ley (Arts. 234, 235 y 236 C.P.P.), manifiesta NO LE CABER LAS GENERALES DE LA LEY. SEGRIDAMENTE INTERROGADO Y EN USO DE LA PALABRA DECLARA: Que resulta ser empleado policial ostentando la jerarquía de ${d.decJerarquia}, Legajo ${d.decLegajo}, prestando servicios en ${d.decDestino} como ${d.decFuncion}. Que en la fecha presta declaración en marco de exp. ${d.exp}, caratulado ${d.encuadre}. ${d.decDeclara}. Es todo cuanto declara. Leída la presente firma de conformidad.
           </div>
         </div>`;
 
