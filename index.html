@@ -768,8 +768,9 @@ document.addEventListener('DOMContentLoaded', function() {
     "AL SEÑOR JEFE DE CUERPO MEDICO"
   ];
 
-  // Estado para la hora del Parte Escrito
+  // Estado para la hora
   let horaParteEscrito = "21.20 hs";
+  let horaActaConstatacion = "18:23";
 
   window.agregarDestinatarioParte = function() {
     const select = document.getElementById('select-destinatario-g');
@@ -985,13 +986,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Genera exclusivamente el contenido A4 del Acta de Constatación
   function renderActaA4Content() {
     const d = getFormValues();
-    const relatoContinuo = (d.actaRelato || '').replace(/\r?\n|\r/g, ' ').trim();
 
     return `
       ${logoSVG}
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
       <div style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0; text-indent: 0cm;">
-        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 18:23 horas, el suscripto <b>${d.suscriptoDatos} (${d.suscriptoFuncion})</b>, secundado por el <b>${d.secundaDatos} (${d.secundaFuncion})</b>, ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. ${relatoContinuo} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${horaActaConstatacion}</b> horas, el suscripto <b>${d.suscriptoDatos}</b> (<b>${d.suscriptoFuncion}</b>) , secundado por el <b>${d.secundaDatos}</b> (<b>${d.secundaFuncion}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
       </div>
     `;
   }
@@ -1197,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida officially al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
@@ -1290,7 +1290,12 @@ document.addEventListener('DOMContentLoaded', function() {
               📑 DATOS PARA EL ACTA DE CONSTATACIÓN
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+              <div class="sheet-row-single">
+                <label>HORA DEL ACTA:</label>
+                <input type="text" value="${horaActaConstatacion}" oninput="horaActaConstatacion = this.value; actualizarActaEnVivo();" placeholder="Ej: 18:23">
+              </div>
+
               <div class="sheet-row-single">
                 <label>DATOS DEL SUSCRIPTO:</label>
                 <input type="text" value="${d.suscriptoDatos}" oninput="document.getElementById('f_105_suscripto_datos').value = this.value; actualizarActaEnVivo();">
