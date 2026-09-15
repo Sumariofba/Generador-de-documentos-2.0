@@ -769,9 +769,6 @@ document.addEventListener('DOMContentLoaded', function() {
     "AL SEÑOR JEFE DE CUERPO MEDICO"
   ];
 
-  // Estado para la hora
-  let horaParteEscrito = "21.20 hs";
-
   window.agregarDestinatarioParte = function() {
     const select = document.getElementById('select-destinatario-g');
     if (!select) return;
@@ -1064,7 +1061,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
 
       <div class="sangria-cero" style="margin-top: 1em;">
-        <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, siendo las ${horaParteEscrito}, cuando se toma conocimiento que ${d.sintesis}.
+        <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, siendo las ${d.horaHecho}, cuando se toma conocimiento que ${d.sintesis}.
       </div>
 
       <div class="sangria-estandar" style="margin-top: 1em;">
@@ -1294,6 +1291,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
+                <label>FECHA DE RECEPCIÓN / PARTE:</label>
+                <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarActaEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>HORA DEL HECHO / TOMADO CONOCIMIENTO:</label>
+                <input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarActaEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>PARTIDO / LUGAR:</label>
+                <input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarActaEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
                 <label>DATOS DEL SUSCRIPTO:</label>
                 <input type="text" value="${d.suscriptoDatos}" oninput="document.getElementById('f_105_suscripto_datos').value = this.value; actualizarActaEnVivo();">
               </div>
@@ -1385,7 +1397,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
               <div class="sheet-row-single">
                 <label>HORA DEL HECHO / TOMADO CONOCIMIENTO:</label>
-                <input type="text" value="${horaParteEscrito}" oninput="horaParteEscrito = this.value; actualizarParteEnVivo();" placeholder="Ej: 21.20 hs">
+                <input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarParteEnVivo();">
               </div>
 
               <div class="sheet-row-single">
