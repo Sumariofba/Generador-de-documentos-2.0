@@ -428,7 +428,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -734,7 +734,7 @@ document.addEventListener('DOMContentLoaded', function() {
     "Copia certificada con habilitación del Libro de novedades de la guardia",
     "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
     "Acta de Inspección ocular del lugar de los hechos",
-    "Croquis ilustrativo sin escalas del lugar de los hechos",
+    "Croquis ilustrativo sin escalas del lugar del hechos",
     "Placas fotográficas del lugar del hecho",
     "Declaración testimonial del Encargado de Logística",
     "Declaración testimonial del causante",
@@ -768,6 +768,9 @@ document.addEventListener('DOMContentLoaded', function() {
     "AL SEÑOR JEFE DE CUERPO MEDICO"
   ];
 
+  // Estado para la hora del Parte Escrito
+  let horaParteEscrito = "21.20 hs";
+
   window.agregarDestinatarioParte = function() {
     const select = document.getElementById('select-destinatario-g');
     if (!select) return;
@@ -776,7 +779,11 @@ document.addEventListener('DOMContentLoaded', function() {
       destinatariosParteEscrito.push(valor);
       const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
       if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
-        previewContainer.innerHTML = renderDocumentTemplate('tab-parte_escrito');
+        const destContainer = document.getElementById('parte-dest-list-target');
+        if (destContainer) {
+          destContainer.innerHTML = renderDestinatariosParteHtml();
+        }
+        actualizarParteEnVivo();
       }
     }
   };
@@ -785,9 +792,22 @@ document.addEventListener('DOMContentLoaded', function() {
     destinatariosParteEscrito.splice(index, 1);
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
-      previewContainer.innerHTML = renderDocumentTemplate('tab-parte_escrito');
+      const destContainer = document.getElementById('parte-dest-list-target');
+      if (destContainer) {
+        destContainer.innerHTML = renderDestinatariosParteHtml();
+      }
+      actualizarParteEnVivo();
     }
   };
+
+  function renderDestinatariosParteHtml() {
+    return destinatariosParteEscrito.map((dest, idx) => `
+      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
+        <span style="font-size: 0.78rem;">${dest}</span>
+        <button class="btn-del-row destinatarios-controls" onclick="quitarDestinatarioParte(${idx})" title="Quitar destinatario" style="margin-left: 8px;">✕</button>
+      </li>
+    `).join('');
+  }
 
   // Estado dinámico para el Índice (Guardando objeto con texto y folio)
   let indiceItems = listaDesplegableColumnaM.map(texto => ({ texto, folio: '' }));
@@ -951,6 +971,17 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  // Función para sincronizar la previsualización del Parte Escrito en tiempo real
+  window.actualizarParteEnVivo = function() {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
+      const liveContainer = document.getElementById('parte-live-preview-target');
+      if (liveContainer) {
+        liveContainer.innerHTML = renderParteA4Content();
+      }
+    }
+  };
+
   // Genera exclusivamente el contenido A4 del Acta de Constatación
   function renderActaA4Content() {
     const d = getFormValues();
@@ -961,6 +992,85 @@ document.addEventListener('DOMContentLoaded', function() {
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
       <div style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0; text-indent: 0cm;">
         En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 18:23 horas, el suscripto <b>${d.suscriptoDatos} (${d.suscriptoFuncion})</b>, secundado por el <b>${d.secundaDatos} (${d.secundaFuncion})</b>, ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. ${relatoContinuo} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+      </div>
+    `;
+  }
+
+  // Genera exclusivamente el contenido A4 del Parte Escrito
+  function renderParteA4Content() {
+    const d = getFormValues();
+
+    let destListItemsHtml = destinatariosParteEscrito.map((dest) => `
+      <li>${dest}</li>
+    `).join('');
+
+    let textoIntroductorio = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
+    if (d.encuadre && d.encuadre.trim() !== '') {
+      textoIntroductorio += " " + d.encuadre;
+    }
+    if (d.caratula && d.caratula.trim() !== '') {
+      textoIntroductorio += ", caratulado: " + d.caratula;
+    }
+    if (d.denNombre && d.denNombre.trim() !== '') {
+      textoIntroductorio += ", donde resulta denunciante: " + d.denNombre;
+      if (d.denDestino && d.denDestino.trim() !== '') {
+        textoIntroductorio += " (" + d.denDestino + ")";
+      }
+    }
+    if (d.vicNombre && d.vicNombre.trim() !== '') {
+      textoIntroductorio += ", víctima: " + d.vicNombre;
+      if (d.vicDestino && d.vicDestino.trim() !== '') {
+        textoIntroductorio += " (" + d.vicDestino + ")";
+      }
+    }
+    if (d.cauNombre && d.cauNombre.trim() !== '') {
+      textoIntroductorio += ", causante: " + d.cauNombre;
+      if (d.cauDestino && d.cauDestino.trim() !== '') {
+        textoIntroductorio += " (" + d.cauDestino + ")";
+      }
+    }
+    if (d.impNombre && d.impNombre.trim() !== '') {
+      textoIntroductorio += ", imputado: " + d.impNombre;
+      if (d.impDestino && d.impDestino.trim() !== '') {
+        textoIntroductorio += " (" + d.impDestino + ")";
+      }
+    }
+    if (d.intervencion && d.intervencion.trim() !== '') {
+      textoIntroductorio += ", con intervención de " + d.intervencion + ".";
+    } else {
+      textoIntroductorio += ".";
+    }
+
+    return `
+      <div style="position: absolute; top: calc(5cm - 1cm - 52px); left: 3cm; margin: 0;">
+        ${logoSVG}
+      </div>
+      
+      <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4;">
+        REF.: Ccar. el inicio de Actuaciones Sumariales Administrativas<br>
+        ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
+      </div>
+      
+      <div style="margin-top: 2em; margin-bottom: 0.5em; font-weight: bold;" class="sangria-cero">DESTINATARIOS:</div>
+
+      <ul style="padding-left: 1.2cm; margin-bottom: 1.5em; line-height: 1.5; font-size: 9.5pt; text-align: justify;">
+        ${destListItemsHtml}
+      </ul>
+
+      <div class="sangria-estandar" style="margin-top: 1em;">
+        ${textoIntroductorio}
+      </div>
+
+      <div class="sangria-cero" style="margin-top: 1em;">
+        <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, siendo las ${horaParteEscrito}, cuando se toma conocimiento que ${d.sintesis}.
+      </div>
+
+      <div class="sangria-estandar" style="margin-top: 1em;">
+        Atento a lo narrado precedentemente, se iniciaron formalmente las actuaciones de rigor conforme a lo estatuido por el Decreto N° 1050/09, reglamentario de la Ley del Personal N° 13.982.
+      </div>
+
+      <div class="sangria-estandar" style="margin-top: 2em;">
+        Lo expuesto es todo en cuanto informo a usted.
       </div>
     `;
   }
@@ -1087,7 +1197,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida officially al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
@@ -1255,91 +1365,57 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
 
       case 'tab-parte_escrito':
-        let destOptionsHtml = listaDestinatariosColumnaG.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-        
-        let destListItemsHtml = destinatariosParteEscrito.map((dest, idx) => `
-          <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-            <span>${dest}</span>
-            <button class="btn-del-row destinatarios-controls" onclick="quitarDestinatarioParte(${idx})" title="Quitar destinatario" style="margin-left: 8px;">✕</button>
-          </li>
-        `).join('');
-
-        // Construcción dinámica del párrafo introductorio según la fórmula de la fuente
-        let textoIntroductorio = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
-        if (d.encuadre && d.encuadre.trim() !== '') {
-          textoIntroductorio += " " + d.encuadre;
-        }
-        if (d.caratula && d.caratula.trim() !== '') {
-          textoIntroductorio += ", caratulado: " + d.caratula;
-        }
-        if (d.denNombre && d.denNombre.trim() !== '') {
-          textoIntroductorio += ", donde resulta denunciante: " + d.denNombre;
-          if (d.denDestino && d.denDestino.trim() !== '') {
-            textoIntroductorio += " (" + d.denDestino + ")";
-          }
-        }
-        if (d.vicNombre && d.vicNombre.trim() !== '') {
-          textoIntroductorio += ", víctima: " + d.vicNombre;
-          if (d.vicDestino && d.vicDestino.trim() !== '') {
-            textoIntroductorio += " (" + d.vicDestino + ")";
-          }
-        }
-        if (d.cauNombre && d.cauNombre.trim() !== '') {
-          textoIntroductorio += ", causante: " + d.cauNombre;
-          if (d.cauDestino && d.cauDestino.trim() !== '') {
-            textoIntroductorio += " (" + d.cauDestino + ")";
-          }
-        }
-        if (d.impNombre && d.impNombre.trim() !== '') {
-          textoIntroductorio += ", imputado: " + d.impNombre;
-          if (d.impDestino && d.impDestino.trim() !== '') {
-            textoIntroductorio += " (" + d.impDestino + ")";
-          }
-        }
-        if (d.intervencion && d.intervencion.trim() !== '') {
-          textoIntroductorio += ", con intervención de " + d.intervencion + ".";
-        } else {
-          textoIntroductorio += ".";
-        }
+        let destOptionsHtmlParte = listaDestinatariosColumnaG.map(opt => `<option value="${opt}">${opt}</option>`).join('');
 
         return `
-        <div class="a4-page" style="padding-top: 5cm; position: relative;">
-          <div style="position: absolute; top: calc(5cm - 1cm - 52px); left: 3cm; margin: 0;">
-            ${logoSVG}
-          </div>
-          
-          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4;">
-            REF.: Ccar. el inicio de Actuaciones Sumariales Administrativas<br>
-            ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
-          </div>
-          
-          <div style="margin-top: 2em; margin-bottom: 0.5em; font-weight: bold;" class="sangria-cero">DESTINATARIOS:</div>
-          
-          <div class="destinatarios-controls" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
-            <select id="select-destinatario-g" style="flex: 1; padding: 5px; font-size: 0.8rem;">
-              ${destOptionsHtml}
-            </select>
-            <button class="btn-secondary" onclick="agregarDestinatarioParte()" style="white-space: nowrap;">➕ Agregar Destinatario</button>
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <!-- COLUMNA IZQUIERDA: FORMULARIO INTERACTIVO EXTENDIDO DESDE EL MARGEN IZQUIERDO -->
+          <div class="parte-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📄 EDICIÓN INTERACTIVA DEL PARTE ESCRITO
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+              <div class="sheet-row-single">
+                <label>FECHA DE RECEPCIÓN / PARTE:</label>
+                <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarParteEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>HORA DEL HECHO / TOMADO CONOCIMIENTO:</label>
+                <input type="text" value="${horaParteEscrito}" oninput="horaParteEscrito = this.value; actualizarParteEnVivo();" placeholder="Ej: 21.20 hs">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>PARTIDO / LUGAR:</label>
+                <input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarParteEnVivo();">
+              </div>
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>GESTIÓN DE DESTINATARIOS:</label>
+              <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <select id="select-destinatario-g" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+                  ${destOptionsHtmlParte}
+                </select>
+                <button class="btn-secondary" onclick="agregarDestinatarioParte()" style="white-space: nowrap;">➕ Agregar</button>
+              </div>
+              <ul id="parte-dest-list-target" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+                ${renderDestinatariosParteHtml()}
+              </ul>
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>SÍNTESIS DEL HECHO:</label>
+              <textarea style="min-height: 180px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_41_sintesis').value = this.value; actualizarParteEnVivo();">${d.sintesis}</textarea>
+            </div>
           </div>
 
-          <ul style="padding-left: 1.2cm; margin-bottom: 1.5em; line-height: 1.5; font-size: 9.5pt; text-align: justify;">
-            ${destListItemsHtml}
-          </ul>
-
-          <div class="sangria-estandar" style="margin-top: 1em;">
-            ${textoIntroductorio}
-          </div>
-
-          <div class="sangria-cero" style="margin-top: 1em;">
-            <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, cuando se toma conocimiento que ${d.sintesis}
-          </div>
-
-          <div class="sangria-estandar" style="margin-top: 1em;">
-            Atento a lo narrado precedentemente, se iniciaron formalmente las actuaciones de rigor conforme a lo estatuido por el Decreto N° 1050/09, reglamentario de la Ley del Personal N° 13.982.
-          </div>
-
-          <div class="sangria-estandar" style="margin-top: 2em;">
-            Lo expuesto es todo en cuanto informo a usted.
+          <!-- COLUMNA DERECHA: VISTA PREVIA A4 EN TIEMPO REAL -->
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page" id="parte-live-preview-target" style="padding-top: 5cm; position: relative;">
+              ${renderParteA4Content()}
+            </div>
           </div>
         </div>`;
 
@@ -1593,7 +1669,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (activeTabKey === 'tab-acta_constatacion') {
+        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito') {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
