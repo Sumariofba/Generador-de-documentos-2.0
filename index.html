@@ -1644,11 +1644,62 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
 
       case 'tab-tdh':
+        let introTDH = "Me dirijo a usted afines de informar en el marco de Actuaciones Sumariales Administrativas";
+        if (d.encuadre && d.encuadre.trim() !== '') {
+          introTDH += " " + d.encuadre;
+        }
+        if (d.caratula && d.caratula.trim() !== '') {
+          introTDH += ", caratulado: " + d.caratula;
+        }
+        if (d.denNombre && d.denNombre.trim() !== '') {
+          introTDH += ", donde resulta denunciante: " + d.denNombre;
+          if (d.denDestino && d.denDestino.trim() !== '') {
+            introTDH += " (" + d.denDestino + ")";
+          }
+        }
+        if (d.vicNombre && d.vicNombre.trim() !== '') {
+          introTDH += ", víctima: " + d.vicNombre;
+          if (d.vicDestino && d.vicDestino.trim() !== '') {
+            introTDH += " (" + d.vicDestino + ")";
+          }
+        }
+        if (d.cauNombre && d.cauNombre.trim() !== '') {
+          introTDH += ", causante: " + d.cauNombre;
+          if (d.cauDestino && d.cauDestino.trim() !== '') {
+            introTDH += " (" + d.cauDestino + ")";
+          }
+        }
+        if (d.impNombre && d.impNombre.trim() !== '') {
+          introTDH += ", imputado: " + d.impNombre;
+          if (d.impDestino && d.impDestino.trim() !== '') {
+            introTDH += " (" + d.impDestino + ")";
+          }
+        }
+        if (d.intervencion && d.intervencion.trim() !== '') {
+          introTDH += ", con intervención de " + d.intervencion + ", tipos, días, horarios y circunstancias del agente la momento del hecho:";
+        } else {
+          introTDH += ".";
+        }
+
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div class="doc-mid-section">REF.: ${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="sangria-cero"><b>Pcir. Informe tipos, días y horarios</b></div>
+          
+          <div style="margin-left: 7cm; display: grid; grid-template-columns: auto 1fr; gap: 8px; font-weight: bold; font-size: 10pt; line-height: 1.4; margin-bottom: 2em;">
+            <div>REF.:</div>
+            <div>Pcir. Informe tipos, días y horarios</div>
+            <div>${d.partido || ''}</div>
+            <div>${d.fechaRecepcion || ''}</div>
+          </div>
+
+          <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; line-height: 1.4;">
+            AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
+            ${d.instructor ? d.instructor.toUpperCase() : ''}
+          </div>
+
+          <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 1.5em;">
+            ${introTDH}
+          </div>
           <div class="sangria-cero" style="margin: 1.2em 0 0.5em 0;">Cumpliendo servicios en el escalón denominado <b>${d.cauEscalon}</b></div>
           <div class="sangria-cero"><b>Modalidad:</b> ${d.cauModalidad}</div>
           <div class="sangria-cero"><b>Horario de presentación al servicio:</b> ${d.cauEntrada}</div>
