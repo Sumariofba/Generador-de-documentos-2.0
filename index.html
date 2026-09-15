@@ -424,7 +424,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .btn-del-row { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -531,10 +531,67 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 3: DATOS DEL CAUSANTE -->
+      <!-- Bloque 3: DATOS DE LA VICTIMA -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
-          <span>👤 3. DATOS DEL CAUSANTE</span>
+          <span>🩺 3. DATOS DE LA VICTIMA</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sheet-card-body">
+          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_51_vic_nombre" value=""></div>
+          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_52_vic_edad" value=""></div>
+          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_53_vic_dni" value=""></div>
+          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_54_vic_domicilio" value=""></div>
+          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_55_vic_entre_calles" value=""></div>
+          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_56_vic_localidad" value=""></div>
+          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_57_vic_partido" value=""></div>
+          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_58_vic_contacto" value=""></div>
+          <div class="sheet-row-single"><label>DESTINO</label><select id="f_59_vic_destino" class="select-destino"></select></div>
+        </div>
+      </div>
+
+      <!-- Bloque 4: DATOS DEL IMPUTADO -->
+      <div class="sheet-card-block collapsed">
+        <div class="sheet-card-header">
+          <span>⚖️ 4. DATOS DEL IMPUTADO</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sheet-card-body">
+          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_42_imp_nombre" value=""></div>
+          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_43_imp_edad" value=""></div>
+          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_44_imp_dni" value=""></div>
+          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_45_imp_domicilio" value=""></div>
+          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_46_imp_entre_calles" value=""></div>
+          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_47_imp_localidad" value=""></div>
+          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_48_imp_partido" value=""></div>
+          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_49_imp_contacto" value=""></div>
+          <div class="sheet-row-single"><label>DESTINO</label><select id="f_50_imp_destino" class="select-destino"></select></div>
+        </div>
+      </div>
+
+      <!-- Bloque 5: DATOS DEL DENUNCIANTE -->
+      <div class="sheet-card-block collapsed">
+        <div class="sheet-card-header">
+          <span>📢 5. DATOS DEL DENUNCIANTE</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sheet-card-body">
+          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_60_den_nombre" value="CONFIDENCIAL"></div>
+          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_61_den_edad" value="45"></div>
+          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_62_den_dni" value="45.000.123"></div>
+          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_63_den_domicilio" value="CALLE 1 N° 24"></div>
+          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_64_den_entre_calles" value="CALLE 2 Y CALLE 3"></div>
+          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_65_den_localidad" value="Los Hornos"></div>
+          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_66_den_partido" value="LA PLATA"></div>
+          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_67_den_contacto" value="11-2257-9393"></div>
+          <div class="sheet-row-single"><label>DESTINO</label><select id="f_68_den_destino" class="select-destino"></select></div>
+        </div>
+      </div>
+
+      <!-- Bloque 6: DATOS DEL CAUSANTE -->
+      <div class="sheet-card-block collapsed">
+        <div class="sheet-card-header">
+          <span>👤 6. DATOS DEL CAUSANTE</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
@@ -555,62 +612,27 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 4: MAGISTRADO Y CAUSA PENAL -->
+      <!-- Bloque 7: ACTA DE CONSTATACION -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
-          <span>⚖️ 4. MAGISTRADO Y CAUSA PENAL</span>
+          <span>📑 7. ACTA DE CONSTATACION</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>MAGISTRADO JUDICIAL</label><input type="text" id="f_87_magistrado" value="FISCALIA GENERAL DEPARTAMENTAL"></div>
-          <div class="sheet-row-single"><label>DPTO JUDICIAL</label><input type="text" id="f_88_dpto_judicial" value="MORON"></div>
-          <div class="sheet-row-single"><label>PROCESO PENAL N°</label><input type="text" id="f_89_proceso_penal" value="PP-00-00-000000-26/00"></div>
-          <div class="sheet-row-single"><label>CARATULA PENAL</label><input type="text" id="f_90_caratula_penal" value="Lesiones culposas"></div>
+          <div class="sheet-row-single"><label>DATOS DEL SUSCRIPTO</label><input type="text" id="f_105_suscripto_datos" value="COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN"></div>
+          <div class="sheet-row-single"><label>FUNCION DEL SUSCRIPTO</label><input type="text" id="f_106_suscripto_funcion" value="SUBDIRECTOR"></div>
+          <div class="sheet-row-single"><label>DESTINO SUSCRIPTO</label><select id="f_107_suscripto_destino" class="select-destino"></select></div>
+          <div class="sheet-row-single"><label>DATOS DE QUIEN SECUNDA</label><input type="text" id="f_108_secunda_datos" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
+          <div class="sheet-row-single"><label>FUNCION DE QUIEN SECUNDA</label><input type="text" id="f_109_secunda_funcion" value="DISPONIBLE"></div>
+          <div class="sheet-row-single"><label>DESTINO SECUNDA</label><select id="f_110_secunda_destino" class="select-destino"></select></div>
+          <div class="sheet-row-single" style="grid-column: 1 / -1;"><label>RELATO DEL ACTA</label><textarea id="f_111_acta_relato">Tomamos conocimiento que el OFICIAL (E.G.) LEGAJO 425.747 FARIAS DIEGO JAVIER, de 27 años de edad, fecha de nacimiento 11/11/1997, nacionalidad argentina, estado civil soltero, instruido, profesión u ocupación empleado policial, domicilio en calle Tierra del fuego N° 2423, localidad de Rafael Calzada, partido de Almirante Brown, provincia de Buenos Aires, Documento Nacional de Identidad N° 40.856.980, teléfono N° 1134495029. Que, en la fecha, siendo aproximadamente las 21.20 horas, hallándose realizando recorrida a pie por el barrio Ejército de los Andes, localidad de Ciudadela, partido de Tres de Febrero, circulando por la Avenida Militar al llegar a la calle Barragán, trastabilla tras pisa un pozo que se encontraba sobre la vereda de la Avenida Militar, producto de trastabillar se lesiona la rodilla izquierda y comienza a sentir un fuerte dolor agudo en la zona. Consecuentemente y debido al fuerte dolor que poseía en la zona el oficial de mención, da aviso a la superioridad de su destino quienes comisionan móvil policial al lugar. Que, siendo las 21.35 horas, se hace presente móvil O.I 31.322 conducido por el OFICIAL (E.G.) LEGAJO ….. , secundado en la oportunidad por el OFICIAL (E.G.) LEGAJO ….. , quienes la trasladaron hasta la Clínica Modelo de Caseros, sita en Lisandro Medina N° 2285, localidad de Caseros, donde lo atiende el Dr. Mario Pacheco Matrícula Nacional Nº 163846, quien tras asistir y evaluarla le diagnosticó traumatismo de rodilla y la derivó a un médico especialista en traumatología. Seguidamente, ante lo antes narrado personal de la Subsección Personal, mantiene comunicación telefónica con la Aseguradora de Riesgo del Trabajo Provincia A.R.T. a su abonado gratuito 0800-333-1333, a quienes en conocimiento de lo sucedido, registra la el siniestro bajo N° 1631925, designando la Clínica IMA de Adrogue para continuar el tratamiento por las lesiones padecidas. En consecuencia, se da inicio a Actuaciones Sumariales Administrativas conforme a lo estatuido en el Decreto N° 1050/09 reglamentario de la Ley N° 13982.</textarea></div>
         </div>
       </div>
 
-      <!-- Bloque 5: DATOS DEL IMPUTADO -->
+      <!-- Bloque 8: DATOS DEL DECLARANTE (TESTIMONIAL) -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
-          <span>⚖️ 5. DATOS DEL IMPUTADO</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_42_imp_nombre" value=""></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_43_imp_edad" value=""></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_44_imp_dni" value=""></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_45_imp_domicilio" value=""></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_46_imp_entre_calles" value=""></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_47_imp_localidad" value=""></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_48_imp_partido" value=""></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_49_imp_contacto" value=""></div>
-          <div class="sheet-row-single"><label>DESTINO</label><select id="f_50_imp_destino" class="select-destino"></select></div>
-        </div>
-      </div>
-
-      <!-- Bloque 6: DATOS DEL DENUNCIANTE -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>📢 6. DATOS DEL DENUNCIANTE</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_60_den_nombre" value="CONFIDENCIAL"></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_61_den_edad" value="45"></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_62_den_dni" value="45.000.123"></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_63_den_domicilio" value="CALLE 1 N° 24"></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_64_den_entre_calles" value="CALLE 2 Y CALLE 3"></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_65_den_localidad" value="Los Hornos"></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_66_den_partido" value="LA PLATA"></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_67_den_contacto" value="11-2257-9393"></div>
-          <div class="sheet-row-single"><label>DESTINO</label><select id="f_68_den_destino" class="select-destino"></select></div>
-        </div>
-      </div>
-
-      <!-- Bloque 7: DATOS DEL DECLARANTE (TESTIMONIAL) -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>📝 7. DATOS DEL DECLARANTE (TESTIMONIAL)</span>
+          <span>📝 8. DATOS DEL DECLARANTE (TESTIMONIAL)</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
@@ -633,39 +655,17 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 8: ACTA DE CONSTATACION -->
+      <!-- Bloque 9: MAGISTRADO Y CAUSA PENAL -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
-          <span>📑 8. ACTA DE CONSTATACION</span>
+          <span>⚖️ 9. MAGISTRADO Y CAUSA PENAL</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>DATOS DEL SUSCRIPTO</label><input type="text" id="f_105_suscripto_datos" value="COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN"></div>
-          <div class="sheet-row-single"><label>FUNCION DEL SUSCRIPTO</label><input type="text" id="f_106_suscripto_funcion" value="SUBDIRECTOR"></div>
-          <div class="sheet-row-single"><label>DESTINO SUSCRIPTO</label><select id="f_107_suscripto_destino" class="select-destino"></select></div>
-          <div class="sheet-row-single"><label>DATOS DE QUIEN SECUNDA</label><input type="text" id="f_108_secunda_datos" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
-          <div class="sheet-row-single"><label>FUNCION DE QUIEN SECUNDA</label><input type="text" id="f_109_secunda_funcion" value="DISPONIBLE"></div>
-          <div class="sheet-row-single"><label>DESTINO SECUNDA</label><select id="f_110_secunda_destino" class="select-destino"></select></div>
-          <div class="sheet-row-single" style="grid-column: 1 / -1;"><label>RELATO DEL ACTA</label><textarea id="f_111_acta_relato">Tomamos conocimiento que el OFICIAL (E.G.) LEGAJO 425.747 FARIAS DIEGO JAVIER, de 27 años de edad, fecha de nacimiento 11/11/1997, nacionalidad argentina, estado civil soltero, instruido, profesión u ocupación empleado policial, domicilio en calle Tierra del fuego N° 2423, localidad de Rafael Calzada, partido de Almirante Brown, provincia de Buenos Aires, Documento Nacional de Identidad N° 40.856.980, teléfono N° 1134495029. Que, en la fecha, siendo aproximadamente las 21.20 horas, hallándose realizando recorrida a pie por el barrio Ejército de los Andes, localidad de Ciudadela, partido de Tres de Febrero, circulando por la Avenida Militar al llegar a la calle Barragán, trastabilla tras pisa un pozo que se encontraba sobre la vereda de la Avenida Militar, producto de trastabillar se lesiona la rodilla izquierda y comienza a sentir un fuerte dolor agudo en la zona. Consecuentemente y debido al fuerte dolor que poseía en la zona el oficial de mención, da aviso a la superioridad de su destino quienes comisionan móvil policial al lugar. Que, siendo las 21.35 horas, se hace presente móvil O.I 31.322 conducido por el OFICIAL (E.G.) LEGAJO ….. , secundado en la oportunidad por el OFICIAL (E.G.) LEGAJO ….. , quienes la trasladaron hasta la Clínica Modelo de Caseros, sita en Lisandro Medina N° 2285, localidad de Caseros, donde lo atiende el Dr. Mario Pacheco Matrícula Nacional Nº 163846, quien tras asistir y evaluarla le diagnosticó traumatismo de rodilla y la derivó a un médico especialista en traumatología. Seguidamente, ante lo antes narrado personal de la Subsección Personal, mantiene comunicación telefónica con la Aseguradora de Riesgo del Trabajo Provincia A.R.T. a su abonado gratuito 0800-333-1333, a quienes en conocimiento de lo sucedido, registra la el siniestro bajo N° 1631925, designando la Clínica IMA de Adrogue para continuar el tratamiento por las lesiones padecidas. En consecuencia, se da inicio a Actuaciones Sumariales Administrativas conforme a lo estatuido en el Decreto N° 1050/09 reglamentario de la Ley N° 13982.</textarea></div>
-        </div>
-      </div>
-
-      <!-- Bloque 9: DATOS DE LA VICTIMA -->
-      <div class="sheet-card-block collapsed">
-        <div class="sheet-card-header">
-          <span>🩺 9. DATOS DE LA VICTIMA</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES</label><input type="text" id="f_51_vic_nombre" value=""></div>
-          <div class="sheet-row-single"><label>EDAD</label><input type="text" id="f_52_vic_edad" value=""></div>
-          <div class="sheet-row-single"><label>DNI</label><input type="text" id="f_53_vic_dni" value=""></div>
-          <div class="sheet-row-single"><label>DOMICILIO</label><input type="text" id="f_54_vic_domicilio" value=""></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES</label><input type="text" id="f_55_vic_entre_calles" value=""></div>
-          <div class="sheet-row-single"><label>LOCALIDAD</label><input type="text" id="f_56_vic_localidad" value=""></div>
-          <div class="sheet-row-single"><label>PARTIDO</label><input type="text" id="f_57_vic_partido" value=""></div>
-          <div class="sheet-row-single"><label>CONTACTO</label><input type="text" id="f_58_vic_contacto" value=""></div>
-          <div class="sheet-row-single"><label>DESTINO</label><select id="f_59_vic_destino" class="select-destino"></select></div>
+          <div class="sheet-row-single"><label>MAGISTRADO JUDICIAL</label><input type="text" id="f_87_magistrado" value="FISCALIA GENERAL DEPARTAMENTAL"></div>
+          <div class="sheet-row-single"><label>DPTO JUDICIAL</label><input type="text" id="f_88_dpto_judicial" value="MORON"></div>
+          <div class="sheet-row-single"><label>PROCESO PENAL N°</label><input type="text" id="f_89_proceso_penal" value="PP-00-00-000000-26/00"></div>
+          <div class="sheet-row-single"><label>CARATULA PENAL</label><input type="text" id="f_90_caratula_penal" value="Lesiones culposas"></div>
         </div>
       </div>
 
@@ -742,6 +742,48 @@ document.addEventListener('DOMContentLoaded', function() {
     "Cierre de actuaciones administrativas",
     "Síntesis y conclusiones"
   ];
+
+  // Opciones desplegables para Destinatarios (Pestaña DESPLEGABLE - Columna G)
+  const listaDestinatariosColumnaG = [
+    "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
+    "AL SEÑOR COORDINADOR DEL DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO",
+    "AL SEÑOR DIRECTOR DE LA DIRECCIÓN FUERZA BARRIAL DE APROXIMACIÓN (FBA)",
+    "AL SEÑOR DIRECTOR REGIMENES Y PERSONAL",
+    "AL SEÑOR JEFE DE CUERPO MEDICO",
+    "AL SEÑOR JEFE DE DEPARTAMENTO COMPORTAMIENTO Y SEGUIMIENTO",
+    "AL SEÑOR JEFE DE SUPERINTENDENCIA DE SEGURIDAD CIUDADANA",
+    "AL SEÑOR JEFE DE POLICÍA DE LA PROVINCIA DE BUENOS AIRES"
+  ];
+
+  // Estado dinámico para el Parte Escrito (Lista de destinatarios activos)
+  let destinatariosParteEscrito = [
+    "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
+    "AL SEÑOR COORDINADOR DEL DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO",
+    "AL SEÑOR DIRECTOR DE LA DIRECCIÓN FUERZA BARRIAL DE APROXIMACIÓN (FBA)",
+    "AL SEÑOR DIRECTOR REGIMENES Y PERSONAL",
+    "AL SEÑOR JEFE DE CUERPO MEDICO"
+  ];
+
+  window.agregarDestinatarioParte = function() {
+    const select = document.getElementById('select-destinatario-g');
+    if (!select) return;
+    const valor = select.value;
+    if (valor && !destinatariosParteEscrito.includes(valor)) {
+      destinatariosParteEscrito.push(valor);
+      const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+      if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
+        previewContainer.innerHTML = renderDocumentTemplate('tab-parte_escrito');
+      }
+    }
+  };
+
+  window.quitarDestinatarioParte = function(index) {
+    destinatariosParteEscrito.splice(index, 1);
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
+      previewContainer.innerHTML = renderDocumentTemplate('tab-parte_escrito');
+    }
+  };
 
   // Estado dinámico para el Índice (Guardando objeto con texto y folio)
   let indiceItems = listaDesplegableColumnaM.map(texto => ({ texto, folio: '' }));
@@ -901,11 +943,13 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'tab-caratula':
         let rowsHtml = '';
         
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">EXPEDIENTE ELECTRONICO:</div>
-          <div class="caratula-val">${d.exp || ''}</div>
-        </div>`;
+        if (d.exp && d.exp.trim() !== '') {
+          rowsHtml += `
+          <div class="caratula-row">
+            <div class="caratula-label">EXPEDIENTE ELECTRONICO:</div>
+            <div class="caratula-val">${d.exp}</div>
+          </div>`;
+        }
 
         rowsHtml += `
         <div class="caratula-row">
@@ -1005,8 +1049,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div class="doc-mid-section" style="margin-top: 1cm; line-height: 1.4;">
-            <b>REF.:</b> Star. Registro Institucional<br>
+          <div style="margin-top: 1cm; line-height: 1.4; margin-left: 7cm; text-align: left; font-weight: bold;">
+            REF.: Star. Registro Institucional<br>
             ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
           </div>
           <div class="sangria-cero" style="margin-top: 2em; margin-bottom: 2em;">
@@ -1089,12 +1133,14 @@ document.addEventListener('DOMContentLoaded', function() {
         return paginasIndiceHtml;
 
       case 'tab-acta_constatacion':
+        const relatoContinuo = (d.actaRelato || '').replace(/\r?\n|\r/g, ' ').trim();
+
         return `
         <div class="a4-page">
           ${logoSVG}
           <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-          <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; text-indent: 0cm !important;">
-            En la localidad de <b>${d.partido}</b>, partido de <b>${d.localidad}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 18:23 horas, el suscripto <b>${d.suscriptoDatos} (${d.suscriptoFuncion})</b>, secundado por el <b>${d.secundaDatos} (${d.secundaFuncion})</b>, ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. ${d.actaRelato} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+          <div style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0; text-indent: 0cm;">
+            En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 18:23 horas, el suscripto <b>${d.suscriptoDatos} (${d.suscriptoFuncion})</b>, secundado por el <b>${d.secundaDatos} (${d.secundaFuncion})</b>, ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. ${relatoContinuo} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
           </div>
         </div>`;
 
@@ -1123,22 +1169,92 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
 
       case 'tab-parte_escrito':
+        let destOptionsHtml = listaDestinatariosColumnaG.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+        
+        let destListItemsHtml = destinatariosParteEscrito.map((dest, idx) => `
+          <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+            <span>${dest}</span>
+            <button class="btn-del-row destinatarios-controls" onclick="quitarDestinatarioParte(${idx})" title="Quitar destinatario" style="margin-left: 8px;">✕</button>
+          </li>
+        `).join('');
+
+        // Construcción dinámica del párrafo introductorio según la fórmula de la fuente
+        let textoIntroductorio = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
+        if (d.encuadre && d.encuadre.trim() !== '') {
+          textoIntroductorio += " " + d.encuadre;
+        }
+        if (d.caratula && d.caratula.trim() !== '') {
+          textoIntroductorio += ", caratulado: " + d.caratula;
+        }
+        if (d.denNombre && d.denNombre.trim() !== '') {
+          textoIntroductorio += ", donde resulta denunciante: " + d.denNombre;
+          if (d.denDestino && d.denDestino.trim() !== '') {
+            textoIntroductorio += " (" + d.denDestino + ")";
+          }
+        }
+        if (d.vicNombre && d.vicNombre.trim() !== '') {
+          textoIntroductorio += ", víctima: " + d.vicNombre;
+          if (d.vicDestino && d.vicDestino.trim() !== '') {
+            textoIntroductorio += " (" + d.vicDestino + ")";
+          }
+        }
+        if (d.cauNombre && d.cauNombre.trim() !== '') {
+          textoIntroductorio += ", causante: " + d.cauNombre;
+          if (d.cauDestino && d.cauDestino.trim() !== '') {
+            textoIntroductorio += " (" + d.cauDestino + ")";
+          }
+        }
+        if (d.impNombre && d.impNombre.trim() !== '') {
+          textoIntroductorio += ", imputado: " + d.impNombre;
+          if (d.impDestino && d.impDestino.trim() !== '') {
+            textoIntroductorio += " (" + d.impDestino + ")";
+          }
+        }
+        if (d.intervencion && d.intervencion.trim() !== '') {
+          textoIntroductorio += ", con intervención de " + d.intervencion + ".";
+        } else {
+          textoIntroductorio += ".";
+        }
+
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div class="doc-mid-section">REF.: ${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="sangria-cero"><b>Ccar. inicio de Actuaciones Sumariales Administrativas</b></div>
-          <div class="sangria-cero" style="margin-top: 1em; font-weight: bold;">DESTINATARIOS:</div>
-          <ul style="padding-left: 1.2cm; margin-bottom: 1.5em; line-height: 1.5; font-size: 9.5pt;">
-            <li>AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS</li>
-            <li>AL SEÑOR COORDINADOR DEL DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO</li>
-            <li>AL SEÑOR DIRECTOR DE LA DIRECCIÓN FUERZA BARRIAL DE APROXIMACIÓN (FBA)</li>
-            <li>AL SEÑOR DIRECTOR REGIMENES Y PERSONAL</li>
-            <li>AL SEÑOR JEFE DE CUERPO MEDICO</li>
+        <div class="a4-page" style="padding-top: 5cm; position: relative;">
+          <div style="position: absolute; top: calc(5cm - 1cm - 52px); left: 3cm; margin: 0;">
+            ${logoSVG}
+          </div>
+          
+          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4;">
+            REF.: Ccar. el inicio de Actuaciones Sumariales Administrativas<br>
+            ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
+          </div>
+          
+          <div style="margin-top: 2em; margin-bottom: 0.5em; font-weight: bold;" class="sangria-cero">DESTINATARIOS:</div>
+          
+          <div class="destinatarios-controls" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
+            <select id="select-destinatario-g" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+              ${destOptionsHtml}
+            </select>
+            <button class="btn-secondary" onclick="agregarDestinatarioParte()" style="white-space: nowrap;">➕ Agregar Destinatario</button>
+          </div>
+
+          <ul style="padding-left: 1.2cm; margin-bottom: 1.5em; line-height: 1.5; font-size: 9.5pt; text-align: justify;">
+            ${destListItemsHtml}
           </ul>
-          <div class="sangria-cero"><b>SINTESIS DEL HECHO:</b> ${d.sintesis}</div>
-          <div class="sangria-estandar" style="margin-top: 1em;">Atento a lo narrado se labran Actuaciones conforme al Decreto 1050/09 Reglamentario de la Ley del Personal 13982.</div>
-          <div class="sangria-estandar">Lo expuesto es todo en cuanto informo a usted.</div>
+
+          <div class="sangria-estandar" style="margin-top: 1em;">
+            ${textoIntroductorio}
+          </div>
+
+          <div class="sangria-cero" style="margin-top: 1em;">
+            <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, cuando se toma conocimiento que ${d.sintesis}
+          </div>
+
+          <div class="sangria-estandar" style="margin-top: 1em;">
+            Atento a lo narrado precedentemente, se iniciaron formalmente las actuaciones de rigor conforme a lo estatuido por el Decreto N° 1050/09, reglamentario de la Ley del Personal N° 13.982.
+          </div>
+
+          <div class="sangria-estandar" style="margin-top: 2em;">
+            Lo expuesto es todo en cuanto informo a usted.
+          </div>
         </div>`;
 
       case 'tab-corre_agregado':
@@ -1288,7 +1404,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.
           </div>
           <div class="sangria-cero" style="margin: 1em 0;"><b>SÍNTESIS DEL HECHO:</b> ${d.sintesis}</div>
-          <div class="sangria-estandar">Asimismo informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En caso de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.</div>
+          <div class="sangria-estandar">Asimismo informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En case de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.</div>
           <table class="table-oficial" style="margin-top: 1.5em;">
             <thead><tr><th>Nombres completos</th><th>Edad</th><th>DNI</th><th>Domicilio</th></tr></thead>
             <tbody><tr><td>${d.vicNombre}</td><td>${d.vicEdad}</td><td>${d.vicDni}</td><td>${d.vicDomicilio}, localidad de ${d.vicLocalidad}, partido de ${d.vicPartido}</td></tr></tbody>
