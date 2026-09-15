@@ -428,7 +428,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -748,6 +748,54 @@ document.addEventListener('DOMContentLoaded', function() {
     "Síntesis y conclusiones"
   ];
 
+  // Estado dinámico para las diligencias agregadas en el Dto. Corre Agregado
+  let diligenciasCorreAgregado = [
+    "Concepto Funcional y Personal",
+    "Informe de tipo, días y horario de servicio",
+    "Stud. Legajo Electrónico Personal (L.E.P.)",
+    "Legajo Electrónico Personal (L.E.P.)",
+    "Copia certificada con habilitación del Libro de novedades de la guardia",
+    "Copia certificada con habilitación Libro de presentismo y Co.Re.S."
+  ];
+
+  window.agregarDiligenciaCorre = function() {
+    const select = document.getElementById('select-corre-columna-m');
+    if (!select) return;
+    const valor = select.value;
+    if (valor && !diligenciasCorreAgregado.includes(valor)) {
+      diligenciasCorreAgregado.push(valor);
+      const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+      if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
+        const targetContainer = document.getElementById('corre-diligencias-list-target');
+        if (targetContainer) {
+          targetContainer.innerHTML = renderDiligenciasCorreHtml();
+        }
+        actualizarCorreEnVivo();
+      }
+    }
+  };
+
+  window.quitarDiligenciaCorre = function(index) {
+    diligenciasCorreAgregado.splice(index, 1);
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
+      const targetContainer = document.getElementById('corre-diligencias-list-target');
+      if (targetContainer) {
+        targetContainer.innerHTML = renderDiligenciasCorreHtml();
+      }
+      actualizarCorreEnVivo();
+    }
+  };
+
+  function renderDiligenciasCorreHtml() {
+    return diligenciasCorreAgregado.map((dil, idx) => `
+      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
+        <span style="font-size: 0.78rem;">${dil}</span>
+        <button class="btn-del-row" onclick="quitarDiligenciaCorre(${idx})" title="Quitar diligencia" style="margin-left: 8px;">✕</button>
+      </li>
+    `).join('');
+  }
+
   // Opciones desplegables para Destinatarios (Pestaña DESPLEGABLE - Columna G)
   const listaDestinatariosColumnaG = [
     "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
@@ -982,6 +1030,48 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
+  // Función para sincronizar la previsualización del Decreto Corre Agregado en tiempo real
+  window.actualizarCorreEnVivo = function() {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
+      const liveContainer = document.getElementById('corre-live-preview-target');
+      if (liveContainer) {
+        liveContainer.innerHTML = renderCorreA4Content();
+      }
+    }
+  };
+
+  // Genera exclusivamente el contenido A4 del Decreto Corre Agregado
+  function renderCorreA4Content() {
+    const d = getFormValues();
+
+    let itemsDiligenciasHtml = diligenciasCorreAgregado.map(dil => `
+      <li>${dil}</li>
+    `).join('');
+
+    return `
+      ${logoSVG}
+      <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">
+        Corresponde a expediente ${d.caratula}
+      </div>
+      <div class="sangria-cero" style="margin-top: 1.5em; margin-bottom: 1.2em;">
+        <b>SEÑOR INSTRUCTOR:</b>
+      </div>
+      <div class="sangria-estandar" style="margin-bottom: 1.2em;">
+        Se agrega a continuación, a la presente pieza administrativa las siguientes diligencias que más abajo se detallan:
+      </div>
+      <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6;">
+        ${itemsDiligenciasHtml}
+      </ul>
+      <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 2.5em;">
+        Lo expuesto es todo en cuanto agrego a la presente. CONSTE.
+      </div>
+      <div style="text-align: left; font-weight: bold; margin-top: 2em;">
+        ${d.dependencia}, a los ${d.fechaRecepcion}
+      </div>
+    `;
+  }
+
   // Genera exclusivamente el contenido A4 del Acta de Constatación
   function renderActaA4Content() {
     const d = getFormValues();
@@ -1196,7 +1286,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
@@ -1434,22 +1524,36 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
 
       case 'tab-corre_agregado':
+        let optionsCorreColumnaM = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">Corresponde a expediente ${d.caratula}</div>
-          <div class="doc-mid-section">${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="doc-addressee">DECRETO - CORRE AGREGADO</div>
-          <div class="sangria-cero">Por recibidas las presentes actuaciones e incorporada la documentación que a continuación se detalla, agréguese formalmente a los actuados de referencia:</div>
-          <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6;">
-            <li>Concepto Funcional y Personal del causante <b>${d.cauNombre}</b>.</li>
-            <li>Informe de tipo, días y horario de servicio.</li>
-            <li>Stud. Legajo Electrónico Personal (L.E.P.).</li>
-            <li>Legajo Electrónico Personal (L.E.P.).</li>
-            <li>Copia certificada con habilitación del Libro de novedades de la guardia.</li>
-            <li>Copia certificada con habilitación Libro de presentismo y Co.Re.S.</li>
-          </ul>
-          <div class="sangria-estandar">Con lo actuado, prosígase con el trámite sumarial correspondiente.</div>
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <!-- COLUMNA IZQUIERDA: FORMULARIO INTERACTIVO Y DESPLEGABLE COLUMNA M -->
+          <div class="corre-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📄 GESTIÓN DE DILIGENCIAS - CORRE AGREGADO
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>SELECCIONAR DILIGENCIA (COLUMNA M):</label>
+              <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <select id="select-corre-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+                  ${optionsCorreColumnaM}
+                </select>
+                <button class="btn-secondary" onclick="agregarDiligenciaCorre()" style="white-space: nowrap;">➕ Agregar</button>
+              </div>
+              <ul id="corre-diligencias-list-target" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+                ${renderDiligenciasCorreHtml()}
+              </ul>
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA: VISTA PREVIA A4 EN TIEMPO REAL -->
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page" id="corre-live-preview-target">
+              ${renderCorreA4Content()}
+            </div>
+          </div>
         </div>`;
 
       case 'tab-cfyp':
@@ -1683,7 +1787,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito') {
+        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado') {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
