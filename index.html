@@ -266,6 +266,10 @@ body {
   max-width: 900px;
 }
 
+.card.full-width-card {
+  max-width: 100% !important;
+}
+
 .card-title {
   font-size: 0.95rem;
   font-weight: 700;
@@ -424,7 +428,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -674,8 +678,8 @@ body {
 
   <!-- VISTA 2: EXCLUSIVA DE DOCUMENTOS -->
   <div class="tab-view" id="view-resto-solapas">
-    <div class="right-preview-panel">
-      <div class="card"> 
+    <div class="right-preview-panel" id="main-right-preview-panel">
+      <div class="card" id="main-preview-card"> 
         <div class="card-title"> 
           <span id="note-preview-title">DOCUMENTO GENERADO</span> 
           <div class="actions-bar"> 
@@ -936,6 +940,31 @@ document.addEventListener('DOMContentLoaded', function() {
     };
   }
 
+  // Función para sincronizar la previsualización del Acta en tiempo real cuando se escribe en sus campos
+  window.actualizarActaEnVivo = function() {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-acta_constatacion') {
+      const liveContainer = document.getElementById('acta-live-preview-target');
+      if (liveContainer) {
+        liveContainer.innerHTML = renderActaA4Content();
+      }
+    }
+  };
+
+  // Genera exclusivamente el contenido A4 del Acta de Constatación
+  function renderActaA4Content() {
+    const d = getFormValues();
+    const relatoContinuo = (d.actaRelato || '').replace(/\r?\n|\r/g, ' ').trim();
+
+    return `
+      ${logoSVG}
+      <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
+      <div style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0; text-indent: 0cm;">
+        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 18:23 horas, el suscripto <b>${d.suscriptoDatos} (${d.suscriptoFuncion})</b>, secundado por el <b>${d.secundaDatos} (${d.secundaFuncion})</b>, ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. ${relatoContinuo} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+      </div>
+    `;
+  }
+
   function renderDocumentTemplate(tabKey) {
     const d = getFormValues();
 
@@ -1058,7 +1087,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
@@ -1133,14 +1162,71 @@ document.addEventListener('DOMContentLoaded', function() {
         return paginasIndiceHtml;
 
       case 'tab-acta_constatacion':
-        const relatoContinuo = (d.actaRelato || '').replace(/\r?\n|\r/g, ' ').trim();
+        let destOptionsSelect = listaDestinos.map(item => {
+          const selectedSusc = item === d.suscriptoDestino ? 'selected' : '';
+          return `<option value="${item}" ${selectedSusc}>${item}</option>`;
+        }).join('');
+
+        let destOptionsSelectSec = listaDestinos.map(item => {
+          const selectedSec = item === d.secundaDestino ? 'selected' : '';
+          return `<option value="${item}" ${selectedSec}>${item}</option>`;
+        }).join('');
 
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-          <div style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0; text-indent: 0cm;">
-            En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> y <b>${d.entre2}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las 18:23 horas, el suscripto <b>${d.suscriptoDatos} (${d.suscriptoFuncion})</b>, secundado por el <b>${d.secundaDatos} (${d.secundaFuncion})</b>, ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. ${relatoContinuo} No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <!-- COLUMNA IZQUIERDA: FORMULARIO AMPLIO DESDE EL MARGEN IZQUIERDO -->
+          <div class="acta-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📑 DATOS PARA EL ACTA DE CONSTATACIÓN
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px;">
+              <div class="sheet-row-single">
+                <label>DATOS DEL SUSCRIPTO:</label>
+                <input type="text" value="${d.suscriptoDatos}" oninput="document.getElementById('f_105_suscripto_datos').value = this.value; actualizarActaEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>FUNCIÓN DEL SUSCRIPTO:</label>
+                <input type="text" value="${d.suscriptoFuncion}" oninput="document.getElementById('f_106_suscripto_funcion').value = this.value; actualizarActaEnVivo();">
+              </div>
+
+              <div class="sheet-row-single" style="grid-column: 1 / -1;">
+                <label>DESTINO SUSCRIPTO:</label>
+                <select onchange="document.getElementById('f_107_suscripto_destino').value = this.value; actualizarActaEnVivo();">
+                  ${destOptionsSelect}
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>DATOS DE QUIEN SECUNDA:</label>
+                <input type="text" value="${d.secundaDatos}" oninput="document.getElementById('f_108_secunda_datos').value = this.value; actualizarActaEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>FUNCIÓN DE QUIEN SECUNDA:</label>
+                <input type="text" value="${d.secundaFuncion}" oninput="document.getElementById('f_109_secunda_funcion').value = this.value; actualizarActaEnVivo();">
+              </div>
+
+              <div class="sheet-row-single" style="grid-column: 1 / -1;">
+                <label>DESTINO SECUNDA:</label>
+                <select onchange="document.getElementById('f_110_secunda_destino').value = this.value; actualizarActaEnVivo();">
+                  ${destOptionsSelectSec}
+                </select>
+              </div>
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>RELATO DEL ACTA:</label>
+              <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_111_acta_relato').value = this.value; actualizarActaEnVivo();">${d.actaRelato}</textarea>
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA: VISTA PREVIA A4 EN TIEMPO REAL -->
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page" id="acta-live-preview-target">
+              ${renderActaA4Content()}
+            </div>
           </div>
         </div>`;
 
@@ -1404,7 +1490,7 @@ document.addEventListener('DOMContentLoaded', function() {
             Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.
           </div>
           <div class="sangria-cero" style="margin: 1em 0;"><b>SÍNTESIS DEL HECHO:</b> ${d.sintesis}</div>
-          <div class="sangria-estandar">Asimismo informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En case de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.</div>
+          <div class="sangria-estandar">Asimismo informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En caso de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.</div>
           <table class="table-oficial" style="margin-top: 1.5em;">
             <thead><tr><th>Nombres completos</th><th>Edad</th><th>DNI</th><th>Domicilio</th></tr></thead>
             <tbody><tr><td>${d.vicNombre}</td><td>${d.vicEdad}</td><td>${d.vicDni}</td><td>${d.vicDomicilio}, localidad de ${d.vicLocalidad}, partido de ${d.vicPartido}</td></tr></tbody>
@@ -1497,6 +1583,8 @@ document.addEventListener('DOMContentLoaded', function() {
       this.classList.add('active');
 
       const activeTabKey = this.getAttribute('data-tab');
+      const card = document.getElementById('main-preview-card');
+
       if (activeTabKey === 'tab-carga_datos') {
         viewCarga.classList.add('active-view');
         viewResto.classList.remove('active-view');
@@ -1504,6 +1592,13 @@ document.addEventListener('DOMContentLoaded', function() {
         viewCarga.classList.remove('active-view');
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
+
+        if (activeTabKey === 'tab-acta_constatacion') {
+          if (card) card.classList.add('full-width-card');
+        } else {
+          if (card) card.classList.remove('full-width-card');
+        }
+
         previewContainer.innerHTML = renderDocumentTemplate(activeTabKey);
       }
     });
