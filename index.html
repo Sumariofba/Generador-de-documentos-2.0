@@ -428,7 +428,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -484,7 +484,7 @@ body {
 
     <div class="accordion-container">
       
-      <!-- Bloque 1: PROCEDENCIA Y DEPENDENCIA INSTRUCTORA (Celdas B1 a B11) -->
+      <!-- Bloque 1: PROCEDENCIA Y DEPENDENCIA INSTRUCTORA -->
       <div class="sheet-card-block">
         <div class="sheet-card-header">
           <span>🏛️ 1. PROCEDENCIA Y DEPENDENCIA INSTRUCTORA</span>
@@ -506,7 +506,7 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 2: EXPEDIENTE Y LUGAR DEL HECHO (Celdas B107 a B127) -->
+      <!-- Bloque 2: EXPEDIENTE Y LUGAR DEL HECHO -->
       <div class="sheet-card-block">
         <div class="sheet-card-header">
           <span>📂 2. EXPEDIENTE Y LUGAR DEL HECHO</span>
@@ -535,7 +535,7 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 3: DATOS DE LA VICTIMA (Celdas B93 a B106) -->
+      <!-- Bloque 3: DATOS DE LA VICTIMA -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
           <span>🩺 3. DATOS DE LA VICTIMA</span>
@@ -554,7 +554,7 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 4: DATOS DEL IMPUTADO (Celdas B79 a B92) -->
+      <!-- Bloque 4: DATOS DEL IMPUTADO -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
           <span>⚖️ 4. DATOS DEL IMPUTADO</span>
@@ -573,7 +573,7 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 5: DATOS DEL DENUNCIANTE (Celdas B33 a B46) -->
+      <!-- Bloque 5: DATOS DEL DENUNCIANTE -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
           <span>📢 5. DATOS DEL DENUNCIANTE</span>
@@ -592,7 +592,7 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 6: DATOS DEL CAUSANTE (Celdas B14 a B27) -->
+      <!-- Bloque 6: DATOS DEL CAUSANTE -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
           <span>👤 6. DATOS DEL CAUSANTE</span>
@@ -616,7 +616,7 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 7: MAGISTRADO Y CAUSA PENAL (Celdas B29 a B32) -->
+      <!-- Bloque 7: MAGISTRADO Y CAUSA PENAL -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
           <span>⚖️ 7. MAGISTRADO Y CAUSA PENAL</span>
@@ -771,7 +771,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 
-  // 11. COL. DIVISIONES CON VÍNCULOS B110, B112 Y B107 CORREGIDOS
   function renderColDivA4Content() {
     const d = getFormValues();
     let itemsDiligenciasHtml = diligenciasColDiv.map(dil => `
@@ -965,7 +964,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27400%27%20height%3D%2760%27%20viewBox%3D%270%200%20400%2060%27%3E%3Crect%20width%3D%27110%27%20height%3D%2735%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%277%27%20y%3D%2716%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%277%27%20y%3D%2727%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2718%27%20font-family%3D%27Arial%27%20font-size%3D%2710%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2736%27%20font-family%3D%27Arial%27%20font-size%3D%2718%27%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E"></div>`;
 
-  // MAPEO DIRECTO Y RIGUROSO CON CELDAS REALES DE 'CARGA DE DATOS'
   function getFormValues() {
     const elemActaRelato = document.getElementById('f_78_relato_acta');
 
@@ -982,7 +980,7 @@ document.addEventListener('DOMContentLoaded', function() {
       secretario: document.getElementById('f_09_secretario').value,           // B10
       cargoSecretario: document.getElementById('f_10_cargo_secretario').value,// B11
       colaboracion: document.getElementById('f_12_colaboracion').value,       // B13
-      cauNombre: document.getElementById('f_13_cau_nombre').value,           // B14
+      cauNombre: document.getElementById('f_13_cau_nombre').value,           // B14 / B88
       cauEdad: document.getElementById('f_14_cau_edad').value,               // B15
       cauDni: document.getElementById('f_15_cau_dni').value,                 // B16
       cauDomicilio: document.getElementById('f_16_cau_domicilio').value,     // B17
@@ -990,7 +988,7 @@ document.addEventListener('DOMContentLoaded', function() {
       cauLocalidad: document.getElementById('f_18_cau_localidad').value,     // B19
       cauPartido: document.getElementById('f_19_cau_partido').value,         // B20
       cauContacto: document.getElementById('f_20_cau_contacto').value,        // B21
-      cauDestino: document.getElementById('f_21_cau_destino').value,         // B22
+      cauDestino: document.getElementById('f_21_cau_destino').value,         // B22 / B96
       cauEscalon: document.getElementById('f_21b_cau_escalon').value,         // B23
       cauEntrada: document.getElementById('f_21c_cau_entrada').value,         // B24
       cauSalida: document.getElementById('f_21d_cau_salida').value,           // B25
@@ -1000,7 +998,7 @@ document.addEventListener('DOMContentLoaded', function() {
       dptoJudicial: document.getElementById('f_88_dpto_judicial').value,     // B30
       procesoPenal: document.getElementById('f_89_proceso_penal').value,     // B31
       caratulaPenal: document.getElementById('f_90_caratula_penal').value,   // B32
-      denNombre: document.getElementById('f_60_den_nombre').value,           // B33
+      denNombre: document.getElementById('f_60_den_nombre').value,           // B33 / B72
       denEdad: document.getElementById('f_61_den_edad').value,               // B34
       denDni: document.getElementById('f_62_den_dni').value,                 // B35
       denDomicilio: document.getElementById('f_63_den_domicilio').value,     // B36
@@ -1008,8 +1006,8 @@ document.addEventListener('DOMContentLoaded', function() {
       denLocalidad: document.getElementById('f_65_den_localidad').value,     // B38
       denPartido: document.getElementById('f_66_den_partido').value,         // B39
       denContacto: document.getElementById('f_67_den_contacto').value,        // B40
-      denDestino: document.getElementById('f_68_den_destino').value,         // B41
-      impNombre: document.getElementById('f_42_imp_nombre').value,           // B79
+      denDestino: document.getElementById('f_68_den_destino').value,         // B41 / B80
+      impNombre: document.getElementById('f_42_imp_nombre').value,           // B79 / B56
       impEdad: document.getElementById('f_43_imp_edad').value,               // B80
       impDni: document.getElementById('f_44_imp_dni').value,                 // B81
       impDomicilio: document.getElementById('f_45_imp_domicilio').value,     // B82
@@ -1017,8 +1015,8 @@ document.addEventListener('DOMContentLoaded', function() {
       impLocalidad: document.getElementById('f_47_imp_localidad').value,     // B84
       impPartido: document.getElementById('f_48_imp_partido').value,         // B85
       impContacto: document.getElementById('f_49_imp_contacto').value,        // B86
-      impDestino: document.getElementById('f_50_imp_destino').value,         // B87
-      vicNombre: document.getElementById('f_51_vic_nombre').value,           // B93
+      impDestino: document.getElementById('f_50_imp_destino').value,         // B87 / B64
+      vicNombre: document.getElementById('f_51_vic_nombre').value,           // B93 / B40
       vicEdad: document.getElementById('f_52_vic_edad').value,               // B94
       vicDni: document.getElementById('f_53_vic_dni').value,                 // B95
       vicDomicilio: document.getElementById('f_54_vic_domicilio').value,     // B96
@@ -1026,13 +1024,13 @@ document.addEventListener('DOMContentLoaded', function() {
       vicLocalidad: document.getElementById('f_56_vic_localidad').value,     // B98
       vicPartido: document.getElementById('f_57_vic_partido').value,         // B99
       vicContacto: document.getElementById('f_58_vic_contacto').value,        // B100
-      vicDestino: document.getElementById('f_59_vic_destino').value,         // B101
+      vicDestino: document.getElementById('f_59_vic_destino').value,         // B101 / B48
       fechaHecho: document.getElementById('f_22_hecho_fecha').value,          // B107
       horaHecho: document.getElementById('f_18_hecho_hora').value,           // B108
       exp: document.getElementById('f_23_exp_elec').value,                   // B109
-      caratula: document.getElementById('f_24_caratula').value,              // B110
-      encuadre: document.getElementById('f_25_encuadre').value,              // B111
-      intervencion: document.getElementById('f_26_intervencion').value,      // B112
+      caratula: document.getElementById('f_24_caratula').value,              // B110 / B20
+      encuadre: document.getElementById('f_25_encuadre').value,              // B111 / B21
+      intervencion: document.getElementById('f_26_intervencion').value,      // B112 / B22
       lugarHecho: document.getElementById('f_27_hecho_lugar').value,         // B113
       hechoLoc: document.getElementById('f_39_hecho_loc').value,             // B125
       hechoPartido: document.getElementById('f_40_hecho_partido').value,     // B126
@@ -1101,7 +1099,6 @@ document.addEventListener('DOMContentLoaded', function() {
     `;
   }
 
-  // 5. ACTA DE CONSTATACIÓN CON FÓRMULA CORREGIDA VINCULADA A B6, B7, B2, B3, B4, B1, B108, B8, B9, B10, B11, B2 Y B78
   function renderActaA4Content() {
     const d = getFormValues();
 
@@ -1391,7 +1388,6 @@ document.addEventListener('DOMContentLoaded', function() {
       case 'tab-acta_constatacion':
         return `
         <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-          <!-- COLUMNA IZQUIERDA: FORMULARIO DE CONSTATACIÓN -->
           <div class="acta-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
             <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
               📑 DATOS PARA EL ACTA DE CONSTATACIÓN
@@ -1399,7 +1395,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>FECHA DE RECEPCIÓN (B1):</label>
+                <label>FECHA DE RECEPCCIÓN (B1):</label>
                 <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarActaEnVivo();">
               </div>
 
@@ -1445,7 +1441,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           </div>
 
-          <!-- COLUMNA DERECHA: VISTA PREVIA A4 EN TIEMPO REAL -->
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
             <div class="a4-page" id="acta-live-preview-target">
               ${renderActaA4Content()}
@@ -1482,7 +1477,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return `
         <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-          <!-- COLUMNA IZQUIERDA: FORMULARIO INTERACTIVO DE PARTE ESCRITO -->
           <div class="parte-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
             <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
               📄 EDICIÓN INTERACTIVA DEL PARTE ESCRITO
@@ -1490,7 +1484,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>FECHA DE RECEPCIÓN / PARTE:</label>
+                <label>FECHA DE RECEPCCIÓN / PARTE:</label>
                 <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarParteEnVivo();">
               </div>
 
@@ -1524,7 +1518,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           </div>
 
-          <!-- COLUMNA DERECHA: VISTA PREVIA A4 EN TIEMPO REAL -->
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
             <div class="a4-page" id="parte-live-preview-target" style="padding-top: 5cm; position: relative;">
               ${renderParteA4Content()}
@@ -1767,12 +1760,177 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
 
       case 'tab-lep':
+        let textoLEP = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
+        if (d.encuadre && d.encuadre.trim() !== '') {
+          textoLEP += " " + d.encuadre;
+        }
+        if (d.caratula && d.caratula.trim() !== '') {
+          textoLEP += ", caratulado: " + d.caratula;
+        }
+        if (d.denNombre && d.denNombre.trim() !== '') {
+          textoLEP += ", donde resulta denunciante: " + d.denNombre;
+          if (d.denDestino && d.denDestino.trim() !== '') {
+            textoLEP += " (" + d.denDestino + ")";
+          }
+        }
+        if (d.vicNombre && d.vicNombre.trim() !== '') {
+          textoLEP += ", víctima: " + d.vicNombre;
+          if (d.vicDestino && d.vicDestino.trim() !== '') {
+            textoLEP += " (" + d.vicDestino + ")";
+          }
+        }
+        if (d.cauNombre && d.cauNombre.trim() !== '') {
+          textoLEP += ", causante: " + d.cauNombre;
+          if (d.cauDestino && d.cauDestino.trim() !== '') {
+            textoLEP += " (" + d.cauDestino + ")";
+          }
+        }
+        if (d.impNombre && d.impNombre.trim() !== '') {
+          textoLEP += ", imputado: " + d.impNombre;
+          if (d.impDestino && d.impDestino.trim() !== '') {
+            textoLEP += " (" + d.impDestino + ")";
+          }
+        }
+        if (d.intervencion && d.intervencion.trim() !== '') {
+          textoLEP += ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:";
+        } else {
+          textoLEP += ".";
+        }
+
+        // INICIALIZAR REGISTROS SELECCIONADOS PARA LA TABLA LEP SI NO EXISTEN
+        if (!window.registrosSeleccionadosLEP) {
+          window.registrosSeleccionadosLEP = [];
+          if (d.cauNombre && d.cauNombre.trim() !== '' && !d.cauNombre.toUpperCase().includes('DATOS DEL CAUSANTE')) window.registrosSeleccionadosLEP.push('CAUSANTE');
+          if (d.vicNombre && d.vicNombre.trim() !== '' && !d.vicNombre.toUpperCase().includes('DATOS DE LA VICTIMA')) window.registrosSeleccionadosLEP.push('VICTIMA');
+          if (d.impNombre && d.impNombre.trim() !== '' && !d.impNombre.toUpperCase().includes('DATOS DEL IMPUTADO')) window.registrosSeleccionadosLEP.push('IMPUTADO');
+          if (d.denNombre && d.denNombre.trim() !== '' && !d.denNombre.toUpperCase().includes('DATOS DEL DENUNCIANTE')) window.registrosSeleccionadosLEP.push('DENUNCIANTE');
+          
+          if (window.registrosSeleccionadosLEP.length === 0) {
+            window.registrosSeleccionadosLEP.push('CAUSANTE');
+          }
+        }
+
+        // FUNCIONES GLOBALES DE GESTIÓN DEL DESPLEGABLE LEP
+        window.agregarRegistroLEP = function() {
+          const select = document.getElementById('select-lep-personas');
+          if (!select) return;
+          const valor = select.value;
+          if (valor && !window.registrosSeleccionadosLEP.includes(valor)) {
+            window.registrosSeleccionadosLEP.push(valor);
+            actualizarVistaLEP();
+          }
+        };
+
+        window.quitarRegistroLEP = function(tipo) {
+          window.registrosSeleccionadosLEP = window.registrosSeleccionadosLEP.filter(r => r !== tipo);
+          actualizarVistaLEP();
+        };
+
+        window.actualizarVistaLEP = function() {
+          const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+          if (activeTab && activeTab.getAttribute('data-tab') === 'tab-lep') {
+            const container = document.getElementById('doc-preview-wrapper-container');
+            if (container) {
+              container.innerHTML = renderDocumentTemplate('tab-lep');
+            }
+          }
+        };
+
+        // CONSTRUCCIÓN DE FILAS SEGÚN SELECCIÓN EN EL DESPLEGABLE
+        let filasTablaLEP = '';
+        let listaGestionHtml = '';
+
+        const mapaPersonas = {
+          'CAUSANTE': { rol: 'CAUSANTE (B88)', nombre: d.cauNombre, destino: d.cauDestino || '' },
+          'VICTIMA': { rol: 'VÍCTIMA (B40)', nombre: d.vicNombre, destino: d.vicDestino || '' },
+          'IMPUTADO': { rol: 'IMPUTADO (B56)', nombre: d.impNombre, destino: d.impDestino || '' },
+          'DENUNCIANTE': { rol: 'DENUNCIANTE (B72)', nombre: d.denNombre, destino: d.denDestino || '' }
+        };
+
+        window.registrosSeleccionadosLEP.forEach(tipo => {
+          const item = mapaPersonas[tipo];
+          if (item && item.nombre) {
+            filasTablaLEP += `
+              <tr>
+                <td>${item.nombre}</td>
+                <td>${item.destino}</td>
+              </tr>`;
+
+            listaGestionHtml += `
+              <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1;">
+                <span style="font-size: 0.8rem; font-weight: bold; color: #334155;">${item.rol}: <span style="font-weight: normal;">${item.nombre}</span></span>
+                <button class="btn-del-row" onclick="quitarRegistroLEP('${tipo}')" title="Quitar de la tabla" style="margin-left: 8px;">✕</button>
+              </li>`;
+          }
+        });
+
+        if (filasTablaLEP === '') {
+          filasTablaLEP = `<tr><td colspan="2" style="text-align: center; color: #64748b; font-style: italic;">Sin datos seleccionados para mostrar</td></tr>`;
+        }
+
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div class="doc-mid-section">REF.: ${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="sangria-cero"><b>Star. Legajo Electrónico Personal (LEP)</b></div>
-          <div class="sangria-estandar" style="margin-top: 1.5em;">Solicito a quien corresponda se sirva remitir copia autenticada del Legajo Electrónico Personal (L.E.P.) correspondiente al efectivo policial <b>${d.cauNombre}</b>.</div>
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <!-- PANEL DE CONTROL CON DESPLEGABLE B88, B40, B56, B72 -->
+          <div class="lep-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📋 SELECCIÓN DE DATOS PARA LA TABLA L.E.P.
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>SELECCIONAR REGISTRO A MOSTRAR / QUITAR:</label>
+              <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                <select id="select-lep-personas" style="flex: 1; padding: 6px; font-size: 0.82rem;">
+                  <option value="CAUSANTE">CAUSANTE (Celda B88: ${d.cauNombre || 'Sin datos'})</option>
+                  <option value="VICTIMA">VÍCTIMA (Celda B40: ${d.vicNombre || 'Sin datos'})</option>
+                  <option value="IMPUTADO">IMPUTADO (Celda B56: ${d.impNombre || 'Sin datos'})</option>
+                  <option value="DENUNCIANTE">DENUNCIANTE (Celda B72: ${d.denNombre || 'Sin datos'})</option>
+                </select>
+                <button class="btn-secondary" onclick="agregarRegistroLEP()" style="white-space: nowrap;">➕ Agregar</button>
+              </div>
+
+              <label style="margin-top: 6px; display: block;">REGISTROS VISIBLES EN LA TABLA:</label>
+              <ul style="list-style: none; padding: 0; margin: 6px 0 0 0; display: flex; flex-direction: column; gap: 4px;">
+                ${listaGestionHtml || '<li style="font-size:0.78rem; color:#94a3b8; font-style:italic;">No hay registros cargados.</li>'}
+              </ul>
+            </div>
+          </div>
+
+          <!-- DOCUMENTO A4 GENERAL -->
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page">
+              ${logoSVG}
+              <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+                REF.: Star. Legajo Electrónico Personal (L.E.P.)<br>
+                ${d.partido || ''}, ${d.fechaRecepcion || ''}
+              </div>
+
+              <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+                AL SEÑOR DIRECTOR<br>
+                DIRECCIÓN DE PERSONAL - REGÍMENES POLICIALES<br>
+                SECCIÓN EXPEDIENTES E INFORMES PERSONAL
+              </div>
+
+              <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5; text-align: justify;">
+                ${textoLEP}
+              </div>
+
+              <table class="table-oficial" style="margin-top: 1.5em;">
+                <thead>
+                  <tr>
+                    <th>NOMBRES Y APELLIDOS</th>
+                    <th>DESTINO</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${filasTablaLEP}
+                </tbody>
+              </table>
+
+              <div class="sangria-estandar" style="margin-top: 2em;">
+                Lo expuesto es todo en cuanto solicito a usted.
+              </div>
+            </div>
+          </div>
         </div>`;
 
       case 'tab-col_ipp':
@@ -1938,7 +2096,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div') {
+        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div' || activeTabKey === 'tab-lep') {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
