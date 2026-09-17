@@ -428,7 +428,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -703,6 +703,108 @@ document.addEventListener('DOMContentLoaded', function() {
     "Cierre de actuaciones administrativas",
     "Síntesis y conclusiones"
   ];
+
+  // Opciones completas para diligencias de Col. Divisiones (Columna C)
+  const listaDiligenciasColumnaC = [
+    "Informe de tipo, días y horario de servicio",
+    "Concepto Funcional y Personal",
+    "Copia certificada con habilitación del Libro de novedades de la guardia",
+    "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
+    "Legajo Electrónico Personal (L.E.P.)",
+    "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
+    "Informe de Comportamiento y Seguimiento laboral"
+  ];
+
+  // Estado dinámico para Col. Divisiones
+  let diligenciasColDiv = [
+    "Informe de tipo, días y horario de servicio",
+    "Concepto Funcional y Personal",
+    "Copia certificada con habilitación del Libro de novedades de la guardia",
+    "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
+    "Legajo Electrónico Personal (L.E.P.)",
+    "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
+    "Informe de Comportamiento y Seguimiento laboral"
+  ];
+
+  window.agregarDiligenciaColDiv = function() {
+    const select = document.getElementById('select-col-div-c');
+    if (!select) return;
+    const valor = select.value;
+    if (valor && !diligenciasColDiv.includes(valor)) {
+      diligenciasColDiv.push(valor);
+      const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+      if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
+        const targetContainer = document.getElementById('col-div-diligencias-list-target');
+        if (targetContainer) {
+          targetContainer.innerHTML = renderDiligenciasColDivHtml();
+        }
+        actualizarColDivEnVivo();
+      }
+    }
+  };
+
+  window.quitarDiligenciaColDiv = function(index) {
+    diligenciasColDiv.splice(index, 1);
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
+      const targetContainer = document.getElementById('col-div-diligencias-list-target');
+      if (targetContainer) {
+        targetContainer.innerHTML = renderDiligenciasColDivHtml();
+      }
+      actualizarColDivEnVivo();
+    }
+  };
+
+  function renderDiligenciasColDivHtml() {
+    return diligenciasColDiv.map((dil, idx) => `
+      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
+        <span style="font-size: 0.78rem;">${dil}</span>
+        <button class="btn-del-row" onclick="quitarDiligenciaColDiv(${idx})" title="Quitar diligencia" style="margin-left: 8px;">✕</button>
+      </li>
+    `).join('');
+  }
+
+  window.actualizarColDivEnVivo = function() {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
+      const liveContainer = document.getElementById('col-div-live-preview-target');
+      if (liveContainer) {
+        liveContainer.innerHTML = renderColDivA4Content();
+      }
+    }
+  };
+
+  function renderColDivA4Content() {
+    const d = getFormValues();
+    let itemsDiligenciasHtml = diligenciasColDiv.map(dil => `
+      <li>${dil} de <b>${d.impNombre || d.cauNombre}</b>.</li>
+    `).join('');
+
+    return `
+      ${logoSVG}
+      <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+        REF.: Star. Colaboración<br>
+        ${d.partido || ''}, ${d.fechaRecepcion || ''}
+      </div>
+
+      <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase;">
+        AL SEÑOR JEFE<br>
+        ${d.colaboracion || ''}
+      </div>
+
+      <div class="sangria-estandar" style="margin-bottom: 1em;">
+        Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de <b>${d.caratula}</b> en tramite ante <b>${d.intervencion}</b> realizada el <b>${d.fechaHecho}</b>, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:
+      </div>
+
+      <ul style="padding-left: 1.2cm; line-height: 1.6; text-align: justify; margin: 1em 0; font-size: 10pt;">
+        ${itemsDiligenciasHtml}
+      </ul>
+
+      <div class="sangria-estandar" style="margin-top: 2em;">
+        Lo expuesto es todo en cuanto solicito a usted.
+      </div>
+    `;
+  }
 
   // Estado dinámico para las diligencias agregadas en el Dto. Corre Agregado
   let diligenciasCorreAgregado = [
@@ -1709,21 +1811,36 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
 
       case 'tab-col_div':
+        let optionsColDivC = listaDiligenciasColumnaC.map(opt => `<option value="${opt}">${opt}</option>`).join('');
+
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div class="doc-mid-section">${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="doc-addressee">AL SEÑOR JEFE / ${d.colaboracion}</div>
-          <div class="sangria-cero">Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de <b>${d.caratula}</b> en trámite ante <b>${d.intervencion}</b>, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan más abajo:</div>
-          <ul style="padding-left: 1.2cm; line-height: 1.6; text-align: justify; margin: 1em 0;">
-            <li>Informe de tipos, días, horarios y modalidad de servicio del <b>${d.impNombre}</b>.</li>
-            <li>Concepto Funcional y Personal firmado por superior directo del causante <b>${d.impNombre}</b>.</li>
-            <li>Copia certificada y legible con habilitación del Libro de Novedades de la guardia de fecha de los hechos.</li>
-            <li>Copia certificada y legible con habilitación del Libro de Presentismo y Co.Re.S.</li>
-            <li>Legajo Electrónico Personal (L.E.P.) de <b>${d.impNombre}</b>.</li>
-            <li>Certificado de Revista legible generado por el Sistema Informático del Personal (SIPP).</li>
-            <li>Adune informe de Comportamiento y Seguimiento tanto en la faz laboral por parte del superior directo.</li>
-          </ul>
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <!-- COLUMNA IZQUIERDA: FORMULARIO INTERACTIVO Y SELECCIÓN DE DILIGENCIAS -->
+          <div class="col-div-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📄 GESTIÓN DE COLABORACIÓN DIVISIONES
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>SELECCIONAR DILIGENCIA (COLUMNA C):</label>
+              <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <select id="select-col-div-c" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+                  ${optionsColDivC}
+                </select>
+                <button class="btn-secondary" onclick="agregarDiligenciaColDiv()" style="white-space: nowrap;">➕ Agregar</button>
+              </div>
+              <ul id="col-div-diligencias-list-target" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
+                ${renderDiligenciasColDivHtml()}
+              </ul>
+            </div>
+          </div>
+
+          <!-- COLUMNA DERECHA: VISTA PREVIA A4 EN TIEMPO REAL CON FORMATO OFICIAL -->
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page" id="col-div-live-preview-target">
+              ${renderColDivA4Content()}
+            </div>
+          </div>
         </div>`;
 
       case 'tab-lep':
@@ -1809,7 +1926,7 @@ document.addEventListener('DOMContentLoaded', function() {
           ${logoSVG}
           <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
           <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
-            En la localidad de ${d.partido}, partido de ${d.hechoPartido}, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en ${d.direccion}, entre calle ${d.entre1} del mismo medio, a los ${d.fechaRecepcion}, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: <i>“Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”</i>, y artículo 205 inciso “k” del mismo texto legal que reza: <i>“Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio... cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia”</i>. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del C.P.P.BA y bajo juramento de decir la verdad bajo la fórmula: <b>“LO JURO”</b>. Seguidamente se lo enteró de los Arts. 275 y 276 del C.P. Nación sobre Falso Testimonio. Preguntado por sus datos manifiesta ser: <b>${d.decNombre}</b>, de ${d.decEdad} años de edad, nacionalidad ${d.decNac}, estado civil ${d.decEstCivil}, profesión u ocupación ${d.decProf}, instruido, domicilio en ${d.decDom}, entre calles ${d.decEntreCalles}, localidad de ${d.decLoc}, DNI N° ${d.decDni}. Preguntado por las generales de la ley (Arts. 234, 235 y 236 C.P.P.), manifiesta NO LE CABER LAS GENERALES DE LA LEY. SEGRIDAMENTE INTERROGADO Y EN USO DE LA PALABRA DECLARA: Que resulta ser empleado policial ostentando la jerarquía de ${d.decJerarquia}, Legajo ${d.decLegajo}, prestando servicios en ${d.decDestino} como ${d.decFuncion}. Que en la fecha presta declaración en marco de exp. ${d.exp}, caratulado ${d.encuadre}. ${d.decDeclara}. Es todo cuanto declara. Leída la presente firma de conformidad.
+            En la localidad de ${d.partido}, partido de ${d.hechoPartido}, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en ${d.direccion}, entre calle ${d.entre1} del mismo medio, a los ${d.fechaRecepcion}, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: <i>“Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”</i>, y artículo 205 inciso “k” del mismo texto legal que reza: <i>“Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio... cuando ello pudiera importar un perjudico para terceros o para la administración de justicia”</i>. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del C.P.P.BA y bajo juramento de decir la verdad bajo la fórmula: <b>“LO JURO”</b>. Seguidamente se lo enteró de los Arts. 275 y 276 del C.P. Nación sobre Falso Testimonio. Preguntado por sus datos manifiesta ser: <b>${d.decNombre}</b>, de ${d.decEdad} años de edad, nacionalidad ${d.decNac}, estado civil ${d.decEstCivil}, profesión u ocupación ${d.decProf}, instruido, domicilio en ${d.decDom}, entre calles ${d.decEntreCalles}, localidad de ${d.decLoc}, DNI N° ${d.decDni}. Preguntado por las generales de la ley (Arts. 234, 235 y 236 C.P.P.), manifiesta NO LE CABER LAS GENERALES DE LA LEY. SEGRIDAMENTE INTERROGADO Y EN USO DE LA PALABRA DECLARA: Que resulta ser empleado policial ostentando la jerarquía de ${d.decJerarquia}, Legajo ${d.decLegajo}, prestando servicios en ${d.decDestino} como ${d.decFuncion}. Que en la fecha presta declaración en marco de exp. ${d.exp}, caratulado ${d.encuadre}. ${d.decDeclara}. Es todo cuanto declara. Leída la presente firma de conformidad.
           </div>
         </div>`;
 
@@ -1898,7 +2015,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado') {
+        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div') {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
