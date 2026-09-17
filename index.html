@@ -425,15 +425,62 @@ body {
   background-color: #dc2626;
 }
 
+/* ESTILOS PARA CAJAS DE FOTOS DRAG & DROP */
+.foto-dropzone {
+  border: 2px dashed #94a3b8;
+  height: 95mm;
+  background: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px;
+}
+
+.foto-dropzone.dragover {
+  background: #e0f2fe;
+  border-color: #0284c7;
+}
+
+.foto-dropzone.selected-zone {
+  border-color: #0284c7;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.25);
+}
+
+.foto-dropzone img {
+  max-width: 100%;
+  max-height: calc(100% - 24px);
+  object-fit: contain;
+}
+
+.foto-placeholder-hint {
+  text-align: center;
+  color: #64748b;
+  font-size: 0.8rem;
+  pointer-events: none;
+}
+
+.foto-label-tag {
+  font-weight: bold;
+  font-size: 8.5pt;
+  margin-top: 4px;
+  text-transform: uppercase;
+}
+
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .testimonial-form-side, .inspeccion-form-side, .croquis-controls { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .testimonial-form-side, .inspeccion-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
   .a4-page { width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; padding: 3.5cm 1.5cm 2.5cm 3cm !important; page-break-after: always; }
   .input-folio { border: none !important; background: transparent !important; }
+  .foto-dropzone { border: 1px solid #000 !important; background: transparent !important; }
 }
 </style>
 </head>
@@ -767,6 +814,83 @@ document.addEventListener('DOMContentLoaded', function() {
     "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
     "Informe de Comportamiento y Seguimiento laboral"
   ];
+
+  /* Estado en memoria de las imágenes cargadas para las 2 Vistas Fotográficas */
+  window.fotosCargadas = {
+    foto1: null,
+    foto2: null
+  };
+
+  window.zonaFotoSeleccionada = 'foto1';
+
+  window.seleccionarZonaFoto = function(idZona) {
+    window.zonaFotoSeleccionada = idZona;
+    document.querySelectorAll('.foto-dropzone').forEach(z => z.classList.remove('selected-zone'));
+    const target = document.getElementById(`zone-${idZona}`);
+    if (target) target.classList.add('selected-zone');
+  };
+
+  window.cargarImagenEnZona = function(idZona, file) {
+    if (!file || !file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      window.fotosCargadas[idZona] = e.target.result;
+      const dropzone = document.getElementById(`zone-${idZona}`);
+      if (dropzone) {
+        dropzone.innerHTML = `
+          <img src="${e.target.result}" alt="Foto ${idZona}">
+          <div class="foto-label-tag">VISTA N° ${idZona === 'foto1' ? '1' : '2'}</div>
+        `;
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  window.handleFileSelectFoto = function(event, idZona) {
+    const file = event.target.files[0];
+    if (file) {
+      window.cargarImagenEnZona(idZona, file);
+    }
+  };
+
+  window.handleDragOverFoto = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.classList.add('dragover');
+  };
+
+  window.handleDragLeaveFoto = function(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.classList.remove('dragover');
+  };
+
+  window.handleDropFoto = function(event, idZona) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.currentTarget.classList.remove('dragover');
+    window.seleccionarZonaFoto(idZona);
+    const files = event.dataTransfer.files;
+    if (files && files.length > 0) {
+      window.cargarImagenEnZona(idZona, files[0]);
+    }
+  };
+
+  document.addEventListener('paste', function(event) {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (!activeTab || activeTab.getAttribute('data-tab') !== 'tab-fotos') return;
+
+    const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+    for (let item of items) {
+      if (item.type.indexOf('image') !== -1) {
+        const blob = item.getAsFile();
+        if (window.zonaFotoSeleccionada) {
+          window.cargarImagenEnZona(window.zonaFotoSeleccionada, blob);
+        }
+        break;
+      }
+    }
+  });
 
   window.agregarDiligenciaColDiv = function() {
     const select = document.getElementById('select-col-div-c');
@@ -2433,13 +2557,52 @@ document.addEventListener('DOMContentLoaded', function() {
         <div class="a4-page">
           ${logoSVG}
           <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 1em;">
-            <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 1</div>
-            <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 2</div>
-            <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 3</div>
-            <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 4</div>
+          
+          <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 1.2em; flex: 1;">
+            <!-- RECUAEDRO VISTA N° 1 -->
+            <div id="zone-foto1" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto1' ? 'selected-zone' : ''}" 
+                 onclick="seleccionarZonaFoto('foto1')" 
+                 ondragover="handleDragOverFoto(event)" 
+                 ondragleave="handleDragLeaveFoto(event)" 
+                 ondrop="handleDropFoto(event, 'foto1')">
+              ${window.fotosCargadas.foto1 ? `
+                <img src="${window.fotosCargadas.foto1}" alt="Foto 1">
+                <div class="foto-label-tag">VISTA N° 1</div>
+              ` : `
+                <div class="foto-placeholder-hint">
+                  📸 <b>VISTA N° 1</b><br>
+                  Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>
+                  o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar desde el portapapeles.
+                </div>
+                <input type="file" id="input-foto1" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto1')">
+                <button class="btn-secondary btn-foto-upload" style="margin-top: 10px;" onclick="event.stopPropagation(); document.getElementById('input-foto1').click();">📁 Buscar Imagen</button>
+                <div class="foto-label-tag" style="position: absolute; bottom: 8px;">VISTA N° 1</div>
+              `}
+            </div>
+
+            <!-- RECUAEDRO VISTA N° 2 -->
+            <div id="zone-foto2" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto2' ? 'selected-zone' : ''}" 
+                 onclick="seleccionarZonaFoto('foto2')" 
+                 ondragover="handleDragOverFoto(event)" 
+                 ondragleave="handleDragLeaveFoto(event)" 
+                 ondrop="handleDropFoto(event, 'foto2')">
+              ${window.fotosCargadas.foto2 ? `
+                <img src="${window.fotosCargadas.foto2}" alt="Foto 2">
+                <div class="foto-label-tag">VISTA N° 2</div>
+              ` : `
+                <div class="foto-placeholder-hint">
+                  📸 <b>VISTA N° 2</b><br>
+                  Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>
+                  o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar desde el portapapeles.
+                </div>
+                <input type="file" id="input-foto2" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto2')">
+                <button class="btn-secondary btn-foto-upload" style="margin-top: 10px;" onclick="event.stopPropagation(); document.getElementById('input-foto2').click();">📁 Buscar Imagen</button>
+                <div class="foto-label-tag" style="position: absolute; bottom: 8px;">VISTA N° 2</div>
+              `}
+            </div>
           </div>
-          <div class="sangria-cero" style="font-size: 9.5pt;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
+
+          <div class="sangria-cero" style="font-size: 9.5pt; margin-top: auto;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
           <div class="sangria-cero" style="font-size: 9.5pt; font-weight: bold;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
         </div>`;
 
