@@ -428,7 +428,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .testimonial-form-side, .inspeccion-form-side { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -1023,19 +1023,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const elemActaRelato = document.getElementById('f_78_relato_acta');
 
     return {
-      fechaRecepcion: document.getElementById('f_00_fecha_recepcion').value, // B1
-      dependencia: document.getElementById('f_01_dependencia').value,         // B2
-      direccion: document.getElementById('f_02_direccion').value,             // B3
-      entre1: document.getElementById('f_03_entre_calle_1').value,            // B4
-      entre2: document.getElementById('f_04_entre_calle_2').value,            // B5
-      localidad: document.getElementById('f_05_localidad').value,             // B6
-      partido: document.getElementById('f_06_partido').value,                 // B7
-      instructor: document.getElementById('f_07_instructor').value,           // B8
-      cargoInstructor: document.getElementById('f_08_cargo_instructor').value,// B9
-      secretario: document.getElementById('f_09_secretario').value,           // B10
-      cargoSecretario: document.getElementById('f_10_cargo_secretario').value,// B11
+      fechaRecepcion: document.getElementById('f_00_fecha_recepcion').value, // B1 / B3 / B17
+      dependencia: document.getElementById('f_01_dependencia').value,         // B2 / B4
+      direccion: document.getElementById('f_02_direccion').value,             // B3 / B5
+      entre1: document.getElementById('f_03_entre_calle_1').value,            // B4 / B6 / B27
+      entre2: document.getElementById('f_04_entre_calle_2').value,            // B5 / B7 / B31
+      localidad: document.getElementById('f_05_localidad').value,             // B6 / B9
+      partido: document.getElementById('f_06_partido').value,                 // B7 / B8
+      instructor: document.getElementById('f_07_instructor').value,           // B8 / B10 / B134
+      cargoInstructor: document.getElementById('f_08_cargo_instructor').value,// B9 / B11 / B135
+      secretario: document.getElementById('f_09_secretario').value,           // B10 / B12 / B137
+      cargoSecretario: document.getElementById('f_10_cargo_secretario').value,// B11 / B13 / B138
       colaboracion: document.getElementById('f_12_colaboracion').value,       // B13
-      cauNombre: document.getElementById('f_13_cau_nombre').value,           // B14 / B88
+      cauNombre: document.getElementById('f_13_cau_nombre').value,           // B14 / B20
       cauEdad: document.getElementById('f_14_cau_edad').value,               // B15
       cauDni: document.getElementById('f_15_cau_dni').value,                 // B16
       cauDomicilio: document.getElementById('f_16_cau_domicilio').value,     // B17
@@ -1043,17 +1043,17 @@ document.addEventListener('DOMContentLoaded', function() {
       cauLocalidad: document.getElementById('f_18_cau_localidad').value,     // B19
       cauPartido: document.getElementById('f_19_cau_partido').value,         // B20
       cauContacto: document.getElementById('f_20_cau_contacto').value,        // B21
-      cauDestino: document.getElementById('f_21_cau_destino').value,         // B22 / B96
-      cauEscalon: document.getElementById('f_21b_cau_escalon').value,         // B23
-      cauEntrada: document.getElementById('f_21c_cau_entrada').value,         // B24
-      cauSalida: document.getElementById('f_21d_cau_salida').value,           // B25
-      cauModalidad: document.getElementById('f_21e_cau_modalidad').value,     // B26
-      cauCircunstancias: document.getElementById('f_21f_cau_circunstancias').value, // B27
-      magistrado: document.getElementById('f_87_magistrado').value,           // B29
-      dptoJudicial: document.getElementById('f_88_dpto_judicial').value,     // B30
-      procesoPenal: document.getElementById('f_89_proceso_penal').value,     // B31
+      cauDestino: document.getElementById('f_21_cau_destino').value,         // B22 / B48
+      cauEscalon: document.getElementById('f_21b_cau_escalon').value,         // B23 / B24
+      cauEntrada: document.getElementById('f_21c_cau_entrada').value,         // B24 / B27
+      cauSalida: document.getElementById('f_21d_cau_salida').value,           // B25 / B28
+      cauModalidad: document.getElementById('f_21e_cau_modalidad').value,     // B26 / B30
+      cauCircunstancias: document.getElementById('f_21f_cau_circunstancias').value, // B27 / B31
+      magistrado: document.getElementById('f_87_magistrado').value,           // B28 / B32
+      dptoJudicial: document.getElementById('f_88_dpto_judicial').value,     // B30 / B35
+      procesoPenal: document.getElementById('f_89_proceso_penal').value,     // B31 / B36
       caratulaPenal: document.getElementById('f_90_caratula_penal').value,   // B32
-      denNombre: document.getElementById('f_60_den_nombre').value,           // B33 / B72
+      denNombre: document.getElementById('f_60_den_nombre').value,           // B33 / B40
       denEdad: document.getElementById('f_61_den_edad').value,               // B34
       denDni: document.getElementById('f_62_den_dni').value,                 // B35
       denDomicilio: document.getElementById('f_63_den_domicilio').value,     // B36
@@ -1061,36 +1061,46 @@ document.addEventListener('DOMContentLoaded', function() {
       denLocalidad: document.getElementById('f_65_den_localidad').value,     // B38
       denPartido: document.getElementById('f_66_den_partido').value,         // B39
       denContacto: document.getElementById('f_67_den_contacto').value,        // B40
-      denDestino: document.getElementById('f_68_den_destino').value,         // B41 / B80
-      impNombre: document.getElementById('f_42_imp_nombre').value,           // B79 / B56
-      impEdad: document.getElementById('f_43_imp_edad').value,               // B80
-      impDni: document.getElementById('f_44_imp_dni').value,                 // B81
-      impDomicilio: document.getElementById('f_45_imp_domicilio').value,     // B82
-      impEntreCalles: document.getElementById('f_46_imp_entre_calles').value,// B83
-      impLocalidad: document.getElementById('f_47_imp_localidad').value,     // B84
-      impPartido: document.getElementById('f_48_imp_partido').value,         // B85
-      impContacto: document.getElementById('f_49_imp_contacto').value,        // B86
-      impDestino: document.getElementById('f_50_imp_destino').value,         // B87 / B64
-      vicNombre: document.getElementById('f_51_vic_nombre').value,           // B93 / B40
-      vicEdad: document.getElementById('f_52_vic_edad').value,               // B94
-      vicDni: document.getElementById('f_53_vic_dni').value,                 // B95
-      vicDomicilio: document.getElementById('f_54_vic_domicilio').value,     // B96
-      vicEntreCalles: document.getElementById('f_55_vic_entre_calles').value,// B97
-      vicLocalidad: document.getElementById('f_56_vic_localidad').value,     // B98
-      vicPartido: document.getElementById('f_57_vic_partido').value,         // B99
-      vicContacto: document.getElementById('f_58_vic_contacto').value,        // B100
-      vicDestino: document.getElementById('f_59_vic_destino').value,         // B101 / B48
-      fechaHecho: document.getElementById('f_22_hecho_fecha').value,          // B107
-      horaHecho: document.getElementById('f_18_hecho_hora').value,           // B108
-      exp: document.getElementById('f_23_exp_elec').value,                   // B109
-      caratula: document.getElementById('f_24_caratula').value,              // B110 / B20
-      encuadre: document.getElementById('f_25_encuadre').value,              // B111 / B21
-      intervencion: document.getElementById('f_26_intervencion').value,      // B112 / B22
-      lugarHecho: document.getElementById('f_27_hecho_lugar').value,         // B113
-      hechoLoc: document.getElementById('f_39_hecho_loc').value,             // B125
-      hechoPartido: document.getElementById('f_40_hecho_partido').value,     // B126
-      actaRelato: elemActaRelato ? elemActaRelato.value : '',                // B78 / B127
-      sintesis: elemActaRelato ? elemActaRelato.value : ''                   // B78 / B127
+      denDestino: document.getElementById('f_68_den_destino').value,         // B41
+      impNombre: document.getElementById('f_42_imp_nombre').value,           // B42
+      impEdad: document.getElementById('f_43_imp_edad').value,               // B43
+      impDni: document.getElementById('f_44_imp_dni').value,                 // B44
+      impDomicilio: document.getElementById('f_45_imp_domicilio').value,     // B45
+      impEntreCalles: document.getElementById('f_46_imp_entre_calles').value,// B46
+      impLocalidad: document.getElementById('f_47_imp_localidad').value,     // B47
+      impPartido: document.getElementById('f_48_imp_partido').value,         // B48
+      impContacto: document.getElementById('f_49_imp_contacto').value,        // B49
+      impDestino: document.getElementById('f_50_imp_destino').value,         // B50
+      vicNombre: document.getElementById('f_51_vic_nombre').value,           // B40
+      vicEdad: document.getElementById('f_52_vic_edad').value,               // B52
+      vicDni: document.getElementById('f_53_vic_dni').value,                 // B53
+      vicDomicilio: document.getElementById('f_54_vic_domicilio').value,     // B54
+      vicEntreCalles: document.getElementById('f_55_vic_entre_calles').value,// B55
+      vicLocalidad: document.getElementById('f_56_vic_localidad').value,     // B56
+      vicPartido: document.getElementById('f_57_vic_partido').value,         // B57
+      vicContacto: document.getElementById('f_58_vic_contacto').value,        // B58
+      vicDestino: document.getElementById('f_59_vic_destino').value,         // B48
+      fechaHecho: document.getElementById('f_22_hecho_fecha').value,          // B59
+      horaHecho: document.getElementById('f_18_hecho_hora').value,           // B60
+      exp: document.getElementById('f_23_exp_elec').value,                   // B61
+      caratula: document.getElementById('f_24_caratula').value,              // B20
+      encuadre: document.getElementById('f_25_encuadre').value,              // B21
+      intervencion: document.getElementById('f_26_intervencion').value,      // B4
+      lugarHecho: document.getElementById('f_27_hecho_lugar').value,         // B23
+      hechoLoc: document.getElementById('f_39_hecho_loc').value,             // B35
+      hechoPartido: document.getElementById('f_40_hecho_partido').value,     // B36
+      actaRelato: elemActaRelato ? elemActaRelato.value : '',                // B78
+      sintesis: elemActaRelato ? elemActaRelato.value : '',                  // B78
+      // Campos de estado de vías / calles específicos para inspección ocular
+      art1Tipo: document.getElementById('f_insp_art1_tipo') ? document.getElementById('f_insp_art1_tipo').value : 'asfalto',
+      art1Estado: document.getElementById('f_insp_art1_estado') ? document.getElementById('f_insp_art1_estado').value : 'buen',
+      art1Mano: document.getElementById('f_insp_art1_mano') ? document.getElementById('f_insp_art1_mano').value : 'doble',
+      art2Tipo: document.getElementById('f_insp_art2_tipo') ? document.getElementById('f_insp_art2_tipo').value : 'asfalto',
+      art2Estado: document.getElementById('f_insp_art2_estado') ? document.getElementById('f_insp_art2_estado').value : 'buen',
+      art2Mano: document.getElementById('f_insp_art2_mano') ? document.getElementById('f_insp_art2_mano').value : 'doble',
+      art3Tipo: document.getElementById('f_insp_art3_tipo') ? document.getElementById('f_insp_art3_tipo').value : 'asfalto',
+      art3Estado: document.getElementById('f_insp_art3_estado') ? document.getElementById('f_insp_art3_estado').value : 'buen',
+      art3Mano: document.getElementById('f_insp_art3_mano') ? document.getElementById('f_insp_art3_mano').value : 'doble'
     };
   }
 
@@ -1100,6 +1110,26 @@ document.addEventListener('DOMContentLoaded', function() {
       const liveContainer = document.getElementById('acta-live-preview-target');
       if (liveContainer) {
         liveContainer.innerHTML = renderActaA4Content();
+      }
+    }
+  };
+
+  window.actualizarTestimonialEnVivo = function() {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-testimonial') {
+      const liveContainer = document.getElementById('testimonial-live-preview-target');
+      if (liveContainer) {
+        liveContainer.innerHTML = renderTestimonialA4Content();
+      }
+    }
+  };
+
+  window.actualizarInspeccionEnVivo = function() {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-inspeccion_ocular') {
+      const liveContainer = document.getElementById('inspeccion-live-preview-target');
+      if (liveContainer) {
+        liveContainer.innerHTML = renderInspeccionA4Content();
       }
     }
   };
@@ -1162,6 +1192,31 @@ document.addEventListener('DOMContentLoaded', function() {
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
       <div style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0; text-indent: 0cm;">
         En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${d.horaHecho}</b> horas, el suscripto <b>${d.instructor}</b> (<b>${d.cargoInstructor}</b>) , secundado por el <b>${d.secretario}</b> (<b>${d.cargoSecretario}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+      </div>
+    `;
+  }
+
+  function renderTestimonialA4Content() {
+    const d = getFormValues();
+    const horaActual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    return `
+      ${logoSVG}
+      <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
+      <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
+        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de OFICIAL, del escalafón GENERAL, legajo personal N° ${d.denDni || ''}, cumpliendo en la actualidad sus servicios en el ${d.denDestino || ''}, como EMPLEADO. En la fecha, se hace presente a los fines de prestar declaración testimonial en ${d.caratula || ''}, caratulado ${d.encuadre || ''}, donde se analiza la conducta del ${d.impNombre || ''} de la ${d.impDestino || ''}, en trámite ante ${d.intervencion || ''}, incoadas el ${d.fechaRecepcion || ''}. En esa inteligencia relata ${d.sintesis || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
+      </div>
+    `;
+  }
+
+  function renderInspeccionA4Content() {
+    const d = getFormValues();
+
+    return `
+      ${logoSVG}
+      <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>
+      <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.5; text-indent: 0cm;">
+        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} y ${d.entre2 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.fechaRecepcion || ''} horas, el suscripto ${d.instructor || ''} (${d.cargoInstructor || ''}) , secundado por el ${d.secretario || ''} (${d.cargoSecretario || ''}), ambos numerarios de ${d.dependencia || ''} y conocedores de las penas con que la Ley castiga el Falso Testimonio. Por orden de la superioridad en relación a Actuaciones Sumariales Administrativas ${d.encuadre || ''} caratuladas ${d.caratula || ''}, donde resultó víctima ${d.vicNombre || ''}, numerario de ${d.vicDestino || ''}, en trámite ante ${d.dependencia || ''}, nos constituimos en ${d.lugarHecho || ''}, entre ${d.entre1 || ''} y ${d.entre2 || ''}, localidad ${d.hechoLoc || ''} y partido ${d.hechoPartido || ''}, lugar donde se dice que ocurrieron los hechos que dieran origen a la formación de las presentes actuaciones, fines de dar cumplimiento a diligencia Inspección Ocular en donde arribó a las siguientes CONCLUSIONES: Que la zona resulta ser zona urbana, poblada con viviendas en su mayoría de una planta y de dos plantas, gozando con todos los adelantos de la época actual (gas natural, red cloacal, agua corriente, luz eléctrica, red telefónica). Que, la arteria ${d.lugarHecho || ''}, que resulta ser de ${d.art1Tipo || ''} en ${d.art1Estado || ''} estado de conservación, circulación vehicular de ${d.art1Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial, no existiendo en el lugar semáforos, si existiendo señales de tránsito. Que, la arteria ${d.entre1 || ''}, resulta ser de ${d.art2Tipo || ''} en ${d.art2Estado || ''} estado de conservación, circulación vehicular de ${d.art2Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. Que, la arteria ${d.entre2 || ''}, resulta ser de ${d.art3Tipo || ''} en ${d.art3Estado || ''} estado de conservación, circulación vehicular de ${d.art3Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. No existiendo en el lugar semáforos, si existiendo señales de tránsito. No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.
       </div>
     `;
   }
@@ -1366,7 +1421,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida officially al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         </div>`;
@@ -1852,7 +1907,6 @@ document.addEventListener('DOMContentLoaded', function() {
           textoLEP += ".";
         }
 
-        // INICIALIZAR REGISTROS SELECCIONADOS PARA LA TABLA LEP SI NO EXISTEN
         if (!window.registrosSeleccionadosLEP) {
           window.registrosSeleccionadosLEP = [];
           if (d.cauNombre && d.cauNombre.trim() !== '' && !d.cauNombre.toUpperCase().includes('DATOS DEL CAUSANTE')) window.registrosSeleccionadosLEP.push('CAUSANTE');
@@ -1865,7 +1919,6 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
 
-        // FUNCIONES GLOBALES DE GESTIÓN DEL DESPLEGABLE LEP
         window.agregarRegistroLEP = function() {
           const select = document.getElementById('select-lep-personas');
           if (!select) return;
@@ -1891,7 +1944,6 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         };
 
-        // CONSTRUCCIÓN DE FILAS SEGÚN SELECCIÓN EN EL DESPLEGABLE
         let filasTablaLEP = '';
         let listaGestionHtml = '';
 
@@ -1925,7 +1977,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         return `
         <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-          <!-- PANEL DE CONTROL CON DESPLEGABLE B88, B40, B56, B72 -->
           <div class="lep-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px;">
             <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
               📋 SELECCIÓN DE DATOS PARA LA TABLA L.E.P.
@@ -1950,7 +2001,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
           </div>
 
-          <!-- DOCUMENTO A4 GENERAL -->
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
             <div class="a4-page">
               ${logoSVG}
@@ -2043,6 +2093,43 @@ document.addEventListener('DOMContentLoaded', function() {
         </div>`;
 
       case 'tab-anmac':
+        let textoANMAC = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
+        if (d.encuadre && d.encuadre.trim() !== '') {
+          textoANMAC += " " + d.encuadre;
+        }
+        if (d.caratula && d.caratula.trim() !== '') {
+          textoANMAC += ", caratulado: " + d.caratula;
+        }
+        if (d.denNombre && d.denNombre.trim() !== '') {
+          textoANMAC += ", donde resulta denunciante: " + d.denNombre;
+          if (d.denDestino && d.denDestino.trim() !== '') {
+            textoANMAC += " (" + d.denDestino + ")";
+          }
+        }
+        if (d.vicNombre && d.vicNombre.trim() !== '') {
+          textoANMAC += ", víctima: " + d.vicNombre;
+          if (d.vicDestino && d.vicDestino.trim() !== '') {
+            textoANMAC += " (" + d.vicDestino + ")";
+          }
+        }
+        if (d.cauNombre && d.cauNombre.trim() !== '') {
+          textoANMAC += ", causante: " + d.cauNombre;
+          if (d.cauDestino && d.cauDestino.trim() !== '') {
+            textoANMAC += " (" + d.cauDestino + ")";
+          }
+        }
+        if (d.impNombre && d.impNombre.trim() !== '') {
+          textoANMAC += ", imputado: " + d.impNombre;
+          if (d.impDestino && d.impDestino.trim() !== '') {
+            textoANMAC += " (" + d.impDestino + ")";
+          }
+        }
+        if (d.intervencion && d.intervencion.trim() !== '') {
+          textoANMAC += ", con intervención de " + d.intervencion + ", quiera tener a bien por intermedio de quien corresponda adune informe de REPAR (conforme el artículo 13 de RESO 581/21 en las actuaciones en que se empleen armas de fuego) a efectos de informar si el agente que más abajo se detalla, posee además del armamento provisto y reglamentario, otra arma de fuego:";
+        } else {
+          textoANMAC += ".";
+        }
+
         return `
         <div class="a4-page">
           ${logoSVG}
@@ -2056,13 +2143,34 @@ document.addEventListener('DOMContentLoaded', function() {
             SECCIÓN RE.P.AR.
           </div>
 
-          <div class="sangria-estandar" style="margin-top: 1.5em;">
-            Solicito quiera tener a bien informar la situación registral de armamentos y condición de usuario registral respecto al personal policial actuante:
+          <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+            ${textoANMAC}
           </div>
+
           <table class="table-oficial" style="margin-top: 1.5em;">
-            <thead><tr><th>NOMBRES</th><th>DNI N°</th><th>DOMICILIO</th></tr></thead>
-            <tbody><tr><td>${d.impNombre}</td><td>${d.impDni}</td><td>${d.impDomicilio}, localidad de ${d.impLocalidad}, partido de ${d.impPartido}</td></tr></tbody>
+            <thead>
+              <tr>
+                <th>NOMBRES</th>
+                <th>DNI N°</th>
+                <th>DOMICILIO</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>${d.impNombre}</td>
+                <td>${d.impDni}</td>
+                <td>${d.impDomicilio}, localidad de ${d.impLocalidad}, partido de ${d.impPartido}</td>
+              </tr>
+            </tbody>
           </table>
+
+          <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify;">
+            Sirva en informar a la brevedad lo solicitado en virtud de que es de vital interés a fin de dictaminar una resolución sobre el sumariado.
+          </div>
+
+          <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify;">
+            Lo expuesto es todo en cuando solicito a usted.
+          </div>
         </div>`;
 
       case 'tab-col_cria':
@@ -2079,35 +2187,190 @@ document.addEventListener('DOMContentLoaded', function() {
             SUPERINTENDENCIA DE POLÍTICAS DE GÉNERO
           </div>
 
-          <div class="sangria-estandar" style="margin-top: 1em;">
+          <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
+            Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
+          </div>
+
+          <table class="table-oficial" style="margin-top: 1.5em;">
+            <thead>
+              <tr>
+                <th>Nombres completos</th>
+                <th>Edad</th>
+                <th>DNI</th>
+                <th>Domicilio</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>${d.vicNombre || ''}</td>
+                <td>${d.vicEdad || ''}</td>
+                <td>${d.vicDni || ''}</td>
+                <td>${d.vicDomicilio || ''}, localidad de ${d.vicLocalidad || ''}, partido de ${d.vicPartido || ''}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
             Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.
           </div>
-          <div class="sangria-cero" style="margin: 1em 0;"><b>SÍNTESIS DEL HECHO:</b> ${d.sintesis}</div>
-          <div class="sangria-estandar">Asimismo informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En caso de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.</div>
-          <table class="table-oficial" style="margin-top: 1.5em;">
-            <thead><tr><th>Nombres completos</th><th>Edad</th><th>DNI</th><th>Domicilio</th></tr></thead>
-            <tbody><tr><td>${d.vicNombre}</td><td>${d.vicEdad}</td><td>${d.vicDni}</td><td>${d.vicDomicilio}, localidad de ${d.vicLocalidad}, partido de ${d.vicPartido}</td></tr></tbody>
-          </table>
-          <div class="sangria-estandar" style="margin-top: 1.5em;">Lo expuesto es todo en cuanto solicito a usted.</div>
+
+          <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+            Para mayor ilustración, se adjunta denuncia.
+          </div>
+
+          <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+            Asimismo Informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En case de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.
+          </div>
+
+          <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
+            Lo expuesto es todo en cuanto solicito a usted.
+          </div>
         </div>`;
 
       case 'tab-testimonial':
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
-          <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
-            En la localidad de ${d.partido}, partido de ${d.hechoPartido}, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en ${d.direccion}, entre calle ${d.entre1} del mismo medio, a los ${d.fechaRecepcion}, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: <i>“Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”</i>, y artículo 205 inciso “k” del mismo texto legal que reza: <i>“Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio... cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia”</i>. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del C.P.P.BA y bajo juramento de decir la verdad bajo la fórmula: <b>“LO JURO”</b>. Seguidamente se lo enteró de los Arts. 275 y 276 del C.P. Nación sobre Falso Testimonio. Preguntado por sus datos manifiesta ser: <b>${d.denNombre}</b>, de ${d.denEdad} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en ${d.denDomicilio}, entre calles ${d.denEntreCalles}, localidad de ${d.denLocalidad}, DNI N° ${d.denDni}. Preguntado por las generales de la ley (Arts. 234, 235 y 236 C.P.P.), manifiesta NO LE CABER LAS GENERALES DE LA LEY. SEGRIDAMENTE INTERROGADO Y EN USO DE LA PALABRA DECLARA: Que resulta ser empleado policial. Que en la fecha presta declaración en marco de exp. ${d.exp}, caratulado ${d.encuadre}. ${d.sintesis}. Es todo cuanto declara. Leída la presente firma de conformidad.
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <div class="testimonial-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📑 DATOS PARA LA DECLARACIÓN TESTIMONIAL
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+              <div class="sheet-row-single">
+                <label>FECHA DE RECEPCCIÓN (B1):</label>
+                <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarTestimonialEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>HORA DEL HECHO (B108):</label>
+                <input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarTestimonialEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>LOCALIDAD (B6):</label>
+                <input type="text" value="${d.localidad}" oninput="document.getElementById('f_05_localidad').value = this.value; actualizarTestimonialEnVivo();">
+              </div>
+
+              <div class="sheet-row-single">
+                <label>PARTIDO (B7):</label>
+                <input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarTestimonialEnVivo();">
+              </div>
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>RELATO DEL ACTA (B131):</label>
+              <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_78_relato_acta').value = this.value; actualizarTestimonialEnVivo();">${d.sintesis}</textarea>
+            </div>
+          </div>
+
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page" id="testimonial-live-preview-target">
+              ${renderTestimonialA4Content()}
+            </div>
           </div>
         </div>`;
 
       case 'tab-inspeccion_ocular':
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">ACTA DE INSPECCIÓN OCULAR</div>
-          <div style="font-size: 9.5pt; margin-bottom: 1em;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
-          <div class="sangria-estandar">En la fecha y lugar ut-supra indicados, constituido el personal policial actuante en la intersección de ${d.lugarHecho} entre ${d.entre1} y ${d.entre2}, se procede a efectuar la correspondiente inspección ocular del sitio...</div>
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <div class="inspeccion-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📑 DATOS PARA LA INSPECCIÓN OCULAR
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+              <!-- DESPLEGABLES PARA ESTADO Y CIRCULACIÓN DE LAS ARTERIAS -->
+              <div class="sheet-row-single">
+                <label>ARTERIA 1 TIPO (B24):</label>
+                <select id="f_insp_art1_tipo" onchange="actualizarInspeccionEnVivo();">
+                  <option value="asfalto" selected>asfalto</option>
+                  <option value="tierra">tierra</option>
+                  <option value="empedrado">empedrado</option>
+                  <option value="hormigón">hormigón</option>
+                  <option value="mejora">mejora</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 1 ESTADO (B25):</label>
+                <select id="f_insp_art1_estado" onchange="actualizarInspeccionEnVivo();">
+                  <option value="buen" selected>buen</option>
+                  <option value="regular">regular</option>
+                  <option value="malo">malo</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 1 MANO (B26):</label>
+                <select id="f_insp_art1_mano" onchange="actualizarInspeccionEnVivo();">
+                  <option value="doble" selected>doble</option>
+                  <option value="única">única</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 2 TIPO (B28):</label>
+                <select id="f_insp_art2_tipo" onchange="actualizarInspeccionEnVivo();">
+                  <option value="asfalto" selected>asfalto</option>
+                  <option value="tierra">tierra</option>
+                  <option value="empedrado">empedrado</option>
+                  <option value="hormigón">hormigón</option>
+                  <option value="mejora">mejora</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 2 ESTADO (B29):</label>
+                <select id="f_insp_art2_estado" onchange="actualizarInspeccionEnVivo();">
+                  <option value="buen" selected>buen</option>
+                  <option value="regular">regular</option>
+                  <option value="malo">malo</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 2 MANO (B30):</label>
+                <select id="f_insp_art2_mano" onchange="actualizarInspeccionEnVivo();">
+                  <option value="doble" selected>doble</option>
+                  <option value="única">única</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 3 TIPO (B32):</label>
+                <select id="f_insp_art3_tipo" onchange="actualizarInspeccionEnVivo();">
+                  <option value="asfalto" selected>asfalto</option>
+                  <option value="tierra">tierra</option>
+                  <option value="empedrado">empedrado</option>
+                  <option value="hormigón">hormigón</option>
+                  <option value="mejora">mejora</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 3 ESTADO (B33):</label>
+                <select id="f_insp_art3_estado" onchange="actualizarInspeccionEnVivo();">
+                  <option value="buen" selected>buen</option>
+                  <option value="regular">regular</option>
+                  <option value="malo">malo</option>
+                </select>
+              </div>
+
+              <div class="sheet-row-single">
+                <label>ARTERIA 3 MANO (B34):</label>
+                <select id="f_insp_art3_mano" onchange="actualizarInspeccionEnVivo();">
+                  <option value="doble" selected>doble</option>
+                  <option value="única">única</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page" id="inspeccion-live-preview-target">
+              ${renderInspeccionA4Content()}
+            </div>
+          </div>
         </div>`;
 
       case 'tab-croquis':
@@ -2194,7 +2457,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div' || activeTabKey === 'tab-lep') {
+        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-testimonial' || activeTabKey === 'tab-inspeccion_ocular' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div' || activeTabKey === 'tab-lep') {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
