@@ -312,6 +312,7 @@ body {
   background: white;
   width: 210mm;
   min-height: 297mm;
+  max-height: 297mm;
   padding: 3.5cm 1.5cm 2.5cm 3cm;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 25px;
   font-size: 10.5pt;
@@ -322,6 +323,7 @@ body {
   display: flex;
   flex-direction: column;
   page-break-after: always;
+  overflow: hidden;
 }
 
 .doc-header-logo { text-align: left; margin-bottom: 0.5cm; }
@@ -425,10 +427,11 @@ body {
   background-color: #dc2626;
 }
 
-/* ESTILOS PARA CAJAS DE FOTOS DRAG & DROP */
+/* ESTILOS AJUSTADOS PARA CAJAS DE FOTOS DENTRO DEL LÍMITE A4 */
 .foto-dropzone {
   border: 2px dashed #94a3b8;
-  height: 95mm;
+  flex: 1;
+  max-height: 78mm;
   background: #f8fafc;
   display: flex;
   flex-direction: column;
@@ -438,7 +441,7 @@ body {
   overflow: hidden;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 8px;
+  padding: 6px;
 }
 
 .foto-dropzone.dragover {
@@ -453,21 +456,21 @@ body {
 
 .foto-dropzone img {
   max-width: 100%;
-  max-height: calc(100% - 24px);
+  max-height: calc(100% - 20px);
   object-fit: contain;
 }
 
 .foto-placeholder-hint {
   text-align: center;
   color: #64748b;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   pointer-events: none;
 }
 
 .foto-label-tag {
   font-weight: bold;
   font-size: 8.5pt;
-  margin-top: 4px;
+  margin-top: 2px;
   text-transform: uppercase;
 }
 
@@ -478,7 +481,7 @@ body {
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
-  .a4-page { width: 210mm !important; min-height: 297mm !important; box-shadow: none !important; padding: 3.5cm 1.5cm 2.5cm 3cm !important; page-break-after: always; }
+  .a4-page { width: 210mm !important; min-height: 297mm !important; max-height: 297mm !important; box-shadow: none !important; padding: 3.5cm 1.5cm 2.5cm 3cm !important; page-break-after: always; overflow: hidden !important; }
   .input-folio { border: none !important; background: transparent !important; }
   .foto-dropzone { border: 1px solid #000 !important; background: transparent !important; }
 }
@@ -2556,10 +2559,10 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
+          <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 0.5em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
           
-          <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 1.2em; flex: 1;">
-            <!-- RECUAEDRO VISTA N° 1 -->
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 0.5em; flex: 1; min-height: 0;">
+            <!-- RECUADRO VISTA N° 1 -->
             <div id="zone-foto1" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto1' ? 'selected-zone' : ''}" 
                  onclick="seleccionarZonaFoto('foto1')" 
                  ondragover="handleDragOverFoto(event)" 
@@ -2575,12 +2578,12 @@ document.addEventListener('DOMContentLoaded', function() {
                   o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar desde el portapapeles.
                 </div>
                 <input type="file" id="input-foto1" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto1')">
-                <button class="btn-secondary btn-foto-upload" style="margin-top: 10px;" onclick="event.stopPropagation(); document.getElementById('input-foto1').click();">📁 Buscar Imagen</button>
-                <div class="foto-label-tag" style="position: absolute; bottom: 8px;">VISTA N° 1</div>
+                <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto1').click();">📁 Buscar Imagen</button>
+                <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 1</div>
               `}
             </div>
 
-            <!-- RECUAEDRO VISTA N° 2 -->
+            <!-- RECUADRO VISTA N° 2 -->
             <div id="zone-foto2" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto2' ? 'selected-zone' : ''}" 
                  onclick="seleccionarZonaFoto('foto2')" 
                  ondragover="handleDragOverFoto(event)" 
@@ -2596,14 +2599,14 @@ document.addEventListener('DOMContentLoaded', function() {
                   o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar desde el portapapeles.
                 </div>
                 <input type="file" id="input-foto2" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto2')">
-                <button class="btn-secondary btn-foto-upload" style="margin-top: 10px;" onclick="event.stopPropagation(); document.getElementById('input-foto2').click();">📁 Buscar Imagen</button>
-                <div class="foto-label-tag" style="position: absolute; bottom: 8px;">VISTA N° 2</div>
+                <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto2').click();">📁 Buscar Imagen</button>
+                <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 2</div>
               `}
             </div>
           </div>
 
-          <div class="sangria-cero" style="font-size: 9.5pt; margin-top: auto;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
-          <div class="sangria-cero" style="font-size: 9.5pt; font-weight: bold;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
+          <div class="sangria-cero" style="font-size: 9pt; margin-bottom: 2px;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
+          <div class="sangria-cero" style="font-size: 9pt; font-weight: bold; margin-bottom: 0;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
         </div>`;
 
       case 'tab-carpetas_medicas':
