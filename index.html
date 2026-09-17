@@ -2046,8 +2046,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div class="doc-mid-section">REF.: ${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="sangria-cero"><b>Star. Colaboración ANMAC / REPAR</b></div>
+          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+            REF.: Star. Colaboración<br>
+            ${d.partido || ''}, ${d.fechaRecepcion || ''}
+          </div>
+
+          <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+            AL SEÑOR JEFE<br>
+            SECCIÓN RE.P.AR.
+          </div>
+
           <div class="sangria-estandar" style="margin-top: 1.5em;">
             Solicito quiera tener a bien informar la situación registral de armamentos y condición de usuario registral respecto al personal policial actuante:
           </div>
@@ -2061,8 +2069,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div class="doc-mid-section">REF.: ${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="sangria-cero"><b>Star. Colaboración Comisaría de la Mujer y Familia</b></div>
+          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+            REF.: Star. Colaboración<br>
+            ${d.partido || ''}, ${d.fechaRecepcion || ''}
+          </div>
+
+          <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+            AL SEÑOR/A SUPERINTENDENTE/A<br>
+            SUPERINTENDENCIA DE POLÍTICAS DE GÉNERO
+          </div>
+
           <div class="sangria-estandar" style="margin-top: 1em;">
             Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.
           </div>
@@ -2123,8 +2139,16 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div class="doc-mid-section">REF.: ${d.partido}, ${d.fechaRecepcion}</div>
-          <div class="sangria-cero"><b>Pcir. Informe de Carpetas médicas</b></div>
+          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+            REF.: Pcir. Informe de Carpetas médicas<br>
+            ${d.partido || ''}, ${d.fechaRecepcion || ''}
+          </div>
+
+          <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+            AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
+            ${d.instructor ? d.instructor.toUpperCase() : ''}
+          </div>
+
           <div class="sangria-estandar" style="margin-top: 1.5em;">Solicito remitir informe detallado de carpetas médicas, licencias por enfermedad y antecedentes de salud laboral registrados por el agente <b>${d.cauNombre}</b>.</div>
         </div>`;
 
