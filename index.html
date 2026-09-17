@@ -2215,10 +2215,6 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-            Para mayor ilustración, se adjunta denuncia.
-          </div>
-
-          <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
             Asimismo Informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En case de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.
           </div>
 
@@ -2377,25 +2373,27 @@ document.addEventListener('DOMContentLoaded', function() {
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">CROQUIS ILUSTRATIVO DEL LUGAR DEL HECHO</div>
-          <div style="font-size: 9.5pt; margin-bottom: 1em;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
-          <div style="border: 2px dashed #475569; border-radius: 6px; height: 185mm; display: flex; justify-content: center; align-items: center; background-color: #f8fafc; color: #64748b; font-weight: bold;">
+          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1em;">CROQUIS ILUSTRATIVO DEL LUGAR DEL HECHO</div>
+          <div style="border: 2px dashed #475569; border-radius: 6px; height: 185mm; display: flex; justify-content: center; align-items: center; background-color: #f8fafc; color: #64748b; font-weight: bold; margin-bottom: 1em;">
             [ ESPACIO RESERVADO PARA PLANO / CROQUIS ILUSTRATIVO SIN ESCALAS ]
           </div>
+          <div class="sangria-cero" style="font-size: 9.5pt;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
+          <div class="sangria-cero" style="font-size: 9.5pt; font-weight: bold;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
         </div>`;
 
       case 'tab-fotos':
         return `
         <div class="a4-page">
           ${logoSVG}
-          <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
-          <div style="font-size: 9.5pt; margin-bottom: 1em;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
+          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 1em;">
             <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 1</div>
             <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 2</div>
             <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 3</div>
             <div style="border: 1px solid #94a3b8; height: 80mm; background: #f1f5f9; display: flex; align-items: flex-end; justify-content: center; padding-bottom: 8px; font-weight: bold; font-size: 8.5pt;">VISTA N° 4</div>
           </div>
+          <div class="sangria-cero" style="font-size: 9.5pt;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
+          <div class="sangria-cero" style="font-size: 9.5pt; font-weight: bold;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
         </div>`;
 
       case 'tab-carpetas_medicas':
