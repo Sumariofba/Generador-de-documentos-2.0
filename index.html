@@ -559,7 +559,7 @@ body {
     <li class="nav-item-top" data-tab="tab-caratula">📄 2. Carátula</li> 
     <li class="nav-item-top" data-tab="tab-reg_inst">📄 3. Registro Institucional</li> 
     <li class="nav-item-top" data-tab="tab-indice_diligencias">📄 4. Índice</li> 
-    <li class="nav-item-top" data-tab="tab-acta_constatacion">📄 5. Acta de Constatación</li> 
+    <li class="nav-item-top active" data-tab="tab-acta_constatacion">📄 5. Acta de Constatación</li> 
     <li class="nav-item-top" data-tab="tab-recepcion">📄 6. Dto. de Recepción</li> 
     <li class="nav-item-top" data-tab="tab-parte_escrito">📄 7. Parte Escrito</li> 
     <li class="nav-item-top" data-tab="tab-corre_agregado">📄 8. Dto. Recepción / Corre Agregado</li> 
@@ -577,7 +577,7 @@ body {
     <li class="nav-item-top" data-tab="tab-fotos">📄 20. Fotos del lugar del Hecho</li> 
     <li class="nav-item-top" data-tab="tab-carpetas_medicas">📄 21. Inf. de Carpetas</li> 
     <li class="nav-item-top" data-tab="tab-cierre">📄 22. Dto. Cierre de Actuaciones</li> 
-    <li class="nav-item-top active" data-tab="tab-sintesis_conclusiones">📄 23. Síntesis y Conclusiones</li> 
+    <li class="nav-item-top" data-tab="tab-sintesis_conclusiones">📄 23. Síntesis y Conclusiones</li> 
   </ul> 
 </div> 
 
@@ -600,17 +600,18 @@ body {
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>FECHA DE RECEPCION (B1):</label><input type="text" id="f_00_fecha_recepcion" value="2 de abril del 2026"></div>
-          <div class="sheet-row-single"><label>DEPENDENCIA INSTRUCTORA (B2):</label><select id="f_01_dependencia" class="select-dependencia"></select></div>
-          <div class="sheet-row-single"><label>DIRECCIÓN (B3):</label><input type="text" id="f_02_direccion" value="San Matías (Ruta provincial 1001) sin número "></div>
-          <div class="sheet-row-single"><label>ENTRE CALLE 1 (B4):</label><input type="text" id="f_03_entre_calle_1" value="Achupallas"></div>
-          <div class="sheet-row-single"><label>ENTRE CALLE 2 (B5):</label><input type="text" id="f_04_entre_calle_2" value="B. Llorente"></div>
-          <div class="sheet-row-single"><label>LOCALIDAD (B6):</label><input type="text" id="f_05_localidad" value="González Catán"></div>
-          <div class="sheet-row-single"><label>PARTIDO (B7):</label><input type="text" id="f_06_partido" value="La Matanza"></div>
-          <div class="sheet-row-single"><label>INSTRUCTOR SUMARIAL (B8):</label><input type="text" id="f_07_instructor" value="COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN"></div>
-          <div class="sheet-row-single"><label>CARGO INSTRUCTOR SUMARIAL (B9):</label><input type="text" id="f_08_cargo_instructor" value="SUBDIRECTOR"></div>
-          <div class="sheet-row-single"><label>SECRETARIO DE ACTUACIONES (B10):</label><input type="text" id="f_09_secretario" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
-          <div class="sheet-row-single"><label>CARGO DEL SECRETARIO DE ACTUACIONES (B11):</label><input type="text" id="f_10_cargo_secretario" value="DISPONIBLE"></div>
+          <div class="sheet-row-single"><label>FECHA DE RECEPCION (B3):</label><input type="text" id="f_00_fecha_recepcion" value="2 de abril del 2026"></div>
+          <div class="sheet-row-single"><label>DEPENDENCIA INSTRUCTORA (B4):</label><select id="f_01_dependencia" class="select-dependencia"></select></div>
+          <div class="sheet-row-single"><label>DIRECCIÓN (B5):</label><input type="text" id="f_02_direccion" value="San Matías (Ruta provincial 1001) sin número "></div>
+          <div class="sheet-row-single"><label>ENTRE CALLE 1 (B6):</label><input type="text" id="f_03_entre_calle_1" value="Achupallas"></div>
+          <div class="sheet-row-single"><label>ENTRE CALLE 2 (B7):</label><input type="text" id="f_04_entre_calle_2" value="B. Llorente"></div>
+          <div class="sheet-row-single"><label>PARTIDO (B8):</label><input type="text" id="f_06_partido" value="La Matanza"></div>
+          <div class="sheet-row-single"><label>LOCALIDAD (B9):</label><input type="text" id="f_05_localidad" value="González Catán"></div>
+          <div class="sheet-row-single"><label>INSTRUCTOR SUMARIAL (B10):</label><input type="text" id="f_07_instructor" value="COMISARIO MAYOR (CDO.) HERNAN ABEL BIANDIN"></div>
+          <div class="sheet-row-single"><label>CARGO INSTRUCTOR SUMARIAL (B11):</label><input type="text" id="f_08_cargo_instructor" value="SUBDIRECTOR"></div>
+          <div class="sheet-row-single"><label>SECRETARIO DE ACTUACIONES (B12):</label><input type="text" id="f_09_secretario" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
+          <div class="sheet-row-single"><label>CARGO DEL SECRETARIO DE ACTUACIONES (B13):</label><input type="text" id="f_10_cargo_secretario" value="DISPONIBLE"></div>
+          <div class="sheet-row-single"><label>HORA DEL HECHO (B18):</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
           <div class="sheet-row-single"><label>COLABORACION A (B13):</label><select id="f_12_colaboracion" class="select-destino"></select></div>
         </div>
       </div>
@@ -623,7 +624,6 @@ body {
         </div>
         <div class="sheet-card-body">
           <div class="sheet-row-single"><label>FECHA DEL HECHO (B107):</label><input type="text" id="f_22_hecho_fecha" value="2 de abril del 2026"></div>
-          <div class="sheet-row-single"><label>HORA DEL HECHO (B108):</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
           <div class="sheet-row-single"><label>EXP. ELECTRONICO N° (B109):</label><input type="text" id="f_23_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP"></div>
           <div class="sheet-row-single"><label>CARATULA ADMINISTRATIVA (B110):</label><input type="text" id="f_24_caratula" value="21100 - 082162/2026 - DN154527"></div>
           <div class="sheet-row-single"><label>ENCUADRE ADMINISTRATIVO (B111):</label><input type="text" id="f_25_encuadre" value="-sin encuadre administrativo-"></div>
@@ -759,8 +759,8 @@ body {
         </div>
         <div class="sheet-card-body">
           <div class="sheet-row-single" style="grid-column: 1 / -1;">
-            <label>RELATO DEL ACTA DE CONSTATACIÓN (CARGA DE DATOS CELDA B140):</label>
-            <textarea id="f_78_relato_acta">se procede a dar inicio al Acta de Constatación a raíz del llamado al 911 sobre un accidente de tránsito en el lugar. Constituidos los efectivos policiales observan la colisión entre un motovehículo y un rodado particular, procediendo al resguardo de la escena y la asistencia médica de los involucrados.</textarea>
+            <label>RELATO DEL ACTA DE CONSTATACIÓN (ACTA DE CONSTATACION I8):</label>
+            <textarea id="f_78_relato_acta">Tomamos conocimiento siendo las 10.30 horas, por parte del OFICIAL (E.G.) LEGAJO 123.456 ROLDAN JOSE LUIS, quien se encuentra cumpliendo en la víspera funciones OFICIAL DE SERVICIO, todos numerarios de la División antes mencionada, que el OFICIAL (E.G.) LEGAJO 123.456 PEREZ JUAN ALBERTO, de 24 años de edad, fecha de nacimiento 01/01/2000, nacionalidad argentina, estado civil soltero, instruido, profesión u ocupación empleado policial, domicilio en Racunda 560 entre calle Vito Dumas y calle Nicolás Paganini, localidad de Virrey del pino, partido de La Matanza, Documento Nacional de Identidad N° 12.345.678, numerario de este elemento, en la fecha, siendo aproximadamente las 9 horas, camino al servicio a bordo de motocicleta marca Bajaj modelo Rowser, dominio AXC123, circulando por la calle San Matías (Ruta Provincial 1001) con sentido ascendente al llegar a la calle Achupallas, al cruzar un charco de agua en la vía rápida de la arteria mencionada, pierde el control del rodado cayendo al suelo, golpeándose brazo derecho, pierna derecha y espalda, produciéndose lesiones a prima facie de carácter leve. Consecuentemente se reincorpora y por propios medios se coloca a un costado de la calle, lugar donde da conocimiento de lo sucedido a su destino. Motivo por el cual se comisionó al lugar al móvil orden OI 123456 marca Ford, modelo Ranger, dominio AB123CD, perteneciente a la flota automotriz de esta división, conducido en la oportunidad por él OFICIAL (E.G.) LEGAJO 123.456 JEREZ JOSE ARMANDO, secundado en la oportunidad por el OFICIAL (E.G.) LEGAJO 123.456 LAME ELSA, quienes lo trasladan hasta la Clínica Modelo de Gregorio Laferrere, sita en la colectora de la Avenida Provincias Unidas entre Esteban Echeverría y Avenida Luro, partido de G. Laferrere, partido de La Matanza, donde lo atiende el Dr/a. Cureta María de los Ángeles Matrícula Nacional Nº 22.345, Matrícula Provincial 12.345, quien tras asistirlo y evaluarlo, diagnóstica que posee traumatismo leves en su cuerpo y para mejor evaluación debe realizar exámenes complementarios por consultorios externos en la especialista traumatología. Seguidamente, ante lo narrado personal de la Subsección Personal del elemento, mantiene comunicación telefónica con el abonado gratuito 0800-333-1333 perteneciente a la Aseguradora de Riesgo del Trabajo Provincia Seguros A.R.T., siendo atendidos en la oportunidad por el operador en turno, a quien puesto en conocimiento de lo sucedido, registra el siniestro bajo N° 123456, informando que el efectivo lesionado continuará con su atención médica en la Clínica Del Buen Pastor, sita en Avenida Mosconi 1716, localidad de Lomas del Mirador, partido de La Matanza. Que, siendo las 14 horas, el OFICIAL (E.G.) LEGAJO 123.456 PEREZ JUAN ALBERTO, se retira franco por sus propios medios desde la Clínica Modelo de G. Laferrere, motivo por el cual no rubricara la presente acta de procedimiento junto a los actuantes. Que, no siendo para más se procede a labrar la presente acta de estilo por razones de logística y medios en la Oficina de la Subsección Personal de la dependencia</textarea>
           </div>
           <div class="sheet-row-single" style="grid-column: 1 / -1;">
             <label>SÍNTESIS DEL HECHO / PARTE ESCRITO (CARGA DE DATOS CELDA B131):</label>
@@ -781,7 +781,7 @@ body {
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 23. Síntesis y Conclusiones</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 5. Acta de Constatación</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -1582,14 +1582,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function renderActaA4Content() {
     const d = getFormValues();
-    const pageContent = `
+    
+    const parte1Acta = `En la localidad de ${d.localidad}, partido de ${d.partido}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia}, sita en ${d.direccion}, entre calle ${d.entre1} del mismo medio, a los ${d.fechaRecepcion}, siendo las ${d.horaHecho} horas, el suscripto ${d.instructor} (${d.cargoInstructor}), secundado por el ${d.secretario} (${d.cargoSecretario}), ambos numerarios de ${d.dependencia} y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante, tomamos conocimiento siendo las 10.30 horas, por parte del OFICIAL (E.G.) LEGAJO 123.456 ROLDAN JOSE LUIS, quien se encuentra cumpliendo en la víspera funciones OFICIAL DE SERVICIO, todos numerarios de la División antes mencionada, que el OFICIAL (E.G.) LEGAJO 123.456 PEREZ JUAN ALBERTO, de 24 años de edad, fecha de nacimiento 01/01/2000, nacionalidad argentina, estado civil soltero, instruido, profesión u ocupación empleado policial, domicilio en Racunda 560 entre calle Vito Dumas y calle Nicolás Paganini, localidad de Virrey del pino, partido de La Matanza, Documento Nacional de Identidad N° 12.345.678, numerario de este elemento, en la fecha, siendo aproximadamente las 9 horas, camino al servicio a bordo de motocicleta marca Bajaj modelo Rowser, dominio AXC123, circulando por la calle San Matías (Ruta Provincial 1001) con sentido ascendente al llegar a la calle Achupallas, al cruzar un charco de agua en la vía rápida de la arteria mencionada, pierde el control del rodado cayendo al suelo, golpeándose brazo derecho, pierna derecha y espalda, produciéndose lesiones a prima facie de carácter leve.`;
+
+    const parte2Acta = `Consecuentemente se reincorpora y por propios medios se coloca a un costado de la calle, lugar donde da conocimiento de lo sucedido a su destino, motivo por el cual se comisionó al lugar al móvil orden OI 123456 marca Ford, modelo Ranger, dominio AB123CD, perteneciente a la flota automotriz de esta división, conducido en la oportunidad por él OFICIAL (E.G.) LEGAJO 123.456 JEREZ JOSE ARMANDO, secundado en la oportunidad por el OFICIAL (E.G.) LEGAJO 123.456 LAME ELSA, quienes lo trasladan hasta la Clínica Modelo de Gregorio Laferrere, sita en la colectora de la Avenida Provincias Unidas entre Esteban Echeverría y Avenida Luro, partido de G. Laferrere, partido de La Matanza, donde lo atiende el Dr/a. Cureta María de los Ángeles Matrícula Nacional Nº 22.345, Matrícula Provincial 12.345, quien tras asistirlo y evaluarlo, diagnóstica que posee traumatismo leves en su cuerpo y para mejor evaluación debe realizar exámenes complementarios por consultorios externos en la especialista traumatología, seguidamente, ante lo narrado personal de la Subsección Personal del elemento, mantiene comunicación telefónica con el abonado gratuito 0800-333-1333 perteneciente a la Aseguradora de Riesgo del Trabajo Provincia Seguros A.R.T., siendo atendidos en la oportunidad por el operador en turno, a quien puesto en conocimiento de lo sucedido, registra el siniestro bajo N° 123456, informando que el efectivo lesionado continuará con su atención médica en la Clínica Del Buen Pastor, sita en Avenida Mosconi 1716, localidad de Lomas del Mirador, partido de La Matanza, que, siendo las 14 horas, el OFICIAL (E.G.) LEGAJO 123.456 PEREZ JUAN ALBERTO, se retira franco por sus propios medios desde la Clínica Modelo de G. Laferrere, motivo por el cual no rubricara la presente acta de procedimiento junto a los actuantes, que, no siendo para más se procede a labrar la presente acta de estilo por razones de logística y medios en la Oficina de la Subsección Personal de la dependencia, no siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.`;
+
+    const page1Content = `
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-      <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
-        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${d.horaHecho}</b> horas, el suscripto <b>${d.instructor}</b> (<b>${d.cargoInstructor}</b>) , secundado por el <b>${d.secretario}</b> (<b>${d.cargoSecretario}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+        ${parte1Acta}
       </div>
     `;
 
-    return renderGenericDocument([pageContent]);
+    const page2Content = `
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+        ${parte2Acta}
+      </div>
+    `;
+
+    return renderGenericDocument([page1Content, page2Content]);
   }
 
   function renderTestimonialA4Content() {
@@ -1598,7 +1609,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const pageContent = `
       <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
-      <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 9.5pt; line-height: 1.4;">
         En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que darán lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
       </div>
     `;
@@ -1708,48 +1719,48 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>FECHA DE RECEPCIÓN (B1):</label>
+                <label>FECHA DE RECEPCIÓN (B3):</label>
                 <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarActaEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>HORA DEL HECHO (B108):</label>
+                <label>HORA DEL HECHO (B18):</label>
                 <input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarActaEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>LOCALIDAD (B6):</label>
+                <label>LOCALIDAD (B9):</label>
                 <input type="text" value="${d.localidad}" oninput="document.getElementById('f_05_localidad').value = this.value; actualizarActaEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>PARTIDO (B7):</label>
+                <label>PARTIDO (B8):</label>
                 <input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarActaEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>INSTRUCTOR SUMARIAL (B8):</label>
+                <label>INSTRUCTOR SUMARIAL (B10):</label>
                 <input type="text" value="${d.instructor}" oninput="document.getElementById('f_07_instructor').value = this.value; actualizarActaEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>CARGO INSTRUCTOR (B9):</label>
+                <label>CARGO INSTRUCTOR (B11):</label>
                 <input type="text" value="${d.cargoInstructor}" oninput="document.getElementById('f_08_cargo_instructor').value = this.value; actualizarActaEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>SECRETARIO DE ACTUACIONES (B10):</label>
+                <label>SECRETARIO DE ACTUACIONES (B12):</label>
                 <input type="text" value="${d.secretario}" oninput="document.getElementById('f_09_secretario').value = this.value; actualizarActaEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>CARGO SECRETARIO (B11):</label>
+                <label>CARGO SECRETARIO (B13):</label>
                 <input type="text" value="${d.cargoSecretario}" oninput="document.getElementById('f_10_cargo_secretario').value = this.value; actualizarActaEnVivo();">
               </div>
             </div>
 
             <div class="sheet-row-single" style="width: 100%;">
-              <label>RELATO DEL ACTA (CARGA DE DATOS CELDA B140):</label>
+              <label>RELATO DEL ACTA (ACTA DE CONSTATACION I8):</label>
               <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_78_relato_acta').value = this.value; actualizarActaEnVivo();">${d.actaRelato}</textarea>
             </div>
           </div>
@@ -1835,7 +1846,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${renderParteA4Content()}
             </div>
           </div>
-        </div>`;
+        `;
 
       case 'tab-corre_agregado':
         let optionsCorreColumnaM = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
@@ -1866,7 +1877,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${renderCorreA4Content()}
             </div>
           </div>
-        </div>`;
+        `;
 
       case 'tab-cfyp':
         let introCFYP = "Dando cumplimiento a lo requerido por usted en relación a expediente";
@@ -2034,7 +2045,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${renderColDivA4Content()}
             </div>
           </div>
-        </div>`;
+        `;
 
       case 'tab-lep':
         let textoLEP = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
@@ -2335,22 +2346,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>FECHA DE RECEPCIÓN (B1):</label>
+                <label>FECHA DE RECEPCIÓN (B3):</label>
                 <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarTestimonialEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>HORA DEL HECHO (B108):</label>
+                <label>HORA DEL HECHO (B18):</label>
                 <input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarTestimonialEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>LOCALIDAD (B6):</label>
+                <label>LOCALIDAD (B9):</label>
                 <input type="text" value="${d.localidad}" oninput="document.getElementById('f_05_localidad').value = this.value; actualizarTestimonialEnVivo();">
               </div>
 
               <div class="sheet-row-single">
-                <label>PARTIDO (B7):</label>
+                <label>PARTIDO (B8):</label>
                 <input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarTestimonialEnVivo();">
               </div>
             </div>
@@ -2650,7 +2661,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return renderGenericDocument([pageCierre]);
 
       case 'tab-sintesis_conclusiones':
-        // Página 1: Encabezado, Introducción, 1. SÍNTESIS DEL HECHO y parte de 2. ELEMENTOS DE PRUEBA para optimizar el espacio en blanco
         const pageSintesis1 = `
           <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
             REF.: Evar. Actuaciones Administrativa con Síntesis y Conclusiones<br>
@@ -2687,7 +2697,6 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
         `;
 
-        // Página 2: Continuación de 2. ELEMENTOS DE PRUEBA, 3. ATENUANTES Y/O AGRAVANTES y RESUELVO
         const pageSintesis2 = `
           <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
             Que, a fs. 33/40 vta, luce copia certificada del libro de novedades de la guardia donde se encuentran asentadas las ausencias al servicio que se le endilgan al infractor y que con fecha 18/06/2023, se presentará al servicio de manera impuntual, sin presentar ninguna documentación y/o constancia que justificara sus ausencias.
@@ -2755,8 +2764,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Inicializar en la pestaña 23 por defecto con vista previa activa
-  const defaultTabKey = 'tab-sintesis_conclusiones';
+  // Inicializar en la pestaña 5 (Acta de Constatación) por defecto con vista previa activa
+  const defaultTabKey = 'tab-acta_constatacion';
   previewContainer.innerHTML = renderDocumentTemplate(defaultTabKey);
 });
 </script>
