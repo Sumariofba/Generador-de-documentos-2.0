@@ -1317,17 +1317,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const elemActaRelato = document.getElementById('f_78_relato_acta');
 
     return {
-      fechaRecepcion: document.getElementById('f_00_fecha_recepcion').value, // B1 / B3 / B17
-      dependencia: document.getElementById('f_01_dependencia').value,         // B2 / B4
-      direccion: document.getElementById('f_02_direccion').value,             // B3 / B5
-      entre1: document.getElementById('f_03_entre_calle_1').value,            // B4 / B6 / B27
-      entre2: document.getElementById('f_04_entre_calle_2').value,            // B5 / B7 / B31
-      localidad: document.getElementById('f_05_localidad').value,             // B6 / B9
-      partido: document.getElementById('f_06_partido').value,                 // B7 / B8
-      instructor: document.getElementById('f_07_instructor').value,           // B8 / B10 / B134
-      cargoInstructor: document.getElementById('f_08_cargo_instructor').value,// B9 / B11 / B135
-      secretario: document.getElementById('f_09_secretario').value,           // B10 / B12 / B137
-      cargoSecretario: document.getElementById('f_10_cargo_secretario').value,// B11 / B13 / B138
+      fechaRecepcion: document.getElementById('f_00_fecha_recepcion').value, // B3 ('CARGA DE DATOS'!B3)
+      dependencia: document.getElementById('f_01_dependencia').value,         // B4 ('CARGA DE DATOS'!B4)
+      direccion: document.getElementById('f_02_direccion').value,             // B5 ('CARGA DE DATOS'!B5)
+      entre1: document.getElementById('f_03_entre_calle_1').value,            // B6 ('CARGA DE DATOS'!B6)
+      entre2: document.getElementById('f_04_entre_calle_2').value,            // B7 ('CARGA DE DATOS'!B7)
+      localidad: document.getElementById('f_05_localidad').value,             // B9 ('CARGA DE DATOS'!B9)
+      partido: document.getElementById('f_06_partido').value,                 // B8 ('CARGA DE DATOS'!B8)
+      instructor: document.getElementById('f_07_instructor').value,           // B10 ('CARGA DE DATOS'!B10)
+      cargoInstructor: document.getElementById('f_08_cargo_instructor').value,// B11 ('CARGA DE DATOS'!B11)
+      secretario: document.getElementById('f_09_secretario').value,           // B12 ('CARGA DE DATOS'!B12)
+      cargoSecretario: document.getElementById('f_10_cargo_secretario').value,// B13 ('CARGA DE DATOS'!B13)
       colaboracion: document.getElementById('f_12_colaboracion').value,       // B13
       cauNombre: document.getElementById('f_13_cau_nombre').value,           // B14 / B20
       cauEdad: document.getElementById('f_14_cau_edad').value,               // B15
@@ -1375,7 +1375,7 @@ document.addEventListener('DOMContentLoaded', function() {
       vicContacto: document.getElementById('f_58_vic_contacto').value,        // B58
       vicDestino: document.getElementById('f_59_vic_destino').value,         // B48
       fechaHecho: document.getElementById('f_22_hecho_fecha').value,          // B59
-      horaHecho: document.getElementById('f_18_hecho_hora').value,           // B60
+      horaHecho: document.getElementById('f_18_hecho_hora').value,           // B18 ('CARGA DE DATOS'!B18)
       exp: document.getElementById('f_23_exp_elec').value,                   // B61
       caratula: document.getElementById('f_24_caratula').value,              // B20
       encuadre: document.getElementById('f_25_encuadre').value,              // B21
@@ -1385,7 +1385,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ec2: document.getElementById('f_32_ec2') ? document.getElementById('f_32_ec2').value : '', // B31
       hechoLoc: document.getElementById('f_39_hecho_loc').value,             // B35
       hechoPartido: document.getElementById('f_40_hecho_partido').value,     // B36
-      actaRelato: elemActaRelato ? elemActaRelato.value : '',                // B140
+      actaRelato: elemActaRelato ? elemActaRelato.value : '',                // B140 ('CARGA DE DATOS'!B140)
       sintesis: elemActaRelato ? elemActaRelato.value : '',                  // B140
       // Campos de estado de vías / calles específicos para inspección ocular
       art1Tipo: document.getElementById('f_insp_art1_tipo') ? document.getElementById('f_insp_art1_tipo').value : 'asfalto',
@@ -1510,7 +1510,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ${logoSVG}
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
       <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
-        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.entre1}</b>, sita en <b>${d.entre2}</b>, entre calle <b>${d.localidad}</b> del mismo medio, a los <b>${d.direccion}</b>, siendo las <b>${d.cauEntreCalles}</b> horas, el suscripto <b>${d.instructor}</b> (<b>${d.cargoInstructor}</b>) , secundado por el <b>${d.secretario}</b> (<b>${d.cargoSecretario}</b>), ambos numerarios de <b>${d.entre1}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${d.horaHecho}</b> horas, el suscripto <b>${d.instructor}</b> (<b>${d.cargoInstructor}</b>) , secundado por el <b>${d.secretario}</b> (<b>${d.cargoSecretario}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
       </div>
     `;
   }
@@ -2221,7 +2221,7 @@ document.addEventListener('DOMContentLoaded', function() {
           }
         }
         if (d.intervencion && d.intervencion.trim() !== '') {
-          textoLEP += ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:";
+          textoLEP += ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establishedos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:";
         } else {
           textoLEP += ".";
         }
