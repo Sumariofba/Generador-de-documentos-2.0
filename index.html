@@ -239,7 +239,7 @@ body {
   resize: vertical;
 }
 
-/* PREVISUALIZACIÓN EXCLUSIVA DE DOCUMENTOS */
+/* PREVISUALIZACIÓN EXCLUSIVA DE DOCUMENTOS EN VISTA DE IMPRESIÓN */
 #view-resto-solapas {
   width: 100%;
 }
@@ -299,7 +299,7 @@ body {
 .btn-print { background-color: #475569; color: white; }
 .btn-print:hover { background-color: #334155; }
 
-/* HOJA DE IMPRESIÓN OFICIAL A4 CON MÁRGENES REFLEJADOS/SIMÉTRICOS */
+/* HOJA DE IMPRESIÓN OFICIAL A4 CON MÁRGENES REFLEJADOS/SIMÉTRICOS (VISTA DE IMPRESIÓN) */
 .doc-preview-wrapper {
   display: flex;
   flex-direction: column;
@@ -327,14 +327,12 @@ body {
   overflow: hidden;
 }
 
-/* MÁRGENES REFLEJADOS PARA PÁGINAS IMPARES Y PARES EN PREVISUALIZACIÓN */
+/* MÁRGENES REFLEJADOS PARA PÁGINAS IMPARES Y PARES EN VISTA DE IMPRESIÓN */
 .a4-page.odd-page {
-  /* Impares: Superior 5cm, Derecho (Exterior) 1.5cm, Inferior 2.5cm, Izquierdo (Interior) 4cm */
   padding: 5cm 1.5cm 2.5cm 4cm;
 }
 
 .a4-page.even-page {
-  /* Pares: Superior 5cm, Izquierdo (Exterior) 1.5cm, Inferior 2.5cm, Derecho (Interior) 4cm */
   padding: 5cm 4cm 2.5cm 1.5cm;
 }
 
@@ -355,18 +353,15 @@ body {
   pointer-events: none;
 }
 
-/* LOGO AUMENTADO EN 1 CM TANTO DE ALTO COMO DE ANCHO */
 .doc-header-logo { 
   text-align: left; 
   margin-bottom: 0.5cm; 
 }
 .doc-header-logo img { 
-  max-height: 90px; /* Aumentado 1 cm proporcionalmente */
+  max-height: 90px;
   width: auto; 
 }
 
-.doc-mid-section { margin-left: 40%; width: 60%; margin-bottom: 1.2em; text-align: right; font-weight: bold; }
-.doc-addressee { font-weight: bold; margin-bottom: 1.2em; text-transform: uppercase; }
 .sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.25cm !important; }
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
@@ -464,7 +459,6 @@ body {
   background-color: #dc2626;
 }
 
-/* CAJAS DE FOTOS DE LUGAR DEL HECHO */
 .foto-dropzone {
   border: 2px dashed #94a3b8;
   flex: 1;
@@ -561,7 +555,7 @@ body {
     <div class="top-navbar-title">GENERADOR DE NOTAS SUMARIALES PAR (23 PESTAÑAS)</div> 
   </div> 
   <ul class="nav-list-top" id="main-tabs-nav"> 
-    <li class="nav-item-top active" data-tab="tab-carga_datos">📝 1. Carga de Datos</li> 
+    <li class="nav-item-top" data-tab="tab-carga_datos">📝 1. Carga de Datos</li> 
     <li class="nav-item-top" data-tab="tab-caratula">📄 2. Carátula</li> 
     <li class="nav-item-top" data-tab="tab-reg_inst">📄 3. Registro Institucional</li> 
     <li class="nav-item-top" data-tab="tab-indice_diligencias">📄 4. Índice</li> 
@@ -583,7 +577,7 @@ body {
     <li class="nav-item-top" data-tab="tab-fotos">📄 20. Fotos del lugar del Hecho</li> 
     <li class="nav-item-top" data-tab="tab-carpetas_medicas">📄 21. Inf. de Carpetas</li> 
     <li class="nav-item-top" data-tab="tab-cierre">📄 22. Dto. Cierre de Actuaciones</li> 
-    <li class="nav-item-top" data-tab="tab-sintesis_conclusiones">📄 23. Síntesis y Conclusiones</li> 
+    <li class="nav-item-top active" data-tab="tab-sintesis_conclusiones">📄 23. Síntesis y Conclusiones</li> 
   </ul> 
 </div> 
 
@@ -591,7 +585,7 @@ body {
 <div class="app-container"> 
   
   <!-- VISTA 1: EXCLUSIVA DE CARGA DE DATOS -->
-  <div class="tab-view active-view" id="view-carga_datos">
+  <div class="tab-view" id="view-carga_datos">
     <div class="global-controls">
       <button class="btn-secondary" id="btn-expand-all">📂 Expandir Todos</button>
       <button class="btn-secondary" id="btn-collapse-all">📁 Contraer Todos</button>
@@ -783,11 +777,11 @@ body {
   </div>
 
   <!-- VISTA 2: EXCLUSIVA DE DOCUMENTOS -->
-  <div class="tab-view" id="view-resto-solapas">
+  <div class="tab-view active-view" id="view-resto-solapas">
     <div class="right-preview-panel" id="main-right-preview-panel">
-      <div class="card" id="main-preview-card"> 
+      <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 23. Síntesis y Conclusiones</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -1376,7 +1370,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  /* ACORDEÓN DE CARGA DE DATOS */
   const headers = document.querySelectorAll('.sheet-card-header');
   headers.forEach(header => {
     header.addEventListener('click', function() {
@@ -1392,10 +1385,8 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.sheet-card-block').forEach(block => block.classList.add('collapsed'));
   });
 
-  /* LOGO SVG CON TAMAÑO AUMENTADO EN 1 CM TANTO DE ALTO COMO DE ANCHO */
   const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27440%27%20height%3D%2790%27%20viewBox%3D%270%200%20440%2090%27%3E%3Crect%20width%3D%27125%27%20height%3D%2750%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%278%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%278%27%20y%3D%2738%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2726%27%20font-family%3D%27Arial%27%20font-size%3D%2712%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2752%27%20font-family%3D%27Arial%27%20font-size%3D%2722%27%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E"></div>`;
 
-  /* FUNCIÓN GENÉRICA PARA ENVOLVER HOJAS A4 CON MÁRGENES REFLEJADOS Y ENCABEZADO OMITIDO EN PARES */
   function renderGenericDocument(pagesArray) {
     const totalPages = pagesArray.length;
     return pagesArray.map((pageInnerContent, index) => {
@@ -1403,7 +1394,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const isOddPage = (pageNum % 2 !== 0);
       const pageClass = isOddPage ? 'odd-page' : 'even-page';
       const headerHtml = isOddPage ? logoSVG : '';
-      const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - MÁRGENES REFLEJADOS)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - SIN ENCABEZADO)`;
+      const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - VISTA DE IMPRESIÓN)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - VISTA DE IMPRESIÓN)`;
 
       return `
         <div class="a4-page ${pageClass}">
@@ -1608,65 +1599,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const pageContent = `
       <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
       <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
-        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
-      </div>
-    `;
-
-    return renderGenericDocument([pageContent]);
-  }
-
-  function renderInspeccionA4Content() {
-    const d = getFormValues();
-
-    const pageContent = `
-      <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>
-      <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.5; text-indent: 0cm;">
-        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} y ${d.entre2 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.fechaRecepcion || ''} horas, el suscripto ${d.instructor || ''} (${d.cargoInstructor || ''}) , secundado por el ${d.secretario || ''} (${d.cargoSecretario || ''}), ambos numerarios de ${d.dependencia || ''} y conocedores de las penas con que la Ley castiga el Falso Testimonio. Por orden de la superioridad en relación a Actuaciones Sumariales Administrativas ${d.encuadre || ''} caratuladas ${d.caratula || ''}, donde resultó víctima ${d.vicNombre || ''}, numerario de ${d.vicDestino || ''}, en trámite ante ${d.dependencia || ''}, nos constituimos en ${d.lugarHecho || ''}, entre ${d.entre1 || ''} y ${d.entre2 || ''}, localidad ${d.hechoLoc || ''} y partido ${d.hechoPartido || ''}, lugar donde se dice que ocurrieron los hechos que dieran origen a la formación de las presentes actuaciones, fines de dar cumplimiento a diligencia Inspección Ocular en donde arribó a las siguientes CONCLUSIONES: Que la zona resulta ser zona urbana, poblada con viviendas en su mayoría de una planta y de dos plantas, gozando con todos los adelantos de la época actual (gas natural, red cloacal, agua corriente, luz eléctrica, red telefónica). Que, la arteria ${d.lugarHecho || ''}, que resulta ser de ${d.art1Tipo || ''} en ${d.art1Estado || ''} estado de conservación, circulación vehicular de ${d.art1Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial, no existiendo en el lugar semáforos, si existiendo señales de tránsito. Que, la arteria ${d.entre1 || ''}, resulta ser de ${d.art2Tipo || ''} en ${d.art2Estado || ''} estado de conservación, circulación vehicular de ${d.art2Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. Que, la arteria ${d.entre2 || ''}, resulta ser de ${d.art3Tipo || ''} en ${d.art3Estado || ''} estado de conservación, circulación vehicular de ${d.art3Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. No existiendo en el lugar semáforos, si existiendo señales de tránsito. No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.
-      </div>
-    `;
-
-    return renderGenericDocument([pageContent]);
-  }
-
-  function renderParteA4Content() {
-    const d = getFormValues();
-    let destListItemsHtml = destinatariosParteEscrito.map((dest) => `<li>${dest}</li>`).join('');
-
-    let textoIntroductorio = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
-    if (d.encuadre && d.encuadre.trim() !== '') textoIntroductorio += " " + d.encuadre;
-    if (d.caratula && d.caratula.trim() !== '') textoIntroductorio += ", caratulado: " + d.caratula;
-    if (d.denNombre && d.denNombre.trim() !== '') textoIntroductorio += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-    if (d.vicNombre && d.vicNombre.trim() !== '') textoIntroductorio += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-    if (d.cauNombre && d.cauNombre.trim() !== '') textoIntroductorio += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-    if (d.impNombre && d.impNombre.trim() !== '') textoIntroductorio += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-    textoIntroductorio += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + "." : ".";
-
-    const pageContent = `
-      <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4;">
-        REF.: Ccar. el inicio de Actuaciones Sumariales Administrativas<br>
-        ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
-      </div>
-      
-      <div style="margin-top: 2em; margin-bottom: 0.5em; font-weight: bold;" class="sangria-cero">DESTINATARIOS:</div>
-
-      <ul style="padding-left: 1.2cm; margin-bottom: 1.5em; line-height: 1.5; font-size: 9.5pt; text-align: justify;">
-        ${destListItemsHtml}
-      </ul>
-
-      <div class="sangria-estandar" style="margin-top: 1em;">
-        ${textoIntroductorio}
-      </div>
-
-      <div class="sangria-cero" style="margin-top: 1em;">
-        <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, siendo las ${d.horaHecho}, cuando ${d.sintesis}.
-      </div>
-
-      <div class="sangria-estandar" style="margin-top: 1em;">
-        Atento a lo narrado precedentemente, se iniciaron formalmente las actuaciones de rigor conforme a lo estatuido por el Decreto N° 1050/09, reglamentario de la Ley del Personal N° 13.982.
-      </div>
-
-      <div class="sangria-estandar" style="margin-top: 2em;">
-        Lo expuesto es todo en cuanto informo a usted.
+        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que darán lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
       </div>
     `;
 
@@ -1729,7 +1662,7 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
         `;
@@ -1775,7 +1708,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>FECHA DE RECEPCCIÓN (B1):</label>
+                <label>FECHA DE RECEPCIÓN (B1):</label>
                 <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarActaEnVivo();">
               </div>
 
@@ -1863,7 +1796,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>FECHA DE RECEPCCIÓN / PARTE:</label>
+                <label>FECHA DE RECEPCIÓN / PARTE:</label>
                 <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarParteEnVivo();">
               </div>
 
@@ -2149,10 +2082,10 @@ document.addEventListener('DOMContentLoaded', function() {
         let listaGestionHtml = '';
 
         const mapaPersonas = {
-          'CAUSANTE': { rol: 'CAUSANTE (B88)', nombre: d.cauNombre, destino: d.cauDestino || '' },
-          'VICTIMA': { rol: 'VÍCTIMA (B40)', nombre: d.vicNombre, destino: d.vicDestino || '' },
-          'IMPUTADO': { rol: 'IMPUTADO (B56)', nombre: d.impNombre, destino: d.impDestino || '' },
-          'DENUNCIANTE': { rol: 'DENUNCIANTE (B72)', nombre: d.denNombre, destino: d.denDestino || '' }
+          'CAUSANTE': { rol: 'CAUSANTE', nombre: d.cauNombre, destino: d.cauDestino || '' },
+          'VICTIMA': { rol: 'VÍCTIMA', nombre: d.vicNombre, destino: d.vicDestino || '' },
+          'IMPUTADO': { rol: 'IMPUTADO', nombre: d.impNombre, destino: d.impDestino || '' },
+          'DENUNCIANTE': { rol: 'DENUNCIANTE', nombre: d.denNombre, destino: d.denDestino || '' }
         };
 
         window.registrosSeleccionadosLEP.forEach(tipo => {
@@ -2215,10 +2148,10 @@ document.addEventListener('DOMContentLoaded', function() {
               <label>SELECCIONAR REGISTRO A MOSTRAR / QUITAR:</label>
               <div style="display: flex; gap: 8px; margin-bottom: 10px;">
                 <select id="select-lep-personas" style="flex: 1; padding: 6px; font-size: 0.82rem;">
-                  <option value="CAUSANTE">CAUSANTE (Celda B88: ${d.cauNombre || 'Sin datos'})</option>
-                  <option value="VICTIMA">VÍCTIMA (Celda B40: ${d.vicNombre || 'Sin datos'})</option>
-                  <option value="IMPUTADO">IMPUTADO (Celda B56: ${d.impNombre || 'Sin datos'})</option>
-                  <option value="DENUNCIANTE">DENUNCIANTE (Celda B72: ${d.denNombre || 'Sin datos'})</option>
+                  <option value="CAUSANTE">CAUSANTE (${d.cauNombre || 'Sin datos'})</option>
+                  <option value="VICTIMA">VÍCTIMA (${d.vicNombre || 'Sin datos'})</option>
+                  <option value="IMPUTADO">IMPUTADO (${d.impNombre || 'Sin datos'})</option>
+                  <option value="DENUNCIANTE">DENUNCIANTE (${d.denNombre || 'Sin datos'})</option>
                 </select>
                 <button class="btn-secondary" onclick="agregarRegistroLEP()" style="white-space: nowrap;">➕ Agregar</button>
               </div>
@@ -2233,7 +2166,7 @@ document.addEventListener('DOMContentLoaded', function() {
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
             ${renderGenericDocument([pageLEPContent])}
           </div>
-        </div>`;
+        `;
 
       case 'tab-col_ipp':
         const pageColIPP = `
@@ -2355,7 +2288,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
-            Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
+            Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por a RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
           </div>
 
           <table class="table-oficial" style="margin-top: 1.5em;">
@@ -2402,7 +2335,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
               <div class="sheet-row-single">
-                <label>FECHA DE RECEPCCIÓN (B1):</label>
+                <label>FECHA DE RECEPCIÓN (B1):</label>
                 <input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarTestimonialEnVivo();">
               </div>
 
@@ -2433,7 +2366,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${renderTestimonialA4Content()}
             </div>
           </div>
-        </div>`;
+        `;
 
       case 'tab-inspeccion_ocular':
         return `
@@ -2535,7 +2468,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${renderInspeccionA4Content()}
             </div>
           </div>
-        </div>`;
+        `;
 
       case 'tab-croquis':
         let textoLugarArmado = `${d.lugarHecho}`;
@@ -2685,7 +2618,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${renderCarpetasA4Content()}
             </div>
           </div>
-        </div>`;
+        `;
 
       case 'tab-cierre':
         const pageCierre = `
@@ -2717,14 +2650,74 @@ document.addEventListener('DOMContentLoaded', function() {
         return renderGenericDocument([pageCierre]);
 
       case 'tab-sintesis_conclusiones':
-        const pageSintesis = `
-          <div style="text-align: center; font-weight: bold; font-size: 12pt; margin-bottom: 1.2em;">SÍNTESIS Y CONCLUSIONES SUMARIALES</div>
-          <div class="sangria-cero" style="margin-bottom: 1em;"><b>Expediente:</b> ${d.caratula}</div>
-          <div class="sangria-cero" style="margin-bottom: 1em;"><b>Causante:</b> ${d.cauNombre}</div>
-          <div class="sangria-estandar">${d.sintesis || 'En relación a las Actuaciones Sumariales Administrativas de referencia, se concluye que cumplimentadas las diligencias de rigor...'}</div>
+        // Página 1: Encabezado, Introducción, 1. SÍNTESIS DEL HECHO y parte de 2. ELEMENTOS DE PRUEBA para optimizar el espacio en blanco
+        const pageSintesis1 = `
+          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+            REF.: Evar. Actuaciones Administrativa con Síntesis y Conclusiones<br>
+            La Matanza, 2 de abril del 2026
+          </div>
+
+          <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+            AL SEÑOR COORDINADOR<br>
+            DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO
+          </div>
+
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+            Me dirijo a usted afines de de adjuntar y elevar en el computo de ____________________(______) fojas utilizadas. Actuaciones Sumariales Administrativas ${d.encuadre || '-sin encuadre administrativo-'}, caratulado: ${d.caratula}, donde resulta denunciante: ${d.denNombre} (CIVIL), víctima: ${d.vicNombre} (CIVIL), causante: ${d.cauNombre} (DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)), imputado: ${d.impNombre} (CIVIL), con intervención de ${d.intervencion}.
+          </div>
+
+          <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">
+            1. SÍNTESIS DEL HECHO:
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+            La presente, tiene génesis con fecha 18/06/2023, siendo las 8.30 horas, a raíz de haberse constatado que el Oficial Subayudante (Adm.) Legajo N° 413766. GALEANO Maximiliano Jorge, no se hizo presente a su servicio ordinario en fecha 15 de junio de 2023; realizada una compulsa a fin de certificar registro en el cual se consigne llamada telefónica o medie otro medio que comunique los motivos que justificaran que no se encuentre presente, no justificó su ausencia mediante comunicación y/o alguna licencia médica y que hizo caso omiso a que regulará su situación pese a las intimidaciones hechas mediante cédulas.
+          </div>
+
+          <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">
+            2. ELEMENTOS DE PRUEBA
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
+            Se fundamenta el administrativo en los siguientes elementos de juicio recolectados y definitivamente incorporados al legajo hasta la fecha:
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
+            Que, a fs. 26/26 vta, luce concepto funcional y privado regular, a criterio de la superioridad dónde presta servicios.
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
+            Que, a fs. 28/31 vta, luce legajo personal digital proveniente de la Dirección Personal Regímenes Policiales, dónde surge que en un periodo de seis meses cuenta en su haber con un total de CINCUENTA Y UN (51) día/s de suspensión sin goce de haberes, por la inasistencia injustificada al servicio.
+          </div>
         `;
 
-        return renderGenericDocument([pageSintesis]);
+        // Página 2: Continuación de 2. ELEMENTOS DE PRUEBA, 3. ATENUANTES Y/O AGRAVANTES y RESUELVO
+        const pageSintesis2 = `
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
+            Que, a fs. 33/40 vta, luce copia certificada del libro de novedades de la guardia donde se encuentran asentadas las ausencias al servicio que se le endilgan al infractor y que con fecha 18/06/2023, se presentará al servicio de manera impuntual, sin presentar ninguna documentación y/o constancia que justificara sus ausencias.
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
+            Que, a fs. 42, luce Vademecum RP 21100 expedido por el Sistema SIPP de Personal, luce que a orden SIETE (7) el efectivo de cuestión, cumple funciones de Ayudante de Guardia y debe cumplir con una carga horaria de 30 horas semanales según su subescalafón.
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+            Que, a fs. 60/60 vta, obra Auto de imputación administrativo, surge que los elementos acumulados hasta el momento claramente se le puede endilgar la falta que se le imputa.
+          </div>
+
+          <div class="sangria-cero" style="font-weight: bold; margin-top: 1em; margin-bottom: 0.5em;">
+            3. ATENUANTES Y/O AGRAVANTES
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+            Habiendo evaluado todos los ATENUANTES (art. 178), y AGRAVANTES (art. 179) del Decreto 1050/09 Reglamentario del Personal Ley 13982.
+          </div>
+
+          <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-top: 1em; margin-bottom: 0.5em;">
+            RESUELVO:
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+            Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial (artículo 31 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982) hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se dicte la pertinente Resolución mediante la cual se disponga que sea EXCENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES, hasta tanto se incorporen nuevos elementos de juicio, que ameriten atribuir responsabilidad disciplinaria.
+          </div>
+          <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-top: 2em;">
+            Lo expuesto es todo en cuanto elevo e informo a usted.
+          </div>
+        `;
+
+        return renderGenericDocument([pageSintesis1, pageSintesis2]);
 
       default:
         return renderGenericDocument([`<div class="sangria-estandar">Documento administrativo sumarial generado formalmente acorde a expediente <b>${d.caratula}</b>.</div>`]);
@@ -2761,6 +2754,10 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  // Inicializar en la pestaña 23 por defecto con vista previa activa
+  const defaultTabKey = 'tab-sintesis_conclusiones';
+  previewContainer.innerHTML = renderDocumentTemplate(defaultTabKey);
 });
 </script>
 
