@@ -477,7 +477,7 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .testimonial-form-side, .inspeccion-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .carpetas-form-side, .testimonial-form-side, .inspeccion-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -817,6 +817,173 @@ document.addEventListener('DOMContentLoaded', function() {
     "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
     "Informe de Comportamiento y Seguimiento laboral"
   ];
+
+  /* Estado global para la Solapa 21 - Informe de Carpetas Médicas */
+  window.carpetasMedicasEstado = {
+    opcion: 'noposee', // 'noposee' o 'carpeta'
+    lista: []
+  };
+
+  window.actualizarModoCarpetas = function(val) {
+    window.carpetasMedicasEstado.opcion = val;
+    const formDetalle = document.getElementById('carpetas-campos-manuales');
+    if (formDetalle) {
+      formDetalle.style.display = (val === 'carpeta') ? 'flex' : 'none';
+    }
+    actualizarCarpetasEnVivo();
+  };
+
+  window.agregarCarpetaMedica = function() {
+    const dias = document.getElementById('cm_dias').value.trim();
+    const art = document.getElementById('cm_art').value.trim();
+    const diag = document.getElementById('cm_diag').value.trim();
+    const fInicio = document.getElementById('cm_inicio').value.trim();
+    const fFin = document.getElementById('cm_fin').value.trim();
+
+    if (!dias || !art || !diag || !fInicio || !fFin) {
+      alert("Por favor complete todos los campos de la carpeta médica.");
+      return;
+    }
+
+    window.carpetasMedicasEstado.lista.push({
+      dias: dias,
+      art: art,
+      diag: diag,
+      fInicio: fInicio,
+      fFin: fFin
+    });
+
+    // Limpiar campos
+    document.getElementById('cm_dias').value = '';
+    document.getElementById('cm_art').value = '';
+    document.getElementById('cm_diag').value = '';
+    document.getElementById('cm_inicio').value = '';
+    document.getElementById('cm_fin').value = '';
+
+    renderListaCarpetasMedicas();
+    actualizarCarpetasEnVivo();
+  };
+
+  window.quitarCarpetaMedica = function(idx) {
+    window.carpetasMedicasEstado.lista.splice(idx, 1);
+    renderListaCarpetasMedicas();
+    actualizarCarpetasEnVivo();
+  };
+
+  function renderListaCarpetasMedicas() {
+    const target = document.getElementById('carpetas-list-target');
+    if (!target) return;
+    target.innerHTML = window.carpetasMedicasEstado.lista.map((c, idx) => `
+      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; background: #fff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
+        <div>
+          <b>${c.dias} (${c.art})</b> - Diag: ${c.diag}<br>
+          <small style="color: #64748b;">${c.fInicio} al ${c.fFin}</small>
+        </div>
+        <button class="btn-del-row" onclick="quitarCarpetaMedica(${idx})" title="Quitar">✕</button>
+      </li>
+    `).join('');
+  }
+
+  window.actualizarCarpetasEnVivo = function() {
+    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-carpetas_medicas') {
+      const liveContainer = document.getElementById('carpetas-live-preview-target');
+      if (liveContainer) {
+        liveContainer.innerHTML = renderCarpetasA4Content();
+      }
+    }
+  };
+
+  function renderCarpetasA4Content() {
+    const d = getFormValues();
+
+    let textoEncabezado = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
+    if (d.encuadre && d.encuadre.trim() !== '') {
+      textoEncabezado += " " + d.encuadre;
+    }
+    if (d.caratula && d.caratula.trim() !== '') {
+      textoEncabezado += ", caratulado: " + d.caratula;
+    }
+    if (d.denNombre && d.denNombre.trim() !== '') {
+      textoEncabezado += ", donde resulta denunciante: " + d.denNombre;
+      if (d.denDestino && d.denDestino.trim() !== '') {
+        textoEncabezado += " (" + d.denDestino + ")";
+      }
+    }
+    if (d.vicNombre && d.vicNombre.trim() !== '') {
+      textoEncabezado += ", víctima: " + d.vicNombre;
+      if (d.vicDestino && d.vicDestino.trim() !== '') {
+        textoEncabezado += " (" + d.vicDestino + ")";
+      }
+    }
+    if (d.cauNombre && d.cauNombre.trim() !== '') {
+      textoEncabezado += ", causante: " + d.cauNombre;
+      if (d.cauDestino && d.cauDestino.trim() !== '') {
+        textoEncabezado += " (" + d.cauDestino + ")";
+      }
+    }
+    if (d.impNombre && d.impNombre.trim() !== '') {
+      textoEncabezado += ", imputado: " + d.impNombre;
+      if (d.impDestino && d.impDestino.trim() !== '') {
+        textoEncabezado += " (" + d.impDestino + ")";
+      }
+    }
+
+    if (d.intervencion && d.intervencion.trim() !== '') {
+      textoEncabezado += ", con intervención de " + d.intervencion + ", ";
+    } else {
+      textoEncabezado += ", ";
+    }
+
+    let cuerpoParrafoHtml = '';
+
+    if (window.carpetasMedicasEstado.opcion === 'noposee' || (window.carpetasMedicasEstado.opcion === 'carpeta' && window.carpetasMedicasEstado.lista.length === 0)) {
+      cuerpoParrafoHtml = `
+        <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+          ${textoEncabezado}informa que el agente:
+        </div>
+        <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6; text-align: justify; font-size: 10pt;">
+          <li>No posee carpetas vinculadas al hecho investigado.</li>
+        </ul>
+      `;
+    } else {
+      let itemsVinetados = window.carpetasMedicasEstado.lista.map(c => 
+        `<li>Carpeta medica por ${c.dias} (${c.art}). Diagnóstico ${c.diag}. Fecha de inicio ${c.fInicio} y fecha de finalización ${c.fFin}.</li>`
+      ).join('');
+
+      cuerpoParrafoHtml = `
+        <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+          ${textoEncabezado}licencias médicas vinculadas al hecho en investigación que mas abajo se detalla:
+        </div>
+        <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6; text-align: justify; font-size: 10pt;">
+          ${itemsVinetados}
+        </ul>
+      `;
+    }
+
+    return `
+      ${logoSVG}
+      <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+        REF.: Pcir. Informe de Carpetas médicas<br>
+        ${d.partido || ''}, ${d.fechaRecepcion || ''}
+      </div>
+
+      <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+        AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
+        ${d.instructor ? d.instructor.toUpperCase() : ''}
+      </div>
+
+      ${cuerpoParrafoHtml}
+
+      <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+        Adjunto captura del Sistema Informático del Personal Policial (SIPP) para mejor ilustración de lo informado.
+      </div>
+
+      <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
+        Lo expuesto es todo en cuanto informo a usted.
+      </div>
+    `;
+  }
 
   /* Estado en memoria de las imágenes cargadas para las 2 Vistas Fotográficas */
   window.fotosCargadas = {
@@ -1356,7 +1523,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ${logoSVG}
       <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
       <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
-        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de OFICIAL, del escalafón GENERAL, legajo personal N° ${d.denDni || ''}, cumpliendo en la actualidad sus servicios en el ${d.denDestino || ''}, como EMPLEADO. En la fecha, se hace presente a los fines de prestar declaración testimonial en ${d.caratula || ''}, caratulado ${d.encuadre || ''}, donde se analiza la conducta del ${d.impNombre || ''} de la ${d.impDestino || ''}, en trámite ante ${d.intervencion || ''}, incoadas el ${d.fechaRecepcion || ''}. En esa inteligencia relata ${d.sintesis || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
+        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establishedo en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de OFICIAL, del escalafón GENERAL, legajo personal N° ${d.denDni || ''}, cumpliendo en la actualidad sus servicios en el ${d.denDestino || ''}, como EMPLEADO. En la fecha, se hace presente a los fines de prestar declaración testimonial en ${d.caratula || ''}, caratulado ${d.encuadre || ''}, donde se analiza la conducta del ${d.impNombre || ''} de la ${d.impDestino || ''}, en trámite ante ${d.intervencion || ''}, incoadas el ${d.fechaRecepcion || ''}. En esa inteligencia relata ${d.sintesis || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
       </div>
     `;
   }
@@ -2611,19 +2778,66 @@ document.addEventListener('DOMContentLoaded', function() {
 
       case 'tab-carpetas_medicas':
         return `
-        <div class="a4-page">
-          ${logoSVG}
-          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-            REF.: Pcir. Informe de Carpetas médicas<br>
-            ${d.partido || ''}, ${d.fechaRecepcion || ''}
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <div class="carpetas-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              🏥 OPCIONES DE CARPETAS MÉDICAS
+            </div>
+
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>SELECCIONAR SITUACIÓN DE LICENCIAS:</label>
+              <select id="select-modo-carpetas" onchange="actualizarModoCarpetas(this.value)" style="padding: 6px; font-size: 0.82rem; margin-top: 4px;">
+                <option value="noposee" ${window.carpetasMedicasEstado.opcion === 'noposee' ? 'selected' : ''}>No posee carpetas vinculadas al hecho investigado.</option>
+                <option value="carpeta" ${window.carpetasMedicasEstado.opcion === 'carpeta' ? 'selected' : ''}>Carpeta medica por xx (xx). Diagnóstico xx. Fecha de inicio xx y fecha de finalización xx.</option>
+              </select>
+            </div>
+
+            <div id="carpetas-campos-manuales" style="display: ${window.carpetasMedicasEstado.opcion === 'carpeta' ? 'flex' : 'none'}; flex-direction: column; gap: 10px; background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
+              <div style="font-weight: bold; font-size: 0.8rem; color: #334155;">DATOS DE LA CARPETA MÉDICA (DATOS MANUALES):</div>
+              
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: bold; color: #475569;">DÍAS (xx):</label>
+                  <input type="text" id="cm_dias" placeholder="Ej: 30 días" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;">
+                </div>
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: bold; color: #475569;">ART. / PARÁMETRO (xx):</label>
+                  <input type="text" id="cm_art" placeholder="Ej: Art. 44 inc. A" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;">
+                </div>
+              </div>
+
+              <div>
+                <label style="font-size: 0.7rem; font-weight: bold; color: #475569;">DIAGNÓSTICO (xx):</label>
+                <input type="text" id="cm_diag" placeholder="Ej: Traumatismo leve" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;">
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: bold; color: #475569;">FECHA INICIO (xx):</label>
+                  <input type="text" id="cm_inicio" placeholder="Ej: 05/04/2026" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;">
+                </div>
+                <div>
+                  <label style="font-size: 0.7rem; font-weight: bold; color: #475569;">FECHA FIN (xx):</label>
+                  <input type="text" id="cm_fin" placeholder="Ej: 04/05/2026" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;">
+                </div>
+              </div>
+
+              <button class="btn-secondary" onclick="agregarCarpetaMedica()" style="margin-top: 4px; background: #0284c7; font-weight: bold;">➕ Agregar Licencia a la Lista</button>
+
+              <div style="margin-top: 8px;">
+                <label style="font-size: 0.72rem; font-weight: bold; color: #475569; text-transform: uppercase;">CARPETAS INGRESADAS:</label>
+                <ul id="carpetas-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;">
+                  <!-- Se llena dinámicamente -->
+                </ul>
+              </div>
+            </div>
           </div>
 
-          <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-            AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
-            ${d.instructor ? d.instructor.toUpperCase() : ''}
+          <div style="flex-shrink: 0; display: flex; justify-content: center;">
+            <div class="a4-page" id="carpetas-live-preview-target">
+              ${renderCarpetasA4Content()}
+            </div>
           </div>
-
-          <div class="sangria-estandar" style="margin-top: 1.5em;">Solicito remitir informe detallado de carpetas médicas, licencias por enfermedad y antecedentes de salud laboral registrados por el agente <b>${d.cauNombre}</b>.</div>
         </div>`;
 
       case 'tab-cierre':
@@ -2668,13 +2882,17 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-testimonial' || activeTabKey === 'tab-inspeccion_ocular' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div' || activeTabKey === 'tab-lep') {
+        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-testimonial' || activeTabKey === 'tab-inspeccion_ocular' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div' || activeTabKey === 'tab-lep' || activeTabKey === 'tab-carpetas_medicas') {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
         }
 
         previewContainer.innerHTML = renderDocumentTemplate(activeTabKey);
+
+        if (activeTabKey === 'tab-carpetas_medicas') {
+          renderListaCarpetasMedicas();
+        }
       }
     });
   });
