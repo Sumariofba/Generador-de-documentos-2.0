@@ -1385,8 +1385,8 @@ document.addEventListener('DOMContentLoaded', function() {
       ec2: document.getElementById('f_32_ec2') ? document.getElementById('f_32_ec2').value : '', // B31
       hechoLoc: document.getElementById('f_39_hecho_loc').value,             // B35
       hechoPartido: document.getElementById('f_40_hecho_partido').value,     // B36
-      actaRelato: elemActaRelato ? elemActaRelato.value : '',                // B78
-      sintesis: elemActaRelato ? elemActaRelato.value : '',                  // B78
+      actaRelato: elemActaRelato ? elemActaRelato.value : '',                // B140
+      sintesis: elemActaRelato ? elemActaRelato.value : '',                  // B140
       // Campos de estado de vías / calles específicos para inspección ocular
       art1Tipo: document.getElementById('f_insp_art1_tipo') ? document.getElementById('f_insp_art1_tipo').value : 'asfalto',
       art1Estado: document.getElementById('f_insp_art1_estado') ? document.getElementById('f_insp_art1_estado').value : 'buen',
@@ -1510,7 +1510,7 @@ document.addEventListener('DOMContentLoaded', function() {
       ${logoSVG}
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
       <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
-        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${d.horaHecho}</b> horas, el suscripto <b>${d.instructor}</b> (<b>${d.cargoInstructor}</b>) , secundado por el <b>${d.secretario}</b> (<b>${d.cargoSecretario}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
+        En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.entre1}</b>, sita en <b>${d.entre2}</b>, entre calle <b>${d.localidad}</b> del mismo medio, a los <b>${d.direccion}</b>, siendo las <b>${d.cauEntreCalles}</b> horas, el suscripto <b>${d.instructor}</b> (<b>${d.cargoInstructor}</b>) , secundado por el <b>${d.secretario}</b> (<b>${d.cargoSecretario}</b>), ambos numerarios de <b>${d.entre1}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
       </div>
     `;
   }
@@ -1865,7 +1865,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="sheet-row-single" style="width: 100%;">
-              <label>RELATO DEL ACTA (B78 / B127):</label>
+              <label>RELATO DEL ACTA (B140):</label>
               <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_78_relato_acta').value = this.value; actualizarActaEnVivo();">${d.actaRelato}</textarea>
             </div>
           </div>
@@ -2507,7 +2507,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
-            Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
+            Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, approvedo por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
           </div>
 
           <table class="table-oficial" style="margin-top: 1.5em;">
