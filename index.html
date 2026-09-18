@@ -299,7 +299,7 @@ body {
 .btn-print { background-color: #475569; color: white; }
 .btn-print:hover { background-color: #334155; }
 
-/* HOJA DE IMPRESIÓN OFICIAL A4 */
+/* HOJA DE IMPRESIÓN OFICIAL A4 CON MÁRGENES SOLICITADOS */
 .doc-preview-wrapper {
   display: flex;
   flex-direction: column;
@@ -313,7 +313,8 @@ body {
   width: 210mm;
   min-height: 297mm;
   max-height: 297mm;
-  padding: 3.5cm 1.5cm 2.5cm 3cm;
+  /* Configuración de Márgenes Simétricos Exactos: Superior: 5cm, Exterior (Derecho): 1.5cm, Inferior: 2.5cm, Interior (Izquierdo): 4cm */
+  padding: 5cm 1.5cm 2.5cm 4cm;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 25px;
   font-size: 10.5pt;
   line-height: 1.45;
@@ -323,7 +324,26 @@ body {
   display: flex;
   flex-direction: column;
   page-break-after: always;
+  break-after: page;
+  margin-bottom: 25px;
   overflow: hidden;
+}
+
+/* ETIQUETA VISUAL DE SALTO DE PÁGINA EN PREVISUALIZACIÓN */
+.page-break-indicator {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  pointer-events: none;
 }
 
 .doc-header-logo { text-align: left; margin-bottom: 0.5cm; }
@@ -333,7 +353,7 @@ body {
 .sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.25cm !important; }
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
-/* ESTILOS FIEL AL MODELO FUENTE DOCX DE LA CARÁTULA */
+/* ESTILOS DE CARÁTULA Y TABLAS */
 .caratula-page-body {
   display: flex;
   flex-direction: column;
@@ -427,11 +447,11 @@ body {
   background-color: #dc2626;
 }
 
-/* ESTILOS AJUSTADOS PARA CAJAS DE FOTOS DENTRO DEL LÍMITE A4 */
+/* CAJAS DE FOTOS DE LUGAR DEL HECHO */
 .foto-dropzone {
   border: 2px dashed #94a3b8;
   flex: 1;
-  max-height: 78mm;
+  height: 72mm;
   background: #f8fafc;
   display: flex;
   flex-direction: column;
@@ -477,11 +497,11 @@ body {
 @media print {
   @page { size: a4; margin: 0; }
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .carpetas-form-side, .testimonial-form-side, .inspeccion-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .carpetas-form-side, .testimonial-form-side, .inspeccion-form-side, .indice-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload, .page-break-indicator { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
-  .a4-page { width: 210mm !important; min-height: 297mm !important; max-height: 297mm !important; box-shadow: none !important; padding: 3.5cm 1.5cm 2.5cm 3cm !important; page-break-after: always; overflow: hidden !important; }
+  .a4-page { width: 210mm !important; min-height: 297mm !important; max-height: 297mm !important; box-shadow: none !important; padding: 5cm 1.5cm 2.5cm 4cm !important; page-break-after: always; break-after: page; overflow: hidden !important; margin-bottom: 0 !important; }
   .input-folio { border: none !important; background: transparent !important; }
   .foto-dropzone { border: 1px solid #000 !important; background: transparent !important; }
 }
@@ -692,6 +712,28 @@ body {
         </div>
       </div>
 
+      <!-- Bloque 8: TEXTOS Y RELATOS DEL SUMARIO -->
+      <div class="sheet-card-block">
+        <div class="sheet-card-header">
+          <span>📝 8. TEXTOS Y RELATOS DEL SUMARIO</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sheet-card-body">
+          <div class="sheet-row-single" style="grid-column: 1 / -1;">
+            <label>RELATO DEL ACTA DE CONSTATACIÓN (CARGA DE DATOS CELDA B140):</label>
+            <textarea id="f_78_relato_acta">se procede a dar inicio al Acta de Constatación a raíz del llamado al 911 sobre un accidente de tránsito en el lugar. Constituidos los efectivos policiales observan la colisión entre un motovehículo y un rodado particular, procediendo al resguardo de la escena y la asistencia médica de los involucrados.</textarea>
+          </div>
+          <div class="sheet-row-single" style="grid-column: 1 / -1;">
+            <label>SÍNTESIS DEL HECHO / PARTE ESCRITO (CARGA DE DATOS CELDA B131):</label>
+            <textarea id="f_79_sintesis_hecho">se tomó conocimiento a través de la guardia de prevención sobre el siniestro vial acaecido sobre la Ruta Provincial 1001, donde se vio involucrado el personal policial Franco de Servicio, labrándose las actuaciones de rigor y otorgando intervención a la Auditoría General de Asuntos Internos.</textarea>
+          </div>
+          <div class="sheet-row-single" style="grid-column: 1 / -1;">
+            <label>DECLARACIÓN TESTIMONIAL - DECLARA (DECLARACION TESTIMONIAL CELDA B10):</label>
+            <textarea id="f_80_relato_testimonial">Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, y en la fecha de los hechos se encontraba prestando servicio ordinario de imaginaria en la guardia de prevención cuando tomó conocimiento mediante frecuencia radial sobre la ocurrencia del suceso, procediendo de inmediato a efectuar la correspondiente anotación en el libro de novedades e informar a la superioridad de turno.</textarea>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -818,9 +860,8 @@ document.addEventListener('DOMContentLoaded', function() {
     "Informe de Comportamiento y Seguimiento laboral"
   ];
 
-  /* Estado global para la Solapa 21 - Informe de Carpetas Médicas */
   window.carpetasMedicasEstado = {
-    opcion: 'noposee', // 'noposee' o 'carpeta'
+    opcion: 'noposee',
     lista: []
   };
 
@@ -845,15 +886,8 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    window.carpetasMedicasEstado.lista.push({
-      dias: dias,
-      art: art,
-      diag: diag,
-      fInicio: fInicio,
-      fFin: fFin
-    });
+    window.carpetasMedicasEstado.lista.push({ dias, art, diag, fInicio, fFin });
 
-    // Limpiar campos
     document.getElementById('cm_dias').value = '';
     document.getElementById('cm_art').value = '';
     document.getElementById('cm_diag').value = '';
@@ -898,45 +932,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const d = getFormValues();
 
     let textoEncabezado = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-    if (d.encuadre && d.encuadre.trim() !== '') {
-      textoEncabezado += " " + d.encuadre;
-    }
-    if (d.caratula && d.caratula.trim() !== '') {
-      textoEncabezado += ", caratulado: " + d.caratula;
-    }
-    if (d.denNombre && d.denNombre.trim() !== '') {
-      textoEncabezado += ", donde resulta denunciante: " + d.denNombre;
-      if (d.denDestino && d.denDestino.trim() !== '') {
-        textoEncabezado += " (" + d.denDestino + ")";
-      }
-    }
-    if (d.vicNombre && d.vicNombre.trim() !== '') {
-      textoEncabezado += ", víctima: " + d.vicNombre;
-      if (d.vicDestino && d.vicDestino.trim() !== '') {
-        textoEncabezado += " (" + d.vicDestino + ")";
-      }
-    }
-    if (d.cauNombre && d.cauNombre.trim() !== '') {
-      textoEncabezado += ", causante: " + d.cauNombre;
-      if (d.cauDestino && d.cauDestino.trim() !== '') {
-        textoEncabezado += " (" + d.cauDestino + ")";
-      }
-    }
-    if (d.impNombre && d.impNombre.trim() !== '') {
-      textoEncabezado += ", imputado: " + d.impNombre;
-      if (d.impDestino && d.impDestino.trim() !== '') {
-        textoEncabezado += " (" + d.impDestino + ")";
-      }
-    }
-
-    if (d.intervencion && d.intervencion.trim() !== '') {
-      textoEncabezado += ", con intervención de " + d.intervencion + ", ";
-    } else {
-      textoEncabezado += ", ";
-    }
+    if (d.encuadre && d.encuadre.trim() !== '') textoEncabezado += " " + d.encuadre;
+    if (d.caratula && d.caratula.trim() !== '') textoEncabezado += ", caratulado: " + d.caratula;
+    if (d.denNombre && d.denNombre.trim() !== '') textoEncabezado += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+    if (d.vicNombre && d.vicNombre.trim() !== '') textoEncabezado += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+    if (d.cauNombre && d.cauNombre.trim() !== '') textoEncabezado += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+    if (d.impNombre && d.impNombre.trim() !== '') textoEncabezado += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+    textoEncabezado += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", " : ", ";
 
     let cuerpoParrafoHtml = '';
-
     if (window.carpetasMedicasEstado.opcion === 'noposee' || (window.carpetasMedicasEstado.opcion === 'carpeta' && window.carpetasMedicasEstado.lista.length === 0)) {
       cuerpoParrafoHtml = `
         <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
@@ -961,36 +965,28 @@ document.addEventListener('DOMContentLoaded', function() {
       `;
     }
 
-    return `
-      ${logoSVG}
+    const htmlContent = `
       <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
         REF.: Pcir. Informe de Carpetas médicas<br>
         ${d.partido || ''}, ${d.fechaRecepcion || ''}
       </div>
-
       <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
         AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
         ${d.instructor ? d.instructor.toUpperCase() : ''}
       </div>
-
       ${cuerpoParrafoHtml}
-
       <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
         Adjunto captura del Sistema Informático del Personal Policial (SIPP) para mejor ilustración de lo informado.
       </div>
-
       <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
         Lo expuesto es todo en cuanto informo a usted.
       </div>
     `;
+
+    return renderGenericDocument([htmlContent]);
   }
 
-  /* Estado en memoria de las imágenes cargadas para las 2 Vistas Fotográficas */
-  window.fotosCargadas = {
-    foto1: null,
-    foto2: null
-  };
-
+  window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
   window.zonaFotoSeleccionada = 'foto1';
 
   window.seleccionarZonaFoto = function(idZona) {
@@ -1007,9 +1003,10 @@ document.addEventListener('DOMContentLoaded', function() {
       window.fotosCargadas[idZona] = e.target.result;
       const dropzone = document.getElementById(`zone-${idZona}`);
       if (dropzone) {
+        const numVista = idZona.replace('foto', '');
         dropzone.innerHTML = `
           <img src="${e.target.result}" alt="Foto ${idZona}">
-          <div class="foto-label-tag">VISTA N° ${idZona === 'foto1' ? '1' : '2'}</div>
+          <div class="foto-label-tag">VISTA N° ${numVista}</div>
         `;
       }
     };
@@ -1018,45 +1015,35 @@ document.addEventListener('DOMContentLoaded', function() {
 
   window.handleFileSelectFoto = function(event, idZona) {
     const file = event.target.files[0];
-    if (file) {
-      window.cargarImagenEnZona(idZona, file);
-    }
+    if (file) window.cargarImagenEnZona(idZona, file);
   };
 
   window.handleDragOverFoto = function(event) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault(); event.stopPropagation();
     event.currentTarget.classList.add('dragover');
   };
 
   window.handleDragLeaveFoto = function(event) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault(); event.stopPropagation();
     event.currentTarget.classList.remove('dragover');
   };
 
   window.handleDropFoto = function(event, idZona) {
-    event.preventDefault();
-    event.stopPropagation();
+    event.preventDefault(); event.stopPropagation();
     event.currentTarget.classList.remove('dragover');
     window.seleccionarZonaFoto(idZona);
     const files = event.dataTransfer.files;
-    if (files && files.length > 0) {
-      window.cargarImagenEnZona(idZona, files[0]);
-    }
+    if (files && files.length > 0) window.cargarImagenEnZona(idZona, files[0]);
   };
 
   document.addEventListener('paste', function(event) {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (!activeTab || activeTab.getAttribute('data-tab') !== 'tab-fotos') return;
-
     const items = (event.clipboardData || event.originalEvent.clipboardData).items;
     for (let item of items) {
       if (item.type.indexOf('image') !== -1) {
         const blob = item.getAsFile();
-        if (window.zonaFotoSeleccionada) {
-          window.cargarImagenEnZona(window.zonaFotoSeleccionada, blob);
-        }
+        if (window.zonaFotoSeleccionada) window.cargarImagenEnZona(window.zonaFotoSeleccionada, blob);
         break;
       }
     }
@@ -1071,9 +1058,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
       if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
         const targetContainer = document.getElementById('col-div-diligencias-list-target');
-        if (targetContainer) {
-          targetContainer.innerHTML = renderDiligenciasColDivHtml();
-        }
+        if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
         actualizarColDivEnVivo();
       }
     }
@@ -1084,9 +1069,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
       const targetContainer = document.getElementById('col-div-diligencias-list-target');
-      if (targetContainer) {
-        targetContainer.innerHTML = renderDiligenciasColDivHtml();
-      }
+      if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
       actualizarColDivEnVivo();
     }
   };
@@ -1104,42 +1087,35 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
       const liveContainer = document.getElementById('col-div-live-preview-target');
-      if (liveContainer) {
-        liveContainer.innerHTML = renderColDivA4Content();
-      }
+      if (liveContainer) liveContainer.innerHTML = renderColDivA4Content();
     }
   };
 
   function renderColDivA4Content() {
     const d = getFormValues();
-    let itemsDiligenciasHtml = diligenciasColDiv.map(dil => `
-      <li>${dil} de <b>${d.impNombre || d.cauNombre}</b>.</li>
-    `).join('');
+    let itemsDiligenciasHtml = diligenciasColDiv.map(dil => `<li>${dil} de <b>${d.impNombre || d.cauNombre}</b>.</li>`).join('');
 
-    return `
-      ${logoSVG}
+    const htmlContent = `
       <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
         REF.: Star. Colaboración<br>
         ${d.partido || ''}, ${d.fechaRecepcion || ''}
       </div>
-
       <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase;">
         AL SEÑOR JEFE<br>
         ${d.colaboracion || ''}
       </div>
-
       <div class="sangria-estandar" style="margin-bottom: 1em;">
         Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de <b>${d.caratula}</b> en tramite ante <b>${d.intervencion}</b> realizada el <b>${d.fechaHecho}</b>, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:
       </div>
-
       <ul style="padding-left: 1.2cm; line-height: 1.6; text-align: justify; margin: 1em 0; font-size: 10pt;">
         ${itemsDiligenciasHtml}
       </ul>
-
       <div class="sangria-estandar" style="margin-top: 2em;">
         Lo expuesto es todo en cuanto solicito a usted.
       </div>
     `;
+
+    return renderGenericDocument([htmlContent]);
   }
 
   let diligenciasCorreAgregado = [
@@ -1160,9 +1136,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
       if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
         const targetContainer = document.getElementById('corre-diligencias-list-target');
-        if (targetContainer) {
-          targetContainer.innerHTML = renderDiligenciasCorreHtml();
-        }
+        if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
         actualizarCorreEnVivo();
       }
     }
@@ -1173,9 +1147,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
       const targetContainer = document.getElementById('corre-diligencias-list-target');
-      if (targetContainer) {
-        targetContainer.innerHTML = renderDiligenciasCorreHtml();
-      }
+      if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
       actualizarCorreEnVivo();
     }
   };
@@ -1217,9 +1189,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
       if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
         const destContainer = document.getElementById('parte-dest-list-target');
-        if (destContainer) {
-          destContainer.innerHTML = renderDestinatariosParteHtml();
-        }
+        if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
         actualizarParteEnVivo();
       }
     }
@@ -1230,9 +1200,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
       const destContainer = document.getElementById('parte-dest-list-target');
-      if (destContainer) {
-        destContainer.innerHTML = renderDestinatariosParteHtml();
-      }
+      if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
       actualizarParteEnVivo();
     }
   };
@@ -1249,9 +1217,7 @@ document.addEventListener('DOMContentLoaded', function() {
   let indiceItems = listaDesplegableColumnaM.map(texto => ({ texto, folio: '' }));
 
   window.actualizarFolioIndice = function(index, valor) {
-    if (indiceItems[index]) {
-      indiceItems[index].folio = valor;
-    }
+    if (indiceItems[index]) indiceItems[index].folio = valor;
   };
 
   window.agregarItemIndice = function() {
@@ -1260,20 +1226,91 @@ document.addEventListener('DOMContentLoaded', function() {
     const valor = select.value;
     if (valor) {
       indiceItems.push({ texto: valor, folio: '' });
-      const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
-      if (activeTab && activeTab.getAttribute('data-tab') === 'tab-indice_diligencias') {
-        previewContainer.innerHTML = renderDocumentTemplate('tab-indice_diligencias');
-      }
+      actualizarIndiceEnVivo();
     }
   };
 
   window.quitarItemIndice = function(index) {
     indiceItems.splice(index, 1);
+    actualizarIndiceEnVivo();
+  };
+
+  function renderIndiceDiligenciasListaHtml() {
+    return indiceItems.map((item, idx) => `
+      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
+        <span style="font-size: 0.78rem; font-weight: 600;">${item.texto}</span>
+        <button class="btn-del-row" onclick="quitarItemIndice(${idx})" title="Quitar elemento" style="margin-left: 8px;">✕</button>
+      </li>
+    `).join('');
+  }
+
+  window.actualizarIndiceEnVivo = function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-indice_diligencias') {
-      previewContainer.innerHTML = renderDocumentTemplate('tab-indice_diligencias');
+      const targetContainer = document.getElementById('indice-diligencias-list-target');
+      if (targetContainer) targetContainer.innerHTML = renderIndiceDiligenciasListaHtml();
+      const liveContainer = document.getElementById('indice-live-preview-target');
+      if (liveContainer) liveContainer.innerHTML = renderIndiceA4PagesContent();
     }
   };
+
+  function renderIndiceA4PagesContent() {
+    const ITEMS_POR_PAGINA_PRIMERA = 16;
+    const ITEMS_POR_PAGINA_SIGUIENTES = 22;
+    
+    let paginasIndiceHtml = '';
+    let totalItems = indiceItems.length;
+    let itemIndex = 0;
+    let numPagina = 1;
+
+    let paginasArray = [];
+
+    while (itemIndex < totalItems || totalItems === 0) {
+      let limite = (numPagina === 1) ? ITEMS_POR_PAGINA_PRIMERA : ITEMS_POR_PAGINA_SIGUIENTES;
+      let itemsPagina = indiceItems.slice(itemIndex, itemIndex + limite);
+      
+      let rowsIndiceHtml = itemsPagina.map((item, idxAbs) => {
+        let actualIndex = itemIndex + idxAbs;
+        return `
+          <tr>
+            <td>${item.texto}</td>
+            <td style="text-align: center;">
+              <input type="text" class="input-folio" value="${item.folio || ''}" oninput="actualizarFolioIndice(${actualIndex}, this.value)" placeholder="...">
+            </td>
+            <td style="width: 40px; text-align: center;" class="indice-controls">
+              <button class="btn-del-row" onclick="quitarItemIndice(${actualIndex})" title="Quitar de la lista">✕</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+
+      let encabezadoPagina = numPagina === 1 ? `
+        <div style="text-align: center; font-weight: bold; font-size: 18pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
+      ` : '';
+
+      paginasArray.push(`
+        ${encabezadoPagina}
+        <table class="table-oficial">
+          <thead>
+            <tr>
+              <th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th>
+              <th style="width: 80px; text-align: center;">Folio/s</th>
+              <th style="width: 40px; text-align: center;" class="indice-controls">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${rowsIndiceHtml}
+          </tbody>
+        </table>
+      `);
+
+      itemIndex += limite;
+      numPagina++;
+      if (totalItems === 0) break;
+    }
+
+    return renderGenericDocument(paginasArray);
+  }
 
   document.querySelectorAll('.select-dependencia, .select-destino').forEach(select => {
     select.innerHTML = '';
@@ -1313,81 +1350,104 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27400%27%20height%3D%2760%27%20viewBox%3D%270%200%20400%2060%27%3E%3Crect%20width%3D%27110%27%20height%3D%2735%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%277%27%20y%3D%2716%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%277%27%20y%3D%2727%27%20font-family%3D%27Arial%27%20font-size%3D%279%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2718%27%20font-family%3D%27Arial%27%20font-size%3D%2710%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27200%27%20y%3D%2736%27%20font-family%3D%27Arial%27%20font-size%3D%2718%27%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E"></div>`;
 
+  /* FUNCIÓN GENÉRICA PARA ENVOLVER HOJAS A4 CUMPLIENDO REGLAS DE ENCABEZADO Y SALTO DE PÁGINA */
+  function renderGenericDocument(pagesArray) {
+    const totalPages = pagesArray.length;
+    return pagesArray.map((pageInnerContent, index) => {
+      const pageNum = index + 1;
+      const isOddPage = (pageNum % 2 !== 0);
+      const headerHtml = isOddPage ? logoSVG : '';
+      const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - SIN ENCABEZADO)`;
+
+      return `
+        <div class="a4-page">
+          <div class="page-break-indicator">📄 ${pageTypeLabel}</div>
+          ${headerHtml}
+          ${pageInnerContent}
+        </div>
+      `;
+    }).join('');
+  }
+
   function getFormValues() {
     const elemActaRelato = document.getElementById('f_78_relato_acta');
+    const elemSintesis = document.getElementById('f_79_sintesis_hecho');
+    const elemTestimonial = document.getElementById('f_80_relato_testimonial');
 
     return {
-      fechaRecepcion: document.getElementById('f_00_fecha_recepcion').value, // B3 ('CARGA DE DATOS'!B3)
-      dependencia: document.getElementById('f_01_dependencia').value,         // B4 ('CARGA DE DATOS'!B4)
-      direccion: document.getElementById('f_02_direccion').value,             // B5 ('CARGA DE DATOS'!B5)
-      entre1: document.getElementById('f_03_entre_calle_1').value,            // B6 ('CARGA DE DATOS'!B6)
-      entre2: document.getElementById('f_04_entre_calle_2').value,            // B7 ('CARGA DE DATOS'!B7)
-      localidad: document.getElementById('f_05_localidad').value,             // B9 ('CARGA DE DATOS'!B9)
-      partido: document.getElementById('f_06_partido').value,                 // B8 ('CARGA DE DATOS'!B8)
-      instructor: document.getElementById('f_07_instructor').value,           // B10 ('CARGA DE DATOS'!B10)
-      cargoInstructor: document.getElementById('f_08_cargo_instructor').value,// B11 ('CARGA DE DATOS'!B11)
-      secretario: document.getElementById('f_09_secretario').value,           // B12 ('CARGA DE DATOS'!B12)
-      cargoSecretario: document.getElementById('f_10_cargo_secretario').value,// B13 ('CARGA DE DATOS'!B13)
-      colaboracion: document.getElementById('f_12_colaboracion').value,       // B13
-      cauNombre: document.getElementById('f_13_cau_nombre').value,           // B14 / B20
-      cauEdad: document.getElementById('f_14_cau_edad').value,               // B15
-      cauDni: document.getElementById('f_15_cau_dni').value,                 // B16
-      cauDomicilio: document.getElementById('f_16_cau_domicilio').value,     // B17
-      cauEntreCalles: document.getElementById('f_17_cau_entre_calles').value,// B18
-      cauLocalidad: document.getElementById('f_18_cau_localidad').value,     // B19
-      cauPartido: document.getElementById('f_19_cau_partido').value,         // B20
-      cauContacto: document.getElementById('f_20_cau_contacto').value,        // B21
-      cauDestino: document.getElementById('f_21_cau_destino').value,         // B22 / B48
-      cauEscalon: document.getElementById('f_21b_cau_escalon').value,         // B23 / B24
-      cauEntrada: document.getElementById('f_21c_cau_entrada').value,         // B24 / B27
-      cauSalida: document.getElementById('f_21d_cau_salida').value,           // B25 / B28
-      cauModalidad: document.getElementById('f_21e_cau_modalidad').value,     // B26 / B30
-      cauCircunstancias: document.getElementById('f_21f_cau_circunstancias').value, // B27 / B31
-      magistrado: document.getElementById('f_87_magistrado').value,           // B28 / B32
-      dptoJudicial: document.getElementById('f_88_dpto_judicial').value,     // B30 / B35
-      procesoPenal: document.getElementById('f_89_proceso_penal').value,     // B31 / B36
-      caratulaPenal: document.getElementById('f_90_caratula_penal').value,   // B32
-      denNombre: document.getElementById('f_60_den_nombre').value,           // B33 / B40
-      denEdad: document.getElementById('f_61_den_edad').value,               // B34
-      denDni: document.getElementById('f_62_den_dni').value,                 // B35
-      denDomicilio: document.getElementById('f_63_den_domicilio').value,     // B36
-      denEntreCalles: document.getElementById('f_64_den_entre_calles').value, // B37
-      denLocalidad: document.getElementById('f_65_den_localidad').value,     // B38
-      denPartido: document.getElementById('f_66_den_partido').value,         // B39
-      denContacto: document.getElementById('f_67_den_contacto').value,        // B40
-      denDestino: document.getElementById('f_68_den_destino').value,         // B41
-      impNombre: document.getElementById('f_42_imp_nombre').value,           // B42
-      impEdad: document.getElementById('f_43_imp_edad').value,               // B43
-      impDni: document.getElementById('f_44_imp_dni').value,                 // B44
-      impDomicilio: document.getElementById('f_45_imp_domicilio').value,     // B45
-      impEntreCalles: document.getElementById('f_46_imp_entre_calles').value,// B46
-      impLocalidad: document.getElementById('f_47_imp_localidad').value,     // B47
-      impPartido: document.getElementById('f_48_imp_partido').value,         // B48
-      impContacto: document.getElementById('f_49_imp_contacto').value,        // B49
-      impDestino: document.getElementById('f_50_imp_destino').value,         // B50
-      vicNombre: document.getElementById('f_51_vic_nombre').value,           // B40
-      vicEdad: document.getElementById('f_52_vic_edad').value,               // B52
-      vicDni: document.getElementById('f_53_vic_dni').value,                 // B53
-      vicDomicilio: document.getElementById('f_54_vic_domicilio').value,     // B54
-      vicEntreCalles: document.getElementById('f_55_vic_entre_calles').value,// B55
-      vicLocalidad: document.getElementById('f_56_vic_localidad').value,     // B56
-      vicPartido: document.getElementById('f_57_vic_partido').value,         // B57
-      vicContacto: document.getElementById('f_58_vic_contacto').value,        // B58
-      vicDestino: document.getElementById('f_59_vic_destino').value,         // B48
-      fechaHecho: document.getElementById('f_22_hecho_fecha').value,          // B59
-      horaHecho: document.getElementById('f_18_hecho_hora').value,           // B18 ('CARGA DE DATOS'!B18)
-      exp: document.getElementById('f_23_exp_elec').value,                   // B61
-      caratula: document.getElementById('f_24_caratula').value,              // B20
-      encuadre: document.getElementById('f_25_encuadre').value,              // B21
-      intervencion: document.getElementById('f_26_intervencion').value,      // B4
-      lugarHecho: document.getElementById('f_27_hecho_lugar').value,         // B23
-      ec1: document.getElementById('f_31_ec1') ? document.getElementById('f_31_ec1').value : '', // B27
-      ec2: document.getElementById('f_32_ec2') ? document.getElementById('f_32_ec2').value : '', // B31
-      hechoLoc: document.getElementById('f_39_hecho_loc').value,             // B35
-      hechoPartido: document.getElementById('f_40_hecho_partido').value,     // B36
-      actaRelato: elemActaRelato ? elemActaRelato.value : '',                // B140 ('CARGA DE DATOS'!B140)
-      sintesis: elemActaRelato ? elemActaRelato.value : '',                  // B140
-      // Campos de estado de vías / calles específicos para inspección ocular
+      fechaRecepcion: document.getElementById('f_00_fecha_recepcion').value,
+      dependencia: document.getElementById('f_01_dependencia').value,
+      direccion: document.getElementById('f_02_direccion').value,
+      entre1: document.getElementById('f_03_entre_calle_1').value,
+      entre2: document.getElementById('f_04_entre_calle_2').value,
+      localidad: document.getElementById('f_05_localidad').value,
+      partido: document.getElementById('f_06_partido').value,
+      instructor: document.getElementById('f_07_instructor').value,
+      cargoInstructor: document.getElementById('f_08_cargo_instructor').value,
+      secretario: document.getElementById('f_09_secretario').value,
+      cargoSecretario: document.getElementById('f_10_cargo_secretario').value,
+      colaboracion: document.getElementById('f_12_colaboracion').value,
+      cauNombre: document.getElementById('f_13_cau_nombre').value,
+      cauEdad: document.getElementById('f_14_cau_edad').value,
+      cauDni: document.getElementById('f_15_cau_dni').value,
+      cauDomicilio: document.getElementById('f_16_cau_domicilio').value,
+      cauEntreCalles: document.getElementById('f_17_cau_entre_calles').value,
+      cauLocalidad: document.getElementById('f_18_cau_localidad').value,
+      cauPartido: document.getElementById('f_19_cau_partido').value,
+      cauContacto: document.getElementById('f_20_cau_contacto').value,
+      cauDestino: document.getElementById('f_21_cau_destino').value,
+      cauEscalon: document.getElementById('f_21b_cau_escalon').value,
+      cauEntrada: document.getElementById('f_21c_cau_entrada').value,
+      cauSalida: document.getElementById('f_21d_cau_salida').value,
+      cauModalidad: document.getElementById('f_21e_cau_modalidad').value,
+      cauCircunstancias: document.getElementById('f_21f_cau_circunstancias').value,
+      magistrado: document.getElementById('f_87_magistrado').value,
+      dptoJudicial: document.getElementById('f_88_dpto_judicial').value,
+      procesoPenal: document.getElementById('f_89_proceso_penal').value,
+      caratulaPenal: document.getElementById('f_90_caratula_penal').value,
+      denNombre: document.getElementById('f_60_den_nombre').value,
+      denEdad: document.getElementById('f_61_den_edad').value,
+      denDni: document.getElementById('f_62_den_dni').value,
+      denDomicilio: document.getElementById('f_63_den_domicilio').value,
+      denEntreCalles: document.getElementById('f_64_den_entre_calles').value,
+      denLocalidad: document.getElementById('f_65_den_localidad').value,
+      denPartido: document.getElementById('f_66_den_partido').value,
+      denContacto: document.getElementById('f_67_den_contacto').value,
+      denDestino: document.getElementById('f_68_den_destino').value,
+      impNombre: document.getElementById('f_42_imp_nombre').value,
+      impEdad: document.getElementById('f_43_imp_edad').value,
+      impDni: document.getElementById('f_44_imp_dni').value,
+      impDomicilio: document.getElementById('f_45_imp_domicilio').value,
+      impEntreCalles: document.getElementById('f_46_imp_entre_calles').value,
+      impLocalidad: document.getElementById('f_47_imp_localidad').value,
+      impPartido: document.getElementById('f_48_imp_partido').value,
+      impContacto: document.getElementById('f_49_imp_contacto').value,
+      impDestino: document.getElementById('f_50_imp_destino').value,
+      vicNombre: document.getElementById('f_51_vic_nombre').value,
+      vicEdad: document.getElementById('f_52_vic_edad').value,
+      vicDni: document.getElementById('f_53_vic_dni').value,
+      vicDomicilio: document.getElementById('f_54_vic_domicilio').value,
+      vicEntreCalles: document.getElementById('f_55_vic_entre_calles').value,
+      vicLocalidad: document.getElementById('f_56_vic_localidad').value,
+      vicPartido: document.getElementById('f_57_vic_partido').value,
+      vicContacto: document.getElementById('f_58_vic_contacto').value,
+      vicDestino: document.getElementById('f_59_vic_destino').value,
+      fechaHecho: document.getElementById('f_22_hecho_fecha').value,
+      horaHecho: document.getElementById('f_18_hecho_hora').value,
+      exp: document.getElementById('f_23_exp_elec').value,
+      caratula: document.getElementById('f_24_caratula').value,
+      encuadre: document.getElementById('f_25_encuadre').value,
+      intervencion: document.getElementById('f_26_intervencion').value,
+      lugarHecho: document.getElementById('f_27_hecho_lugar').value,
+      ec1: document.getElementById('f_31_ec1') ? document.getElementById('f_31_ec1').value : '',
+      ec2: document.getElementById('f_32_ec2') ? document.getElementById('f_32_ec2').value : '',
+      hechoLoc: document.getElementById('f_39_hecho_loc').value,
+      hechoPartido: document.getElementById('f_40_hecho_partido').value,
+      
+      actaRelato: elemActaRelato ? elemActaRelato.value : '',
+      sintesis: elemSintesis ? elemSintesis.value : '',
+      testimonialRelato: elemTestimonial ? elemTestimonial.value : '',
+
       art1Tipo: document.getElementById('f_insp_art1_tipo') ? document.getElementById('f_insp_art1_tipo').value : 'asfalto',
       art1Estado: document.getElementById('f_insp_art1_estado') ? document.getElementById('f_insp_art1_estado').value : 'buen',
       art1Mano: document.getElementById('f_insp_art1_mano') ? document.getElementById('f_insp_art1_mano').value : 'doble',
@@ -1404,9 +1464,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-acta_constatacion') {
       const liveContainer = document.getElementById('acta-live-preview-target');
-      if (liveContainer) {
-        liveContainer.innerHTML = renderActaA4Content();
-      }
+      if (liveContainer) liveContainer.innerHTML = renderActaA4Content();
     }
   };
 
@@ -1414,9 +1472,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-testimonial') {
       const liveContainer = document.getElementById('testimonial-live-preview-target');
-      if (liveContainer) {
-        liveContainer.innerHTML = renderTestimonialA4Content();
-      }
+      if (liveContainer) liveContainer.innerHTML = renderTestimonialA4Content();
     }
   };
 
@@ -1424,9 +1480,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-inspeccion_ocular') {
       const liveContainer = document.getElementById('inspeccion-live-preview-target');
-      if (liveContainer) {
-        liveContainer.innerHTML = renderInspeccionA4Content();
-      }
+      if (liveContainer) liveContainer.innerHTML = renderInspeccionA4Content();
     }
   };
 
@@ -1434,9 +1488,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
       const liveContainer = document.getElementById('parte-live-preview-target');
-      if (liveContainer) {
-        liveContainer.innerHTML = renderParteA4Content();
-      }
+      if (liveContainer) liveContainer.innerHTML = renderParteA4Content();
     }
   };
 
@@ -1444,9 +1496,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
       const liveContainer = document.getElementById('corre-live-preview-target');
-      if (liveContainer) {
-        liveContainer.innerHTML = renderCorreA4Content();
-      }
+      if (liveContainer) liveContainer.innerHTML = renderCorreA4Content();
     }
   };
 
@@ -1455,33 +1505,21 @@ document.addEventListener('DOMContentLoaded', function() {
     const iframeMap = document.getElementById('f_croquis_map_iframe');
     if (inputBuscar && iframeMap) {
       const query = inputBuscar.value.trim();
-      if (query) {
-        iframeMap.src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
-      }
+      if (query) iframeMap.src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
     }
   };
 
   window.abrirGoogleMapsManual = function() {
     const inputBuscar = document.getElementById('f_croquis_search_input');
-    let query = '';
-    if (inputBuscar && inputBuscar.value.trim()) {
-      query = inputBuscar.value.trim();
-    } else {
-      const d = getFormValues();
-      query = `${d.lugarHecho} y ${d.ec1}, ${d.hechoLoc}, ${d.hechoPartido}`;
-    }
+    let query = inputBuscar && inputBuscar.value.trim() ? inputBuscar.value.trim() : `${getFormValues().lugarHecho} y ${getFormValues().ec1}, ${getFormValues().hechoLoc}, ${getFormValues().hechoPartido}`;
     window.open(`https://www.google.com/maps/search/${encodeURIComponent(query)}`, '_blank');
   };
 
   function renderCorreA4Content() {
     const d = getFormValues();
+    let itemsDiligenciasHtml = diligenciasCorreAgregado.map(dil => `<li>${dil}</li>`).join('');
 
-    let itemsDiligenciasHtml = diligenciasCorreAgregado.map(dil => `
-      <li>${dil}</li>
-    `).join('');
-
-    return `
-      ${logoSVG}
+    const pageContent = `
       <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">
         Corresponde a expediente ${d.caratula}
       </div>
@@ -1501,94 +1539,63 @@ document.addEventListener('DOMContentLoaded', function() {
         ${d.dependencia}, a los ${d.fechaRecepcion}
       </div>
     `;
+
+    return renderGenericDocument([pageContent]);
   }
 
   function renderActaA4Content() {
     const d = getFormValues();
-
-    return `
-      ${logoSVG}
+    const pageContent = `
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
       <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
         En la localidad de <b>${d.localidad}</b>, partido de <b>${d.partido}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia}</b>, sita en <b>${d.direccion}</b>, entre calle <b>${d.entre1}</b> del mismo medio, a los <b>${d.fechaRecepcion}</b>, siendo las <b>${d.horaHecho}</b> horas, el suscripto <b>${d.instructor}</b> (<b>${d.cargoInstructor}</b>) , secundado por el <b>${d.secretario}</b> (<b>${d.cargoSecretario}</b>), ambos numerarios de <b>${d.dependencia}</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. ${d.actaRelato}. No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.
       </div>
     `;
+
+    return renderGenericDocument([pageContent]);
   }
 
   function renderTestimonialA4Content() {
     const d = getFormValues();
     const horaActual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-    return `
-      ${logoSVG}
+    const pageContent = `
       <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
       <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.4;">
-        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establishedo en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de OFICIAL, del escalafón GENERAL, legajo personal N° ${d.denDni || ''}, cumpliendo en la actualidad sus servicios en el ${d.denDestino || ''}, como EMPLEADO. En la fecha, se hace presente a los fines de prestar declaración testimonial en ${d.caratula || ''}, caratulado ${d.encuadre || ''}, donde se analiza la conducta del ${d.impNombre || ''} de la ${d.impDestino || ''}, en trámite ante ${d.intervencion || ''}, incoadas el ${d.fechaRecepcion || ''}. En esa intelligence relata ${d.sintesis || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
+        En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
       </div>
     `;
+
+    return renderGenericDocument([pageContent]);
   }
 
   function renderInspeccionA4Content() {
     const d = getFormValues();
 
-    return `
-      ${logoSVG}
+    const pageContent = `
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>
       <div class="sangria-cero" style="text-align: justify; font-size: 9.5pt; line-height: 1.5; text-indent: 0cm;">
         En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} y ${d.entre2 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.fechaRecepcion || ''} horas, el suscripto ${d.instructor || ''} (${d.cargoInstructor || ''}) , secundado por el ${d.secretario || ''} (${d.cargoSecretario || ''}), ambos numerarios de ${d.dependencia || ''} y conocedores de las penas con que la Ley castiga el Falso Testimonio. Por orden de la superioridad en relación a Actuaciones Sumariales Administrativas ${d.encuadre || ''} caratuladas ${d.caratula || ''}, donde resultó víctima ${d.vicNombre || ''}, numerario de ${d.vicDestino || ''}, en trámite ante ${d.dependencia || ''}, nos constituimos en ${d.lugarHecho || ''}, entre ${d.entre1 || ''} y ${d.entre2 || ''}, localidad ${d.hechoLoc || ''} y partido ${d.hechoPartido || ''}, lugar donde se dice que ocurrieron los hechos que dieran origen a la formación de las presentes actuaciones, fines de dar cumplimiento a diligencia Inspección Ocular en donde arribó a las siguientes CONCLUSIONES: Que la zona resulta ser zona urbana, poblada con viviendas en su mayoría de una planta y de dos plantas, gozando con todos los adelantos de la época actual (gas natural, red cloacal, agua corriente, luz eléctrica, red telefónica). Que, la arteria ${d.lugarHecho || ''}, que resulta ser de ${d.art1Tipo || ''} en ${d.art1Estado || ''} estado de conservación, circulación vehicular de ${d.art1Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial, no existiendo en el lugar semáforos, si existiendo señales de tránsito. Que, la arteria ${d.entre1 || ''}, resulta ser de ${d.art2Tipo || ''} en ${d.art2Estado || ''} estado de conservación, circulación vehicular de ${d.art2Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. Que, la arteria ${d.entre2 || ''}, resulta ser de ${d.art3Tipo || ''} en ${d.art3Estado || ''} estado de conservación, circulación vehicular de ${d.art3Mano || ''} mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. No existiendo en el lugar semáforos, si existiendo señales de tránsito. No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.
       </div>
     `;
+
+    return renderGenericDocument([pageContent]);
   }
 
   function renderParteA4Content() {
     const d = getFormValues();
-
-    let destListItemsHtml = destinatariosParteEscrito.map((dest) => `
-      <li>${dest}</li>
-    `).join('');
+    let destListItemsHtml = destinatariosParteEscrito.map((dest) => `<li>${dest}</li>`).join('');
 
     let textoIntroductorio = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
-    if (d.encuadre && d.encuadre.trim() !== '') {
-      textoIntroductorio += " " + d.encuadre;
-    }
-    if (d.caratula && d.caratula.trim() !== '') {
-      textoIntroductorio += ", caratulado: " + d.caratula;
-    }
-    if (d.denNombre && d.denNombre.trim() !== '') {
-      textoIntroductorio += ", donde resulta denunciante: " + d.denNombre;
-      if (d.denDestino && d.denDestino.trim() !== '') {
-        textoIntroductorio += " (" + d.denDestino + ")";
-      }
-    }
-    if (d.vicNombre && d.vicNombre.trim() !== '') {
-      textoIntroductorio += ", víctima: " + d.vicNombre;
-      if (d.vicDestino && d.vicDestino.trim() !== '') {
-        textoIntroductorio += " (" + d.vicDestino + ")";
-      }
-    }
-    if (d.cauNombre && d.cauNombre.trim() !== '') {
-      textoIntroductorio += ", causante: " + d.cauNombre;
-      if (d.cauDestino && d.cauDestino.trim() !== '') {
-        textoIntroductorio += " (" + d.cauDestino + ")";
-      }
-    }
-    if (d.impNombre && d.impNombre.trim() !== '') {
-      textoIntroductorio += ", imputado: " + d.impNombre;
-      if (d.impDestino && d.impDestino.trim() !== '') {
-        textoIntroductorio += " (" + d.impDestino + ")";
-      }
-    }
-    if (d.intervencion && d.intervencion.trim() !== '') {
-      textoIntroductorio += ", con intervención de " + d.intervencion + ".";
-    } else {
-      textoIntroductorio += ".";
-    }
+    if (d.encuadre && d.encuadre.trim() !== '') textoIntroductorio += " " + d.encuadre;
+    if (d.caratula && d.caratula.trim() !== '') textoIntroductorio += ", caratulado: " + d.caratula;
+    if (d.denNombre && d.denNombre.trim() !== '') textoIntroductorio += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+    if (d.vicNombre && d.vicNombre.trim() !== '') textoIntroductorio += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+    if (d.cauNombre && d.cauNombre.trim() !== '') textoIntroductorio += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+    if (d.impNombre && d.impNombre.trim() !== '') textoIntroductorio += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+    textoIntroductorio += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + "." : ".";
 
-    return `
-      <div style="position: absolute; top: calc(5cm - 1cm - 52px); left: 3cm; margin: 0;">
-        ${logoSVG}
-      </div>
-      
+    const pageContent = `
       <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4;">
         REF.: Ccar. el inicio de Actuaciones Sumariales Administrativas<br>
         ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
@@ -1605,7 +1612,7 @@ document.addEventListener('DOMContentLoaded', function() {
       </div>
 
       <div class="sangria-cero" style="margin-top: 1em;">
-        <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, siendo las ${d.horaHecho}, cuando se toma conocimiento que ${d.sintesis}.
+        <b>SÍNTESIS DEL HECHO:</b> Los presentes actuados tienen su génesis en ${d.fechaRecepcion}, siendo las ${d.horaHecho}, cuando ${d.sintesis}.
       </div>
 
       <div class="sangria-estandar" style="margin-top: 1em;">
@@ -1616,6 +1623,8 @@ document.addEventListener('DOMContentLoaded', function() {
         Lo expuesto es todo en cuanto informo a usted.
       </div>
     `;
+
+    return renderGenericDocument([pageContent]);
   }
 
   function renderDocumentTemplate(tabKey) {
@@ -1624,98 +1633,32 @@ document.addEventListener('DOMContentLoaded', function() {
     switch(tabKey) {
       case 'tab-caratula':
         let rowsHtml = '';
-        
         if (d.exp && d.exp.trim() !== '') {
-          rowsHtml += `
-          <div class="caratula-row">
-            <div class="caratula-label">EXPEDIENTE ELECTRONICO:</div>
-            <div class="caratula-val">${d.exp}</div>
-          </div>`;
+          rowsHtml += `<div class="caratula-row"><div class="caratula-label">EXPEDIENTE ELECTRONICO:</div><div class="caratula-val">${d.exp}</div></div>`;
         }
-
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">CALIFICACIÓN ADMINISTRATIVA:</div>
-          <div class="caratula-val">${d.encuadre || ''}</div>
-        </div>`;
-
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">FECHA DEL HECHO:</div>
-          <div class="caratula-val">${d.fechaHecho || ''}</div>
-        </div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">CALIFICACIÓN ADMINISTRATIVA:</div><div class="caratula-val">${d.encuadre || ''}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">FECHA DEL HECHO:</div><div class="caratula-val">${d.fechaHecho || ''}</div></div>`;
 
         if (d.denNombre && d.denNombre.trim() !== '') {
-          rowsHtml += `
-          <div class="caratula-row">
-            <div class="caratula-label">DENUNCIANTE:</div>
-            <div class="caratula-val">${d.denNombre}</div>
-          </div>`;
+          rowsHtml += `<div class="caratula-row"><div class="caratula-label">DENUNCIANTE:</div><div class="caratula-val">${d.denNombre}</div></div>`;
         }
-
         if (d.vicNombre && d.vicNombre.trim() !== '') {
-          rowsHtml += `
-          <div class="caratula-row">
-            <div class="caratula-label">VÍCTIMA:</div>
-            <div class="caratula-val">${d.vicNombre}</div>
-          </div>`;
+          rowsHtml += `<div class="caratula-row"><div class="caratula-label">VÍCTIMA:</div><div class="caratula-val">${d.vicNombre}</div></div>`;
         }
-
         if (d.cauNombre && d.cauNombre.trim() !== '') {
-          rowsHtml += `
-          <div class="caratula-row">
-            <div class="caratula-label">CAUSANTE:</div>
-            <div class="caratula-val">${d.cauNombre}</div>
-          </div>`;
-
-          rowsHtml += `
-          <div class="caratula-row">
-            <div class="caratula-label">DESTINO AL MOMENTO DEL HECHO:</div>
-            <div class="caratula-val">${d.cauDestino || ''}</div>
-          </div>`;
+          rowsHtml += `<div class="caratula-row"><div class="caratula-label">CAUSANTE:</div><div class="caratula-val">${d.cauNombre}</div></div>`;
+          rowsHtml += `<div class="caratula-row"><div class="caratula-label">DESTINO AL MOMENTO DEL HECHO:</div><div class="caratula-val">${d.cauDestino || ''}</div></div>`;
         }
-
         if (d.impNombre && d.impNombre.trim() !== '') {
-          rowsHtml += `
-          <div class="caratula-row">
-            <div class="caratula-label">IMPUTADO:</div>
-            <div class="caratula-val">${d.impNombre}</div>
-          </div>`;
+          rowsHtml += `<div class="caratula-row"><div class="caratula-label">IMPUTADO:</div><div class="caratula-val">${d.impNombre}</div></div>`;
         }
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">CTROL. DISCIPLINARIO INTERV.:</div><div class="caratula-val">${d.intervencion || ''}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">INSTRUCTOR:</div><div class="caratula-val">${d.instructor || ''}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">SECRETARIO DE ACTUACION:</div><div class="caratula-val">${d.secretario || ''}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">DEPENDENCIA INSTRUCTORA:</div><div class="caratula-val">${d.dependencia || ''}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">FECHA DE INICIO:</div><div class="caratula-val">${d.fechaRecepcion || ''}</div></div>`;
 
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">CTROL. DISCIPLINARIO INTERV.:</div>
-          <div class="caratula-val">${d.intervencion || ''}</div>
-        </div>`;
-
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">INSTRUCTOR:</div>
-          <div class="caratula-val">${d.instructor || ''}</div>
-        </div>`;
-
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">SECRETARIO DE ACTUACION:</div>
-          <div class="caratula-val">${d.secretario || ''}</div>
-        </div>`;
-
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">DEPENDENCIA INSTRUCTORA:</div>
-          <div class="caratula-val">${d.dependencia || ''}</div>
-        </div>`;
-
-        rowsHtml += `
-        <div class="caratula-row">
-          <div class="caratula-label">FECHA DE INICIO:</div>
-          <div class="caratula-val">${d.fechaRecepcion || ''}</div>
-        </div>`;
-
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageCaratulaContent = `
           <div class="caratula-page-body">
             <div>
               <div class="caratula-titulo-principal">ACTUACION SUMARIAL ADMINISTRATIVA</div>
@@ -1725,12 +1668,12 @@ document.addEventListener('DOMContentLoaded', function() {
               ${rowsHtml}
             </div>
           </div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageCaratulaContent]);
 
       case 'tab-reg_inst':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageRegInst = `
           <div style="margin-top: 1cm; line-height: 1.4; margin-left: 7cm; text-align: left; font-weight: bold;">
             REF.: Star. Registro Institucional<br>
             ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
@@ -1740,79 +1683,41 @@ document.addEventListener('DOMContentLoaded', function() {
             <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
           </div>
           <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establishedo en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+            Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
           </div>
           <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
-        </div>`;
+        `;
+        return renderGenericDocument([pageRegInst]);
 
       case 'tab-indice_diligencias':
-        let optionsHtml = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-        
-        const ITEMS_POR_PAGINA_PRIMERA = 18;
-        const ITEMS_POR_PAGINA_SIGUIENTES = 24;
-        
-        let paginasIndiceHtml = '';
-        let totalItems = indiceItems.length;
-        let itemIndex = 0;
-        let numPagina = 1;
+        let optionsHtmlIndice = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
 
-        while (itemIndex < totalItems || totalItems === 0) {
-          let limite = (numPagina === 1) ? ITEMS_POR_PAGINA_PRIMERA : ITEMS_POR_PAGINA_SIGUIENTES;
-          let itemsPagina = indiceItems.slice(itemIndex, itemIndex + limite);
-          
-          let rowsIndiceHtml = itemsPagina.map((item, idxAbs) => {
-            let actualIndex = itemIndex + idxAbs;
-            return `
-              <tr>
-                <td>${item.texto}</td>
-                <td style="text-align: center;">
-                  <input type="text" class="input-folio" value="${item.folio || ''}" oninput="actualizarFolioIndice(${actualIndex}, this.value)" placeholder="...">
-                </td>
-                <td style="width: 40px; text-align: center;" class="indice-controls">
-                  <button class="btn-del-row" onclick="quitarItemIndice(${actualIndex})" title="Quitar de la lista">✕</button>
-                </td>
-              </tr>
-            `;
-          }).join('');
-
-          let encabezadoPagina = numPagina === 1 ? `
-            <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
-            
-            <div class="indice-controls" style="margin-bottom: 12px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
-              <select id="select-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">
-                ${optionsHtml}
-              </select>
-              <button class="btn-secondary" onclick="agregarItemIndice()" style="white-space: nowrap;">➕ Agregar a la Lista</button>
+        return `
+        <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+          <div class="indice-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+            <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+              📋 GESTIÓN DE DILIGENCIAS DEL ÍNDICE
             </div>
-          ` : '';
 
-          let logoHtml = (numPagina % 2 !== 0) ? logoSVG : '';
-
-          paginasIndiceHtml += `
-            <div class="a4-page">
-              ${logoHtml}
-              ${encabezadoPagina}
-              <table class="table-oficial">
-                <thead>
-                  <tr>
-                    <th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th>
-                    <th style="width: 80px; text-align: center;">Folio/s</th>
-                    <th style="width: 40px; text-align: center;" class="indice-controls">Acción</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${rowsIndiceHtml}
-                </tbody>
-              </table>
+            <div class="sheet-row-single" style="width: 100%;">
+              <label>SELECCIONAR DILIGENCIA A AGREGAR:</label>
+              <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                <select id="select-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">
+                  ${optionsHtmlIndice}
+                </select>
+                <button class="btn-secondary" onclick="agregarItemIndice()" style="white-space: nowrap;">➕ Agregar</button>
+              </div>
+              <label style="margin-top: 6px; display: block;">DILIGENCIAS EN EL ÍNDICE:</label>
+              <ul id="indice-diligencias-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0; display: flex; flex-direction: column; gap: 4px;">
+                ${renderIndiceDiligenciasListaHtml()}
+              </ul>
             </div>
-          `;
+          </div>
 
-          itemIndex += limite;
-          numPagina++;
-          if (totalItems === 0) break;
-        }
-
-        return paginasIndiceHtml;
+          <div style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center;" id="indice-live-preview-target">
+            ${renderIndiceA4PagesContent()}
+          </div>
+        </div>`;
 
       case 'tab-acta_constatacion':
         return `
@@ -1865,22 +1770,20 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="sheet-row-single" style="width: 100%;">
-              <label>RELATO DEL ACTA (B140):</label>
+              <label>RELATO DEL ACTA (CARGA DE DATOS CELDA B140):</label>
               <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_78_relato_acta').value = this.value; actualizarActaEnVivo();">${d.actaRelato}</textarea>
             </div>
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page" id="acta-live-preview-target">
+            <div id="acta-live-preview-target">
               ${renderActaA4Content()}
             </div>
           </div>
         </div>`;
 
       case 'tab-recepcion':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pagRecepcion1 = `
           <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">Corresponde a expediente ${d.caratula}</div>
           <div style="text-align: left; font-weight: bold; margin-bottom: 1.2em;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
           <div style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">
@@ -1892,14 +1795,15 @@ document.addEventListener('DOMContentLoaded', function() {
           <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Cumplir con toda diligencia que sea de menester y/o surja de lo actuado.</p>
           <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Cumplidas todas las diligencias requeridas por el ente y vuelva para su prosecución.</p>
           <div style="text-align: center; font-weight: bold; margin-top: 2em;">CUMPLA EL ACTUARIO</div>
-        </div>
-        
-        <!-- PÁGINA 2 -->
-        <div class="a4-page">
+        `;
+
+        const pagRecepcion2 = `
           <div style="text-align: left; font-weight: bold; margin-bottom: 1em;">SEÑOR INSTRUCTOR:</div>
           <div style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Tomo conocimiento y daré estricto cumplimiento a lo ordenado por usted. CONSTE.</div>
           <div style="text-align: left; font-weight: bold; margin-top: 1em;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pagRecepcion1, pagRecepcion2]);
 
       case 'tab-parte_escrito':
         let destOptionsHtmlParte = listaDestinatariosColumnaG.map(opt => `<option value="${opt}">${opt}</option>`).join('');
@@ -1942,13 +1846,13 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="sheet-row-single" style="width: 100%;">
-              <label>SÍNTESIS DEL HECHO:</label>
-              <textarea style="min-height: 180px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_78_relato_acta').value = this.value; actualizarParteEnVivo();">${d.sintesis}</textarea>
+              <label>SÍNTESIS DEL HECHO (CARGA DE DATOS CELDA B131):</label>
+              <textarea style="min-height: 180px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_79_sintesis_hecho').value = this.value; actualizarParteEnVivo();">${d.sintesis}</textarea>
             </div>
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page" id="parte-live-preview-target" style="padding-top: 5cm; position: relative;">
+            <div id="parte-live-preview-target">
               ${renderParteA4Content()}
             </div>
           </div>
@@ -1979,7 +1883,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page" id="corre-live-preview-target">
+            <div id="corre-live-preview-target">
               ${renderCorreA4Content()}
             </div>
           </div>
@@ -1987,20 +1891,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
       case 'tab-cfyp':
         let introCFYP = "Dando cumplimiento a lo requerido por usted en relación a expediente";
-        if (d.encuadre && d.encuadre.trim() !== '') {
-          introCFYP += " " + d.encuadre;
-        }
-        if (d.caratula && d.caratula.trim() !== '') {
-          introCFYP += ", caratulado: " + d.caratula;
-        }
-        if (d.intervencion && d.intervencion.trim() !== '') {
-          introCFYP += ", con intervención de " + d.intervencion;
-        }
+        if (d.encuadre && d.encuadre.trim() !== '') introCFYP += " " + d.encuadre;
+        if (d.caratula && d.caratula.trim() !== '') introCFYP += ", caratulado: " + d.caratula;
+        if (d.intervencion && d.intervencion.trim() !== '') introCFYP += ", con intervención de " + d.intervencion;
         introCFYP += ". Respecto a Concepto funcional y privado del infractor, Informo los siguientes puntos del efectivo:";
 
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageCFYP = `
           <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 0.5em; text-transform: uppercase;">
             CONCEPTO FUNCIONAL Y PRIVADO
           </div>
@@ -2090,50 +1986,21 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sangria-estandar" style="margin-top: 1.5em;">
             Lo expuesto es todo en cuanto informo a usted.
           </div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageCFYP]);
 
       case 'tab-tdh':
         let introTDH = "Me dirijo a usted afines de informar en el marco de Actuaciones Sumariales Administrativas";
-        if (d.encuadre && d.encuadre.trim() !== '') {
-          introTDH += " " + d.encuadre;
-        }
-        if (d.caratula && d.caratula.trim() !== '') {
-          introTDH += ", caratulado: " + d.caratula;
-        }
-        if (d.denNombre && d.denNombre.trim() !== '') {
-          introTDH += ", donde resulta denunciante: " + d.denNombre;
-          if (d.denDestino && d.denDestino.trim() !== '') {
-            introTDH += " (" + d.denDestino + ")";
-          }
-        }
-        if (d.vicNombre && d.vicNombre.trim() !== '') {
-          introTDH += ", víctima: " + d.vicNombre;
-          if (d.vicDestino && d.vicDestino.trim() !== '') {
-            introTDH += " (" + d.vicDestino + ")";
-          }
-        }
-        if (d.cauNombre && d.cauNombre.trim() !== '') {
-          introTDH += ", causante: " + d.cauNombre;
-          if (d.cauDestino && d.cauDestino.trim() !== '') {
-            introTDH += " (" + d.cauDestino + ")";
-          }
-        }
-        if (d.impNombre && d.impNombre.trim() !== '') {
-          introTDH += ", imputado: " + d.impNombre;
-          if (d.impDestino && d.impDestino.trim() !== '') {
-            introTDH += " (" + d.impDestino + ")";
-          }
-        }
-        if (d.intervencion && d.intervencion.trim() !== '') {
-          introTDH += ", con intervención de " + d.intervencion + ", tipos, días, horarios y circunstancias del agente la momento del hecho:";
-        } else {
-          introTDH += ".";
-        }
+        if (d.encuadre && d.encuadre.trim() !== '') introTDH += " " + d.encuadre;
+        if (d.caratula && d.caratula.trim() !== '') introTDH += ", caratulado: " + d.caratula;
+        if (d.denNombre && d.denNombre.trim() !== '') introTDH += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+        if (d.vicNombre && d.vicNombre.trim() !== '') introTDH += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+        if (d.cauNombre && d.cauNombre.trim() !== '') introTDH += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+        if (d.impNombre && d.impNombre.trim() !== '') introTDH += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+        introTDH += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", tipos, días, horarios y circunstancias del agente la momento del hecho:" : ".";
 
-        return `
-        <div class="a4-page">
-          ${logoSVG}
-          
+        const pageTDH = `
           <div style="margin-left: 7cm; display: grid; grid-template-columns: auto 1fr; gap: 8px; font-weight: bold; font-size: 10pt; line-height: 1.4; margin-bottom: 2em;">
             <div>REF.:</div>
             <div>Pcir. Informe tipos, días y horarios</div>
@@ -2155,7 +2022,9 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sangria-cero" style="margin-bottom: 1.5em;"><b>Horario de finalización:</b> ${d.cauSalida}</div>
           <div class="sangria-estandar">Cabe destacar que el agente al momento que sucedieron los hechos, se encontraba <b>${d.cauCircunstancias}</b>.</div>
           <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto informo a usted.</div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageTDH]);
 
       case 'tab-col_div':
         let optionsColDivC = listaDiligenciasColumnaC.map(opt => `<option value="${opt}">${opt}</option>`).join('');
@@ -2182,7 +2051,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page" id="col-div-live-preview-target">
+            <div id="col-div-live-preview-target">
               ${renderColDivA4Content()}
             </div>
           </div>
@@ -2190,41 +2059,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
       case 'tab-lep':
         let textoLEP = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-        if (d.encuadre && d.encuadre.trim() !== '') {
-          textoLEP += " " + d.encuadre;
-        }
-        if (d.caratula && d.caratula.trim() !== '') {
-          textoLEP += ", caratulado: " + d.caratula;
-        }
-        if (d.denNombre && d.denNombre.trim() !== '') {
-          textoLEP += ", donde resulta denunciante: " + d.denNombre;
-          if (d.denDestino && d.denDestino.trim() !== '') {
-            textoLEP += " (" + d.denDestino + ")";
-          }
-        }
-        if (d.vicNombre && d.vicNombre.trim() !== '') {
-          textoLEP += ", víctima: " + d.vicNombre;
-          if (d.vicDestino && d.vicDestino.trim() !== '') {
-            textoLEP += " (" + d.vicDestino + ")";
-          }
-        }
-        if (d.cauNombre && d.cauNombre.trim() !== '') {
-          textoLEP += ", causante: " + d.cauNombre;
-          if (d.cauDestino && d.cauDestino.trim() !== '') {
-            textoLEP += " (" + d.cauDestino + ")";
-          }
-        }
-        if (d.impNombre && d.impNombre.trim() !== '') {
-          textoLEP += ", imputado: " + d.impNombre;
-          if (d.impDestino && d.impDestino.trim() !== '') {
-            textoLEP += " (" + d.impDestino + ")";
-          }
-        }
-        if (d.intervencion && d.intervencion.trim() !== '') {
-          textoLEP += ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establishedos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:";
-        } else {
-          textoLEP += ".";
-        }
+        if (d.encuadre && d.encuadre.trim() !== '') textoLEP += " " + d.encuadre;
+        if (d.caratula && d.caratula.trim() !== '') textoLEP += ", caratulado: " + d.caratula;
+        if (d.denNombre && d.denNombre.trim() !== '') textoLEP += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+        if (d.vicNombre && d.vicNombre.trim() !== '') textoLEP += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+        if (d.cauNombre && d.cauNombre.trim() !== '') textoLEP += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+        if (d.impNombre && d.impNombre.trim() !== '') textoLEP += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+        textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
 
         if (!window.registrosSeleccionadosLEP) {
           window.registrosSeleccionadosLEP = [];
@@ -2232,10 +2073,7 @@ document.addEventListener('DOMContentLoaded', function() {
           if (d.vicNombre && d.vicNombre.trim() !== '' && !d.vicNombre.toUpperCase().includes('DATOS DE LA VICTIMA')) window.registrosSeleccionadosLEP.push('VICTIMA');
           if (d.impNombre && d.impNombre.trim() !== '' && !d.impNombre.toUpperCase().includes('DATOS DEL IMPUTADO')) window.registrosSeleccionadosLEP.push('IMPUTADO');
           if (d.denNombre && d.denNombre.trim() !== '' && !d.denNombre.toUpperCase().includes('DATOS DEL DENUNCIANTE')) window.registrosSeleccionadosLEP.push('DENUNCIANTE');
-          
-          if (window.registrosSeleccionadosLEP.length === 0) {
-            window.registrosSeleccionadosLEP.push('CAUSANTE');
-          }
+          if (window.registrosSeleccionadosLEP.length === 0) window.registrosSeleccionadosLEP.push('CAUSANTE');
         }
 
         window.agregarRegistroLEP = function() {
@@ -2257,9 +2095,7 @@ document.addEventListener('DOMContentLoaded', function() {
           const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
           if (activeTab && activeTab.getAttribute('data-tab') === 'tab-lep') {
             const container = document.getElementById('doc-preview-wrapper-container');
-            if (container) {
-              container.innerHTML = renderDocumentTemplate('tab-lep');
-            }
+            if (container) container.innerHTML = renderDocumentTemplate('tab-lep');
           }
         };
 
@@ -2276,12 +2112,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.registrosSeleccionadosLEP.forEach(tipo => {
           const item = mapaPersonas[tipo];
           if (item && item.nombre) {
-            filasTablaLEP += `
-              <tr>
-                <td>${item.nombre}</td>
-                <td>${item.destino}</td>
-              </tr>`;
-
+            filasTablaLEP += `<tr><td>${item.nombre}</td><td>${item.destino}</td></tr>`;
             listaGestionHtml += `
               <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1;">
                 <span style="font-size: 0.8rem; font-weight: bold; color: #334155;">${item.rol}: <span style="font-weight: normal;">${item.nombre}</span></span>
@@ -2293,6 +2124,39 @@ document.addEventListener('DOMContentLoaded', function() {
         if (filasTablaLEP === '') {
           filasTablaLEP = `<tr><td colspan="2" style="text-align: center; color: #64748b; font-style: italic;">Sin datos seleccionados para mostrar</td></tr>`;
         }
+
+        const pageLEPContent = `
+          <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+            REF.: Star. Legajo Electrónico Personal (L.E.P.)<br>
+            ${d.partido || ''}, ${d.fechaRecepcion || ''}
+          </div>
+
+          <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+            AL SEÑOR DIRECTOR<br>
+            DIRECCIÓN DE PERSONAL - REGÍMENES POLICIALES<br>
+            SECCIÓN EXPEDIENTES E INFORMES PERSONAL
+          </div>
+
+          <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5; text-align: justify;">
+            ${textoLEP}
+          </div>
+
+          <table class="table-oficial" style="margin-top: 1.5em;">
+            <thead>
+              <tr>
+                <th>NOMBRES Y APELLIDOS</th>
+                <th>DESTINO</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${filasTablaLEP}
+            </tbody>
+          </table>
+
+          <div class="sangria-estandar" style="margin-top: 2em;">
+            Lo expuesto es todo en cuanto solicito a usted.
+          </div>
+        `;
 
         return `
         <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
@@ -2321,46 +2185,12 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page">
-              ${logoSVG}
-              <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-                REF.: Star. Legajo Electrónico Personal (L.E.P.)<br>
-                ${d.partido || ''}, ${d.fechaRecepcion || ''}
-              </div>
-
-              <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-                AL SEÑOR DIRECTOR<br>
-                DIRECCIÓN DE PERSONAL - REGÍMENES POLICIALES<br>
-                SECCIÓN EXPEDIENTES E INFORMES PERSONAL
-              </div>
-
-              <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5; text-align: justify;">
-                ${textoLEP}
-              </div>
-
-              <table class="table-oficial" style="margin-top: 1.5em;">
-                <thead>
-                  <tr>
-                    <th>NOMBRES Y APELLIDOS</th>
-                    <th>DESTINO</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  ${filasTablaLEP}
-                </tbody>
-              </table>
-
-              <div class="sangria-estandar" style="margin-top: 2em;">
-                Lo expuesto es todo en cuanto solicito a usted.
-              </div>
-            </div>
+            ${renderGenericDocument([pageLEPContent])}
           </div>
         </div>`;
 
       case 'tab-col_ipp':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageColIPP = `
           <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
             REF.: Star. informe de Procesos Penales (PP) vinculado<br>
             ${d.partido || ''}, ${d.fechaRecepcion || ''}
@@ -2383,12 +2213,12 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TERMINO MUY URGENTE.</div>
           <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageColIPP]);
 
       case 'tab-cautelares':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageCautelares = `
           <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
             REF.: Star. Medidas cautelares vigentes<br>
             ${d.partido || ''}, ${d.fechaRecepcion || ''}
@@ -2409,49 +2239,21 @@ document.addEventListener('DOMContentLoaded', function() {
           </ul>
           <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TERMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad.</div>
           <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageCautelares]);
 
       case 'tab-anmac':
         let textoANMAC = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-        if (d.encuadre && d.encuadre.trim() !== '') {
-          textoANMAC += " " + d.encuadre;
-        }
-        if (d.caratula && d.caratula.trim() !== '') {
-          textoANMAC += ", caratulado: " + d.caratula;
-        }
-        if (d.denNombre && d.denNombre.trim() !== '') {
-          textoANMAC += ", donde resulta denunciante: " + d.denNombre;
-          if (d.denDestino && d.denDestino.trim() !== '') {
-            textoANMAC += " (" + d.denDestino + ")";
-          }
-        }
-        if (d.vicNombre && d.vicNombre.trim() !== '') {
-          textoANMAC += ", víctima: " + d.vicNombre;
-          if (d.vicDestino && d.vicDestino.trim() !== '') {
-            textoANMAC += " (" + d.vicDestino + ")";
-          }
-        }
-        if (d.cauNombre && d.cauNombre.trim() !== '') {
-          textoANMAC += ", causante: " + d.cauNombre;
-          if (d.cauDestino && d.cauDestino.trim() !== '') {
-            textoANMAC += " (" + d.cauDestino + ")";
-          }
-        }
-        if (d.impNombre && d.impNombre.trim() !== '') {
-          textoANMAC += ", imputado: " + d.impNombre;
-          if (d.impDestino && d.impDestino.trim() !== '') {
-            textoANMAC += " (" + d.impDestino + ")";
-          }
-        }
-        if (d.intervencion && d.intervencion.trim() !== '') {
-          textoANMAC += ", con intervención de " + d.intervencion + ", quiera tener a bien por intermedio de quien corresponda adune informe de REPAR (conforme el artículo 13 de RESO 581/21 en las actuaciones en que se empleen armas de fuego) a efectos de informar si el agente que más abajo se detalla, posee además del armamento provisto y reglamentario, otra arma de fuego:";
-        } else {
-          textoANMAC += ".";
-        }
+        if (d.encuadre && d.encuadre.trim() !== '') textoANMAC += " " + d.encuadre;
+        if (d.caratula && d.caratula.trim() !== '') textoANMAC += ", caratulado: " + d.caratula;
+        if (d.denNombre && d.denNombre.trim() !== '') textoANMAC += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+        if (d.vicNombre && d.vicNombre.trim() !== '') textoANMAC += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+        if (d.cauNombre && d.cauNombre.trim() !== '') textoANMAC += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+        if (d.impNombre && d.impNombre.trim() !== '') textoANMAC += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+        textoANMAC += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien por intermedio de quien corresponda adune informe de REPAR (conforme el artículo 13 de RESO 581/21 en las actuaciones en que se empleen armas de fuego) a efectos de informar si el agente que más abajo se detalla, posee además del armamento provisto y reglamentario, otra arma de fuego:" : ".";
 
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageANMAC = `
           <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
             REF.: Star. Colaboración<br>
             ${d.partido || ''}, ${d.fechaRecepcion || ''}
@@ -2490,12 +2292,12 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify;">
             Lo expuesto es todo en cuando solicito a usted.
           </div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageANMAC]);
 
       case 'tab-col_cria':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageColCria = `
           <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
             REF.: Star. Colaboración<br>
             ${d.partido || ''}, ${d.fechaRecepcion || ''}
@@ -2507,7 +2309,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
-            Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, approvedo por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
+            Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
           </div>
 
           <table class="table-oficial" style="margin-top: 1.5em;">
@@ -2540,7 +2342,9 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
             Lo expuesto es todo en cuanto solicito a usted.
           </div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageColCria]);
 
       case 'tab-testimonial':
         return `
@@ -2573,13 +2377,13 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div class="sheet-row-single" style="width: 100%;">
-              <label>RELATO DEL ACTA (B131):</label>
-              <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_78_relato_acta').value = this.value; actualizarTestimonialEnVivo();">${d.sintesis}</textarea>
+              <label>DECLARACIÓN TESTIMONIAL (DECLARACION TESTIMONIAL CELDA B10):</label>
+              <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_80_relato_testimonial').value = this.value; actualizarTestimonialEnVivo();">${d.testimonialRelato}</textarea>
             </div>
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page" id="testimonial-live-preview-target">
+            <div id="testimonial-live-preview-target">
               ${renderTestimonialA4Content()}
             </div>
           </div>
@@ -2594,7 +2398,6 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
 
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-              <!-- DESPLEGABLES PARA ESTADO Y CIRCULACIÓN DE LAS ARTERIAS -->
               <div class="sheet-row-single">
                 <label>ARTERIA 1 TIPO (B24):</label>
                 <select id="f_insp_art1_tipo" onchange="actualizarInspeccionEnVivo();">
@@ -2682,7 +2485,7 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page" id="inspeccion-live-preview-target">
+            <div id="inspeccion-live-preview-target">
               ${renderInspeccionA4Content()}
             </div>
           </div>
@@ -2690,14 +2493,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
       case 'tab-croquis':
         let textoLugarArmado = `${d.lugarHecho}`;
-        if (d.ec1 || d.ec2) {
-          textoLugarArmado += ` entre ${d.ec1} y ${d.ec2}`;
-        }
+        if (d.ec1 || d.ec2) textoLugarArmado += ` entre ${d.ec1} y ${d.ec2}`;
         let queryInscripcion = `${d.lugarHecho} y ${d.ec1}, ${d.hechoLoc}, ${d.hechoPartido}`;
 
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageCroquis = `
           <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 0.5em;">CROQUIS ILUSTRATIVO DEL LUGAR DEL HECHO</div>
           
           <div class="croquis-controls" style="margin-bottom: 10px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
@@ -2720,61 +2519,64 @@ document.addEventListener('DOMContentLoaded', function() {
           </div>
           <div class="sangria-cero" style="font-size: 9.5pt;"><b>Lugar del hecho:</b> ${textoLugarArmado} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
           <div class="sangria-cero" style="font-size: 9.5pt; font-weight: bold;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageCroquis]);
 
       case 'tab-fotos':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageFotos1 = `
           <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 0.5em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
-          
-          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 0.5em; flex: 1; min-height: 0;">
-            <!-- RECUADRO VISTA N° 1 -->
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1cm; flex: 1; min-height: 0;">
             <div id="zone-foto1" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto1' ? 'selected-zone' : ''}" 
-                 onclick="seleccionarZonaFoto('foto1')" 
-                 ondragover="handleDragOverFoto(event)" 
-                 ondragleave="handleDragLeaveFoto(event)" 
-                 ondrop="handleDropFoto(event, 'foto1')">
-              ${window.fotosCargadas.foto1 ? `
-                <img src="${window.fotosCargadas.foto1}" alt="Foto 1">
-                <div class="foto-label-tag">VISTA N° 1</div>
-              ` : `
-                <div class="foto-placeholder-hint">
-                  📸 <b>VISTA N° 1</b><br>
-                  Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>
-                  o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar desde el portapapeles.
-                </div>
+                 onclick="seleccionarZonaFoto('foto1')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto1')">
+              ${window.fotosCargadas.foto1 ? `<img src="${window.fotosCargadas.foto1}" alt="Foto 1"><div class="foto-label-tag">VISTA N° 1</div>` : `
+                <div class="foto-placeholder-hint">📸 <b>VISTA N° 1</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
                 <input type="file" id="input-foto1" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto1')">
                 <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto1').click();">📁 Buscar Imagen</button>
                 <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 1</div>
               `}
             </div>
-
-            <!-- RECUADRO VISTA N° 2 -->
             <div id="zone-foto2" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto2' ? 'selected-zone' : ''}" 
-                 onclick="seleccionarZonaFoto('foto2')" 
-                 ondragover="handleDragOverFoto(event)" 
-                 ondragleave="handleDragLeaveFoto(event)" 
-                 ondrop="handleDropFoto(event, 'foto2')">
-              ${window.fotosCargadas.foto2 ? `
-                <img src="${window.fotosCargadas.foto2}" alt="Foto 2">
-                <div class="foto-label-tag">VISTA N° 2</div>
-              ` : `
-                <div class="foto-placeholder-hint">
-                  📸 <b>VISTA N° 2</b><br>
-                  Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>
-                  o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar desde el portapapeles.
-                </div>
+                 onclick="seleccionarZonaFoto('foto2')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto2')">
+              ${window.fotosCargadas.foto2 ? `<img src="${window.fotosCargadas.foto2}" alt="Foto 2"><div class="foto-label-tag">VISTA N° 2</div>` : `
+                <div class="foto-placeholder-hint">📸 <b>VISTA N° 2</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
                 <input type="file" id="input-foto2" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto2')">
                 <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto2').click();">📁 Buscar Imagen</button>
                 <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 2</div>
               `}
             </div>
           </div>
-
-          <div class="sangria-cero" style="font-size: 9pt; margin-top: 1.2em; margin-bottom: 0;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
+          <div class="sangria-cero" style="font-size: 9pt; margin-top: 0; margin-bottom: 0;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
           <div class="sangria-cero" style="font-size: 9pt; font-weight: bold; margin-top: 1.2em; margin-bottom: 0;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-        </div>`;
+        `;
+
+        const pageFotos2 = `
+          <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 0.5em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
+          <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1cm; flex: 1; min-height: 0;">
+            <div id="zone-foto3" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto3' ? 'selected-zone' : ''}" 
+                 onclick="seleccionarZonaFoto('foto3')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto3')">
+              ${window.fotosCargadas.foto3 ? `<img src="${window.fotosCargadas.foto3}" alt="Foto 3"><div class="foto-label-tag">VISTA N° 3</div>` : `
+                <div class="foto-placeholder-hint">📸 <b>VISTA N° 3</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
+                <input type="file" id="input-foto3" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto3')">
+                <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto3').click();">📁 Buscar Imagen</button>
+                <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 3</div>
+              `}
+            </div>
+            <div id="zone-foto4" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto4' ? 'selected-zone' : ''}" 
+                 onclick="seleccionarZonaFoto('foto4')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto4')">
+              ${window.fotosCargadas.foto4 ? `<img src="${window.fotosCargadas.foto4}" alt="Foto 4"><div class="foto-label-tag">VISTA N° 4</div>` : `
+                <div class="foto-placeholder-hint">📸 <b>VISTA N° 4</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
+                <input type="file" id="input-foto4" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto4')">
+                <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto4').click();">📁 Buscar Imagen</button>
+                <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 4</div>
+              `}
+            </div>
+          </div>
+          <div class="sangria-cero" style="font-size: 9pt; margin-top: 0; margin-bottom: 0;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
+          <div class="sangria-cero" style="font-size: 9pt; font-weight: bold; margin-top: 1.2em; margin-bottom: 0;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
+        `;
+
+        return renderGenericDocument([pageFotos1, pageFotos2]);
 
       case 'tab-carpetas_medicas':
         return `
@@ -2827,23 +2629,20 @@ document.addEventListener('DOMContentLoaded', function() {
               <div style="margin-top: 8px;">
                 <label style="font-size: 0.72rem; font-weight: bold; color: #475569; text-transform: uppercase;">CARPETAS INGRESADAS:</label>
                 <ul id="carpetas-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;">
-                  <!-- Se llena dinámicamente -->
                 </ul>
               </div>
             </div>
           </div>
 
           <div style="flex-shrink: 0; display: flex; justify-content: center;">
-            <div class="a4-page" id="carpetas-live-preview-target">
+            <div id="carpetas-live-preview-target">
               ${renderCarpetasA4Content()}
             </div>
           </div>
         </div>`;
 
       case 'tab-cierre':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageCierre = `
           <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 2em;">
             Corresponde a expediente ${d.caratula}
           </div>
@@ -2867,20 +2666,22 @@ document.addEventListener('DOMContentLoaded', function() {
           <div class="sangria-cero" style="text-align: justify; line-height: 1.5; text-indent: 3.5cm !important;">
             Proceder al cierre de las presentes Actuaciones Sumariales Administrativas en el estado en que se encuentra y remitir a la mayor consideración y posterior resolución del <b>${d.intervencion ? d.intervencion.toUpperCase() : ''}</b>.
           </div>
-        </div>`;
+        `;
+
+        return renderGenericDocument([pageCierre]);
 
       case 'tab-sintesis_conclusiones':
-        return `
-        <div class="a4-page">
-          ${logoSVG}
+        const pageSintesis = `
           <div style="text-align: center; font-weight: bold; font-size: 12pt; margin-bottom: 1.2em;">SÍNTESIS Y CONCLUSIONES SUMARIALES</div>
           <div class="sangria-cero" style="margin-bottom: 1em;"><b>Expediente:</b> ${d.caratula}</div>
           <div class="sangria-cero" style="margin-bottom: 1em;"><b>Causante:</b> ${d.cauNombre}</div>
-          <div class="sangria-estandar">En relación a las Actuaciones Sumariales Administrativas de referencia, se concluye que cumplimentadas las diligencias de rigor...</div>
-        </div>`;
+          <div class="sangria-estandar">${d.sintesis || 'En relación a las Actuaciones Sumariales Administrativas de referencia, se concluye que cumplimentadas las diligencias de rigor...'}</div>
+        `;
+
+        return renderGenericDocument([pageSintesis]);
 
       default:
-        return `<div class="a4-page">${logoSVG}<div class="sangria-estandar">Documento administrativo sumarial generado formalmente acorde a expediente <b>${d.caratula}</b>.</div></div>`;
+        return renderGenericDocument([`<div class="sangria-estandar">Documento administrativo sumarial generado formalmente acorde a expediente <b>${d.caratula}</b>.</div>`]);
     }
   }
 
@@ -2900,7 +2701,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-testimonial' || activeTabKey === 'tab-inspeccion_ocular' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div' || activeTabKey === 'tab-lep' || activeTabKey === 'tab-carpetas_medicas') {
+        if (activeTabKey === 'tab-acta_constatacion' || activeTabKey === 'tab-testimonial' || activeTabKey === 'tab-inspeccion_ocular' || activeTabKey === 'tab-parte_escrito' || activeTabKey === 'tab-corre_agregado' || activeTabKey === 'tab-col_div' || activeTabKey === 'tab-lep' || activeTabKey === 'tab-carpetas_medicas' || activeTabKey === 'tab-indice_diligencias') {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
