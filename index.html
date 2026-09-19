@@ -607,8 +607,8 @@ body {
     <li class="nav-item-top" data-tab="tab-cautelares">📄 14. Star. Cautelares</li> 
     <li class="nav-item-top" data-tab="tab-anmac">📄 15. Star. Inf. Repar</li> 
     <li class="nav-item-top" data-tab="tab-col_cria">📄 16. Star. Inf. CMYF</li> 
-    <li class="nav-item-top active" data-tab="tab-testimonial">📄 17. Declaración Testimonial</li> 
-    <li class="nav-item-top" data-tab="tab-inspeccion_ocular">📄 18. Acta de Inspección Ocular</li> 
+    <li class="nav-item-top" data-tab="tab-testimonial">📄 17. Declaración Testimonial</li> 
+    <li class="nav-item-top active" data-tab="tab-inspeccion_ocular">📄 18. Acta de Inspección Ocular</li> 
     <li class="nav-item-top" data-tab="tab-croquis">📄 19. Croquis ilustrativos sin escalas</li> 
     <li class="nav-item-top" data-tab="tab-fotos">📄 20. Fotos del lugar del Hecho</li> 
     <li class="nav-item-top" data-tab="tab-carpetas_medicas">📄 21. Inf. de Carpetas</li> 
@@ -821,7 +821,7 @@ body {
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 17. Declaración Testimonial</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 18. Acta de Inspección Ocular</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -1609,7 +1609,6 @@ function renderCorreA4Content() {
 function renderActaA4Content() {
   const d = getFormValues();
 
-  // Construcción exacta del texto completo
   const textoCompleto = "En la localidad de " + d.localidad + 
     ", partido de " + d.partido + 
     ", provincia de Buenos Aires, República Argentina, en el asiento físico de la " + d.dependencia + 
@@ -1625,7 +1624,6 @@ function renderActaA4Content() {
     " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
     ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
-  // Paginación Dinámica Basada en Medición de Altura DOM Real
   const tempContainer = document.createElement('div');
   tempContainer.style.position = 'absolute';
   tempContainer.style.visibility = 'hidden';
@@ -1657,7 +1655,6 @@ function renderActaA4Content() {
     const pageElem = tempContainer.firstElementChild;
     const pElem = pageElem.querySelector('.sangria-cero');
 
-    // Comprobar si el contenido supera la altura disponible de la página A4
     if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
       if (currentWords.length === 0) {
         currentWords.push(words[wordIndex]);
@@ -1697,7 +1694,6 @@ function renderActaA4Content() {
 function renderTestimonialA4Content() {
   const d = getFormValues();
 
-  // 1. Armado exacto del relato utilizando la fórmula textual con vínculos dinámicos en negrita
   const textoFormulaHtml = "En la localidad de <b>" + (d.localidad || '') + 
     "</b>, partido de <b>" + (d.partido || '') + 
     "</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>" + (d.dependencia || '') + 
@@ -1705,7 +1701,7 @@ function renderTestimonialA4Content() {
     "</b>, entre calle <b>" + (d.entre1 || '') + 
     "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
     "</b>, siendo las <b>" + (d.horaHecho || '') + 
-    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
+    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
     "</b>, de <b>" + (d.denEdad || '') + 
     "</b> años de edad, nacionalidad <b>" + (d.denNacionalidad || 'ARGENTINA') + 
     "</b>, estado civil <b>" + (d.denEstCivil || 'SOLTERO') + 
@@ -1728,7 +1724,6 @@ function renderTestimonialA4Content() {
     "</b>. En esa inteligencia relata <span style='font-weight: normal;'>" + (d.testimonialRelato || '') + 
     "</span>. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.";
 
-  // 2. Algoritmo inteligente de separación en tokens HTML y Paginación A4 Real en DOM
   const tempContainer = document.createElement('div');
   tempContainer.style.position = 'absolute';
   tempContainer.style.visibility = 'hidden';
@@ -1878,19 +1873,135 @@ function renderParteA4Content() {
 function renderInspeccionA4Content() {
   const d = getFormValues();
 
-  const pageContent = `
-    <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.5em; text-transform: uppercase;">
-      ACTA DE INSPECCIÓN OCULAR
-    </div>
-    <div class="sangria-cero" style="text-align: justify; font-size: 10pt; line-height: 1.45;">
-      En la localidad de ${d.localidad}, partido de ${d.partido}, a los ${d.fechaRecepcion}, el instructor constituidos en ${d.lugarHecho} entre ${d.ec1} y ${d.ec2}, procede a realizar la correspondiente inspección ocular del lugar del hecho, constatando que la arteria principal es de ${d.art1Tipo}, en ${d.art1Estado} estado de conservación, de ${d.art1Mano} mano de circulación. En cuanto a las arterias transversales, la primera es de ${d.art2Tipo}, en ${d.art2Estado} estado, de ${d.art2Mano} mano; mientras que la segunda es de ${d.art3Tipo}, en ${d.art3Estado} estado, de ${d.art3Mano} mano.
-    </div>
-    <div class="sangria-estandar" style="margin-top: 2em;">
-      No siendo para más, se da por finalizado el acto firmando para constancia.
-    </div>
-  `;
+  // Armado textual exacto con fórmulas y variables dinámicas en negrita
+  const textoFormulaHtml = "En la localidad de <b>" + (d.localidad || '') + 
+    "</b>, partido de <b>" + (d.partido || '') + 
+    "</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>" + (d.dependencia || '') + 
+    "</b>, sita en <b>" + (d.direccion || '') + 
+    "</b>, entre calle <b>" + (d.entre1 || '') + 
+    "</b> y <b>" + (d.entre2 || '') + 
+    "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
+    "</b>, siendo las <b>" + (d.horaHecho || '') + 
+    "</b> horas, el suscripto <b>" + (d.instructor || '') + 
+    "</b> (<b>" + (d.cargoInstructor || '') + 
+    "</b>) , secundado por el <b>" + (d.secretario || '') + 
+    "</b> (<b>" + (d.cargoSecretario || '') + 
+    "</b>), ambos numerarios de <b>" + (d.dependencia || '') + 
+    "</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. Por orden de la superioridad en relación a Actuaciones Sumariales Administrativas <b>" + (d.encuadre || d.caratula || '') + 
+    "</b> caratuladas <b>" + (d.caratula || '') + 
+    "</b>, donde resultó víctima <b>" + (d.vicNombre || d.cauNombre || '') + 
+    "</b>, numerario de <b>" + (d.vicDestino || d.cauDestino || '') + 
+    "</b>, en trámite ante <b>" + (d.dependencia || '') + 
+    "</b>, nos constituimos en <b>" + (d.lugarHecho || '') + 
+    "</b>, entre <b>" + (d.ec1 || '') + 
+    "</b> y <b>" + (d.ec2 || '') + 
+    "</b>, localidad <b>" + (d.hechoLoc || d.localidad || '') + 
+    "</b> y partido <b>" + (d.hechoPartido || d.partido || '') + 
+    "</b>, lugar donde se dice que ocurrieron los hechos que dieran origen a la formación de las presentes actuaciones, fines de dar cumplimiento a diligencia Inspección Ocular en donde arribó a las siguientes CONCLUSIONES: Que la zona resulta ser zona urbana, poblada con viviendas en su mayoría de una planta y de dos plantas, gozando con todos los adelantos de la época actual (gas natural, red cloacal, agua corriente, luz eléctrica, red telefónica). Que, la arteria <b>" + (d.lugarHecho || '') + 
+    "</b>, que resulta ser de <b>" + (d.art1Tipo || '') + 
+    "</b> en <b>" + (d.art1Estado || '') + 
+    "</b> estado de conservación, circulación vehicular de <b>" + (d.art1Mano || '') + 
+    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial, no existiendo en el lugar semáforos, si existiendo señales de tránsito. Que, la arteria <b>" + (d.ec1 || '') + 
+    "</b>, resulta ser de <b>" + (d.art2Tipo || '') + 
+    "</b> en <b>" + (d.art2Estado || '') + 
+    "</b> estado de conservación, circulación vehicular de <b>" + (d.art2Mano || '') + 
+    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. Que, la arteria <b>" + (d.ec2 || '') + 
+    "</b>, resulta ser de <b>" + (d.art3Tipo || '') + 
+    "</b> en <b>" + (d.art3Estado || '') + 
+    "</b> estado de conservación, circulación vehicular de <b>" + (d.art3Mano || '') + 
+    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. No existiendo en el lugar semáforos, si existiendo señales de tránsito. No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.";
 
-  return renderGenericDocument([pageContent]);
+  // Paginación inteligente A4 en DOM
+  const tempContainer = document.createElement('div');
+  tempContainer.style.position = 'absolute';
+  tempContainer.style.visibility = 'hidden';
+  tempContainer.style.top = '-9999px';
+  tempContainer.style.left = '-9999px';
+  tempContainer.style.width = '210mm';
+  document.body.appendChild(tempContainer);
+
+  const tokens = textoFormulaHtml.match(/(<[^>]+>|[^<]+)/g) || [textoFormulaHtml];
+  let wordTokens = [];
+  
+  tokens.forEach(tok => {
+    if (tok.startsWith('<')) {
+      wordTokens.push(tok);
+    } else {
+      let parts = tok.split(/(\s+)/);
+      parts.forEach(p => { if (p) wordTokens.push(p); });
+    }
+  });
+
+  let pagesArray = [];
+  let currentTokens = [];
+  let tokenIndex = 0;
+
+  while (tokenIndex < wordTokens.length) {
+    currentTokens.push(wordTokens[tokenIndex]);
+    tokenIndex++;
+
+    let isFirstPage = (pagesArray.length === 0);
+    let pageClass = isFirstPage ? 'odd-page' : 'even-page';
+    let testContentHtml = currentTokens.join('');
+
+    let testHtml = `
+      <div class="a4-page ${pageClass}" style="box-shadow:none; margin:0; position:relative;">
+        ${isFirstPage ? logoSVG : ''}
+        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>' : ''}
+        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+          ${testContentHtml}
+        </div>
+      </div>
+    `;
+
+    tempContainer.innerHTML = testHtml;
+    const pageElem = tempContainer.firstElementChild;
+    const pElem = pageElem.querySelector('.sangria-cero');
+
+    if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
+      currentTokens.pop();
+      tokenIndex--;
+
+      let finalPageContent = `
+        ${isFirstPage ? logoSVG : ''}
+        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>' : ''}
+        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+          ${currentTokens.join('')}
+        </div>
+      `;
+      pagesArray.push(finalPageContent);
+      currentTokens = [];
+    }
+  }
+
+  if (currentTokens.length > 0) {
+    let isFirstPage = (pagesArray.length === 0);
+    let finalPageContent = `
+      ${isFirstPage ? logoSVG : ''}
+      ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>' : ''}
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+        ${currentTokens.join('')}
+      </div>
+    `;
+    pagesArray.push(finalPageContent);
+  }
+
+  document.body.removeChild(tempContainer);
+
+  const totalPages = pagesArray.length;
+  return pagesArray.map((pageInnerContent, index) => {
+    const pageNum = index + 1;
+    const isOddPage = (pageNum % 2 !== 0);
+    const pageClass = isOddPage ? 'odd-page' : 'even-page';
+    const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - VISTA DE IMPRESIÓN)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - VISTA DE IMPRESIÓN)`;
+
+    return `
+      <div class="a4-page ${pageClass}">
+        <div class="page-break-indicator">📄 ${pageTypeLabel}</div>
+        ${pageInnerContent}
+      </div>
+    `;
+  }).join('');
 }
 
 function renderDocumentTemplate(tabKey) {
@@ -2213,7 +2324,7 @@ function renderDocumentTemplate(tabKey) {
       if (d.vicNombre && d.vicNombre.trim() !== '') textoLEP += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
       if (d.cauNombre && d.cauNombre.trim() !== '') textoLEP += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
       if (d.impNombre && d.impNombre.trim() !== '') textoLEP += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales established en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
+      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
 
       if (!window.registrosSeleccionadosLEP) {
         window.registrosSeleccionadosLEP = [];
@@ -2466,58 +2577,61 @@ function renderDocumentTemplate(tabKey) {
             📑 DATOS PARA LA INSPECCIÓN OCULAR
           </div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+            <div class="sheet-row-single"><label>LUGAR DEL HECHO (ARTERIA PRINCIPAL):</label><input type="text" value="${d.lugarHecho}" oninput="document.getElementById('f_27_hecho_lugar').value = this.value; actualizarInspeccionEnVivo();"></div>
+            <div class="sheet-row-single"><label>ENTRE CALLE 1:</label><input type="text" value="${d.ec1}" oninput="document.getElementById('f_31_ec1').value = this.value; actualizarInspeccionEnVivo();"></div>
+            <div class="sheet-row-single"><label>ENTRE CALLE 2:</label><input type="text" value="${d.ec2}" oninput="document.getElementById('f_32_ec2').value = this.value; actualizarInspeccionEnVivo();"></div>
             <div class="sheet-row-single">
-              <label>CALLE PRINCIPAL:</label>
+              <label>CALLE PRINCIPAL TIPO:</label>
               <select id="f_insp_art1_tipo" onchange="actualizarInspeccionEnVivo();">
-                <option value="asfalto" selected>asfalto</option><option value="tierra">tierra</option><option value="empedrado">empedrado</option><option value="hormigón">hormigón</option><option value="mejora">mejora</option>
+                <option value="asfalto" ${d.art1Tipo === 'asfalto' ? 'selected' : ''}>asfalto</option><option value="tierra" ${d.art1Tipo === 'tierra' ? 'selected' : ''}>tierra</option><option value="empedrado" ${d.art1Tipo === 'empedrado' ? 'selected' : ''}>empedrado</option><option value="hormigón" ${d.art1Tipo === 'hormigón' ? 'selected' : ''}>hormigón</option><option value="mejora" ${d.art1Tipo === 'mejora' ? 'selected' : ''}>mejora</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>CALLE PRINCIPAL ESTADO:</label>
               <select id="f_insp_art1_estado" onchange="actualizarInspeccionEnVivo();">
-                <option value="buen" selected>buen</option><option value="regular">regular</option><option value="malo">malo</option>
+                <option value="buen" ${d.art1Estado === 'buen' ? 'selected' : ''}>buen</option><option value="regular" ${d.art1Estado === 'regular' ? 'selected' : ''}>regular</option><option value="malo" ${d.art1Estado === 'malo' ? 'selected' : ''}>malo</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>CALLE PRINCIPAL MANO:</label>
               <select id="f_insp_art1_mano" onchange="actualizarInspeccionEnVivo();">
-                <option value="doble" selected>doble</option><option value="única">única</option>
+                <option value="doble" ${d.art1Mano === 'doble' ? 'selected' : ''}>doble</option><option value="única" ${d.art1Mano === 'única' ? 'selected' : ''}>única</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>ENTRE CALLE 1 TIPO:</label>
               <select id="f_insp_art2_tipo" onchange="actualizarInspeccionEnVivo();">
-                <option value="asfalto" selected>asfalto</option><option value="tierra">tierra</option><option value="empedrado">empedrado</option><option value="hormigón">hormigón</option><option value="mejora">mejora</option>
+                <option value="asfalto" ${d.art2Tipo === 'asfalto' ? 'selected' : ''}>asfalto</option><option value="tierra" ${d.art2Tipo === 'tierra' ? 'selected' : ''}>tierra</option><option value="empedrado" ${d.art2Tipo === 'empedrado' ? 'selected' : ''}>empedrado</option><option value="hormigón" ${d.art2Tipo === 'hormigón' ? 'selected' : ''}>hormigón</option><option value="mejora" ${d.art2Tipo === 'mejora' ? 'selected' : ''}>mejora</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>ENTRE CALLE 1 ESTADO:</label>
               <select id="f_insp_art2_estado" onchange="actualizarInspeccionEnVivo();">
-                <option value="buen" selected>buen</option><option value="regular">regular</option><option value="malo">malo</option>
+                <option value="buen" ${d.art2Estado === 'buen' ? 'selected' : ''}>buen</option><option value="regular" ${d.art2Estado === 'regular' ? 'selected' : ''}>regular</option><option value="malo" ${d.art2Estado === 'malo' ? 'selected' : ''}>malo</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>ENTRE CALLE 1 MANO:</label>
               <select id="f_insp_art2_mano" onchange="actualizarInspeccionEnVivo();">
-                <option value="doble" selected>doble</option><option value="única">única</option>
+                <option value="doble" ${d.art2Mano === 'doble' ? 'selected' : ''}>doble</option><option value="única" ${d.art2Mano === 'única' ? 'selected' : ''}>única</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>ENTRE CALLE 2 TIPO:</label>
               <select id="f_insp_art3_tipo" onchange="actualizarInspeccionEnVivo();">
-                <option value="asfalto" selected>asfalto</option><option value="tierra">tierra</option><option value="empedrado">empedrado</option><option value="hormigón">hormigón</option><option value="mejora">mejora</option>
+                <option value="asfalto" ${d.art3Tipo === 'asfalto' ? 'selected' : ''}>asfalto</option><option value="tierra" ${d.art3Tipo === 'tierra' ? 'selected' : ''}>tierra</option><option value="empedrado" ${d.art3Tipo === 'empedrado' ? 'selected' : ''}>empedrado</option><option value="hormigón" ${d.art3Tipo === 'hormigón' ? 'selected' : ''}>hormigón</option><option value="mejora" ${d.art3Tipo === 'mejora' ? 'selected' : ''}>mejora</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>ENTRE CALLE 2 ESTADO:</label>
               <select id="f_insp_art3_estado" onchange="actualizarInspeccionEnVivo();">
-                <option value="buen" selected>buen</option><option value="regular">regular</option><option value="malo">malo</option>
+                <option value="buen" ${d.art3Estado === 'buen' ? 'selected' : ''}>buen</option><option value="regular" ${d.art3Estado === 'regular' ? 'selected' : ''}>regular</option><option value="malo" ${d.art3Estado === 'malo' ? 'selected' : ''}>malo</option>
               </select>
             </div>
             <div class="sheet-row-single">
               <label>ENTRE CALLE 2 MANO:</label>
               <select id="f_insp_art3_mano" onchange="actualizarInspeccionEnVivo();">
-                <option value="doble" selected>doble</option><option value="única">única</option>
+                <option value="doble" ${d.art3Mano === 'doble' ? 'selected' : ''}>doble</option><option value="única" ${d.art3Mano === 'única' ? 'selected' : ''}>única</option>
               </select>
             </div>
           </div>
@@ -2767,7 +2881,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Cargar pestaña predeterminada
-  const defaultTabKey = 'tab-testimonial';
+  const defaultTabKey = 'tab-inspeccion_ocular';
   previewContainer.innerHTML = renderDocumentTemplate(defaultTabKey);
 });
 </script>
