@@ -385,6 +385,33 @@ body {
 .sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.25cm !important; }
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
+/* Estilo para los campos interactivos de CFYP */
+.cfyp-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px dotted #94a3b8;
+  background: transparent;
+  font-size: 9.5pt;
+  font-family: inherit;
+  padding: 0 4px;
+  outline: none;
+}
+
+.cfyp-input:focus {
+  border-bottom: 1px solid var(--primary);
+  background-color: #f0f9ff;
+}
+
+.cfyp-matriz-td {
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.15s ease;
+}
+
+.cfyp-matriz-td:hover {
+  background-color: #e0f2fe !important;
+}
+
 /* ==========================================================================
    7. COMPONENTES INTERNOS DE DOCUMENTOS (TABLAS, CARÁTULA, FOTOS)
    ========================================================================== */
@@ -551,6 +578,7 @@ body {
     margin-bottom: 0 !important; 
   }
 
+  .cfyp-input { border-bottom: none !important; }
   .input-folio { border: none !important; background: transparent !important; }
   .foto-dropzone { border: 1px solid #000 !important; background: transparent !important; }
 }
@@ -933,6 +961,19 @@ window.carpetasMedicasEstado = { opcion: 'noposee', lista: [] };
 window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
 window.zonaFotoSeleccionada = 'foto1';
 window.registrosSeleccionadosLEP = null;
+
+/* Función interactiva para la matriz de CFYP */
+function toggleMatrizCFYP(tdElement) {
+  const row = tdElement.parentElement;
+  const celdas = row.querySelectorAll('.cfyp-matriz-td');
+  
+  const yaTeniaX = tdElement.textContent.trim() === 'X';
+  celdas.forEach(c => c.textContent = '');
+  
+  if (!yaTeniaX) {
+    tdElement.textContent = 'X';
+  }
+}
 
 /* ==========================================================================
    3. FUNCIONES AUXILIARES DE NAVEGACIÓN Y EXTRACCIÓN DE DATOS
@@ -1558,7 +1599,6 @@ function renderCorreA4Content() {
 function renderActaA4Content() {
   const d = getFormValues();
 
-  // Construcción exacta del texto completo
   const textoCompleto = "En la localidad de " + d.localidad + 
     ", partido de " + d.partido + 
     ", provincia de Buenos Aires, República Argentina, en el asiento físico de la " + d.dependencia + 
@@ -1574,7 +1614,6 @@ function renderActaA4Content() {
     " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
     ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
-  // Paginación Dinámica Basada en Medición de Altura DOM Real
   const tempContainer = document.createElement('div');
   tempContainer.style.position = 'absolute';
   tempContainer.style.visibility = 'hidden';
@@ -1606,7 +1645,6 @@ function renderActaA4Content() {
     const pageElem = tempContainer.firstElementChild;
     const pElem = pageElem.querySelector('.sangria-cero');
 
-    // Comprobar si el contenido supera la altura disponible de la página A4
     if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
       if (currentWords.length === 0) {
         currentWords.push(words[wordIndex]);
@@ -1933,15 +1971,42 @@ function renderDocumentTemplate(tabKey) {
         <div class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.15; font-size: 10pt;">${introCFYP}</div>
         
         <div style="font-size: 9.5pt; line-height: 1.15; margin-bottom: 1.2em; text-align: justify;">
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">Normal</span></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">13 años, 9 meses y 29 días</span></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">1 años, 2 meses, 26 días</span></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">${d.cauDomicilio ? d.cauDomicilio + ' de ' + d.cauLocalidad + '.' : 'Perú 1439 entre Freire y Uruguay de Avellaneda.'}</span></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">Jefe de SEC. ZONA DESTACAMENTOS (F.B.A. XIV) II.</span></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">No registra en el presente periodo</span></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">No registra en el presente periodo</span></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">No registra en el presente periodo</span></div>
-          <div style="display: flex; margin-top: 5px; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span><span style="flex: 1; border-bottom: 1px dotted #94a3b8; padding-left: 4px;">Ninguna</span></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span>
+            <input type="text" class="cfyp-input" value="Normal">
+          </div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span>
+            <input type="text" class="cfyp-input" value="13 años, 9 meses y 29 días">
+          </div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span>
+            <input type="text" class="cfyp-input" value="1 años, 2 meses, 26 días">
+          </div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span>
+            <input type="text" class="cfyp-input" value="${d.cauDomicilio ? d.cauDomicilio + ' de ' + d.cauLocalidad + '.' : 'Perú 1439 entre Freire y Uruguay de Avellaneda.'}">
+          </div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span>
+            <input type="text" class="cfyp-input" value="Jefe de SEC. ZONA DESTACAMENTOS (F.B.A. XIV) II.">
+          </div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span>
+            <input type="text" class="cfyp-input" value="No registra en el presente periodo">
+          </div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span>
+            <input type="text" class="cfyp-input" value="No registra en el presente periodo">
+          </div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span>
+            <input type="text" class="cfyp-input" value="No registra en el presente periodo">
+          </div>
+          <div style="display: flex; align-items: center; margin-top: 5px; margin-bottom: 5px;">
+            <span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span>
+            <input type="text" class="cfyp-input" value="Ninguna">
+          </div>
         </div>
 
         <table class="table-oficial" style="margin-top: 12px; margin-bottom: 12px; font-size: 8.5pt; line-height: 1.0; border-collapse: collapse; width: 100%;">
@@ -1967,10 +2032,10 @@ function renderDocumentTemplate(tabKey) {
                 <td style="border: 1px solid #000; padding: 5px; text-align: justify; line-height: 1.0;">
                   <b>${item.label}</b><br><span style="font-size: 7.8pt;">${item.desc}</span>
                 </td>
-                <td style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;"></td>
-                <td style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;">X</td>
-                <td style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;"></td>
-                <td style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;"></td>
+                <td class="cfyp-matriz-td" onclick="toggleMatrizCFYP(this)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;"></td>
+                <td class="cfyp-matriz-td" onclick="toggleMatrizCFYP(this)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;">X</td>
+                <td class="cfyp-matriz-td" onclick="toggleMatrizCFYP(this)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;"></td>
+                <td class="cfyp-matriz-td" onclick="toggleMatrizCFYP(this)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-weight: bold; font-size: 10pt;"></td>
               </tr>
             `).join('')}
           </tbody>
