@@ -1928,35 +1928,26 @@ function renderDocumentTemplate(tabKey) {
       if (d.intervencion && d.intervencion.trim() !== '') introCFYP += ", con intervención de " + d.intervencion;
       introCFYP += ". Respecto a Concepto funcional y privado del infractor, Informo los siguientes puntos del efectivo:";
 
-      const pPersona = d.cauNombre || d.impNombre || '';
-      const pDomicilio = d.cauDomicilio ? (d.cauDomicilio + (d.cauLocalidad ? ' de ' + d.cauLocalidad : '') + '.') : (d.impDomicilio ? (d.impDomicilio + (d.impLocalidad ? ' de ' + d.impLocalidad : '') + '.') : 'Perú 1439 entre Freire y Uruguay de Avellaneda.');
-
       const pageCFYP = `
-        <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 0.3em; text-transform: uppercase;">CONCEPTO FUNCIONAL Y PRIVADO</div>
-        <div style="font-weight: bold; font-size: 9.5pt; margin-bottom: 0.8em; text-align: left;">${d.dependencia ? d.dependencia : 'DIR. FUERZA BARRIAL DE APROX. (FBA)'}, a los ${d.fechaRecepcion || '2 de abril del 2026'}</div>
-        <div class="sangria-estandar" style="margin-bottom: 0.8em; text-align: justify; font-size: 9pt; line-height: 1.35;">${introCFYP}</div>
+        <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.5em; text-transform: uppercase;">CONCEPTO FUNCIONAL Y PRIVADO</div>
+        <div style="font-weight: bold; font-size: 10pt; margin-bottom: 1.2em;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
+        <div class="sangria-estandar" style="margin-bottom: 1.5em; text-align: justify; font-size: 10pt; line-height: 1.5;">${introCFYP}</div>
         
-        <div style="font-size: 8.5pt; line-height: 1.4; margin-bottom: 0.8em; display: flex; flex-direction: column; gap: 3px;">
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="Normal"></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="13 años, 9 meses y 29 días"></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">3. ANTIGÜEDAD EN EL DESTINO:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="1 años, 2 meses, 26 días"></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">4. DOMICILIO DECLARADO:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="${pDomicilio}"></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="Jefe de SEC. ZONA DESTACAMENTOS (F.B.A. XIV) II."></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">6. SANCIONES QUE REGISTRA:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="No registra en el presente periodo"></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">7. SUMARIOS ADMINISTRATIVOS:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="No registra en el presente periodo"></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">8. REGISTRO DE CARPETAS MÉDICAS:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="No registra en el presente periodo"></div>
-          <div style="display: flex; align-items: flex-end; gap: 4px;"><span style="font-weight: bold; white-space: nowrap;">OTRAS FUNCIONES QUE CUMPLA:</span><input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="Ninguna"></div>
+        <div style="font-size: 9.5pt; line-height: 1.8; margin-bottom: 1.5em; display: flex; flex-direction: column; gap: 6px;">
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">Normal</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">13 años, 9 meses y 29 días</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">1 años, 2 meses, 26 días</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">${d.cauDomicilio ? d.cauDomicilio + ' de ' + d.cauLocalidad + '.' : 'Perú 1439 entre Freire y Uruguay de Avellaneda.'}</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">Jefe de SEC.ZONA DESTACAMENTOS (F.B.A.XIV) II.</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">No registra en el presente periodo</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">No registra en el presente periodo</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">No registra en el presente periodo</span></div>
+          <div style="display: flex; align-items: baseline;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span><span style="border-bottom: 1px dotted #000; flex: 1; padding-left: 6px;">Ninguna</span></div>
         </div>
 
-        <table class="table-oficial" style="margin-top: 4px; font-size: 8pt; width: 100%; border-collapse: collapse; table-layout: fixed;">
+        <table class="table-oficial" style="margin-top: 10px; margin-bottom: 1.5em; font-size: 8.5pt;">
           <thead>
-            <tr>
-              <th style="width: 44%; padding: 4px;">ASPECTO EVALUADO</th>
-              <th style="text-align: center; width: 14%; padding: 4px;">AMPLIA</th>
-              <th style="text-align: center; width: 14%; padding: 4px;">NORMAL</th>
-              <th style="text-align: center; width: 14%; padding: 4px;">REGULAR</th>
-              <th style="text-align: center; width: 14%; padding: 4px;">MALO</th>
-            </tr>
+            <tr><th>ASPECTO EVALUADO</th><th style="text-align: center; width: 14%;">AMPLIA</th><th style="text-align: center; width: 14%;">NORMAL</th><th style="text-align: center; width: 14%;">REGULAR</th><th style="text-align: center; width: 14%;">MALO</th></tr>
           </thead>
           <tbody>
             ${[
@@ -1968,21 +1959,24 @@ function renderDocumentTemplate(tabKey) {
               { label: 'ORGANIZACIÓN', desc: '(A los efectos de una respuesta rápida a la prestación de la tarea cotidiana).' }
             ].map(item => `
               <tr>
-                <td style="padding: 3px 5px; word-wrap: break-word;"><b>${item.label}</b><br><span style="font-size: 7.5pt; color: #444;">${item.desc}</span></td>
-                <td style="text-align: center; padding: 2px;"><input type="text" class="input-folio" style="font-weight: bold; font-size: 10pt; height: 100%; width: 100%;" value=""></td>
-                <td style="text-align: center; padding: 2px;"><input type="text" class="input-folio" style="font-weight: bold; font-size: 10pt; height: 100%; width: 100%;" value="X"></td>
-                <td style="text-align: center; padding: 2px;"><input type="text" class="input-folio" style="font-weight: bold; font-size: 10pt; height: 100%; width: 100%;" value=""></td>
-                <td style="text-align: center; padding: 2px;"><input type="text" class="input-folio" style="font-weight: bold; font-size: 10pt; height: 100%; width: 100%;" value=""></td>
+                <td style="padding: 4px 6px;"><b>${item.label}</b><br><span style="font-size: 7.5pt; color: #475569;">${item.desc}</span></td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: center; font-weight: bold; font-size: 11pt;">X</td>
+                <td style="text-align: center;"></td>
+                <td style="text-align: center;"></td>
               </tr>
             `).join('')}
           </tbody>
         </table>
 
-        <div style="display: flex; align-items: flex-end; margin-top: 0.8em; font-size: 8.5pt; gap: 4px;">
-          <span style="font-weight: bold; white-space: nowrap;">OBSERVACIONES:</span>
-          <input type="text" class="input-folio" style="flex: 1; text-align: left; border-bottom: 1px dashed #cbd5e1; padding: 0 4px; height: 18px;" value="">
+        <div style="display: flex; align-items: baseline; margin-bottom: 1.5em; font-size: 9.5pt;">
+          <span style="font-weight: bold; margin-right: 8px; flex-shrink: 0;">OBSERVACIONES:</span>
+          <span style="border-bottom: 1px dotted #000; flex: 1;"></span>
         </div>
-        <div class="sangria-estandar" style="margin-top: 1em; font-size: 9pt;">Lo expuesto es todo en cuanto informo a usted.</div>
+
+        <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 4cm; text-align: justify; line-height: 1.5;">
+          Lo expuesto es todo en cuanto informo a usted.
+        </div>
       `;
       return renderGenericDocument([pageCFYP]);
 
