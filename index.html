@@ -385,34 +385,6 @@ body {
 .sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.25cm !important; }
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
-/* Estilos específicos para inputs integrados en línea */
-.cfyp-input-inline {
-  flex: 1;
-  border: none;
-  border-bottom: 1px dotted #94a3b8;
-  background: transparent;
-  padding: 0 4px;
-  font-size: 9.5pt;
-  outline: none;
-  font-family: inherit;
-}
-.cfyp-input-inline:hover, .cfyp-input-inline:focus {
-  background-color: #f1f5f9;
-  border-bottom: 1px solid #0284c7;
-}
-
-.cfyp-cell-option {
-  cursor: pointer;
-  user-select: none;
-  text-align: center;
-  vertical-align: middle;
-  font-weight: bold;
-  font-size: 10pt;
-}
-.cfyp-cell-option:hover {
-  background-color: #e2e8f0;
-}
-
 /* ==========================================================================
    7. COMPONENTES INTERNOS DE DOCUMENTOS (TABLAS, CARÁTULA, FOTOS)
    ========================================================================== */
@@ -493,6 +465,32 @@ body {
   border: 1px solid #cbd5e1;
   background: #ffffff;
   outline: none;
+}
+
+.input-cfyp-dotted {
+  flex: 1;
+  border: none;
+  border-bottom: 1px dotted #000;
+  background: transparent;
+  padding-left: 4px;
+  font-size: 9.5pt;
+  outline: none;
+}
+.input-cfyp-dotted:focus {
+  background-color: #f8fafc;
+  border-bottom: 1px solid #0284c7;
+}
+
+.cell-option-x {
+  cursor: pointer;
+  user-select: none;
+  font-weight: bold !important;
+  font-size: 10pt !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+}
+.cell-option-x:hover {
+  background-color: #f1f5f9;
 }
 
 .foto-dropzone {
@@ -579,7 +577,7 @@ body {
     margin-bottom: 0 !important; 
   }
 
-  .input-folio, .cfyp-input-inline { border: none !important; background: transparent !important; }
+  .input-folio, .input-cfyp-dotted { border: none !important; background: transparent !important; }
   .foto-dropzone { border: 1px solid #000 !important; background: transparent !important; }
 }
 </style>
@@ -957,33 +955,12 @@ let destinatariosParteEscrito = [
 ];
 let indiceItems = listaDesplegableColumnaM.map(texto => ({ texto, folio: '' }));
 
+window.cfypTablaEstado = [1, 1, 1, 1, 1, 1]; // Índice por defecto (columna 1 = NORMAL)
+
 window.carpetasMedicasEstado = { opcion: 'noposee', lista: [] };
 window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
 window.zonaFotoSeleccionada = 'foto1';
 window.registrosSeleccionadosLEP = null;
-
-// Estado persistente interactivo para CFYP
-window.cfypData = {
-  p1: "Normal",
-  p2: "13 años, 9 meses y 29 días",
-  p3: "1 años, 2 meses, 26 días",
-  p4: "Perú 1439 entre Freire y Uruguay de Avellaneda.",
-  p5: "Jefe de SEC. ZONA DESTACAMENTOS (F.B.A. XIV) II.",
-  p6: "No registra en el presente periodo",
-  p7: "No registra en el presente periodo",
-  p8: "No registra en el presente periodo",
-  pOtras: "Ninguna",
-  observaciones: "Sin observaciones.",
-  evaluaciones: { 0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1 } // Índice de columna seleccionada (1 = NORMAL)
-};
-
-window.seleccionarOpcionCFYP = function(rowIdx, colIdx) {
-  window.cfypData.evaluaciones[rowIdx] = colIdx;
-  const container = document.getElementById('doc-preview-wrapper-container');
-  if (container) {
-    container.innerHTML = renderDocumentTemplate('tab-cfyp');
-  }
-};
 
 /* ==========================================================================
    3. FUNCIONES AUXILIARES DE NAVEGACIÓN Y EXTRACCIÓN DE DATOS
@@ -1104,6 +1081,16 @@ function getFormValues() {
 /* ==========================================================================
    4. MANEJADORES DE EVENTOS Y VISTAS EN VIVO (MÓDULOS)
    ========================================================================== */
+
+/* --- Manejo de clics e interacciones de CFYP --- */
+window.seleccionarOpcionCFYP = function(filaIdx, colIdx) {
+  window.cfypTablaEstado[filaIdx] = colIdx;
+  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-cfyp') {
+    const container = document.getElementById('doc-preview-wrapper-container');
+    if (container) container.innerHTML = renderDocumentTemplate('tab-cfyp');
+  }
+};
 
 /* --- Carpetas Médicas --- */
 window.actualizarModoCarpetas = function(val) {
@@ -1701,7 +1688,7 @@ function renderTestimonialA4Content() {
   const pageContent = `
     <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
     <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 9.5pt; line-height: 1.4;">
-      En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que darán lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
+      En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que darán lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
     </div>
   `;
 
@@ -1978,7 +1965,7 @@ function renderDocumentTemplate(tabKey) {
       if (d.intervencion && d.intervencion.trim() !== '') introCFYP += ", con intervención de " + d.intervencion;
       introCFYP += ". Respecto a Concepto funcional y privado del infractor, informo los siguientes puntos del efectivo:";
 
-      const aspectos = [
+      const aspectosCFYP = [
         { label: 'CULTURA', desc: '(En cuanto a la función que cumple que le permitan asesorar con idoneidad)' },
         { label: 'OPERATIVIDAD', desc: '(En resolver situaciones, decisiones apropiadas y correctas)' },
         { label: 'EFICIENCIA', desc: '(Conocimientos teóricos con aplicación práctica)' },
@@ -1993,15 +1980,15 @@ function renderDocumentTemplate(tabKey) {
         <div class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.15; font-size: 10pt;">${introCFYP}</div>
         
         <div style="font-size: 9.5pt; line-height: 1.15; margin-bottom: 1.2em; text-align: justify;">
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p1}" oninput="window.cfypData.p1 = this.value;"></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p2}" oninput="window.cfypData.p2 = this.value;"></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p3}" oninput="window.cfypData.p3 = this.value;"></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p4}" oninput="window.cfypData.p4 = this.value;"></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p5}" oninput="window.cfypData.p5 = this.value;"></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p6}" oninput="window.cfypData.p6 = this.value;"></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p7}" oninput="window.cfypData.p7 = this.value;"></div>
-          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p8}" oninput="window.cfypData.p8 = this.value;"></div>
-          <div style="display: flex; margin-top: 5px; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.pOtras}" oninput="window.cfypData.pOtras = this.value;"></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><input type="text" class="input-cfyp-dotted" value="Normal"></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><input type="text" class="input-cfyp-dotted" value="13 años, 9 meses y 29 días"></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span><input type="text" class="input-cfyp-dotted" value="1 años, 2 meses, 26 días"></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span><input type="text" class="input-cfyp-dotted" value="${d.cauDomicilio ? d.cauDomicilio + ' de ' + d.cauLocalidad + '.' : 'Perú 1439 entre Freire y Uruguay de Avellaneda.'}"></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><input type="text" class="input-cfyp-dotted" value="Jefe de SEC. ZONA DESTACAMENTOS (F.B.A. XIV) II."></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span><input type="text" class="input-cfyp-dotted" value="No registra en el presente periodo"></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span><input type="text" class="input-cfyp-dotted" value="No registra en el presente periodo"></div>
+          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span><input type="text" class="input-cfyp-dotted" value="No registra en el presente periodo"></div>
+          <div style="display: flex; align-items: center; margin-top: 5px; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span><input type="text" class="input-cfyp-dotted" value="Ninguna"></div>
         </div>
 
         <table class="table-oficial" style="margin-top: 12px; margin-bottom: 0px; font-size: 8.5pt; line-height: 1.0; border-collapse: collapse; width: 100%;">
@@ -2015,29 +2002,26 @@ function renderDocumentTemplate(tabKey) {
             </tr>
           </thead>
           <tbody>
-            ${aspectos.map((item, rowIdx) => {
-              const selectedCol = window.cfypData.evaluaciones[rowIdx];
-              return `
+            ${aspectosCFYP.map((item, filaIdx) => `
               <tr>
                 <td style="border: 1px solid #000; padding: 5px; text-align: justify; line-height: 1.0;">
                   <b>${item.label}</b><br><span style="font-size: 7.8pt;">${item.desc}</span>
                 </td>
-                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 0)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 0 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
-                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 1)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 1 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
-                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 2)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 2 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
-                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 3)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 3 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
+                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 0)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 0 ? 'X' : ''}</td>
+                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 1)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 1 ? 'X' : ''}</td>
+                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 2)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 2 ? 'X' : ''}</td>
+                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 3)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 3 ? 'X' : ''}</td>
               </tr>
-              `;
-            }).join('')}
+            `).join('')}
           </tbody>
         </table>
 
-        <div style="font-size: 10pt; line-height: 1.15; margin-top: 0px; margin-bottom: 0px; display: flex; align-items: center;">
-          <span style="font-weight: bold; margin-right: 5px;">Observaciones:</span>
-          <input type="text" class="cfyp-input-inline" value="${window.cfypData.observaciones}" oninput="window.cfypData.observaciones = this.value;">
+        <div style="font-size: 9.5pt; line-height: 1.0; margin-top: 0; margin-bottom: 0; padding-top: 4px; padding-bottom: 4px; display: flex; align-items: center;">
+          <span style="font-weight: bold; min-width: 130px; flex-shrink: 0;">Observaciones:</span>
+          <input type="text" class="input-cfyp-dotted" value="Sin observaciones." style="margin: 0; padding: 2px 4px;">
         </div>
 
-        <div class="sangria-estandar" style="margin-top: 0px; text-align: justify; line-height: 1.15; font-size: 10pt; margin-bottom: 3cm;">
+        <div class="sangria-estandar" style="margin-top: 0; text-align: justify; line-height: 1.0; font-size: 10pt; padding-top: 2px;">
           Lo expuesto es todo en cuanto informo a usted.
         </div>
       `;
