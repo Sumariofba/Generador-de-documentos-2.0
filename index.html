@@ -385,26 +385,32 @@ body {
 .sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.25cm !important; }
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
-/* Estilos específicos interactivos para la vista CFYP */
-.cfyp-input-line {
+/* Estilos específicos para inputs integrados en línea */
+.cfyp-input-inline {
+  flex: 1;
   border: none;
   border-bottom: 1px dotted #94a3b8;
   background: transparent;
-  width: 100%;
+  padding: 0 4px;
   font-size: 9.5pt;
-  padding: 1px 4px;
   outline: none;
+  font-family: inherit;
 }
-.cfyp-input-line:focus {
+.cfyp-input-inline:hover, .cfyp-input-inline:focus {
+  background-color: #f1f5f9;
   border-bottom: 1px solid #0284c7;
-  background-color: #f0f9ff;
 }
+
 .cfyp-cell-option {
   cursor: pointer;
   user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: 10pt;
 }
 .cfyp-cell-option:hover {
-  background-color: #f1f5f9;
+  background-color: #e2e8f0;
 }
 
 /* ==========================================================================
@@ -573,7 +579,7 @@ body {
     margin-bottom: 0 !important; 
   }
 
-  .input-folio, .cfyp-input-line { border: none !important; background: transparent !important; }
+  .input-folio, .cfyp-input-inline { border: none !important; background: transparent !important; }
   .foto-dropzone { border: 1px solid #000 !important; background: transparent !important; }
 }
 </style>
@@ -956,25 +962,26 @@ window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
 window.zonaFotoSeleccionada = 'foto1';
 window.registrosSeleccionadosLEP = null;
 
-// Estado interactivo propio para el bloque CFYP
+// Estado persistente interactivo para CFYP
 window.cfypData = {
   p1: "Normal",
   p2: "13 años, 9 meses y 29 días",
   p3: "1 años, 2 meses, 26 días",
-  p4: "", // Se autocompleta con domicilio o valor por defecto
+  p4: "Perú 1439 entre Freire y Uruguay de Avellaneda.",
   p5: "Jefe de SEC. ZONA DESTACAMENTOS (F.B.A. XIV) II.",
   p6: "No registra en el presente periodo",
   p7: "No registra en el presente periodo",
   p8: "No registra en el presente periodo",
-  pOtra: "Ninguna",
+  pOtras: "Ninguna",
   observaciones: "Sin observaciones.",
-  evaluaciones: {
-    0: 2, // Columna por defecto 2 ("NORMAL")
-    1: 2,
-    2: 2,
-    3: 2,
-    4: 2,
-    5: 2
+  evaluaciones: { 0: 1, 1: 1, 2: 1, 3: 1, 4: 1, 5: 1 } // Índice de columna seleccionada (1 = NORMAL)
+};
+
+window.seleccionarOpcionCFYP = function(rowIdx, colIdx) {
+  window.cfypData.evaluaciones[rowIdx] = colIdx;
+  const container = document.getElementById('doc-preview-wrapper-container');
+  if (container) {
+    container.innerHTML = renderDocumentTemplate('tab-cfyp');
   }
 };
 
@@ -1097,19 +1104,6 @@ function getFormValues() {
 /* ==========================================================================
    4. MANEJADORES DE EVENTOS Y VISTAS EN VIVO (MÓDULOS)
    ========================================================================== */
-
-/* --- Funciones de interacción para CFYP --- */
-window.actualizarCFYPField = function(key, value) {
-  window.cfypData[key] = value;
-};
-
-window.seleccionarOpcionCFYP = function(rowIndex, colIndex) {
-  window.cfypData.evaluaciones[rowIndex] = colIndex;
-  for (let c = 1; c <= 4; c++) {
-    const el = document.getElementById(`cfyp-cell-${rowIndex}-${c}`);
-    if (el) el.innerHTML = (c === colIndex) ? '<b>X</b>' : '';
-  }
-};
 
 /* --- Carpetas Médicas --- */
 window.actualizarModoCarpetas = function(val) {
@@ -1984,10 +1978,6 @@ function renderDocumentTemplate(tabKey) {
       if (d.intervencion && d.intervencion.trim() !== '') introCFYP += ", con intervención de " + d.intervencion;
       introCFYP += ". Respecto a Concepto funcional y privado del infractor, informo los siguientes puntos del efectivo:";
 
-      if (!window.cfypData.p4) {
-        window.cfypData.p4 = d.cauDomicilio ? `${d.cauDomicilio} de ${d.cauLocalidad}.` : 'Perú 1439 entre Freire y Uruguay de Avellaneda.';
-      }
-
       const aspectos = [
         { label: 'CULTURA', desc: '(En cuanto a la función que cumple que le permitan asesorar con idoneidad)' },
         { label: 'OPERATIVIDAD', desc: '(En resolver situaciones, decisiones apropiadas y correctas)' },
@@ -1997,39 +1987,24 @@ function renderDocumentTemplate(tabKey) {
         { label: 'ORGANIZACIÓN', desc: '(A los efectos de una respuesta rápida a la prestación de la tarea cotidiana)' }
       ];
 
-      const rowsTablaCFYP = aspectos.map((item, idx) => {
-        const selIndex = window.cfypData.evaluaciones[idx];
-        return `
-          <tr>
-            <td style="border: 1px solid #000; padding: 5px; text-align: justify; line-height: 1.0;">
-              <b>${item.label}</b><br><span style="font-size: 7.8pt;">${item.desc}</span>
-            </td>
-            <td id="cfyp-cell-${idx}-1" class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${idx}, 1)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-size: 10pt;">${selIndex === 1 ? '<b>X</b>' : ''}</td>
-            <td id="cfyp-cell-${idx}-2" class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${idx}, 2)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-size: 10pt;">${selIndex === 2 ? '<b>X</b>' : ''}</td>
-            <td id="cfyp-cell-${idx}-3" class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${idx}, 3)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-size: 10pt;">${selIndex === 3 ? '<b>X</b>' : ''}</td>
-            <td id="cfyp-cell-${idx}-4" class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${idx}, 4)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle; font-size: 10pt;">${selIndex === 4 ? '<b>X</b>' : ''}</td>
-          </tr>
-        `;
-      }).join('');
-
       const pageCFYP = `
         <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1em; text-transform: uppercase;">CONCEPTO FUNCIONAL Y PRIVADO</div>
         <div style="font-weight: bold; font-size: 10pt; margin-bottom: 1.2em; text-align: left;">${d.dependencia ? d.dependencia : (d.cauDestino || '')}, a los ${d.fechaRecepcion}</div>
         <div class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.15; font-size: 10pt;">${introCFYP}</div>
         
         <div style="font-size: 9.5pt; line-height: 1.15; margin-bottom: 1.2em; text-align: justify;">
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p1}" oninput="actualizarCFYPField('p1', this.value)"></div>
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p2}" oninput="actualizarCFYPField('p2', this.value)"></div>
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p3}" oninput="actualizarCFYPField('p3', this.value)"></div>
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p4}" oninput="actualizarCFYPField('p4', this.value)"></div>
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p5}" oninput="actualizarCFYPField('p5', this.value)"></div>
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p6}" oninput="actualizarCFYPField('p6', this.value)"></div>
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p7}" oninput="actualizarCFYPField('p7', this.value)"></div>
-          <div style="display: flex; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.p8}" oninput="actualizarCFYPField('p8', this.value)"></div>
-          <div style="display: flex; margin-top: 5px; margin-bottom: 5px; align-items: center;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span><input type="text" class="cfyp-input-line" value="${window.cfypData.pOtra}" oninput="actualizarCFYPField('pOtra', this.value)"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p1}" oninput="window.cfypData.p1 = this.value;"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p2}" oninput="window.cfypData.p2 = this.value;"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p3}" oninput="window.cfypData.p3 = this.value;"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p4}" oninput="window.cfypData.p4 = this.value;"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p5}" oninput="window.cfypData.p5 = this.value;"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p6}" oninput="window.cfypData.p6 = this.value;"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p7}" oninput="window.cfypData.p7 = this.value;"></div>
+          <div style="display: flex; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.p8}" oninput="window.cfypData.p8 = this.value;"></div>
+          <div style="display: flex; margin-top: 5px; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span><input type="text" class="cfyp-input-inline" value="${window.cfypData.pOtras}" oninput="window.cfypData.pOtras = this.value;"></div>
         </div>
 
-        <table class="table-oficial" style="margin-top: 12px; margin-bottom: 12px; font-size: 8.5pt; line-height: 1.0; border-collapse: collapse; width: 100%;">
+        <table class="table-oficial" style="margin-top: 12px; margin-bottom: 0px; font-size: 8.5pt; line-height: 1.0; border-collapse: collapse; width: 100%;">
           <thead>
             <tr style="background-color: #f2f2f2;">
               <th style="border: 1px solid #000; padding: 6px; text-align: left; text-transform: uppercase;">ASPECTO EVALUADO</th>
@@ -2040,16 +2015,29 @@ function renderDocumentTemplate(tabKey) {
             </tr>
           </thead>
           <tbody>
-            ${rowsTablaCFYP}
+            ${aspectos.map((item, rowIdx) => {
+              const selectedCol = window.cfypData.evaluaciones[rowIdx];
+              return `
+              <tr>
+                <td style="border: 1px solid #000; padding: 5px; text-align: justify; line-height: 1.0;">
+                  <b>${item.label}</b><br><span style="font-size: 7.8pt;">${item.desc}</span>
+                </td>
+                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 0)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 0 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
+                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 1)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 1 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
+                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 2)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 2 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
+                <td class="cfyp-cell-option" onclick="seleccionarOpcionCFYP(${rowIdx}, 3)" style="border: 1px solid #000; padding: 5px;">${selectedCol === 3 ? '<strong style="font-weight:900; font-size:11pt;">X</strong>' : ''}</td>
+              </tr>
+              `;
+            }).join('')}
           </tbody>
         </table>
 
-        <div style="font-size: 9.5pt; line-height: 1.15; margin-top: 10px; margin-bottom: 15px; display: flex; align-items: center;">
-          <span style="font-weight: bold; margin-right: 6px;">Observaciones:</span>
-          <input type="text" class="cfyp-input-line" value="${window.cfypData.observaciones}" oninput="actualizarCFYPField('observaciones', this.value)">
+        <div style="font-size: 10pt; line-height: 1.15; margin-top: 0px; margin-bottom: 0px; display: flex; align-items: center;">
+          <span style="font-weight: bold; margin-right: 5px;">Observaciones:</span>
+          <input type="text" class="cfyp-input-inline" value="${window.cfypData.observaciones}" oninput="window.cfypData.observaciones = this.value;">
         </div>
 
-        <div class="sangria-estandar" style="margin-top: 1.2em; text-align: justify; line-height: 1.15; font-size: 10pt; margin-bottom: 3cm;">
+        <div class="sangria-estandar" style="margin-top: 0px; text-align: justify; line-height: 1.15; font-size: 10pt; margin-bottom: 3cm;">
           Lo expuesto es todo en cuanto informo a usted.
         </div>
       `;
