@@ -1574,59 +1574,34 @@ function renderActaA4Content() {
     " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
     ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
-  // Ajuste a ~2900 caracteres por página para completar 37 líneas con interlineado 1.5 en A4
-  const CARACTERES_POR_PAGINA = 2900;
-
-  if (textoCompleto.length <= CARACTERES_POR_PAGINA) {
-    const pageSingleContent = `
-      <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-        ${textoCompleto}
-      </div>
-    `;
-    return renderGenericDocument([pageSingleContent]);
-  }
-
-  // Fragmentación dinámica manteniendo 37 líneas aprox (2900 caracteres) por página completa
+  const CARACTERES_POR_PAGINA = 2843;
   let paginasArray = [];
-  let textoRestante = textoCompleto;
-  let esPrimeraPagina = true;
+  let inicio = 0;
+  let numPagina = 1;
 
-  while (textoRestante.length > 0) {
-    if (textoRestante.length <= CARACTERES_POR_PAGINA) {
-      let contenidoPagina = esPrimeraPagina ? `
-        <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-          ${textoRestante}
-        </div>
-      ` : `
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-          ${textoRestante}
-        </div>
-      `;
-      paginasArray.push(contenidoPagina);
-      break;
+  while (inicio < textoCompleto.length) {
+    let fin = inicio + CARACTERES_POR_PAGINA;
+    if (fin < textoCompleto.length) {
+      let puntoCorte = textoCompleto.lastIndexOf(' ', fin);
+      if (puntoCorte > inicio) {
+        fin = puntoCorte;
+      }
+    } else {
+      fin = textoCompleto.length;
     }
 
-    let puntoCorte = textoRestante.lastIndexOf(' ', CARACTERES_POR_PAGINA);
-    if (puntoCorte === -1) puntoCorte = CARACTERES_POR_PAGINA;
+    let fragmento = textoCompleto.substring(inicio, fin);
+    let encabezadoTitulo = (numPagina === 1) ? `<div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>` : '';
 
-    let tramoActual = textoRestante.substring(0, puntoCorte);
-    textoRestante = textoRestante.substring(puntoCorte).trim();
-
-    let contenidoPagina = esPrimeraPagina ? `
-      <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-        ${tramoActual}
+    paginasArray.push(`
+      ${encabezadoTitulo}
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
+        ${fragmento}
       </div>
-    ` : `
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-        ${tramoActual}
-      </div>
-    `;
+    `);
 
-    paginasArray.push(contenidoPagina);
-    esPrimeraPagina = false;
+    inicio = fin;
+    numPagina++;
   }
 
   return renderGenericDocument(paginasArray);
@@ -1744,7 +1719,7 @@ function renderDocumentTemplate(tabKey) {
           <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
         </div>
         <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-          Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+          Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
         </div>
         <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
       `;
@@ -2181,7 +2156,7 @@ function renderDocumentTemplate(tabKey) {
           AL SEÑOR/A SUPERINTENDENTE/A<br>SUPERINTENDENCIA DE POLÍTICAS DE GÉNERO
         </div>
         <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
-          Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por a RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
+          Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, approved por a RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
         </div>
         <table class="table-oficial" style="margin-top: 1.5em;">
           <thead>
