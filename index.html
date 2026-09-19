@@ -1558,13 +1558,21 @@ function renderCorreA4Content() {
 function renderActaA4Content() {
   const d = getFormValues();
   
-  const encabezadoActa = `En la localidad de ${d.localidad}, partido de ${d.partido}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia}, sita en ${d.direccion}, entre calle ${d.entre1} y ${d.entre2} del mismo medio, a los ${d.fechaRecepcion}, siendo las ${d.horaHecho} horas, el suscripto ${d.instructor} (${d.cargoInstructor}), secundado por el ${d.secretario} (${d.cargoSecretario}), ambos numerarios de ${d.dependencia} y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante, proceden a labrar la presente acta: `;
-
-  const cuerpoRelato = d.actaRelato || '';
-
-  const cierreActa = ` No siendo para más se da por finalizado el acto, previa e íntegra lectura que de por sí se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.`;
-
-  const textoCompleto = encabezadoActa + cuerpoRelato + cierreActa;
+  // Construcción exacta de la fórmula indicada con sus vínculos correspondientes
+  const textoCompleto = "En la localidad de " + d.localidad + 
+    ", partido de " + d.partido + 
+    ", provincia de Buenos Aires, República Argentina, en el asiento físico de la " + d.dependencia + 
+    ", sita en " + d.direccion + 
+    ", entre calle " + d.entre1 + 
+    " del mismo medio, a los " + d.fechaRecepcion + 
+    ", siendo las " + d.horaHecho + 
+    " horas, el suscripto " + d.instructor + 
+    " (" + d.cargoInstructor + 
+    ") , secundado por el " + d.secretario + 
+    " (" + d.cargoSecretario + 
+    "), ambos numerarios de " + d.dependencia + 
+    " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
+    ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
   // Lógica de separación de texto para dividirse entre la página 1 y la página 2
   let limiteCorte = Math.floor(textoCompleto.length / 2);
