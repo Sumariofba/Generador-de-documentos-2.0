@@ -1574,7 +1574,20 @@ function renderActaA4Content() {
     " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
     ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
-  // Lógica de separación de texto para dividirse entre la página 1 y la página 2
+  const MAX_CARACTERES_PAGINA = 1500;
+
+  // Si el contenido es corto (por ejemplo, cuando el relato está vacío), se renderiza en 1 sola página.
+  if (textoCompleto.length <= MAX_CARACTERES_PAGINA) {
+    const pageSingleContent = `
+      <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+        ${textoCompleto}
+      </div>
+    `;
+    return renderGenericDocument([pageSingleContent]);
+  }
+
+  // Lógica de separación si el texto supera el límite de 1 página
   let limiteCorte = Math.floor(textoCompleto.length / 2);
   let puntoCorte = textoCompleto.indexOf(' ', limiteCorte);
   if (puntoCorte === -1) puntoCorte = limiteCorte;
