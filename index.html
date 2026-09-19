@@ -1606,7 +1606,7 @@ function renderActaA4Content() {
     const pageElem = tempContainer.firstElementChild;
     const pElem = pageElem.querySelector('.sangria-cero');
 
-    // Comprobar si el contenido supera la altura disponible de la página A4 (297mm aprox 1122px)
+    // Comprobar si el contenido supera la altura disponible de la página A4
     if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
       if (currentWords.length === 0) {
         currentWords.push(words[wordIndex]);
@@ -1661,37 +1661,25 @@ function renderParteA4Content() {
   const d = getFormValues();
   let destHtml = destinatariosParteEscrito.map(dest => `<b>${dest}</b>`).join('<br>');
 
-  // Construcción exacta del primer párrafo respetando la fórmula y los nexos
+  // Construcción del Primer Párrafo dinámico
   let parrafo1 = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
-  if (d.encuadre && d.encuadre.trim() !== '') {
-    parrafo1 += " <b>" + d.encuadre + "</b>";
-  }
-  if (d.caratula && d.caratula.trim() !== '') {
-    parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
-  }
+  if (d.encuadre && d.encuadre.trim() !== '') parrafo1 += " <b>" + d.encuadre + "</b>";
+  if (d.caratula && d.caratula.trim() !== '') parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
   if (d.denNombre && d.denNombre.trim() !== '') {
     parrafo1 += ", donde resulta denunciante: <b>" + d.denNombre + "</b>";
-    if (d.denDestino && d.denDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.denDestino + "</b>)";
-    }
+    if (d.denDestino && d.denDestino.trim() !== '') parrafo1 += " (<b>" + d.denDestino + "</b>)";
   }
   if (d.vicNombre && d.vicNombre.trim() !== '') {
     parrafo1 += ", víctima: <b>" + d.vicNombre + "</b>";
-    if (d.vicDestino && d.vicDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.vicDestino + "</b>)";
-    }
+    if (d.vicDestino && d.vicDestino.trim() !== '') parrafo1 += " (<b>" + d.vicDestino + "</b>)";
   }
   if (d.cauNombre && d.cauNombre.trim() !== '') {
     parrafo1 += ", causante: <b>" + d.cauNombre + "</b>";
-    if (d.cauDestino && d.cauDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.cauDestino + "</b>)";
-    }
+    if (d.cauDestino && d.cauDestino.trim() !== '') parrafo1 += " (<b>" + d.cauDestino + "</b>)";
   }
   if (d.impNombre && d.impNombre.trim() !== '') {
     parrafo1 += ", imputado: <b>" + d.impNombre + "</b>";
-    if (d.impDestino && d.impDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.impDestino + "</b>)";
-    }
+    if (d.impDestino && d.impDestino.trim() !== '') parrafo1 += " (<b>" + d.impDestino + "</b>)";
   }
   if (d.intervencion && d.intervencion.trim() !== '') {
     parrafo1 += ", con intervención de <b>" + d.intervencion + "</b>.";
@@ -1699,29 +1687,29 @@ function renderParteA4Content() {
     parrafo1 += ".";
   }
 
-  // Construcción del segundo párrafo a renglón en blanco según la fórmula
-  let relatoSintesis = d.sintesis || '';
-  let parrafo2 = "SINTESIS DEL HECHO: Los presentes actuados tienen su génesis en <b>" + (d.fechaHecho || '') + "</b>, siendo las <b>" + (d.horaHecho || '') + "</b>,cuando se toma conocimiento que <b>" + relatoSintesis + "</b>.";
+  // Construcción del Segundo Párrafo dinámico
+  let parrafo2 = "SINTESIS DEL HECHO: Los presentes actuados tienen su génesis en <b>" + (d.fechaHecho || '') + "</b>, siendo las <b>" + (d.horaHecho || '') + "</b>,cuando se toma conocimiento que <b>" + (d.sintesis || '') + "</b>.";
+
+  // Tercer y Cuarto Párrafo
+  let parrafo3 = "Atento a lo narrado se labran Actuaciones conforme al Decreto 1050/09 Reglamentario de la Ley del Personal 13982.";
+  let parrafo4 = "Lo expuesto, es todo en cuanto informo a usted.";
+
+  const estiloParrafo = "text-align: justify; text-justify: inter-word; text-indent: 1.15cm; line-height: 1.5; margin-bottom: 1em; font-size: 10.5pt;";
 
   const pageContent = `
     <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">
-      ${d.partido}, ${d.fechaRecepcion}
+      ${d.partido || ''}, ${d.fechaRecepcion || ''}
     </div>
     <div class="sangria-cero" style="margin-bottom: 1.8em; font-size: 10pt; line-height: 1.4;">
       ${destHtml}
     </div>
-    <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-bottom: 1em; text-align: center;">
+    <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-bottom: 1.5em; text-align: center;">
       COMUNICACIÓN ADMINISTRATIVA - PARTE ESCRITO
     </div>
-    <div style="text-align: justify; line-height: 1.5; text-indent: 1.15cm; margin-bottom: 1.2em;">
-      ${parrafo1}
-    </div>
-    <div style="text-align: justify; line-height: 1.5; text-indent: 1.15cm; margin-bottom: 1.2em;">
-      ${parrafo2}
-    </div>
-    <div style="text-align: justify; line-height: 1.5; text-indent: 1.15cm; margin-top: 2em;">
-      Lo expuesto es todo en cuanto me corresponde informar a Usted.
-    </div>
+    <div style="${estiloParrafo}">${parrafo1}</div>
+    <div style="${estiloParrafo}">${parrafo2}</div>
+    <div style="${estiloParrafo}">${parrafo3}</div>
+    <div style="${estiloParrafo}">${parrafo4}</div>
   `;
 
   return renderGenericDocument([pageContent]);
