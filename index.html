@@ -1873,7 +1873,25 @@ function renderParteA4Content() {
 function renderInspeccionA4Content() {
   const d = getFormValues();
 
-  // Armado textual exacto con fórmulas y variables dinámicas en negrita
+  // Armado textual condicional según completitud de los campos entre calle 1 y entre calle 2
+  let textoBloqueEC1 = "";
+  if (d.ec1 && d.ec1.trim() !== "") {
+    textoBloqueEC1 = " Que, la arteria <b>" + d.ec1 + 
+      "</b>, resulta ser de <b>" + (d.art2Tipo || '') + 
+      "</b> en <b>" + (d.art2Estado || '') + 
+      "</b> estado de conservación, circulación vehicular de <b>" + (d.art2Mano || '') + 
+      "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial.";
+  }
+
+  let textoBloqueEC2 = "";
+  if (d.ec2 && d.ec2.trim() !== "") {
+    textoBloqueEC2 = " Que, la arteria <b>" + d.ec2 + 
+      "</b>, resulta ser de <b>" + (d.art3Tipo || '') + 
+      "</b> en <b>" + (d.art3Estado || '') + 
+      "</b> estado de conservación, circulación vehicular de <b>" + (d.art3Mano || '') + 
+      "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. No existiendo en el lugar semáforos, si existiendo señales de tránsito.";
+  }
+
   const textoFormulaHtml = "En la localidad de <b>" + (d.localidad || '') + 
     "</b>, partido de <b>" + (d.partido || '') + 
     "</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>" + (d.dependencia || '') + 
@@ -1901,15 +1919,10 @@ function renderInspeccionA4Content() {
     "</b>, que resulta ser de <b>" + (d.art1Tipo || '') + 
     "</b> en <b>" + (d.art1Estado || '') + 
     "</b> estado de conservación, circulación vehicular de <b>" + (d.art1Mano || '') + 
-    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial, no existiendo en el lugar semáforos, si existiendo señales de tránsito. Que, la arteria <b>" + (d.ec1 || '') + 
-    "</b>, resulta ser de <b>" + (d.art2Tipo || '') + 
-    "</b> en <b>" + (d.art2Estado || '') + 
-    "</b> estado de conservación, circulación vehicular de <b>" + (d.art2Mano || '') + 
-    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. Que, la arteria <b>" + (d.ec2 || '') + 
-    "</b>, resulta ser de <b>" + (d.art3Tipo || '') + 
-    "</b> en <b>" + (d.art3Estado || '') + 
-    "</b> estado de conservación, circulación vehicular de <b>" + (d.art3Mano || '') + 
-    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. No existiendo en el lugar semáforos, si existiendo señales de tránsito. No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.";
+    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial, no existiendo en el lugar semáforos, si existiendo señales de tránsito." + 
+    textoBloqueEC1 + 
+    textoBloqueEC2 + 
+    " No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.";
 
   // Paginación inteligente A4 en DOM
   const tempContainer = document.createElement('div');
