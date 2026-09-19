@@ -382,7 +382,7 @@ body {
   width: auto; 
 }
 
-.sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.25cm !important; }
+.sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.15cm !important; }
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
 /* ==========================================================================
@@ -539,6 +539,18 @@ body {
   text-transform: uppercase;
 }
 
+/* Estilos de edición interactiva */
+.item-parrafo-card {
+  background: #f8fafc;
+  border: 1px solid #cbd5e1;
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 /* ==========================================================================
    8. REGLAS DE IMPRESIÓN IMPRESO / OFICIAL
    ========================================================================== */
@@ -560,7 +572,7 @@ body {
   }
 
   html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .carpetas-form-side, .testimonial-form-side, .inspeccion-form-side, .indice-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload, .page-break-indicator { display: none !important; }
+  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .carpetas-form-side, .testimonial-form-side, .inspeccion-form-side, .indice-form-side, .sintesis-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload, .page-break-indicator { display: none !important; }
   .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
   .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
   .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
@@ -608,12 +620,12 @@ body {
     <li class="nav-item-top" data-tab="tab-anmac">📄 15. Star. Inf. Repar</li> 
     <li class="nav-item-top" data-tab="tab-col_cria">📄 16. Star. Inf. CMYF</li> 
     <li class="nav-item-top" data-tab="tab-testimonial">📄 17. Declaración Testimonial</li> 
-    <li class="nav-item-top active" data-tab="tab-inspeccion_ocular">📄 18. Acta de Inspección Ocular</li> 
+    <li class="nav-item-top" data-tab="tab-inspeccion_ocular">📄 18. Acta de Inspección Ocular</li> 
     <li class="nav-item-top" data-tab="tab-croquis">📄 19. Croquis ilustrativos sin escalas</li> 
     <li class="nav-item-top" data-tab="tab-fotos">📄 20. Fotos del lugar del Hecho</li> 
     <li class="nav-item-top" data-tab="tab-carpetas_medicas">📄 21. Inf. de Carpetas</li> 
     <li class="nav-item-top" data-tab="tab-cierre">📄 22. Dto. Cierre de Actuaciones</li> 
-    <li class="nav-item-top" data-tab="tab-sintesis_conclusiones">📄 23. Síntesis y Conclusiones</li> 
+    <li class="nav-item-top active" data-tab="tab-sintesis_conclusiones">📄 23. Síntesis y Conclusiones</li> 
   </ul> 
 </div> 
 
@@ -760,19 +772,19 @@ body {
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_13_cau_nombre" value=""></div>
-          <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_14_cau_edad" value=""></div>
-          <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_15_cau_dni" value=""></div>
-          <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_16_cau_domicilio" value=""></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES:</label><input type="text" id="f_17_cau_entre_calles" value=""></div>
-          <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" id="f_18_cau_localidad" value=""></div>
-          <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" id="f_19_cau_partido" value=""></div>
-          <div class="sheet-row-single"><label>CONTACTO:</label><input type="text" id="f_20_cau_contacto" value=""></div>
+          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_13_cau_nombre" value="PÉREZ JUAN CARLOS"></div>
+          <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_14_cau_edad" value="30"></div>
+          <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_15_cau_dni" value="38.888.999"></div>
+          <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_16_cau_domicilio" value="Calle Falsa 123"></div>
+          <div class="sheet-row-single"><label>ENTRE CALLES:</label><input type="text" id="f_17_cau_entre_calles" value="Rivadavia"></div>
+          <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" id="f_18_cau_localidad" value="Ramos Mejía"></div>
+          <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" id="f_19_cau_partido" value="La Matanza"></div>
+          <div class="sheet-row-single"><label>CONTACTO:</label><input type="text" id="f_20_cau_contacto" value="11-9988-7766"></div>
           <div class="sheet-row-single"><label>DESTINO:</label><select id="f_21_cau_destino" class="select-destino"></select></div>
-          <div class="sheet-row-single"><label>ESCALÓN:</label><input type="text" id="f_21b_cau_escalon" value=""></div>
-          <div class="sheet-row-single"><label>HORARIO DE ENTRADA:</label><input type="text" id="f_21c_cau_entrada" value=""></div>
-          <div class="sheet-row-single"><label>HORARIO DE SALIDA:</label><input type="text" id="f_21d_cau_salida" value=""></div>
-          <div class="sheet-row-single"><label>MODALIDAD:</label><input type="text" id="f_21e_cau_modalidad" value=""></div>
+          <div class="sheet-row-single"><label>ESCALÓN:</label><input type="text" id="f_21b_cau_escalon" value="-"></div>
+          <div class="sheet-row-single"><label>HORARIO DE ENTRADA:</label><input type="text" id="f_21c_cau_entrada" value="-"></div>
+          <div class="sheet-row-single"><label>HORARIO DE SALIDA:</label><input type="text" id="f_21d_cau_salida" value="-"></div>
+          <div class="sheet-row-single"><label>MODALIDAD:</label><input type="text" id="f_21e_cau_modalidad" value="-"></div>
           <div class="sheet-row-single"><label>CIRCUNSTANCIAS AL MOMENTO DEL HECHO:</label><select id="f_21f_cau_circunstancias" class="select-circunstancias"></select></div>
         </div>
       </div>
@@ -821,7 +833,7 @@ body {
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 18. Acta de Inspección Ocular</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 23. Síntesis y Conclusiones</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -948,7 +960,7 @@ let diligenciasCorreAgregado = [
   "Stud. Legajo Electrónico Personal (L.E.P.)",
   "Legajo Electrónico Personal (L.E.P.)",
   "Copia certificada con habilitación del Libro de novedades de la guardia",
-  "Copia certificada con habilitación Libro de presentismo y Co.Re.S."
+  "Copia certificada with habilitación Libro de presentismo y Co.Re.S."
 ];
 let destinatariosParteEscrito = [
   "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
@@ -965,6 +977,13 @@ window.carpetasMedicasEstado = { opcion: 'noposee', lista: [] };
 window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
 window.zonaFotoSeleccionada = 'foto1';
 window.registrosSeleccionadosLEP = null;
+
+// ESTADO GLOBAL DE PÁRRAFOS PRUEBA (SÍNTESIS Y CONCLUSIONES)
+window.parrafosSintesisPrueba = [
+  { tipo: 'opcion1', foja: '26/26 vta', elemento: 'Concepto Funcional y Personal' },
+  { tipo: 'opcion1', foja: '28/31 vta', elemento: 'Legajo Electrónico Personal (L.E.P.)' },
+  { tipo: 'opcion2', orden: 'SIETE (7)', contenido: 'cumple funciones de Ayudante de Guardia y debe cumplir con una carga horaria de 30 horas semanales según su subescalafón', paginas: '1 a 3', elemento: 'Vademécum - RP21100' }
+];
 
 /* ==========================================================================
    3. FUNCIONES AUXILIARES DE NAVEGACIÓN Y EXTRACCIÓN DE DATOS
@@ -1519,6 +1538,110 @@ function renderIndiceA4PagesContent() {
   return renderGenericDocument(paginasArray);
 }
 
+/* --- MANEJADORES DE SÍNTESIS Y CONCLUSIONES (BLOQUE CORREGIDO) --- */
+window.agregarParrafoSintesis = function(tipo) {
+  if (tipo === 'opcion1') {
+    window.parrafosSintesisPrueba.push({
+      tipo: 'opcion1',
+      foja: '',
+      elemento: listaDesplegableColumnaM[0] || ''
+    });
+  } else if (tipo === 'opcion2') {
+    window.parrafosSintesisPrueba.push({
+      tipo: 'opcion2',
+      orden: '',
+      contenido: '',
+      paginas: '',
+      elemento: listaDesplegableColumnaM[0] || ''
+    });
+  }
+  actualizarSintesisEnVivo();
+};
+
+window.quitarParrafoSintesis = function(index) {
+  window.parrafosSintesisPrueba.splice(index, 1);
+  actualizarSintesisEnVivo();
+};
+
+window.actualizarCampoParrafoSintesis = function(index, campo, valor) {
+  if (window.parrafosSintesisPrueba[index]) {
+    window.parrafosSintesisPrueba[index][campo] = valor;
+    actualizarSintesisEnVivoOnlyPreview();
+  }
+};
+
+function actualizarSintesisEnVivo() {
+  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-sintesis_conclusiones') {
+    const listTarget = document.getElementById('sintesis-parrafos-list-target');
+    if (listTarget) listTarget.innerHTML = renderListaControlSintesisHtml();
+    const liveContainer = document.getElementById('sintesis-live-preview-target');
+    if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
+  }
+}
+
+function actualizarSintesisEnVivoOnlyPreview() {
+  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-sintesis_conclusiones') {
+    const liveContainer = document.getElementById('sintesis-live-preview-target');
+    if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
+  }
+}
+
+function renderListaControlSintesisHtml() {
+  return window.parrafosSintesisPrueba.map((p, idx) => {
+    let optionsHtml = listaDesplegableColumnaM.map(opt => `<option value="${opt}" ${opt === p.elemento ? 'selected' : ''}>${opt}</option>`).join('');
+
+    if (p.tipo === 'opcion1') {
+      return `
+        <div class="item-parrafo-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.78rem; color: #0284c7;">
+            <span>📌 PÁRRAFO OPCIÓN 1 (Fs. xx)</span>
+            <button class="btn-del-row" onclick="quitarParrafoSintesis(${idx})">✕</button>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <label style="font-size:0.7rem; font-weight:bold;">Foja/s (xx):</label>
+            <input type="text" value="${p.foja}" oninput="actualizarCampoParrafoSintesis(${idx}, 'foja', this.value)" placeholder="Ej: 26/26 vta" style="flex:1; padding:3px 6px; font-size:0.8rem;">
+          </div>
+          <div>
+            <label style="font-size:0.7rem; font-weight:bold;">Elemento (yy):</label>
+            <select onchange="actualizarCampoParrafoSintesis(${idx}, 'elemento', this.value)" style="width:100%; padding:3px 6px; font-size:0.78rem; margin-top:2px;">
+              ${optionsHtml}
+            </select>
+          </div>
+        </div>
+      `;
+    } else {
+      return `
+        <div class="item-parrafo-card">
+          <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.78rem; color: #0369a1;">
+            <span>📌 PÁRRAFO OPCIÓN 2 (Orden xx)</span>
+            <button class="btn-del-row" onclick="quitarParrafoSintesis(${idx})">✕</button>
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <label style="font-size:0.7rem; font-weight:bold;">Orden (xx):</label>
+            <input type="text" value="${p.orden}" oninput="actualizarCampoParrafoSintesis(${idx}, 'orden', this.value)" placeholder="Ej: SIETE (7)" style="flex:1; padding:3px 6px; font-size:0.8rem;">
+          </div>
+          <div>
+            <label style="font-size:0.7rem; font-weight:bold;">Contenido (yy):</label>
+            <input type="text" value="${p.contenido}" oninput="actualizarCampoParrafoSintesis(${idx}, 'contenido', this.value)" placeholder="Ej: cumple funciones de..." style="width:100%; padding:3px 6px; font-size:0.8rem; margin-top:2px;">
+          </div>
+          <div style="display: flex; gap: 6px; align-items: center;">
+            <label style="font-size:0.7rem; font-weight:bold;">Página/s (zz):</label>
+            <input type="text" value="${p.paginas}" oninput="actualizarCampoParrafoSintesis(${idx}, 'paginas', this.value)" placeholder="Ej: 12 a 15" style="flex:1; padding:3px 6px; font-size:0.8rem;">
+          </div>
+          <div>
+            <label style="font-size:0.7rem; font-weight:bold;">Elemento (ww):</label>
+            <select onchange="actualizarCampoParrafoSintesis(${idx}, 'elemento', this.value)" style="width:100%; padding:3px 6px; font-size:0.78rem; margin-top:2px;">
+              ${optionsHtml}
+            </select>
+          </div>
+        </div>
+      `;
+    }
+  }).join('');
+}
+
 /* --- Actualizadores Varios de Vista Previa --- */
 window.actualizarActaEnVivo = function() {
   const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
@@ -1873,7 +1996,6 @@ function renderParteA4Content() {
 function renderInspeccionA4Content() {
   const d = getFormValues();
 
-  // Armado textual condicional según completitud de los campos entre calle 1 y entre calle 2
   let textoBloqueEC1 = "";
   if (d.ec1 && d.ec1.trim() !== "") {
     textoBloqueEC1 = " Que, la arteria <b>" + d.ec1 + 
@@ -1924,7 +2046,6 @@ function renderInspeccionA4Content() {
     textoBloqueEC2 + 
     " No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.";
 
-  // Paginación inteligente A4 en DOM
   const tempContainer = document.createElement('div');
   tempContainer.style.position = 'absolute';
   tempContainer.style.visibility = 'hidden';
@@ -2015,6 +2136,102 @@ function renderInspeccionA4Content() {
       </div>
     `;
   }).join('');
+}
+
+/* --- RENDERIZADOR SÍNTESIS Y CONCLUSIONES (BLOQUE CORREGIDO) --- */
+function renderSintesisConclusionesA4Content() {
+  const d = getFormValues();
+
+  // 1. CONSTRUCCIÓN DEL PRIMER PÁRRAFO DINÁMICO SEGÚN LA FÓRMULA SOLICITADA
+  let parrafo1 = "Me dirijo a usted afines de de adjuntar y elevar en el computo de ____________________(______) fojas utilizadas. Actuaciones Sumariales Administrativas";
+  
+  if (d.encuadre && d.encuadre.trim() !== '') {
+    parrafo1 += " <b>" + d.encuadre + "</b>";
+  }
+  if (d.caratula && d.caratula.trim() !== '') {
+    parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
+  }
+  if (d.denNombre && d.denNombre.trim() !== '') {
+    parrafo1 += ", donde resulta denunciante: <b>" + d.denNombre + "</b>";
+    if (d.denDestino && d.denDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.denDestino + "</b>)";
+    }
+  }
+  if (d.vicNombre && d.vicNombre.trim() !== '') {
+    parrafo1 += ", víctima: <b>" + d.vicNombre + "</b>";
+    if (d.vicDestino && d.vicDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.vicDestino + "</b>)";
+    }
+  }
+  if (d.cauNombre && d.cauNombre.trim() !== '') {
+    parrafo1 += ", causante: <b>" + d.cauNombre + "</b>";
+    if (d.cauDestino && d.cauDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.cauDestino + "</b>)";
+    }
+  }
+  if (d.impNombre && d.impNombre.trim() !== '') {
+    parrafo1 += ", imputado: <b>" + d.impNombre + "</b>";
+    if (d.impDestino && d.impDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.impDestino + "</b>)";
+    }
+  }
+  if (d.intervencion && d.intervencion.trim() !== '') {
+    parrafo1 += ", con intervención de <b>" + d.intervencion + "</b>.";
+  } else {
+    parrafo1 += ".";
+  }
+
+  // 2. RENDEREADO DE PÁRRAFOS PRUEBA DINÁMICOS CON SANGRÍA DE 1,15CM
+  let parrafosPruebaHtml = window.parrafosSintesisPrueba.map(p => {
+    if (p.tipo === 'opcion1') {
+      let fojaText = p.foja ? p.foja : 'xx';
+      let elemText = p.elemento ? p.elemento : 'yy';
+      return `<div class="sangria-estandar" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5;">Que a Fs. <b>${fojaText}</b>, luce <b>${elemText}</b>.</div>`;
+    } else {
+      let ordenText = p.orden ? p.orden : 'xx';
+      let contText = p.contenido ? p.contenido : 'yy';
+      let pagText = p.paginas ? p.paginas : 'zz';
+      let elemText = p.elemento ? p.elemento : 'ww';
+      return `<div class="sangria-estandar" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5;">Que a Orden <b>${ordenText}</b>, luce <b>${contText}</b>, que contiene: a página/s <b>${pagText}</b>, <b>${elemText}</b>;</div>`;
+    }
+  }).join('');
+
+  const page1Content = `
+    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+      REF.: Evar. Actuaciones Administrativa con Síntesis y Conclusiones<br>${d.partido || ''}, ${d.fechaRecepcion || ''}
+    </div>
+    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+      AL SEÑOR COORDINADOR<br>DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO
+    </div>
+    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+      ${parrafo1}
+    </div>
+    <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">1. SÍNTESIS DEL HECHO:</div>
+    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+      ${d.sintesis || 'se tomó conocimiento a través de la guardia de prevención sobre el siniestro vial acaecido, labrándose las actuaciones de rigor.'}
+    </div>
+    <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">2. ELEMENTOS DE PRUEBA</div>
+    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
+      Se fundamenta el administrativo en los siguientes elementos de juicio recolectados y definitivamente incorporados al legajo hasta la fecha:
+    </div>
+    ${parrafosPruebaHtml}
+  `;
+
+  const page2Content = `
+    <div class="sangria-cero" style="font-weight: bold; margin-top: 1em; margin-bottom: 0.5em;">3. ATENUANTES Y/O AGRAVANTES</div>
+    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+      Habiendo evaluado todos los ATENUANTES (art. 178), y AGRAVANTES (art. 179) del Decreto 1050/09 Reglamentario del Personal Ley 13982.
+    </div>
+    <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-top: 1em; margin-bottom: 0.5em;">RESUELVO:</div>
+    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
+      Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se dicte la pertinente Resolución mediante la cual se disponga que sea EXCENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES.
+    </div>
+    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-top: 2em;">
+      Lo expuesto es todo en cuanto elevo e informo a usted.
+    </div>
+  `;
+
+  return renderGenericDocument([page1Content, page2Content]);
 }
 
 function renderDocumentTemplate(tabKey) {
@@ -2778,37 +2995,27 @@ function renderDocumentTemplate(tabKey) {
       return renderGenericDocument([pageCierre]);
 
     case 'tab-sintesis_conclusiones':
-      const pageSintesis1 = `
-        <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-          REF.: Evar. Actuaciones Administrativa con Síntesis y Conclusiones<br>La Matanza, 2 de abril del 2026
+      return `
+      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+        <div class="sintesis-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+            📝 GESTIÓN DE PÁRRAFOS DE ELEMENTOS DE PRUEBA
+          </div>
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <button class="btn-secondary" onclick="agregarParrafoSintesis('opcion1')" style="flex: 1; background: #0284c7; white-space: nowrap;">➕ Agregar Opción 1 (Fs. xx)</button>
+            <button class="btn-secondary" onclick="agregarParrafoSintesis('opcion2')" style="flex: 1; background: #0369a1; white-space: nowrap;">➕ Agregar Opción 2 (Orden xx)</button>
+          </div>
+          <div class="sheet-row-single" style="width: 100%;">
+            <label>LISTA DE PÁRRAFOS CONFIGURADOS:</label>
+            <div id="sintesis-parrafos-list-target" style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px;">
+              ${renderListaControlSintesisHtml()}
+            </div>
+          </div>
         </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-          AL SEÑOR COORDINADOR<br>DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO
+        <div style="flex-shrink: 0; display: flex; justify-content: center;">
+          <div id="sintesis-live-preview-target">${renderSintesisConclusionesA4Content()}</div>
         </div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-          Me dirijo a usted afines de de adjuntar y elevar en el computo de ____________________(______) fojas utilizadas. Actuaciones Sumariales Administrativas ${d.encuadre || '-sin encuadre administrativo-'}, caratulado: ${d.caratula}, donde resulta denunciante: ${d.denNombre} (CIVIL), víctima: ${d.vicNombre} (CIVIL), causante: ${d.cauNombre} (DIV. FUERZA BARRIAL DE APROX. II (FBA ALMIRANTE BROWN)), imputado: ${d.impNombre} (CIVIL), con intervención de ${d.intervencion}.
-        </div>
-        <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">1. SÍNTESIS DEL HECHO:</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-          La presente, tiene génesis con fecha 18/06/2023, siendo las 8.30 horas, a raíz de haberse constatado que el Oficial Subayudante (Adm.) Legajo N° 413766. GALEANO Maximiliano Jorge, no se hizo presente a su servicio ordinario en fecha 15 de junio de 2023; realizada una compulsa a fin de certificar registro en el cual se consigne llamada telefónica o medie otro medio que comunique los motivos que justificaran que no se encuentre presente, no justificó su ausencia mediante comunicación y/o alguna licencia médica y que hizo caso omiso a que regulará su situación pese a las intimidaciones hechas mediante cédulas.
-        </div>
-        <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">2. ELEMENTOS DE PRUEBA</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">Se fundamenta el administrativo en los siguientes elementos de juicio recolectados y definitivamente incorporados al legajo hasta la fecha:</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">Que, a fs. 26/26 vta, luce concepto funcional y privado regular, a criterio de la superioridad dónde presta servicios.</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">Que, a fs. 28/31 vta, luce legajo personal digital proveniente de la Dirección Personal Regímenes Policiales, dónde surge que en un periodo de seis meses cuenta en su haber con un total de CINCUENTA Y UN (51) día/s de suspensión sin goce de haberes, por la inasistencia injustificada al servicio.</div>
-      `;
-
-      const pageSintesis2 = `
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">Que, a fs. 33/40 vta, luce copia certificada del libro de novedades de la guardia donde se encuentran asentadas las ausencias al servicio que se le endilgan al infractor y que con fecha 18/06/2023, se presentará al servicio de manera impuntual, sin presentar ninguna documentación y/o constancia que justificara sus ausencias.</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">Que, a fs. 42, luce Vademecum RP 21100 expedido por el Sistema SIPP de Personal, luce que a orden SIETE (7) el efectivo de cuestión, cumple funciones de Ayudante de Guardia y debe cumplir con una carga horaria de 30 horas semanales según su subescalafón.</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">Que, a fs. 60/60 vta, obra Auto de imputación administrativo, surge que los elementos acumulados hasta el momento claramente se le puede endilgar la falta que se le imputa.</div>
-        <div class="sangria-cero" style="font-weight: bold; margin-top: 1em; margin-bottom: 0.5em;">3. ATENUANTES Y/O AGRAVANTES</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">Habiendo evaluado todos los ATENUANTES (art. 178), y AGRAVANTES (art. 179) del Decreto 1050/09 Reglamentario del Personal Ley 13982.</div>
-        <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-top: 1em; margin-bottom: 0.5em;">RESUELVO:</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial (artículo 31 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982) hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se dicte la pertinente Resolución mediante la cual se disponga que sea EXCENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES, hasta tanto se incorporen nuevos elementos de juicio, que ameriten atribuir responsabilidad disciplinaria.</div>
-        <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-top: 2em;">Lo expuesto es todo en cuanto elevo e informo a usted.</div>
-      `;
-      return renderGenericDocument([pageSintesis1, pageSintesis2]);
+      </div>`;
 
     default:
       return renderGenericDocument([`<div class="sangria-estandar">Documento administrativo sumarial generado formalmente acorde a expediente <b>${d.caratula}</b>.</div>`]);
@@ -2878,7 +3085,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (['tab-acta_constatacion', 'tab-testimonial', 'tab-inspeccion_ocular', 'tab-parte_escrito', 'tab-corre_agregado', 'tab-col_div', 'tab-lep', 'tab-carpetas_medicas', 'tab-indice_diligencias'].includes(activeTabKey)) {
+        if (['tab-acta_constatacion', 'tab-testimonial', 'tab-inspeccion_ocular', 'tab-parte_escrito', 'tab-corre_agregado', 'tab-col_div', 'tab-lep', 'tab-carpetas_medicas', 'tab-indice_diligencias', 'tab-sintesis_conclusiones'].includes(activeTabKey)) {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
@@ -2894,7 +3101,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Cargar pestaña predeterminada
-  const defaultTabKey = 'tab-inspeccion_ocular';
+  const defaultTabKey = 'tab-sintesis_conclusiones';
   previewContainer.innerHTML = renderDocumentTemplate(defaultTabKey);
 });
 </script>
