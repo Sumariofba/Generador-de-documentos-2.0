@@ -1574,57 +1574,41 @@ function renderActaA4Content() {
     " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
     ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
-  // Estimación dinámica de capacidad por hoja (A4 con márgenes oficiales de 5cm superior / 2.5cm inferior)
-  // ~85 caracteres por línea; la Pág 1 posee ~23 líneas útiles y las subsiguientes ~27 líneas útiles.
-  const CARACTERES_PAG_1 = 23 * 85; // ~1955 caracteres
-  const CARACTERES_PAG_N = 27 * 85; // ~2295 caracteres
+  const MAX_CARACTERES_PAGINA = 1500;
 
-  let paginasArray = [];
-
-  if (textoCompleto.length <= CARACTERES_PAG_1) {
-    paginasArray.push(`
+  // Si el contenido es corto (por ejemplo, cuando el relato está vacío), se renderiza en 1 sola página con interlineado 1.5.
+  if (textoCompleto.length <= MAX_CARACTERES_PAGINA) {
+    const pageSingleContent = `
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
         ${textoCompleto}
       </div>
-    `);
-  } else {
-    let cursor = 0;
-    let numPag = 1;
-
-    while (cursor < textoCompleto.length) {
-      let capacidadCap = (numPag === 1) ? CARACTERES_PAG_1 : CARACTERES_PAG_N;
-      let targetCorte = cursor + capacidadCap;
-
-      if (targetCorte >= textoCompleto.length) {
-        targetCorte = textoCompleto.length;
-      } else {
-        let puntoEspacio = textoCompleto.lastIndexOf(' ', targetCorte);
-        if (puntoEspacio > cursor) targetCorte = puntoEspacio;
-      }
-
-      let fragmento = textoCompleto.substring(cursor, targetCorte).trim();
-      cursor = targetCorte;
-
-      if (numPag === 1) {
-        paginasArray.push(`
-          <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-          <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-            ${fragmento}
-          </div>
-        `);
-      } else {
-        paginasArray.push(`
-          <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-            ${fragmento}
-          </div>
-        `);
-      }
-      numPag++;
-    }
+    `;
+    return renderGenericDocument([pageSingleContent]);
   }
 
-  return renderGenericDocument(paginasArray);
+  // Lógica de separación si el texto supera el límite de 1 página con interlineado 1.5.
+  let limiteCorte = Math.floor(textoCompleto.length / 2);
+  let puntoCorte = textoCompleto.indexOf(' ', limiteCorte);
+  if (puntoCorte === -1) puntoCorte = limiteCorte;
+
+  const parte1Acta = textoCompleto.substring(0, puntoCorte);
+  const parte2Acta = textoCompleto.substring(puntoCorte);
+
+  const page1Content = `
+    <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
+    <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
+      ${parte1Acta}
+    </div>
+  `;
+
+  const page2Content = `
+    <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
+      ${parte2Acta}
+    </div>
+  `;
+
+  return renderGenericDocument([page1Content, page2Content]);
 }
 
 function renderTestimonialA4Content() {
