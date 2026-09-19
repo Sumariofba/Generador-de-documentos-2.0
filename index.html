@@ -599,14 +599,14 @@ body {
     <li class="nav-item-top" data-tab="tab-recepcion">📄 6. Dto. de Recepción</li> 
     <li class="nav-item-top" data-tab="tab-parte_escrito">📄 7. Parte Escrito</li> 
     <li class="nav-item-top" data-tab="tab-corre_agregado">📄 8. Dto. Corre Agregado</li> 
-    <li class="nav-item-top active" data-tab="tab-cfyp">📄 9. CFYP</li> 
+    <li class="nav-item-top" data-tab="tab-cfyp">📄 9. CFYP</li> 
     <li class="nav-item-top" data-tab="tab-tdh">📄 10. TDH</li> 
     <li class="nav-item-top" data-tab="tab-col_div">📄 11. Col. Divisiones</li> 
     <li class="nav-item-top" data-tab="tab-lep">📄 12. Star. LEP</li> 
     <li class="nav-item-top" data-tab="tab-col_ipp">📄 13. Star. PP</li> 
     <li class="nav-item-top" data-tab="tab-cautelares">📄 14. Star. Cautelares</li> 
     <li class="nav-item-top" data-tab="tab-anmac">📄 15. Star. Inf. Repar</li> 
-    <li class="nav-item-top" data-tab="tab-col_cria">📄 16. Star. Inf. CMYF</li> 
+    <li class="nav-item-top active" data-tab="tab-col_cria">📄 16. Star. Inf. CMYF</li> 
     <li class="nav-item-top" data-tab="tab-testimonial">📄 17. Declaración Testimonial</li> 
     <li class="nav-item-top" data-tab="tab-inspeccion_ocular">📄 18. Acta de Inspección Ocular</li> 
     <li class="nav-item-top" data-tab="tab-croquis">📄 19. Croquis ilustrativos sin escalas</li> 
@@ -817,7 +817,7 @@ body {
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 9. CFYP</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 16. Star. Inf. CMYF</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -1861,7 +1861,7 @@ function renderDocumentTemplate(tabKey) {
             📑 DATOS PARA EL ACTA DE CONSTATACIÓN
           </div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-            <div class="sheet-row-single"><label>FECHA DE RECEPCIÓN:</label><input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarActaEnVivo();"></div>
+            <div class="sheet-row-single"><label>FECHA DE RECEPCCIÓN:</label><input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarActaEnVivo();"></div>
             <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarActaEnVivo();"></div>
             <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" value="${d.localidad}" oninput="document.getElementById('f_05_localidad').value = this.value; actualizarActaEnVivo();"></div>
             <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarActaEnVivo();"></div>
@@ -2270,15 +2270,21 @@ function renderDocumentTemplate(tabKey) {
       return renderGenericDocument([pageANMAC]);
 
     case 'tab-col_cria':
+      let encuadrePart = (d.encuadre && d.encuadre.trim() !== '') ? ` <b>${d.encuadre}</b>` : '';
+      let caratulaPart = (d.caratula && d.caratula.trim() !== '') ? `, caratulado: <b>${d.caratula}</b>` : '';
+      let cauPart = (d.cauNombre && d.cauNombre.trim() !== '') ? `, donde evalúa la conducta del <b>${d.cauNombre}</b>` : '';
+      let cauDestPart = (d.cauDestino && d.cauDestino.trim() !== '') ? `, numerario de la <b>${d.cauDestino}</b>` : '';
+      let intervPart = (d.intervencion && d.intervencion.trim() !== '') ? `, en trámite ante el <b>${d.intervencion}</b>` : '';
+
       const pageColCria = `
-        <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-          REF.: Star. Colaboración<br>${d.partido || ''}, ${d.fechaRecepcion || ''}
+        <div style="margin-left: 7cm; text-align: left; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+          <b>REF.:</b> Star. Inf. De Riesgo y socioambiental víctima.<br><b>${d.partido || ''}</b>, <b>${d.fechaRecepcion || ''}</b>
         </div>
         <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
           AL SEÑOR/A SUPERINTENDENTE/A<br>SUPERINTENDENCIA DE POLÍTICAS DE GÉNERO
         </div>
         <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
-          Me dirijo a usted a los fines de solicitarle en el marco de ${d.caratula || ''} donde se evalúa la conducta del ${d.cauNombre || ''}, numerario de la ${d.cauDestino || ''}, en trámite ante el ${d.intervencion || ''}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por a RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
+          Me dirijo a usted a los fines de solicitarle en el marco de Actuaciones Sumariales Administrativas${encuadrePart}${caratulaPart}${cauPart}${cauDestPart}${intervPart}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por a RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
         </div>
         <table class="table-oficial" style="margin-top: 1.5em;">
           <thead>
@@ -2286,10 +2292,10 @@ function renderDocumentTemplate(tabKey) {
           </thead>
           <tbody>
             <tr>
-              <td>${d.vicNombre || ''}</td>
-              <td>${d.vicEdad || ''}</td>
-              <td>${d.vicDni || ''}</td>
-              <td>${d.vicDomicilio || ''}, localidad de ${d.vicLocalidad || ''}, partido de ${d.vicPartido || ''}</td>
+              <td><b>${d.vicNombre || ''}</b></td>
+              <td><b>${d.vicEdad || ''}</b></td>
+              <td><b>${d.vicDni || ''}</b></td>
+              <td><b>${d.vicDomicilio || ''}</b>, localidad de <b>${d.vicLocalidad || ''}</b>, partido de <b>${d.vicPartido || ''}</b></td>
             </tr>
           </tbody>
         </table>
@@ -2635,7 +2641,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Cargar pestaña predeterminada
-  const defaultTabKey = 'tab-cfyp';
+  const defaultTabKey = 'tab-col_cria';
   previewContainer.innerHTML = renderDocumentTemplate(defaultTabKey);
 });
 </script>
