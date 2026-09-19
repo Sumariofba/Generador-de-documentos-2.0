@@ -725,27 +725,31 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 5: DATOS DEL DENUNCIANTE -->
-      <div class="sheet-card-block collapsed">
+      <!-- Bloque 5: DATOS DEL DENUNCIANTE / TESTIGO -->
+      <div class="sheet-card-block">
         <div class="sheet-card-header">
-          <span>📢 5. DATOS DEL DENUNCIANTE</span>
+          <span>📢 5. DATOS DEL DENUNCIANTE / TESTIGO</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_60_den_nombre" value=""></div>
-          <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_61_den_edad" value=""></div>
-          <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_62_den_dni" value=""></div>
-          <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_63_den_domicilio" value=""></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES:</label><input type="text" id="f_64_den_entre_calles" value=""></div>
-          <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" id="f_65_den_localidad" value=""></div>
-          <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" id="f_66_den_partido" value=""></div>
-          <div class="sheet-row-single"><label>CONTACTO:</label><input type="text" id="f_67_den_contacto" value=""></div>
+          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_60_den_nombre" value="ROLDAN JOSE LUIS"></div>
+          <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_61_den_edad" value="35"></div>
+          <div class="sheet-row-single"><label>NACIONALIDAD:</label><input type="text" id="f_61b_den_nacionalidad" value="ARGENTINA"></div>
+          <div class="sheet-row-single"><label>ESTADO CIVIL:</label><input type="text" id="f_61c_den_est_civil" value="SOLTERO"></div>
+          <div class="sheet-row-single"><label>PROFESIÓN / OCUPACIÓN:</label><input type="text" id="f_61d_den_profesion" value="EMPLEADO POLICIAL"></div>
+          <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_62_den_dni" value="33.444.555"></div>
+          <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_63_den_domicilio" value="Av. San Martín 1234"></div>
+          <div class="sheet-row-single"><label>ENTRE CALLE 1:</label><input type="text" id="f_64_den_entre_calles" value="Belgrano"></div>
+          <div class="sheet-row-single"><label>ENTRE CALLE 2:</label><input type="text" id="f_64b_den_entre_calles_2" value="Moreno"></div>
+          <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" id="f_65_den_localidad" value="González Catán"></div>
+          <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" id="f_66_den_partido" value="La Matanza"></div>
+          <div class="sheet-row-single"><label>CONTACTO:</label><input type="text" id="f_67_den_contacto" value="11-2233-4455"></div>
           <div class="sheet-row-single"><label>DESTINO:</label><select id="f_68_den_destino" class="select-destino"></select></div>
-          <div class="sheet-row-single"><label>ESCALÓN:</label><input type="text" id="f_68b_den_escalon" value="-"></div>
-          <div class="sheet-row-single"><label>HORARIO DE ENTRADA:</label><input type="text" id="f_68c_den_entrada" value="-"></div>
-          <div class="sheet-row-single"><label>HORARIO DE SALIDA:</label><input type="text" id="f_68d_den_salida" value="-"></div>
-          <div class="sheet-row-single"><label>MODALIDAD:</label><input type="text" id="f_68e_den_modalidad" value="-"></div>
-          <div class="sheet-row-single"><label>CIRCUNSTANCIAS AL MOMENTO DEL HECHO:</label><select id="f_68f_den_circunstancias" class="select-circunstancias"></select></div>
+          <div class="sheet-row-single"><label>JERARQUÍA COMPLETA:</label><input type="text" id="f_68b_den_jerarquia" value="OFICIAL (E.G.)"></div>
+          <div class="sheet-row-single"><label>ESCALAFÓN:</label><input type="text" id="f_68c_den_escalafon" value="GENERAL"></div>
+          <div class="sheet-row-single"><label>LEGAJO PERSONAL N°:</label><input type="text" id="f_68d_den_legajo" value="123.456"></div>
+          <div class="sheet-row-single"><label>CUMPLE SERVICIOS EN:</label><input type="text" id="f_68e_den_servicio_lugar" value="DIVISION FUERZA BARRIAL DE APROXIMACION (FBA) IX"></div>
+          <div class="sheet-row-single"><label>FUNCIÓN O CARGO EN EL DESTINO:</label><input type="text" id="f_68f_den_funcion" value="IMAGINARIA DE GUARDIA"></div>
         </div>
       </div>
 
@@ -803,8 +807,8 @@ body {
             <textarea id="f_79_sintesis_hecho">se tomó conocimiento a través de la guardia de prevención sobre el siniestro vial acaecido sobre la Ruta Provincial 1001, donde se vio involucrado el personal policial Franco de Servicio, labrándose las actuaciones de rigor y otorgando intervención a la Auditoría General de Asuntos Internos.</textarea>
           </div>
           <div class="sheet-row-single" style="grid-column: 1 / -1;">
-            <label>DECLARACIÓN TESTIMONIAL:</label>
-            <textarea id="f_80_relato_testimonial">Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, y en la fecha de los hechos se encontraba prestando servicio ordinario de imaginaria en la guardia de prevención cuando tomó conocimiento mediante frecuencia radial sobre la ocurrencia del suceso, procediendo de inmediato a efectuar la correspondiente anotación en el libro de novedades e informar a la superioridad de turno.</textarea>
+            <label>DECLARACIÓN TESTIMONIAL (RELATO ESPECÍFICO):</label>
+            <textarea id="f_80_relato_testimonial">que en la fecha y siendo las 08:30 horas se encontraba en la guardia cuando tomó conocimiento del suceso motivo del presente actuado, procediendo a informar a la superioridad y labrar las anotaciones de rigor.</textarea>
           </div>
         </div>
       </div>
@@ -1027,21 +1031,22 @@ function getFormValues() {
     caratulaPenal: getVal('f_90_caratula_penal'),
     denNombre: getVal('f_60_den_nombre'),
     denEdad: getVal('f_61_den_edad'),
+    denNacionalidad: getVal('f_61b_den_nacionalidad'),
+    denEstCivil: getVal('f_61c_den_est_civil'),
+    denProfesion: getVal('f_61d_den_profesion'),
     denDni: getVal('f_62_den_dni'),
     denDomicilio: getVal('f_63_den_domicilio'),
     denEntreCalles: getVal('f_64_den_entre_calles'),
-    denEntreCalle2: getVal('f_64b_den_entre_calle2'),
+    denEntreCalles2: getVal('f_64b_den_entre_calles_2'),
     denLocalidad: getVal('f_65_den_localidad'),
     denPartido: getVal('f_66_den_partido'),
-    denNacionalidad: getVal('f_61b_den_nacionalidad') || 'ARGENTINA',
-    denEstadoCivil: getVal('f_61c_den_estado_civil') || 'SOLTERO',
-    denOcupacion: getVal('f_61d_den_ocupacion') || 'EMPLEADO POLICIAL',
-    denJerarquia: getVal('f_68g_den_jerarquia') || 'OFICIAL DE POLICIA',
-    denEscalafon: getVal('f_68h_den_escalafon') || 'GENERAL',
-    denLegajo: getVal('f_68i_den_legajo') || '123456',
-    denPuesto: getVal('f_68j_den_puesto') || 'IMAGINARIA DE GUARDIA',
     denContacto: getVal('f_67_den_contacto'),
     denDestino: getVal('f_68_den_destino'),
+    denJerarquia: getVal('f_68b_den_jerarquia'),
+    denEscalafon: getVal('f_68c_den_escalafon'),
+    denLegajo: getVal('f_68d_den_legajo'),
+    denServicioLugar: getVal('f_68e_den_servicio_lugar'),
+    denFuncion: getVal('f_68f_den_funcion'),
     impNombre: getVal('f_42_imp_nombre'),
     impEdad: getVal('f_43_imp_edad'),
     impDni: getVal('f_44_imp_dni'),
@@ -1691,17 +1696,39 @@ function renderActaA4Content() {
 
 function renderTestimonialA4Content() {
   const d = getFormValues();
-  const horaActual = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const horaUsar = d.horaHecho || horaActual;
 
-  const entreCallesText = (d.denEntreCalles && d.denEntreCalle2) 
-    ? `<b>${d.denEntreCalles}</b> y <b>${d.denEntreCalle2}</b>` 
-    : `<b>${d.denEntreCalles || ''}</b>`;
+  // 1. Armado exacto del relato utilizando la fórmula textual con vínculos dinámicos en negrita
+  const textoFormulaHtml = "En la localidad de <b>" + (d.localidad || '') + 
+    "</b>, partido de <b>" + (d.partido || '') + 
+    "</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>" + (d.dependencia || '') + 
+    "</b>, sita en <b>" + (d.direccion || '') + 
+    "</b>, entre calle <b>" + (d.entre1 || '') + 
+    "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
+    "</b>, siendo las <b>" + (d.horaHecho || '') + 
+    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
+    "</b>, de <b>" + (d.denEdad || '') + 
+    "</b> años de edad, nacionalidad <b>" + (d.denNacionalidad || 'ARGENTINA') + 
+    "</b>, estado civil <b>" + (d.denEstCivil || 'SOLTERO') + 
+    "</b>, profesión u ocupación <b>" + (d.denProfesion || 'EMPLEADO POLICIAL') + 
+    "</b>, instruido, domicilio en calle <b>" + (d.denDomicilio || '') + 
+    "</b>, entre calle <b>" + (d.denEntreCalles || '') + 
+    "</b> y <b>" + (d.denEntreCalles2 || '') + 
+    "</b> del mismo medio, Documento Nacional de Identidad Nº <b>" + (d.denDni || '') + 
+    "</b>, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de <b>" + (d.denJerarquia || '') + 
+    "</b>, del escalafón <b>" + (d.denEscalafon || '') + 
+    "</b>, legajo personal N° <b>" + (d.denLegajo || '') + 
+    "</b>, cumpliendo en la actualidad sus servicios en el <b>" + (d.denServicioLugar || '') + 
+    "</b>, como <b>" + (d.denFuncion || '') + 
+    "</b>. En la fecha, se hace presente a los fines de prestar declaración testimonial en <b>" + (d.encuadre || d.caratula || '') + 
+    "</b>, caratulado <b>" + (d.caratula || '') + 
+    "</b>, donde se analiza la conducta del <b>" + (d.cauNombre || d.impNombre || '') + 
+    "</b> de la <b>" + (d.cauDestino || d.impDestino || '') + 
+    "</b>, en trámite ante <b>" + (d.intervencion || '') + 
+    "</b>, incoadas el <b>" + (d.fechaHecho || '') + 
+    "</b>. En esa inteligencia relata <span style='font-weight: normal;'>" + (d.testimonialRelato || '') + 
+    "</span>. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.";
 
-  // Construcción del texto completo con la fórmula textual exacta y los vínculos en negrita
-  const textoCompletoHTML = `En la localidad de <b>${d.localidad || ''}</b>, partido de <b>${d.partido || ''}</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>${d.dependencia || ''}</b>, sita en <b>${d.direccion || ''}</b>, entre calle <b>${d.entre1 || ''}</b> del mismo medio, a los <b>${d.fechaRecepcion || ''}</b>, siendo las <b>${horaUsar}</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>${d.denNombre || ''}</b>, de <b>${d.denEdad || ''}</b> años de edad, nacionalidad <b>${d.denNacionalidad}</b>, estado civil <b>${d.denEstadoCivil}</b>, profesión u ocupación <b>${d.denOcupacion}</b>, instruido, domicilio en calle <b>${d.denDomicilio || ''}</b>, entre calle ${entreCallesText} del mismo medio, Documento Nacional de Identidad Nº <b>${d.denDni || ''}</b>, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de <b>${d.denJerarquia}</b>, del escalafón <b>${d.denEscalafon}</b>, legajo personal N° <b>${d.denLegajo}</b>, cumpliendo en la actualidad sus servicios en el <b>${d.denDestino || ''}</b>, como <b>${d.denPuesto}</b>. En la fecha, se hace presente a los fines de prestar declaración testimonial en <b>${d.exp || ''}</b>, caratulado <b>${d.caratula || ''}</b>, donde se analiza la conducta del <b>${d.cauNombre || ''}</b> de la <b>${d.cauDestino || ''}</b>, en trámite ante <b>${d.intervencion || ''}</b>, incoadas el <b>${d.fechaHecho || ''}</b>. En esa inteligencia relata <b>${d.testimonialRelato || ''}</b>. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.`;
-
-  // Algoritmo Inteligente de Paginación DOM
+  // 2. Algoritmo inteligente de separación en tokens HTML y Paginación A4 Real en DOM
   const tempContainer = document.createElement('div');
   tempContainer.style.position = 'absolute';
   tempContainer.style.visibility = 'hidden';
@@ -1710,21 +1737,36 @@ function renderTestimonialA4Content() {
   tempContainer.style.width = '210mm';
   document.body.appendChild(tempContainer);
 
-  const tokens = textoCompletoHTML.split(/(<[^>]+>|\s+)/).filter(Boolean);
+  const tokens = textoFormulaHtml.match(/(<[^>]+>|[^<]+)/g) || [textoFormulaHtml];
+  let wordTokens = [];
+  
+  tokens.forEach(tok => {
+    if (tok.startsWith('<')) {
+      wordTokens.push(tok);
+    } else {
+      let parts = tok.split(/(\s+)/);
+      parts.forEach(p => { if (p) wordTokens.push(p); });
+    }
+  });
+
   let pagesArray = [];
   let currentTokens = [];
   let tokenIndex = 0;
 
-  while (tokenIndex < tokens.length) {
-    currentTokens.push(tokens[tokenIndex]);
+  while (tokenIndex < wordTokens.length) {
+    currentTokens.push(wordTokens[tokenIndex]);
+    tokenIndex++;
+
     let isFirstPage = (pagesArray.length === 0);
-    
+    let pageClass = isFirstPage ? 'odd-page' : 'even-page';
+    let testContentHtml = currentTokens.join('');
+
     let testHtml = `
-      <div class="a4-page ${isFirstPage ? 'odd-page' : 'even-page'}" style="box-shadow:none; margin:0; position:relative;">
+      <div class="a4-page ${pageClass}" style="box-shadow:none; margin:0; position:relative;">
         ${isFirstPage ? logoSVG : ''}
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 12pt; margin-bottom: 1.2em; text-transform: uppercase;">DECLARACIÓN TESTIMONIAL</div>' : ''}
+        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em;">DECLARACIÓN TESTIMONIAL</div>' : ''}
         <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-          ${currentTokens.join('')}
+          ${testContentHtml}
         </div>
       </div>
     `;
@@ -1733,36 +1775,50 @@ function renderTestimonialA4Content() {
     const pageElem = tempContainer.firstElementChild;
     const pElem = pageElem.querySelector('.sangria-cero');
 
-    if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 240 : 180))) {
-      currentTokens.pop(); // quitar el token que desbordó la hoja A4
-      
-      let pageContentHtml = `
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 12pt; margin-bottom: 1.2em; text-transform: uppercase;">DECLARACIÓN TESTIMONIAL</div>' : ''}
+    if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
+      currentTokens.pop();
+      tokenIndex--;
+
+      let finalPageContent = `
+        ${isFirstPage ? logoSVG : ''}
+        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em;">DECLARACIÓN TESTIMONIAL</div>' : ''}
         <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
           ${currentTokens.join('')}
         </div>
       `;
-      pagesArray.push(pageContentHtml);
+      pagesArray.push(finalPageContent);
       currentTokens = [];
-    } else {
-      tokenIndex++;
     }
   }
 
   if (currentTokens.length > 0) {
     let isFirstPage = (pagesArray.length === 0);
-    let pageContentHtml = `
-      ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 12pt; margin-bottom: 1.2em; text-transform: uppercase;">DECLARACIÓN TESTIMONIAL</div>' : ''}
+    let finalPageContent = `
+      ${isFirstPage ? logoSVG : ''}
+      ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em;">DECLARACIÓN TESTIMONIAL</div>' : ''}
       <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
         ${currentTokens.join('')}
       </div>
     `;
-    pagesArray.push(pageContentHtml);
+    pagesArray.push(finalPageContent);
   }
 
   document.body.removeChild(tempContainer);
 
-  return renderGenericDocument(pagesArray);
+  const totalPages = pagesArray.length;
+  return pagesArray.map((pageInnerContent, index) => {
+    const pageNum = index + 1;
+    const isOddPage = (pageNum % 2 !== 0);
+    const pageClass = isOddPage ? 'odd-page' : 'even-page';
+    const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - VISTA DE IMPRESIÓN)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - VISTA DE IMPRESIÓN)`;
+
+    return `
+      <div class="a4-page ${pageClass}">
+        <div class="page-break-indicator">📄 ${pageTypeLabel}</div>
+        ${pageInnerContent}
+      </div>
+    `;
+  }).join('');
 }
 
 function renderParteA4Content() {
@@ -2388,19 +2444,13 @@ function renderDocumentTemplate(tabKey) {
           </div>
           <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
             <div class="sheet-row-single"><label>FECHA DE RECEPCIÓN:</label><input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarTestimonialEnVivo();"></div>
+            <div class="sheet-row-single"><label>HORA DEL HECHO / DECLARACIÓN:</label><input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarTestimonialEnVivo();"></div>
             <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" value="${d.localidad}" oninput="document.getElementById('f_05_localidad').value = this.value; actualizarTestimonialEnVivo();"></div>
             <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>TESTIGO / NOMBRE COMPLETO:</label><input type="text" value="${d.denNombre}" oninput="document.getElementById('f_60_den_nombre').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>EDAD:</label><input type="text" value="${d.denEdad}" oninput="document.getElementById('f_61_den_edad').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>DNI:</label><input type="text" value="${d.denDni}" oninput="document.getElementById('f_62_den_dni').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" value="${d.denDomicilio}" oninput="document.getElementById('f_63_den_domicilio').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>ENTRE CALLE 1:</label><input type="text" value="${d.denEntreCalles}" oninput="document.getElementById('f_64_den_entre_calles').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>ENTRE CALLE 2:</label><input type="text" id="f_64b_den_entre_calle2" value=" Nicolás Paganini" oninput="actualizarTestimonialEnVivo();"></div>
           </div>
           <div class="sheet-row-single" style="width: 100%;">
-            <label>RELATO DE LA DECLARACIÓN TESTIMONIAL:</label>
-            <textarea id="f_80_relato_testimonial" style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="actualizarTestimonialEnVivo();">${d.testimonialRelato}</textarea>
+            <label>DECLARACIÓN TESTIMONIAL (RELATO):</label>
+            <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4; font-weight: normal;" oninput="document.getElementById('f_80_relato_testimonial').value = this.value; actualizarTestimonialEnVivo();">${d.testimonialRelato}</textarea>
           </div>
         </div>
         <div style="flex-shrink: 0; display: flex; justify-content: center;">
