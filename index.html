@@ -569,9 +569,9 @@ body {
     <li class="nav-item-top" data-tab="tab-caratula">📄 2. Carátula</li> 
     <li class="nav-item-top" data-tab="tab-reg_inst">📄 3. Registro Institucional</li> 
     <li class="nav-item-top" data-tab="tab-indice_diligencias">📄 4. Índice</li> 
-    <li class="nav-item-top active" data-tab="tab-acta_constatacion">📄 5. Acta de Constatación</li> 
+    <li class="nav-item-top" data-tab="tab-acta_constatacion">📄 5. Acta de Constatación</li> 
     <li class="nav-item-top" data-tab="tab-recepcion">📄 6. Dto. de Recepción</li> 
-    <li class="nav-item-top" data-tab="tab-parte_escrito">📄 7. Parte Escrito</li> 
+    <li class="nav-item-top active" data-tab="tab-parte_escrito">📄 7. Parte Escrito</li> 
     <li class="nav-item-top" data-tab="tab-corre_agregado">📄 8. Dto. Corre Agregado</li> 
     <li class="nav-item-top" data-tab="tab-cfyp">📄 9. CFYP</li> 
     <li class="nav-item-top" data-tab="tab-tdh">📄 10. TDH</li> 
@@ -791,7 +791,7 @@ body {
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 5. Acta de Constatación</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 7. Parte Escrito</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -1661,6 +1661,48 @@ function renderParteA4Content() {
   const d = getFormValues();
   let destHtml = destinatariosParteEscrito.map(dest => `<b>${dest}</b>`).join('<br>');
 
+  // Construcción exacta del primer párrafo respetando la fórmula y los nexos
+  let parrafo1 = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
+  if (d.encuadre && d.encuadre.trim() !== '') {
+    parrafo1 += " <b>" + d.encuadre + "</b>";
+  }
+  if (d.caratula && d.caratula.trim() !== '') {
+    parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
+  }
+  if (d.denNombre && d.denNombre.trim() !== '') {
+    parrafo1 += ", donde resulta denunciante: <b>" + d.denNombre + "</b>";
+    if (d.denDestino && d.denDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.denDestino + "</b>)";
+    }
+  }
+  if (d.vicNombre && d.vicNombre.trim() !== '') {
+    parrafo1 += ", víctima: <b>" + d.vicNombre + "</b>";
+    if (d.vicDestino && d.vicDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.vicDestino + "</b>)";
+    }
+  }
+  if (d.cauNombre && d.cauNombre.trim() !== '') {
+    parrafo1 += ", causante: <b>" + d.cauNombre + "</b>";
+    if (d.cauDestino && d.cauDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.cauDestino + "</b>)";
+    }
+  }
+  if (d.impNombre && d.impNombre.trim() !== '') {
+    parrafo1 += ", imputado: <b>" + d.impNombre + "</b>";
+    if (d.impDestino && d.impDestino.trim() !== '') {
+      parrafo1 += " (<b>" + d.impDestino + "</b>)";
+    }
+  }
+  if (d.intervencion && d.intervencion.trim() !== '') {
+    parrafo1 += ", con intervención de <b>" + d.intervencion + "</b>.";
+  } else {
+    parrafo1 += ".";
+  }
+
+  // Construcción del segundo párrafo a renglón en blanco según la fórmula
+  let relatoSintesis = d.sintesis || '';
+  let parrafo2 = "SINTESIS DEL HECHO: Los presentes actuados tienen su génesis en <b>" + (d.fechaHecho || '') + "</b>, siendo las <b>" + (d.horaHecho || '') + "</b>,cuando se toma conocimiento que <b>" + relatoSintesis + "</b>.";
+
   const pageContent = `
     <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">
       ${d.partido}, ${d.fechaRecepcion}
@@ -1671,10 +1713,13 @@ function renderParteA4Content() {
     <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-bottom: 1em; text-align: center;">
       COMUNICACIÓN ADMINISTRATIVA - PARTE ESCRITO
     </div>
-    <div class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.5;">
-      Cumpleme en informar a Usted, que en la fecha, siendo las ${d.horaHecho}, ${d.sintesis}
+    <div style="text-align: justify; line-height: 1.5; text-indent: 1.15cm; margin-bottom: 1.2em;">
+      ${parrafo1}
     </div>
-    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
+    <div style="text-align: justify; line-height: 1.5; text-indent: 1.15cm; margin-bottom: 1.2em;">
+      ${parrafo2}
+    </div>
+    <div style="text-align: justify; line-height: 1.5; text-indent: 1.15cm; margin-top: 2em;">
       Lo expuesto es todo en cuanto me corresponde informar a Usted.
     </div>
   `;
@@ -2001,7 +2046,7 @@ function renderDocumentTemplate(tabKey) {
       if (d.vicNombre && d.vicNombre.trim() !== '') textoLEP += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
       if (d.cauNombre && d.cauNombre.trim() !== '') textoLEP += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
       if (d.impNombre && d.impNombre.trim() !== '') textoLEP += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
+      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales established en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
 
       if (!window.registrosSeleccionadosLEP) {
         window.registrosSeleccionadosLEP = [];
@@ -2549,7 +2594,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   // Cargar pestaña predeterminada
-  const defaultTabKey = 'tab-acta_constatacion';
+  const defaultTabKey = 'tab-parte_escrito';
   previewContainer.innerHTML = renderDocumentTemplate(defaultTabKey);
 });
 </script>
