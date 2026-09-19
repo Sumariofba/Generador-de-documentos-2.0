@@ -1574,41 +1574,62 @@ function renderActaA4Content() {
     " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
     ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
-  const MAX_CARACTERES_PAGINA = 1500;
+  // Ajuste a ~2900 caracteres por página para completar 37 líneas con interlineado 1.5 en A4
+  const CARACTERES_POR_PAGINA = 2900;
 
-  // Si el contenido es corto (por ejemplo, cuando el relato está vacío), se renderiza en 1 sola página con interlineado 1.5.
-  if (textoCompleto.length <= MAX_CARACTERES_PAGINA) {
+  if (textoCompleto.length <= CARACTERES_POR_PAGINA) {
     const pageSingleContent = `
       <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
         ${textoCompleto}
       </div>
     `;
     return renderGenericDocument([pageSingleContent]);
   }
 
-  // Lógica de separación si el texto supera el límite de 1 página con interlineado 1.5.
-  let limiteCorte = Math.floor(textoCompleto.length / 2);
-  let puntoCorte = textoCompleto.indexOf(' ', limiteCorte);
-  if (puntoCorte === -1) puntoCorte = limiteCorte;
+  // Fragmentación dinámica manteniendo 37 líneas aprox (2900 caracteres) por página completa
+  let paginasArray = [];
+  let textoRestante = textoCompleto;
+  let esPrimeraPagina = true;
 
-  const parte1Acta = textoCompleto.substring(0, puntoCorte);
-  const parte2Acta = textoCompleto.substring(puntoCorte);
+  while (textoRestante.length > 0) {
+    if (textoRestante.length <= CARACTERES_POR_PAGINA) {
+      let contenidoPagina = esPrimeraPagina ? `
+        <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
+        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
+          ${textoRestante}
+        </div>
+      ` : `
+        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
+          ${textoRestante}
+        </div>
+      `;
+      paginasArray.push(contenidoPagina);
+      break;
+    }
 
-  const page1Content = `
-    <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
-    <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
-      ${parte1Acta}
-    </div>
-  `;
+    let puntoCorte = textoRestante.lastIndexOf(' ', CARACTERES_POR_PAGINA);
+    if (puntoCorte === -1) puntoCorte = CARACTERES_POR_PAGINA;
 
-  const page2Content = `
-    <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.5; margin: 0; padding: 0;">
-      ${parte2Acta}
-    </div>
-  `;
+    let tramoActual = textoRestante.substring(0, puntoCorte);
+    textoRestante = textoRestante.substring(puntoCorte).trim();
 
-  return renderGenericDocument([page1Content, page2Content]);
+    let contenidoPagina = esPrimeraPagina ? `
+      <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
+        ${tramoActual}
+      </div>
+    ` : `
+      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
+        ${tramoActual}
+      </div>
+    `;
+
+    paginasArray.push(contenidoPagina);
+    esPrimeraPagina = false;
+  }
+
+  return renderGenericDocument(paginasArray);
 }
 
 function renderTestimonialA4Content() {
@@ -1618,7 +1639,7 @@ function renderTestimonialA4Content() {
   const pageContent = `
     <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-bottom: 1em;">DECLARACIÓN TESTIMONIAL</div>
     <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 9.5pt; line-height: 1.4;">
-      En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que darán lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
+      En la localidad de ${d.localidad || ''}, partido de ${d.partido || ''}, provincia de Buenos Aires, República Argentina, en el asiento físico de la ${d.dependencia || ''}, sita en ${d.direccion || ''}, entre calle ${d.entre1 || ''} del mismo medio, a los ${d.fechaRecepcion || ''}, siendo las ${d.horaHecho || horaActual} horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que darán lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjuicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa”. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: ${d.denNombre || ''}, de ${d.denEdad || ''} años de edad, nacionalidad ARGENTINA, estado civil SOLTERO, profesión u ocupación EMPLEADO POLICIAL, instruido, domicilio en calle ${d.denDomicilio || ''}, entre calle ${d.denEntreCalles || ''} del mismo medio, Documento Nacional de Identidad Nº ${d.denDni || ''}, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: ${d.testimonialRelato || ''}. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.
     </div>
   `;
 
