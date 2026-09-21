@@ -338,8 +338,7 @@ body {
 .a4-page {
   background: white;
   width: 210mm;
-  min-height: 297mm;
-  max-height: 297mm;
+  height: 297mm;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 25px;
   font-size: 10.5pt;
   line-height: 1.45;
@@ -348,8 +347,6 @@ body {
   box-sizing: border-box !important;
   display: flex;
   flex-direction: column;
-  page-break-after: always;
-  break-after: page;
   margin-bottom: 25px;
   overflow: hidden;
 }
@@ -552,45 +549,105 @@ body {
 }
 
 /* ==========================================================================
-   8. REGLAS DE IMPRESIÓN IMPRESO / OFICIAL
+   8. REGLAS DE IMPRESIÓN IMPRESO / OFICIAL (SANECIMIENTO Y FIDELIDAD A4)
    ========================================================================== */
 @media print {
   @page {
-    size: A4;
-    margin-top: 5cm;
-    margin-bottom: 2.5cm;
-  }
-  
-  @page :left {
-    margin-left: 1.5cm;
-    margin-right: 4cm;
+    size: A4 portrait;
+    margin: 0; /* Desactiva márgenes del navegador para calzar idéntico con la pantalla */
   }
 
-  @page :right {
-    margin-left: 4cm;
-    margin-right: 1.5cm;
+  html, body { 
+    background: white !important; 
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
   }
 
-  html, body { background: white !important; overflow: visible !important; }
-  .top-navbar, .card-title, .actions-bar, .indice-controls, .destinatarios-controls, .btn-del-row, .acta-form-side, .parte-form-side, .corre-form-side, .col-div-form-side, .lep-form-side, .carpetas-form-side, .testimonial-form-side, .inspeccion-form-side, .indice-form-side, .sintesis-form-side, .croquis-controls, .foto-placeholder-hint, .btn-foto-upload, .page-break-indicator { display: none !important; }
-  .app-container { display: block !important; width: 100% !important; margin: 0 !important; }
-  .right-preview-panel { padding: 0 !important; background: transparent !important; width: 100% !important; height: auto !important; }
-  .card { border: none !important; box-shadow: none !important; padding: 0 !important; max-width: 100% !important; }
-  
-  .a4-page { 
+  /* Oculta controles e interfaz UI */
+  .top-navbar, 
+  .card-title, 
+  .actions-bar, 
+  .indice-controls, 
+  .destinatarios-controls, 
+  .btn-del-row, 
+  .acta-form-side, 
+  .parte-form-side, 
+  .corre-form-side, 
+  .col-div-form-side, 
+  .lep-form-side, 
+  .carpetas-form-side, 
+  .testimonial-form-side, 
+  .inspeccion-form-side, 
+  .indice-form-side, 
+  .sintesis-form-side, 
+  .croquis-controls, 
+  .foto-placeholder-hint, 
+  .btn-foto-upload, 
+  .page-break-indicator { 
+    display: none !important; 
+  }
+
+  .app-container { 
+    display: block !important; 
     width: 100% !important; 
-    min-height: auto !important; 
-    max-height: none !important; 
+    margin: 0 !important; 
+    padding: 0 !important;
+  }
+
+  .right-preview-panel { 
+    padding: 0 !important; 
+    background: transparent !important; 
+    width: 100% !important; 
+    height: auto !important; 
+    overflow: visible !important;
+  }
+
+  .card { 
+    border: none !important; 
     box-shadow: none !important; 
     padding: 0 !important; 
-    page-break-after: always; 
-    break-after: page; 
-    overflow: visible !important; 
-    margin-bottom: 0 !important; 
+    max-width: 100% !important; 
+    background: transparent !important;
+  }
+  
+  .doc-preview-wrapper {
+    display: block !important;
+    width: 210mm !important;
+    gap: 0 !important;
   }
 
-  .input-folio, .input-cfyp-dotted { border: none !important; background: transparent !important; }
-  .foto-dropzone { border: 1px solid #000 !important; background: transparent !important; }
+  .a4-page { 
+    width: 210mm !important; 
+    height: 297mm !important; 
+    box-shadow: none !important; 
+    border: none !important;
+    margin: 0 !important; 
+    page-break-before: always;
+    page-break-after: always; 
+    break-after: page; 
+    overflow: hidden !important; 
+    box-sizing: border-box !important;
+    position: relative !important;
+  }
+
+  .a4-page:first-child {
+    page-break-before: avoid !important;
+  }
+
+  .a4-page.odd-page { padding: 5cm 1.5cm 2.5cm 4cm !important; }
+  .a4-page.even-page { padding: 5cm 4cm 2.5cm 1.5cm !important; }
+
+  .input-folio, .input-cfyp-dotted { 
+    border: none !important; 
+    background: transparent !important; 
+  }
+
+  .foto-dropzone { 
+    border: 1px solid #000 !important; 
+    background: transparent !important; 
+  }
 }
 </style>
 </head>
@@ -972,7 +1029,7 @@ let diligenciasCorreAgregado = [
   "Stud. Legajo Electrónico Personal (L.E.P.)",
   "Legajo Electrónico Personal (L.E.P.)",
   "Copia certificada con habilitación del Libro de novedades de la guardia",
-  "Copia certificada with habilitación Libro de presentismo y Co.Re.S."
+  "Copia certificada con habilitación Libro de presentismo y Co.Re.S."
 ];
 let destinatariosParteEscrito = [
   "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
@@ -1550,7 +1607,7 @@ function renderIndiceA4PagesContent() {
   return renderGenericDocument(paginasArray);
 }
 
-/* --- MANEJADORES DE SÍNTESIS Y CONCLUSIONES (BLOQUE CORREGIDO) --- */
+/* --- MANEJADORES DE SÍNTESIS Y CONCLUSIONES --- */
 window.agregarParrafoSintesis = function(tipo) {
   if (tipo === 'opcion1') {
     window.parrafosSintesisPrueba.push({
@@ -1710,6 +1767,33 @@ window.abrirGoogleMapsManual = function() {
   window.open(`https://www.google.com/maps/search/${encodeURIComponent(query)}`, '_blank');
 };
 
+/* --- Gestión global de la solapa L.E.P. --- */
+window.agregarRegistroLEP = function() {
+  const select = document.getElementById('select-lep-personas');
+  if (!select) return;
+  const valor = select.value;
+  if (!window.registrosSeleccionadosLEP) window.registrosSeleccionadosLEP = [];
+  if (valor && !window.registrosSeleccionadosLEP.includes(valor)) {
+    window.registrosSeleccionadosLEP.push(valor);
+    window.actualizarVistaLEP();
+  }
+};
+
+window.quitarRegistroLEP = function(tipo) {
+  if (window.registrosSeleccionadosLEP) {
+    window.registrosSeleccionadosLEP = window.registrosSeleccionadosLEP.filter(r => r !== tipo);
+    window.actualizarVistaLEP();
+  }
+};
+
+window.actualizarVistaLEP = function() {
+  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-lep') {
+    const container = document.getElementById('doc-preview-wrapper-container');
+    if (container) container.innerHTML = renderDocumentTemplate('tab-lep');
+  }
+};
+
 /* ==========================================================================
    5. RENDERIZADORES DE PLANTILLAS A4 (DOCUMENTOS)
    ========================================================================== */
@@ -1836,7 +1920,7 @@ function renderTestimonialA4Content() {
     "</b>, entre calle <b>" + (d.entre1 || '') + 
     "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
     "</b>, siendo las <b>" + (d.horaHecho || '') + 
-    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
+    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
     "</b>, de <b>" + (d.denEdad || '') + 
     "</b> años de edad, nacionalidad <b>" + (d.denNacionalidad || 'ARGENTINA') + 
     "</b>, estado civil <b>" + (d.denEstCivil || 'SOLTERO') + 
@@ -2150,11 +2234,10 @@ function renderInspeccionA4Content() {
   }).join('');
 }
 
-/* --- RENDERIZADOR SÍNTESIS Y CONCLUSIONES (BLOQUE CORREGIDO) --- */
+/* --- RENDERIZADOR SÍNTESIS Y CONCLUSIONES --- */
 function renderSintesisConclusionesA4Content() {
   const d = getFormValues();
 
-  // 1. CONSTRUCCIÓN DEL PRIMER PÁRRAFO DINÁMICO SEGÚN LA FÓRMULA SOLICITADA
   let parrafo1 = "Me dirijo a usted afines de de adjuntar y elevar en el computo de ____________________(______) fojas utilizadas. Actuaciones Sumariales Administrativas";
   
   if (d.encuadre && d.encuadre.trim() !== '') {
@@ -2193,7 +2276,6 @@ function renderSintesisConclusionesA4Content() {
     parrafo1 += ".";
   }
 
-  // 2. RENDEREADO DE PÁRRAFOS PRUEBA DINÁMICOS CON SANGRÍA DE 1,15CM
   let parrafosPruebaHtml = window.parrafosSintesisPrueba.map(p => {
     if (p.tipo === 'opcion1') {
       let fojaText = p.foja ? p.foja : 'xx';
@@ -2576,29 +2658,6 @@ function renderDocumentTemplate(tabKey) {
         if (d.denNombre && d.denNombre.trim() !== '' && !d.denNombre.toUpperCase().includes('DATOS DEL DENUNCIANTE')) window.registrosSeleccionadosLEP.push('DENUNCIANTE');
         if (window.registrosSeleccionadosLEP.length === 0) window.registrosSeleccionadosLEP.push('CAUSANTE');
       }
-
-      window.agregarRegistroLEP = function() {
-        const select = document.getElementById('select-lep-personas');
-        if (!select) return;
-        const valor = select.value;
-        if (valor && !window.registrosSeleccionadosLEP.includes(valor)) {
-          window.registrosSeleccionadosLEP.push(valor);
-          actualizarVistaLEP();
-        }
-      };
-
-      window.quitarRegistroLEP = function(tipo) {
-        window.registrosSeleccionadosLEP = window.registrosSeleccionadosLEP.filter(r => r !== tipo);
-        actualizarVistaLEP();
-      };
-
-      window.actualizarVistaLEP = function() {
-        const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
-        if (activeTab && activeTab.getAttribute('data-tab') === 'tab-lep') {
-          const container = document.getElementById('doc-preview-wrapper-container');
-          if (container) container.innerHTML = renderDocumentTemplate('tab-lep');
-        }
-      };
 
       let filasTablaLEP = '';
       let listaGestionHtml = '';
