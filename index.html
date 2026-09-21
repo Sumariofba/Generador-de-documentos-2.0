@@ -18,6 +18,7 @@
   --card-bg: #ffffff;
   --border: #cbd5e1;
   --text-dark: #1e293b;
+  --sidebar-width: 320px;
 }
 
 * {
@@ -31,78 +32,94 @@ body {
   background-color: var(--bg-body);
   color: var(--text-dark);
   display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
+  height: 100vh;
+  overflow: hidden;
 }
 
 /* ==========================================================================
-   2. BARRA DE NAVEGACIÓN SUPERIOR
+   2. MENÚ LATERAL IZQUIERDO (SIDEBAR)
    ========================================================================== */
-.top-navbar {
+.sidebar {
+  width: var(--sidebar-width);
   background-color: var(--sidebar-bg);
   display: flex;
   flex-direction: column;
-  border-bottom: 3px solid var(--primary);
   flex-shrink: 0;
-  padding: 6px 12px;
-  position: sticky;
-  top: 0;
+  height: 100vh;
+  border-right: 3px solid var(--primary);
   z-index: 1000;
+  overflow-y: auto;
 }
 
-.top-navbar-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 4px;
+.sidebar-header {
+  padding: 16px 12px;
+  background-color: #0b1120;
+  border-bottom: 1px solid #1e293b;
 }
 
-.top-navbar-title {
+.sidebar-title {
   color: #fff;
   font-weight: 800;
-  font-size: 0.9rem;
-  padding: 4px 12px;
+  font-size: 0.85rem;
+  padding: 6px 10px;
   background: var(--primary);
   border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
 }
 
-.nav-list-top {
+.menu-section {
+  padding: 8px 0;
+  border-bottom: 1px solid #1e293b;
+}
+
+.menu-section-title {
+  padding: 8px 14px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #38bdf8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background-color: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-list-sidebar {
   list-style: none;
   padding: 0;
-  margin: 4px 0 0 0;
+  margin: 4px 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
+  flex-direction: column;
+  gap: 2px;
 }
 
-.nav-item-top {
-  padding: 5px 9px;
+.nav-item-sidebar {
+  padding: 7px 16px;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   color: #94a3b8;
-  background-color: #1e293b;
-  border-radius: 4px 4px 0 0;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 4px;
-  border: 1px solid #334155;
-  border-bottom: none;
+  gap: 8px;
   white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
-.nav-item-top:hover {
+.nav-item-sidebar:hover {
   background-color: var(--sidebar-hover);
   color: #fff;
+  padding-left: 20px;
 }
 
-.nav-item-top.active {
+.nav-item-sidebar.active {
   background-color: var(--primary);
   color: #fff;
   font-weight: 700;
-  border-color: var(--primary-dark);
+  border-left: 4px solid #38bdf8;
 }
 
 /* ==========================================================================
@@ -110,14 +127,17 @@ body {
    ========================================================================== */
 .app-container {
   display: flex;
-  flex: 1 1 auto;
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
   position: relative;
-  width: 100%;
 }
 
 .tab-view {
   display: none !important;
   width: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 
 .tab-view.active-view {
@@ -129,7 +149,7 @@ body {
    ========================================================================== */
 #view-carga_datos {
   width: 100%;
-  padding: 16px;
+  padding: 20px;
   background: var(--bg-body);
   flex-direction: column;
 }
@@ -289,14 +309,14 @@ body {
 
 .right-preview-panel {
   width: 100%;
-  padding: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
   background: var(--bg-body);
   overflow-y: auto;
-  height: calc(100vh - 65px);
+  height: 100vh;
 }
 
 .card {
@@ -338,7 +358,7 @@ body {
 .a4-page {
   background: white;
   width: 210mm;
-  height: 297mm;
+  min-height: 297mm;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 25px;
   font-size: 10.5pt;
   line-height: 1.45;
@@ -383,7 +403,7 @@ body {
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
 /* ==========================================================================
-   7. COMPONENTES INTERNOS DE DOCUMENTOS (TABLAS, CARÁTULA, FOTOS)
+   7. COMPONENTES INTERNOS DE DOCUMENTOS (TABLAS, CARÁTULA, FOTOS, BLOQUES)
    ========================================================================== */
 .caratula-page-body {
   display: flex;
@@ -536,7 +556,6 @@ body {
   text-transform: uppercase;
 }
 
-/* Estilos de edición interactiva */
 .item-parrafo-card {
   background: #f8fafc;
   border: 1px solid #cbd5e1;
@@ -549,24 +568,16 @@ body {
 }
 
 /* ==========================================================================
-   8. REGLAS DE IMPRESIÓN IMPRESO / OFICIAL (SANECIMIENTO Y FIDELIDAD A4)
+   8. REGLAS DE IMPRESIÓN (SOLUCIÓN DEFINITIVA AL FORMULARIO PREVIO)
    ========================================================================== */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 0; /* Desactiva márgenes del navegador para calzar idéntico con la pantalla */
+    margin: 0;
   }
 
-  html, body { 
-    background: white !important; 
-    overflow: visible !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 210mm !important;
-  }
-
-  /* Oculta controles e interfaz UI */
-  .top-navbar, 
+  /* Ocultar elementos de UI */
+  .sidebar, 
   .card-title, 
   .actions-bar, 
   .indice-controls, 
@@ -589,11 +600,35 @@ body {
     display: none !important; 
   }
 
+  /* OCULTAR FORMULARIO DE CARGA DE DATOS SIEMPRE EN IMPRESIÓN SI NO ES LA VISTA ACTIVA */
+  .tab-view:not(.active-view),
+  #view-carga_datos:not(.active-view) {
+    display: none !important;
+  }
+
+  html, body { 
+    background: white !important; 
+    overflow: visible !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 210mm !important;
+    height: auto !important;
+  }
+
   .app-container { 
     display: block !important; 
     width: 100% !important; 
+    height: auto !important;
     margin: 0 !important; 
     padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .tab-view.active-view {
+    display: block !important;
+    height: auto !important;
+    overflow: visible !important;
+    width: 100% !important;
   }
 
   .right-preview-panel { 
@@ -620,14 +655,16 @@ body {
 
   .a4-page { 
     width: 210mm !important; 
-    height: 297mm !important; 
+    min-height: 297mm !important; 
+    height: auto !important;
     box-shadow: none !important; 
     border: none !important;
     margin: 0 !important; 
     page-break-before: always;
     page-break-after: always; 
     break-after: page; 
-    overflow: hidden !important; 
+    break-inside: avoid;
+    overflow: visible !important; 
     box-sizing: border-box !important;
     position: relative !important;
   }
@@ -654,55 +691,73 @@ body {
 
 <body> 
 
-<!-- BARRA DE SOLAPAS SUPERIOR --> 
-<div class="top-navbar"> 
-  <div class="top-navbar-header"> 
-    <div class="top-navbar-title">GENERADOR DE NOTAS SUMARIALES PAR (35 PESTAÑAS)</div> 
+<!-- MENÚ LATERAL IZQUIERDO --> 
+<aside class="sidebar"> 
+  <div class="sidebar-header"> 
+    <div class="sidebar-title">GENERADOR DE NOTAS PAR</div> 
   </div> 
-  <ul class="nav-list-top" id="main-tabs-nav"> 
-    <li class="nav-item-top" data-tab="tab-carga_datos">📝 1. Carga de Datos</li> 
-    <li class="nav-item-top" data-tab="tab-caratula">📄 2. Carátula</li> 
-    <li class="nav-item-top" data-tab="tab-reg_inst">📄 3. Registro Institucional</li> 
-    <li class="nav-item-top" data-tab="tab-indice_diligencias">📄 4. Índice</li> 
-    <li class="nav-item-top" data-tab="tab-acta_constatacion">📄 5. Acta de Constatación</li> 
-    <li class="nav-item-top" data-tab="tab-recepcion">📄 6. Dto. de Recepción</li> 
-    <li class="nav-item-top" data-tab="tab-parte_escrito">📄 7. Parte Escrito</li> 
-    <li class="nav-item-top" data-tab="tab-corre_agregado">📄 8. Dto. Corre Agregado</li> 
-    <li class="nav-item-top" data-tab="tab-cfyp">📄 9. CFYP</li> 
-    <li class="nav-item-top" data-tab="tab-tdh">📄 10. TDH</li> 
-    <li class="nav-item-top" data-tab="tab-col_div">📄 11. Col. Divisiones</li> 
-    <li class="nav-item-top" data-tab="tab-lep">📄 12. Star. LEP</li> 
-    <li class="nav-item-top" data-tab="tab-col_ipp">📄 13. Star. PP</li> 
-    <li class="nav-item-top" data-tab="tab-cautelares">📄 14. Star. Cautelares</li> 
-    <li class="nav-item-top" data-tab="tab-anmac">📄 15. Star. Inf. Repar</li> 
-    <li class="nav-item-top" data-tab="tab-col_cria">📄 16. Star. Inf. CMYF</li> 
-    <li class="nav-item-top" data-tab="tab-star_jmd">📄 17. STAR. JMD</li> 
-    <li class="nav-item-top" data-tab="tab-star_valor_arancelario">📄 18. STAR VALOR ARANCELARIO DE REPOSICION</li> 
-    <li class="nav-item-top" data-tab="tab-star_historial_avl">📄 19. STAR. INF. HISTORIAL DE AVL</li> 
-    <li class="nav-item-top" data-tab="tab-inf_seguimiento_comportamiento">📄 20. INF. SEGUIMIENTO Y COMPORTAMIENTO</li> 
-    <li class="nav-item-top" data-tab="tab-testimonial">📄 21. Declaración Testimonial</li> 
-    <li class="nav-item-top" data-tab="tab-inspeccion_ocular">📄 22. Acta de Inspección Ocular</li> 
-    <li class="nav-item-top" data-tab="tab-croquis">📄 23. Croquis ilustrativos sin escalas</li> 
-    <li class="nav-item-top" data-tab="tab-fotos">📄 24. Fotos del lugar del Hecho</li> 
-    <li class="nav-item-top" data-tab="tab-carpetas_medicas">📄 25. Inf. de Carpetas</li> 
-    <li class="nav-item-top" data-tab="tab-auto_imputacion">📄 26. AUTO DE IMPUTACION</li> 
-    <li class="nav-item-top" data-tab="tab-acta_not_auto_imputacion">📄 27. ACTA NOT. AUTO DE IMPUTACION</li> 
-    <li class="nav-item-top" data-tab="tab-stud_procedimiento_abreviado">📄 28. STUD. PROCEDIMIENTO ABREVIADO</li> 
-    <li class="nav-item-top" data-tab="tab-acta_acuerdo_procedimiento_abreviado">📄 29. ACTA ACUERDO PROCEDIMIENTO ABREVIADO</li> 
-    <li class="nav-item-top" data-tab="tab-incomparecencia_decaimiento">📄 30. INCOMPARECENCIA Y DECAIMIENTO DE DERECHO A DEFENSA</li> 
-    <li class="nav-item-top" data-tab="tab-resuelvo_defensa">📄 31. RESUELVO DEFENSA</li> 
-    <li class="nav-item-top" data-tab="tab-cierre">📄 32. Dto. Cierre de Actuaciones</li> 
-    <li class="nav-item-top" data-tab="tab-auto_elevacion">📄 33. AUTO DE ELEVACION</li> 
-    <li class="nav-item-top" data-tab="tab-acta_not_auto_elevacion">📄 34. ACTA NOT. AUTO DE ELEVACION</li> 
-    <li class="nav-item-top active" data-tab="tab-sintesis_conclusiones">📄 35. Síntesis y Conclusiones</li> 
-  </ul> 
-</div> 
+
+  <!-- SECCIÓN 1 -->
+  <div class="menu-section">
+    <ul class="nav-list-sidebar"> 
+      <li class="nav-item-sidebar active" data-tab="tab-carga_datos">📝 Carga de Datos</li> 
+    </ul>
+  </div>
+
+  <!-- SECCIÓN 2 -->
+  <div class="menu-section">
+    <div class="menu-section-title">📂 Primeras diligencias Administrativas</div>
+    <ul class="nav-list-sidebar"> 
+      <li class="nav-item-sidebar" data-tab="tab-caratula">📄 Carátula</li> 
+      <li class="nav-item-sidebar" data-tab="tab-reg_inst">📄 Registro Institucional</li> 
+      <li class="nav-item-sidebar" data-tab="tab-indice_diligencias">📄 Índice</li> 
+      <li class="nav-item-sidebar" data-tab="tab-acta_constatacion">📄 Acta de Constatación</li> 
+      <li class="nav-item-sidebar" data-tab="tab-recepcion">📄 Dto. de Recepción</li> 
+      <li class="nav-item-sidebar" data-tab="tab-parte_escrito">📄 Parte Escrito</li> 
+      <li class="nav-item-sidebar" data-tab="tab-corre_agregado">📄 Dto. Corre Agregado</li> 
+      <li class="nav-item-sidebar" data-tab="tab-cfyp">📄 CFYP</li> 
+      <li class="nav-item-sidebar" data-tab="tab-tdh">📄 TDH</li> 
+      <li class="nav-item-sidebar" data-tab="tab-col_div">📄 Col. Divisiones</li> 
+      <li class="nav-item-sidebar" data-tab="tab-lep">📄 Star. LEP</li> 
+      <li class="nav-item-sidebar" data-tab="tab-col_ipp">📄 Star. PP</li> 
+      <li class="nav-item-sidebar" data-tab="tab-cautelares">📄 Star. Cautelares</li> 
+      <li class="nav-item-sidebar" data-tab="tab-anmac">📄 Star. Inf. Repar</li> 
+      <li class="nav-item-sidebar" data-tab="tab-col_cria">📄 Star. Inf. CMYF</li> 
+      <li class="nav-item-sidebar" data-tab="tab-star_jmd">📄 STAR. JMD</li> 
+      <li class="nav-item-sidebar" data-tab="tab-star_valor_arancelario">📄 STAR VALOR ARANCELARIO DE REPOSICION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-star_historial_avl">📄 STAR. INF. HISTORIAL DE AVL</li> 
+      <li class="nav-item-sidebar" data-tab="tab-inf_seguimiento_comportamiento">📄 INF. SEGUIMIENTO Y COMPORTAMIENTO</li> 
+      <li class="nav-item-sidebar" data-tab="tab-testimonial">📄 Declaración Testimonial</li> 
+      <li class="nav-item-sidebar" data-tab="tab-inspeccion_ocular">📄 Acta de Inspección Ocular</li> 
+      <li class="nav-item-sidebar" data-tab="tab-croquis">📄 Croquis ilustrativos sin escalas</li> 
+      <li class="nav-item-sidebar" data-tab="tab-fotos">📄 Fotos del lugar del Hecho</li> 
+      <li class="nav-item-sidebar" data-tab="tab-carpetas_medicas">📄 Inf. de Carpetas</li> 
+    </ul>
+  </div>
+
+  <!-- SECCIÓN 3 -->
+  <div class="menu-section">
+    <div class="menu-section-title">⚖️ Diligencias Administrativas Auto de Imputacion</div>
+    <ul class="nav-list-sidebar"> 
+      <li class="nav-item-sidebar" data-tab="tab-auto_imputacion">📄 AUTO DE IMPUTACION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-acta_not_auto_imputacion">📄 ACTA NOT. AUTO DE IMPUTACION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-stud_procedimiento_abreviado">📄 STUD. PROCEDIMIENTO ABREVIADO</li> 
+      <li class="nav-item-sidebar" data-tab="tab-acta_acuerdo_procedimiento_abreviado">📄 ACTA ACUERDO PROCEDIMIENTO ABREVIADO</li> 
+      <li class="nav-item-sidebar" data-tab="tab-incomparecencia_decaimiento">📄 INCOMPARECENCIA Y DECAIMIENTO DE DERECHO A DEFENSA</li> 
+      <li class="nav-item-sidebar" data-tab="tab-resuelvo_defensa">📄 RESUELVO DEFENSA</li> 
+      <li class="nav-item-sidebar" data-tab="tab-cierre">📄 Dto. Cierre de Actuaciones</li> 
+      <li class="nav-item-sidebar" data-tab="tab-auto_elevacion">📄 AUTO DE ELEVACION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-acta_not_auto_elevacion">📄 ACTA NOT. AUTO DE ELEVACION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-sintesis_conclusiones">📄 Síntesis y Conclusiones</li> 
+    </ul> 
+  </div>
+</aside> 
 
 <!-- CONTENEDOR PRINCIPAL --> 
 <div class="app-container"> 
   
   <!-- VISTA 1: EXCLUSIVA DE CARGA DE DATOS -->
-  <div class="tab-view" id="view-carga_datos">
+  <div class="tab-view active-view" id="view-carga_datos">
     <div class="global-controls">
       <button class="btn-secondary" id="btn-expand-all">📂 Expandir Todos</button>
       <button class="btn-secondary" id="btn-collapse-all">📁 Contraer Todos</button>
@@ -894,15 +949,42 @@ body {
         </div>
       </div>
 
+      <!-- BLOQUE COL. DIVISIONES -->
+      <div id="bloque-col-div" class="bloque-diligencia sheet-card-block">
+        <div class="sheet-card-header">
+          <span>🏛️ COL. DIVISIONES - SELECCIÓN DE DILIGENCIA</span>
+          <span class="toggle-icon">▼</span>
+        </div>
+        <div class="sheet-card-body">
+          <div class="sheet-row-single" style="grid-column: 1 / -1;">
+            <label for="tipo-diligencia-col-div">SELECCIONAR DILIGENCIA (DESPLEGABLE COLUMNA C):</label>
+            <select id="tipo-diligencia-col-div" onchange="actualizarPlantillaColDiv()">
+              <option value="">-Elija una opción del Desplegable-</option>
+              <option value="Informe de tipo, días y horario de servicio">Informe de tipo, días y horario de servicio</option>
+              <option value="Concepto Funcional y Personal">Concepto Funcional y Personal</option>
+              <option value="Copia certificada con habilitación del Libro de novedades de la guardia">Copia certificada con habilitación del Libro de novedades de la guardia</option>
+              <option value="Copia certificada con habilitación Libro de presentismo y Co.Re.S.">Copia certificada con habilitación Libro de presentismo y Co.Re.S.</option>
+              <option value="Legajo Electrónico Personal (L.E.P.)">Legajo Electrónico Personal (L.E.P.)</option>
+              <option value="Situación de revista del efectivo generado por el Sistema Informático (SIPP)">Situación de revista del efectivo generado por el Sistema Informático (SIPP)</option>
+              <option value="Informe de Comportamiento y Seguimiento laboral">Informe de Comportamiento y Seguimiento laboral</option>
+            </select>
+          </div>
+
+          <div id="campos-dinamicos-col-div" class="sheet-row-single" style="grid-column: 1 / -1;">
+            <!-- Campos vinculados según la opción elegida -->
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
   <!-- VISTA 2: EXCLUSIVA DE DOCUMENTOS -->
-  <div class="tab-view active-view" id="view-resto-solapas">
+  <div class="tab-view" id="view-resto-solapas">
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 35. Síntesis y Conclusiones</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 Carátula</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -1040,14 +1122,12 @@ let destinatariosParteEscrito = [
 ];
 let indiceItems = listaDesplegableColumnaM.map(texto => ({ texto, folio: '' }));
 
-window.cfypTablaEstado = [1, 1, 1, 1, 1, 1]; // Índice por defecto (columna 1 = NORMAL)
-
+window.cfypTablaEstado = [1, 1, 1, 1, 1, 1];
 window.carpetasMedicasEstado = { opcion: 'noposee', lista: [] };
 window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
 window.zonaFotoSeleccionada = 'foto1';
 window.registrosSeleccionadosLEP = null;
 
-// ESTADO GLOBAL DE PÁRRAFOS PRUEBA (SÍNTESIS Y CONCLUSIONES)
 window.parrafosSintesisPrueba = [
   { tipo: 'opcion1', foja: '26/26 vta', elemento: 'Concepto Funcional y Personal' },
   { tipo: 'opcion1', foja: '28/31 vta', elemento: 'Legajo Electrónico Personal (L.E.P.)' },
@@ -1182,18 +1262,31 @@ function getFormValues() {
 /* ==========================================================================
    4. MANEJADORES DE EVENTOS Y VISTAS EN VIVO (MÓDULOS)
    ========================================================================== */
+window.actualizarPlantillaColDiv = function() {
+  const sel = document.getElementById('tipo-diligencia-col-div');
+  const target = document.getElementById('campos-dinamicos-col-div');
+  if (sel && target) {
+    const valor = sel.value;
+    target.innerHTML = `<p style="font-size:0.8rem; color:#0369a1; margin:0;">Diligencia vinculada activa: <b>${valor || 'Ninguna (Elija una opción)'}</b></p>`;
+    
+    if (valor && !diligenciasColDiv.includes(valor)) {
+      diligenciasColDiv.push(valor);
+      const targetContainer = document.getElementById('col-div-diligencias-list-target');
+      if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
+      actualizarColDivEnVivo();
+    }
+  }
+};
 
-/* --- Manejo de clics e interacciones de CFYP --- */
 window.seleccionarOpcionCFYP = function(filaIdx, colIdx) {
   window.cfypTablaEstado[filaIdx] = colIdx;
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-cfyp') {
     const container = document.getElementById('doc-preview-wrapper-container');
     if (container) container.innerHTML = renderDocumentTemplate('tab-cfyp');
   }
 };
 
-/* --- Carpetas Médicas --- */
 window.actualizarModoCarpetas = function(val) {
   window.carpetasMedicasEstado.opcion = val;
   const formDetalle = document.getElementById('carpetas-campos-manuales');
@@ -1245,7 +1338,7 @@ function renderListaCarpetasMedicas() {
 }
 
 window.actualizarCarpetasEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-carpetas_medicas') {
     const liveContainer = document.getElementById('carpetas-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderCarpetasA4Content();
@@ -1310,7 +1403,6 @@ function renderCarpetasA4Content() {
   return renderGenericDocument([htmlContent]);
 }
 
-/* --- Gestión de Fotos --- */
 window.seleccionarZonaFoto = function(idZona) {
   window.zonaFotoSeleccionada = idZona;
   document.querySelectorAll('.foto-dropzone').forEach(z => z.classList.remove('selected-zone'));
@@ -1359,7 +1451,7 @@ window.handleDropFoto = function(event, idZona) {
 };
 
 document.addEventListener('paste', function(event) {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (!activeTab || activeTab.getAttribute('data-tab') !== 'tab-fotos') return;
   const items = (event.clipboardData || event.originalEvent.clipboardData).items;
   for (let item of items) {
@@ -1371,14 +1463,13 @@ document.addEventListener('paste', function(event) {
   }
 });
 
-/* --- Colaboración Divisiones --- */
 window.agregarDiligenciaColDiv = function() {
   const select = document.getElementById('select-col-div-c');
   if (!select) return;
   const valor = select.value;
   if (valor && !diligenciasColDiv.includes(valor)) {
     diligenciasColDiv.push(valor);
-    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    const activeTab = document.querySelector('.nav-item-sidebar.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
       const targetContainer = document.getElementById('col-div-diligencias-list-target');
       if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
@@ -1389,7 +1480,7 @@ window.agregarDiligenciaColDiv = function() {
 
 window.quitarDiligenciaColDiv = function(index) {
   diligenciasColDiv.splice(index, 1);
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
     const targetContainer = document.getElementById('col-div-diligencias-list-target');
     if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
@@ -1407,7 +1498,7 @@ function renderDiligenciasColDivHtml() {
 }
 
 window.actualizarColDivEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
     const liveContainer = document.getElementById('col-div-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderColDivA4Content();
@@ -1441,14 +1532,13 @@ function renderColDivA4Content() {
   return renderGenericDocument([htmlContent]);
 }
 
-/* --- Corre Agregado --- */
 window.agregarDiligenciaCorre = function() {
   const select = document.getElementById('select-corre-columna-m');
   if (!select) return;
   const valor = select.value;
   if (valor && !diligenciasCorreAgregado.includes(valor)) {
     diligenciasCorreAgregado.push(valor);
-    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    const activeTab = document.querySelector('.nav-item-sidebar.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
       const targetContainer = document.getElementById('corre-diligencias-list-target');
       if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
@@ -1459,7 +1549,7 @@ window.agregarDiligenciaCorre = function() {
 
 window.quitarDiligenciaCorre = function(index) {
   diligenciasCorreAgregado.splice(index, 1);
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
     const targetContainer = document.getElementById('corre-diligencias-list-target');
     if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
@@ -1476,14 +1566,13 @@ function renderDiligenciasCorreHtml() {
   `).join('');
 }
 
-/* --- Parte Escrito --- */
 window.agregarDestinatarioParte = function() {
   const select = document.getElementById('select-destinatario-g');
   if (!select) return;
   const valor = select.value;
   if (valor && !destinatariosParteEscrito.includes(valor)) {
     destinatariosParteEscrito.push(valor);
-    const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+    const activeTab = document.querySelector('.nav-item-sidebar.active');
     if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
       const destContainer = document.getElementById('parte-dest-list-target');
       if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
@@ -1494,7 +1583,7 @@ window.agregarDestinatarioParte = function() {
 
 window.quitarDestinatarioParte = function(index) {
   destinatariosParteEscrito.splice(index, 1);
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
     const destContainer = document.getElementById('parte-dest-list-target');
     if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
@@ -1511,7 +1600,6 @@ function renderDestinatariosParteHtml() {
   `).join('');
 }
 
-/* --- Índice de Diligencias --- */
 window.actualizarFolioIndice = function(index, valor) {
   if (indiceItems[index]) indiceItems[index].folio = valor;
 };
@@ -1541,7 +1629,7 @@ function renderIndiceDiligenciasListaHtml() {
 }
 
 window.actualizarIndiceEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-indice_diligencias') {
     const targetContainer = document.getElementById('indice-diligencias-list-target');
     if (targetContainer) targetContainer.innerHTML = renderIndiceDiligenciasListaHtml();
@@ -1607,7 +1695,6 @@ function renderIndiceA4PagesContent() {
   return renderGenericDocument(paginasArray);
 }
 
-/* --- MANEJADORES DE SÍNTESIS Y CONCLUSIONES --- */
 window.agregarParrafoSintesis = function(tipo) {
   if (tipo === 'opcion1') {
     window.parrafosSintesisPrueba.push({
@@ -1640,7 +1727,7 @@ window.actualizarCampoParrafoSintesis = function(index, campo, valor) {
 };
 
 function actualizarSintesisEnVivo() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-sintesis_conclusiones') {
     const listTarget = document.getElementById('sintesis-parrafos-list-target');
     if (listTarget) listTarget.innerHTML = renderListaControlSintesisHtml();
@@ -1650,7 +1737,7 @@ function actualizarSintesisEnVivo() {
 }
 
 function actualizarSintesisEnVivoOnlyPreview() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-sintesis_conclusiones') {
     const liveContainer = document.getElementById('sintesis-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
@@ -1711,9 +1798,8 @@ function renderListaControlSintesisHtml() {
   }).join('');
 }
 
-/* --- Actualizadores Varios de Vista Previa --- */
 window.actualizarActaEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-acta_constatacion') {
     const liveContainer = document.getElementById('acta-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderActaA4Content();
@@ -1721,7 +1807,7 @@ window.actualizarActaEnVivo = function() {
 };
 
 window.actualizarTestimonialEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-testimonial') {
     const liveContainer = document.getElementById('testimonial-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderTestimonialA4Content();
@@ -1729,7 +1815,7 @@ window.actualizarTestimonialEnVivo = function() {
 };
 
 window.actualizarInspeccionEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-inspeccion_ocular') {
     const liveContainer = document.getElementById('inspeccion-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderInspeccionA4Content();
@@ -1737,7 +1823,7 @@ window.actualizarInspeccionEnVivo = function() {
 };
 
 window.actualizarParteEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
     const liveContainer = document.getElementById('parte-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderParteA4Content();
@@ -1745,7 +1831,7 @@ window.actualizarParteEnVivo = function() {
 };
 
 window.actualizarCorreEnVivo = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
     const liveContainer = document.getElementById('corre-live-preview-target');
     if (liveContainer) liveContainer.innerHTML = renderCorreA4Content();
@@ -1767,7 +1853,6 @@ window.abrirGoogleMapsManual = function() {
   window.open(`https://www.google.com/maps/search/${encodeURIComponent(query)}`, '_blank');
 };
 
-/* --- Gestión global de la solapa L.E.P. --- */
 window.agregarRegistroLEP = function() {
   const select = document.getElementById('select-lep-personas');
   if (!select) return;
@@ -1787,7 +1872,7 @@ window.quitarRegistroLEP = function(tipo) {
 };
 
 window.actualizarVistaLEP = function() {
-  const activeTab = document.querySelector('#main-tabs-nav .nav-item-top.active');
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (activeTab && activeTab.getAttribute('data-tab') === 'tab-lep') {
     const container = document.getElementById('doc-preview-wrapper-container');
     if (container) container.innerHTML = renderDocumentTemplate('tab-lep');
@@ -1920,7 +2005,7 @@ function renderTestimonialA4Content() {
     "</b>, entre calle <b>" + (d.entre1 || '') + 
     "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
     "</b>, siendo las <b>" + (d.horaHecho || '') + 
-    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
+    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
     "</b>, de <b>" + (d.denEdad || '') + 
     "</b> años de edad, nacionalidad <b>" + (d.denNacionalidad || 'ARGENTINA') + 
     "</b>, estado civil <b>" + (d.denEstCivil || 'SOLTERO') + 
@@ -2234,7 +2319,6 @@ function renderInspeccionA4Content() {
   }).join('');
 }
 
-/* --- RENDERIZADOR SÍNTESIS Y CONCLUSIONES --- */
 function renderSintesisConclusionesA4Content() {
   const d = getFormValues();
 
@@ -2625,7 +2709,7 @@ function renderDocumentTemplate(tabKey) {
             📄 GESTIÓN DE COLABORACIÓN DIVISIONES
           </div>
           <div class="sheet-row-single" style="width: 100%;">
-            <label>SELECCIONAR DILIGENCIA:</label>
+            <label>SELECCIONAR DILIGENCIA (DESPLEGABLE COLUMNA C):</label>
             <div style="display: flex; gap: 8px; margin-bottom: 8px;">
               <select id="select-col-div-c" style="flex: 1; padding: 5px; font-size: 0.8rem;">${optionsColDivC}</select>
               <button class="btn-secondary" onclick="agregarDiligenciaColDiv()" style="white-space: nowrap;">➕ Agregar</button>
@@ -2648,7 +2732,7 @@ function renderDocumentTemplate(tabKey) {
       if (d.vicNombre && d.vicNombre.trim() !== '') textoLEP += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
       if (d.cauNombre && d.cauNombre.trim() !== '') textoLEP += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
       if (d.impNombre && d.impNombre.trim() !== '') textoLEP += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
+      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales established en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
 
       if (!window.registrosSeleccionadosLEP) {
         window.registrosSeleccionadosLEP = [];
@@ -3106,7 +3190,7 @@ function renderDocumentTemplate(tabKey) {
    6. INICIALIZACIÓN Y EVENTOS DOM
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', function() {
-  const tabs = document.querySelectorAll('#main-tabs-nav .nav-item-top');
+  const tabs = document.querySelectorAll('.nav-item-sidebar');
   const viewCarga = document.getElementById('view-carga_datos');
   const viewResto = document.getElementById('view-resto-solapas');
   const previewTitle = document.getElementById('note-preview-title');
@@ -3180,9 +3264,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Cargar pestaña predeterminada
-  const defaultTabKey = 'tab-sintesis_conclusiones';
-  previewContainer.innerHTML = renderDocumentTemplate(defaultTabKey);
+  // Cargar vista por defecto
+  viewCarga.classList.add('active-view');
 });
 </script>
 
