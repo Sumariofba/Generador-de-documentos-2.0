@@ -600,7 +600,7 @@ body {
 <!-- BARRA DE SOLAPAS SUPERIOR --> 
 <div class="top-navbar"> 
   <div class="top-navbar-header"> 
-    <div class="top-navbar-title">GENERADOR DE NOTAS SUMARIALES PAR (23 PESTAÑAS)</div> 
+    <div class="top-navbar-title">GENERADOR DE NOTAS SUMARIALES PAR (35 PESTAÑAS)</div> 
   </div> 
   <ul class="nav-list-top" id="main-tabs-nav"> 
     <li class="nav-item-top" data-tab="tab-carga_datos">📝 1. Carga de Datos</li> 
@@ -619,13 +619,25 @@ body {
     <li class="nav-item-top" data-tab="tab-cautelares">📄 14. Star. Cautelares</li> 
     <li class="nav-item-top" data-tab="tab-anmac">📄 15. Star. Inf. Repar</li> 
     <li class="nav-item-top" data-tab="tab-col_cria">📄 16. Star. Inf. CMYF</li> 
-    <li class="nav-item-top" data-tab="tab-testimonial">📄 17. Declaración Testimonial</li> 
-    <li class="nav-item-top" data-tab="tab-inspeccion_ocular">📄 18. Acta de Inspección Ocular</li> 
-    <li class="nav-item-top" data-tab="tab-croquis">📄 19. Croquis ilustrativos sin escalas</li> 
-    <li class="nav-item-top" data-tab="tab-fotos">📄 20. Fotos del lugar del Hecho</li> 
-    <li class="nav-item-top" data-tab="tab-carpetas_medicas">📄 21. Inf. de Carpetas</li> 
-    <li class="nav-item-top" data-tab="tab-cierre">📄 22. Dto. Cierre de Actuaciones</li> 
-    <li class="nav-item-top active" data-tab="tab-sintesis_conclusiones">📄 23. Síntesis y Conclusiones</li> 
+    <li class="nav-item-top" data-tab="tab-star_jmd">📄 17. STAR. JMD</li> 
+    <li class="nav-item-top" data-tab="tab-star_valor_arancelario">📄 18. STAR VALOR ARANCELARIO DE REPOSICION</li> 
+    <li class="nav-item-top" data-tab="tab-star_historial_avl">📄 19. STAR. INF. HISTORIAL DE AVL</li> 
+    <li class="nav-item-top" data-tab="tab-inf_seguimiento_comportamiento">📄 20. INF. SEGUIMIENTO Y COMPORTAMIENTO</li> 
+    <li class="nav-item-top" data-tab="tab-testimonial">📄 21. Declaración Testimonial</li> 
+    <li class="nav-item-top" data-tab="tab-inspeccion_ocular">📄 22. Acta de Inspección Ocular</li> 
+    <li class="nav-item-top" data-tab="tab-croquis">📄 23. Croquis ilustrativos sin escalas</li> 
+    <li class="nav-item-top" data-tab="tab-fotos">📄 24. Fotos del lugar del Hecho</li> 
+    <li class="nav-item-top" data-tab="tab-carpetas_medicas">📄 25. Inf. de Carpetas</li> 
+    <li class="nav-item-top" data-tab="tab-auto_imputacion">📄 26. AUTO DE IMPUTACION</li> 
+    <li class="nav-item-top" data-tab="tab-acta_not_auto_imputacion">📄 27. ACTA NOT. AUTO DE IMPUTACION</li> 
+    <li class="nav-item-top" data-tab="tab-stud_procedimiento_abreviado">📄 28. STUD. PROCEDIMIENTO ABREVIADO</li> 
+    <li class="nav-item-top" data-tab="tab-acta_acuerdo_procedimiento_abreviado">📄 29. ACTA ACUERDO PROCEDIMIENTO ABREVIADO</li> 
+    <li class="nav-item-top" data-tab="tab-incomparecencia_decaimiento">📄 30. INCOMPARECENCIA Y DECAIMIENTO DE DERECHO A DEFENSA</li> 
+    <li class="nav-item-top" data-tab="tab-resuelvo_defensa">📄 31. RESUELVO DEFENSA</li> 
+    <li class="nav-item-top" data-tab="tab-cierre">📄 32. Dto. Cierre de Actuaciones</li> 
+    <li class="nav-item-top" data-tab="tab-auto_elevacion">📄 33. AUTO DE ELEVACION</li> 
+    <li class="nav-item-top" data-tab="tab-acta_not_auto_elevacion">📄 34. ACTA NOT. AUTO DE ELEVACION</li> 
+    <li class="nav-item-top active" data-tab="tab-sintesis_conclusiones">📄 35. Síntesis y Conclusiones</li> 
   </ul> 
 </div> 
 
@@ -833,7 +845,7 @@ body {
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
         <div class="card-title"> 
-          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 23. Síntesis y Conclusiones</span> 
+          <span id="note-preview-title">DOCUMENTO GENERADO - 📄 35. Síntesis y Conclusiones</span> 
           <div class="actions-bar"> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
@@ -3018,7 +3030,16 @@ function renderDocumentTemplate(tabKey) {
       </div>`;
 
     default:
-      return renderGenericDocument([`<div class="sangria-estandar">Documento administrativo sumarial generado formalmente acorde a expediente <b>${d.caratula}</b>.</div>`]);
+      return renderGenericDocument([`
+        <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 2em;">Corresponde a expediente ${d.caratula}</div>
+        <div class="sangria-cero" style="font-weight: bold; margin-bottom: 1.5em; text-transform: uppercase;">${d.dependencia || ''}, a los ${d.fechaRecepcion || ''}</div>
+        <div style="text-align: center; font-weight: bold; font-size: 14pt; margin: 2em 0; text-transform: uppercase;">
+          DOCUMENTO ADMINISTRATIVO SUMARIAL GENERADO
+        </div>
+        <div class="sangria-estandar">
+          Documento administrativo sumarial correspondiente a la solapa seleccionada, tramitado formalmente acorde al expediente <b>${d.caratula}</b>.
+        </div>
+      `]);
   }
 }
 
