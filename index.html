@@ -23,7 +23,7 @@
 
 * {
   box-sizing: border-box !important;
-  font-family: 'Segoe UI', Arial !important;
+  font-family: 'Segoe UI', Arial, sans-serif !important;
 }
 
 body {
@@ -285,6 +285,8 @@ body {
 
 .btn-print { background-color: #475569; color: white; }
 .btn-print:hover { background-color: #334155; }
+.btn-word { background-color: #0284c7; color: white; }
+.btn-word:hover { background-color: #0369a1; }
 
 .btn-del-row {
   background-color: #ef4444;
@@ -301,7 +303,7 @@ body {
 }
 
 /* ==========================================================================
-   6. VISTA DOCUMENTOS / PREVISUALIZACIÓN A4
+   6. VISTA DOCUMENTOS / PREVISUALIZACIÓN A4 CON MÁRGENES REFLEJADOS
    ========================================================================== */
 #view-resto-solapas {
   width: 100%;
@@ -351,15 +353,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 25px;
   width: 100%;
 }
 
+/* FORMATO A4 CON MÁRGENES SIMÉTRICOS / REFLEJADOS */
 .a4-page {
   background: white;
   width: 210mm;
   min-height: 297mm;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 10px 25px;
+  height: 297mm;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 10px 25px;
   font-size: 10.5pt;
   line-height: 1.45;
   color: #000;
@@ -371,8 +375,9 @@ body {
   overflow: hidden;
 }
 
-.a4-page.odd-page { padding: 5cm 1.5cm 2.5cm 4cm; }
-.a4-page.even-page { padding: 5cm 4cm 2.5cm 1.5cm; }
+/* MÁRGENES REFLEJADOS EN PANTALLA E IMPRESIÓN */
+.a4-page.odd-page { padding: 5cm 1.5cm 2.5cm 4cm !important; }
+.a4-page.even-page { padding: 5cm 4cm 2.5cm 1.5cm !important; }
 
 .page-break-indicator {
   position: absolute;
@@ -395,7 +400,7 @@ body {
   margin-bottom: 0.5cm; 
 }
 .doc-header-logo img { 
-  max-height: 90px;
+  max-height: 85px;
   width: auto; 
 }
 
@@ -403,7 +408,7 @@ body {
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
 /* ==========================================================================
-   7. COMPONENTES INTERNOS DE DOCUMENTOS (TABLAS, CARÁTULA, FOTOS, BLOQUES)
+   7. COMPONENTES INTERNOS DE DOCUMENTOS
    ========================================================================== */
 .caratula-page-body {
   display: flex;
@@ -417,7 +422,7 @@ body {
   text-align: center;
   font-weight: bold;
   font-size: 20pt;
-  margin-top: 1.5em;
+  margin-top: 1em;
   margin-bottom: 0.3em;
   text-transform: uppercase;
 }
@@ -425,8 +430,8 @@ body {
 .caratula-subtitulo-isa {
   text-align: center;
   font-weight: bold;
-  font-size: 20pt;
-  margin-bottom: 2em;
+  font-size: 18pt;
+  margin-bottom: 1.5em;
   border: 1px solid #000;
   padding: 6px 12px;
 }
@@ -568,7 +573,7 @@ body {
 }
 
 /* ==========================================================================
-   8. REGLAS DE IMPRESIÓN (SOLUCIÓN DEFINITIVA AL FORMULARIO PREVIO)
+   8. REGLAS DE IMPRESIÓN CON MÁRGENES REFLEJADOS
    ========================================================================== */
 @media print {
   @page {
@@ -576,7 +581,7 @@ body {
     margin: 0;
   }
 
-  /* Ocultar elementos de UI */
+  /* Ocultar UI */
   .sidebar, 
   .card-title, 
   .actions-bar, 
@@ -600,7 +605,6 @@ body {
     display: none !important; 
   }
 
-  /* OCULTAR FORMULARIO DE CARGA DE DATOS SIEMPRE EN IMPRESIÓN SI NO ES LA VISTA ACTIVA */
   .tab-view:not(.active-view),
   #view-carga_datos:not(.active-view) {
     display: none !important;
@@ -655,8 +659,7 @@ body {
 
   .a4-page { 
     width: 210mm !important; 
-    min-height: 297mm !important; 
-    height: auto !important;
+    height: 297mm !important;
     box-shadow: none !important; 
     border: none !important;
     margin: 0 !important; 
@@ -664,7 +667,7 @@ body {
     page-break-after: always; 
     break-after: page; 
     break-inside: avoid;
-    overflow: visible !important; 
+    overflow: hidden !important; 
     box-sizing: border-box !important;
     position: relative !important;
   }
@@ -724,7 +727,7 @@ body {
       <li class="nav-item-sidebar" data-tab="tab-anmac">📄 Star. Inf. Repar</li> 
       <li class="nav-item-sidebar" data-tab="tab-col_cria">📄 Star. Inf. CMYF</li> 
       <li class="nav-item-sidebar" data-tab="tab-star_jmd">📄 STAR. JMD</li> 
-      <li class="nav-item-sidebar" data-tab="tab-star_valor_arancelario">📄 STAR VALOR ARANCELARIO DE REPOSICION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-star_valor_arancelario">📄 STAR VALOR ARANCELARIO REPOSICIÓN</li> 
       <li class="nav-item-sidebar" data-tab="tab-star_historial_avl">📄 STAR. INF. HISTORIAL DE AVL</li> 
       <li class="nav-item-sidebar" data-tab="tab-inf_seguimiento_comportamiento">📄 INF. SEGUIMIENTO Y COMPORTAMIENTO</li> 
       <li class="nav-item-sidebar" data-tab="tab-testimonial">📄 Declaración Testimonial</li> 
@@ -737,17 +740,17 @@ body {
 
   <!-- SECCIÓN 3 -->
   <div class="menu-section">
-    <div class="menu-section-title">⚖️ Diligencias Administrativas Auto de Imputacion</div>
+    <div class="menu-section-title">⚖️ Diligencias Administrativas Auto de Imputación</div>
     <ul class="nav-list-sidebar"> 
-      <li class="nav-item-sidebar" data-tab="tab-auto_imputacion">📄 AUTO DE IMPUTACION</li> 
-      <li class="nav-item-sidebar" data-tab="tab-acta_not_auto_imputacion">📄 ACTA NOT. AUTO DE IMPUTACION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-auto_imputacion">📄 AUTO DE IMPUTACIÓN</li> 
+      <li class="nav-item-sidebar" data-tab="tab-acta_not_auto_imputacion">📄 ACTA NOT. AUTO DE IMPUTACIÓN</li> 
       <li class="nav-item-sidebar" data-tab="tab-stud_procedimiento_abreviado">📄 STUD. PROCEDIMIENTO ABREVIADO</li> 
       <li class="nav-item-sidebar" data-tab="tab-acta_acuerdo_procedimiento_abreviado">📄 ACTA ACUERDO PROCEDIMIENTO ABREVIADO</li> 
-      <li class="nav-item-sidebar" data-tab="tab-incomparecencia_decaimiento">📄 INCOMPARECENCIA Y DECAIMIENTO DE DERECHO A DEFENSA</li> 
+      <li class="nav-item-sidebar" data-tab="tab-incomparecencia_decaimiento">📄 INCOMPARECENCIA Y DECAIMIENTO</li> 
       <li class="nav-item-sidebar" data-tab="tab-resuelvo_defensa">📄 RESUELVO DEFENSA</li> 
       <li class="nav-item-sidebar" data-tab="tab-cierre">📄 Dto. Cierre de Actuaciones</li> 
-      <li class="nav-item-sidebar" data-tab="tab-auto_elevacion">📄 AUTO DE ELEVACION</li> 
-      <li class="nav-item-sidebar" data-tab="tab-acta_not_auto_elevacion">📄 ACTA NOT. AUTO DE ELEVACION</li> 
+      <li class="nav-item-sidebar" data-tab="tab-auto_elevacion">📄 AUTO DE ELEVACIÓN</li> 
+      <li class="nav-item-sidebar" data-tab="tab-acta_not_auto_elevacion">📄 ACTA NOT. AUTO DE ELEVACIÓN</li> 
       <li class="nav-item-sidebar" data-tab="tab-sintesis_conclusiones">📄 Síntesis y Conclusiones</li> 
     </ul> 
   </div>
@@ -772,9 +775,9 @@ body {
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>FECHA DE RECEPCION:</label><input type="text" id="f_00_fecha_recepcion" value="2 de abril del 2026"></div>
+          <div class="sheet-row-single"><label>FECHA DE RECEPCIÓN:</label><input type="text" id="f_00_fecha_recepcion" value="2 de abril del 2026"></div>
           <div class="sheet-row-single"><label>DEPENDENCIA INSTRUCTORA:</label><select id="f_01_dependencia" class="select-dependencia"></select></div>
-          <div class="sheet-row-single"><label>DIRECCIÓN:</label><input type="text" id="f_02_direccion" value="San Matías (Ruta provincial 1001) sin número "></div>
+          <div class="sheet-row-single"><label>DIRECCIÓN:</label><input type="text" id="f_02_direccion" value="San Matías (Ruta provincial 1001) sin número"></div>
           <div class="sheet-row-single"><label>ENTRE CALLE 1:</label><input type="text" id="f_03_entre_calle_1" value="Achupallas"></div>
           <div class="sheet-row-single"><label>ENTRE CALLE 2:</label><input type="text" id="f_04_entre_calle_2" value="B. Llorente"></div>
           <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" id="f_06_partido" value="La Matanza"></div>
@@ -784,7 +787,7 @@ body {
           <div class="sheet-row-single"><label>SECRETARIO DE ACTUACIONES:</label><input type="text" id="f_09_secretario" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
           <div class="sheet-row-single"><label>CARGO DEL SECRETARIO DE ACTUACIONES:</label><input type="text" id="f_10_cargo_secretario" value="DISPONIBLE"></div>
           <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
-          <div class="sheet-row-single"><label>COLABORACION A:</label><select id="f_12_colaboracion" class="select-destino"></select></div>
+          <div class="sheet-row-single"><label>COLABORACIÓN A:</label><select id="f_12_colaboracion" class="select-destino"></select></div>
         </div>
       </div>
 
@@ -796,8 +799,8 @@ body {
         </div>
         <div class="sheet-card-body">
           <div class="sheet-row-single"><label>FECHA DEL HECHO:</label><input type="text" id="f_22_hecho_fecha" value="2 de abril del 2026"></div>
-          <div class="sheet-row-single"><label>EXP. ELECTRONICO N°:</label><input type="text" id="f_23_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP"></div>
-          <div class="sheet-row-single"><label>CARATULA ADMINISTRATIVA:</label><input type="text" id="f_24_caratula" value="21100 - 082162/2026 - DN154527"></div>
+          <div class="sheet-row-single"><label>EXP. ELECTRÓNICO N°:</label><input type="text" id="f_23_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP"></div>
+          <div class="sheet-row-single"><label>CARÁTULA ADMINISTRATIVA:</label><input type="text" id="f_24_caratula" value="21100 - 082162/2026 - DN154527"></div>
           <div class="sheet-row-single"><label>ENCUADRE ADMINISTRATIVO:</label><input type="text" id="f_25_encuadre" value="-sin encuadre administrativo-"></div>
           <div class="sheet-row-single"><label>CONTROL DISCIPLINARIO INTERVINIENTE:</label>
             <select id="f_26_intervencion">
@@ -813,14 +816,14 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 3: DATOS DE LA VICTIMA -->
+      <!-- Bloque 3: DATOS DE LA VÍCTIMA -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
-          <span>🩺 3. DATOS DE LA VICTIMA</span>
+          <span>🩺 3. DATOS DE LA VÍCTIMA</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_51_vic_nombre" value=""></div>
+          <div class="sheet-row-single"><label>JERARQUÍA, LEGAJO Y NOMBRES:</label><input type="text" id="f_51_vic_nombre" value=""></div>
           <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_52_vic_edad" value=""></div>
           <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_53_vic_dni" value=""></div>
           <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_54_vic_domicilio" value=""></div>
@@ -844,7 +847,7 @@ body {
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_42_imp_nombre" value=""></div>
+          <div class="sheet-row-single"><label>JERARQUÍA, LEGAJO Y NOMBRES:</label><input type="text" id="f_42_imp_nombre" value=""></div>
           <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_43_imp_edad" value=""></div>
           <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_44_imp_dni" value=""></div>
           <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_45_imp_domicilio" value=""></div>
@@ -868,7 +871,7 @@ body {
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_60_den_nombre" value="ROLDAN JOSE LUIS"></div>
+          <div class="sheet-row-single"><label>JERARQUÍA, LEGAJO Y NOMBRES:</label><input type="text" id="f_60_den_nombre" value="ROLDAN JOSE LUIS"></div>
           <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_61_den_edad" value="35"></div>
           <div class="sheet-row-single"><label>NACIONALIDAD:</label><input type="text" id="f_61b_den_nacionalidad" value="ARGENTINA"></div>
           <div class="sheet-row-single"><label>ESTADO CIVIL:</label><input type="text" id="f_61c_den_est_civil" value="SOLTERO"></div>
@@ -896,7 +899,7 @@ body {
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUIA, LEGAJO Y NOMBRES:</label><input type="text" id="f_13_cau_nombre" value="PÉREZ JUAN CARLOS"></div>
+          <div class="sheet-row-single"><label>JERARQUÍA, LEGAJO Y NOMBRES:</label><input type="text" id="f_13_cau_nombre" value="PÉREZ JUAN CARLOS"></div>
           <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_14_cau_edad" value="30"></div>
           <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_15_cau_dni" value="38.888.999"></div>
           <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_16_cau_domicilio" value="Calle Falsa 123"></div>
@@ -923,7 +926,7 @@ body {
           <div class="sheet-row-single"><label>MAGISTRADO INTERVINIENTE:</label><input type="text" id="f_87_magistrado" value="UFI N° 1 DE MORON"></div>
           <div class="sheet-row-single"><label>DPTO JUDICIAL:</label><input type="text" id="f_88_dpto_judicial" value="MORON"></div>
           <div class="sheet-row-single"><label>PROCESO PENAL N°:</label><input type="text" id="f_89_proceso_penal" value="PP-00-00-000000-26/00"></div>
-          <div class="sheet-row-single"><label>CARATULA PENAL:</label><input type="text" id="f_90_caratula_penal" value="Lesiones culposas"></div>
+          <div class="sheet-row-single"><label>CARÁTULA PENAL:</label><input type="text" id="f_90_caratula_penal" value="Lesiones culposas"></div>
         </div>
       </div>
 
@@ -949,33 +952,6 @@ body {
         </div>
       </div>
 
-      <!-- BLOQUE COL. DIVISIONES -->
-      <div id="bloque-col-div" class="bloque-diligencia sheet-card-block">
-        <div class="sheet-card-header">
-          <span>🏛️ COL. DIVISIONES - SELECCIÓN DE DILIGENCIA</span>
-          <span class="toggle-icon">▼</span>
-        </div>
-        <div class="sheet-card-body">
-          <div class="sheet-row-single" style="grid-column: 1 / -1;">
-            <label for="tipo-diligencia-col-div">SELECCIONAR DILIGENCIA (DESPLEGABLE COLUMNA C):</label>
-            <select id="tipo-diligencia-col-div" onchange="actualizarPlantillaColDiv()">
-              <option value="">-Elija una opción del Desplegable-</option>
-              <option value="Informe de tipo, días y horario de servicio">Informe de tipo, días y horario de servicio</option>
-              <option value="Concepto Funcional y Personal">Concepto Funcional y Personal</option>
-              <option value="Copia certificada con habilitación del Libro de novedades de la guardia">Copia certificada con habilitación del Libro de novedades de la guardia</option>
-              <option value="Copia certificada con habilitación Libro de presentismo y Co.Re.S.">Copia certificada con habilitación Libro de presentismo y Co.Re.S.</option>
-              <option value="Legajo Electrónico Personal (L.E.P.)">Legajo Electrónico Personal (L.E.P.)</option>
-              <option value="Situación de revista del efectivo generado por el Sistema Informático (SIPP)">Situación de revista del efectivo generado por el Sistema Informático (SIPP)</option>
-              <option value="Informe de Comportamiento y Seguimiento laboral">Informe de Comportamiento y Seguimiento laboral</option>
-            </select>
-          </div>
-
-          <div id="campos-dinamicos-col-div" class="sheet-row-single" style="grid-column: 1 / -1;">
-            <!-- Campos vinculados según la opción elegida -->
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -986,6 +962,7 @@ body {
         <div class="card-title"> 
           <span id="note-preview-title">DOCUMENTO GENERADO - 📄 Carátula</span> 
           <div class="actions-bar"> 
+            <button class="btn btn-word" onclick="downloadAsWord()">📥 Descargar Word (.doc)</button> 
             <button class="btn btn-print" onclick="window.print()">🖨️ Imprimir Documento</button> 
           </div> 
         </div> 
@@ -1099,7 +1076,7 @@ const listaDestinatariosColumnaG = [
   "AL SEÑOR JEFE DE POLICÍA DE LA PROVINCIA DE BUENOS AIRES"
 ];
 
-const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27440%27%20height%3D%2790%27%20viewBox%3D%270%200%20440%2090%27%3E%3Crect%20width%3D%27125%27%20height%3D%2750%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%278%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%278%27%20y%3D%2738%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2726%27%20font-family%3D%27Arial%27%20font-size%3D%2712%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2752%27%20font-family%3D%27Arial%27%20font-size%3D%2222%22%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E"></div>`;
+const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27440%27%20height%3D%2790%27%20viewBox%3D%270%200%20440%2090%27%3E%3Crect%20width%3D%27125%27%20height%3D%2750%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%278%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%278%27%20y%3D%2738%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2726%27%20font-family%3D%27Arial%27%20font-size%3D%2712%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2752%27%20font-family%3D%27Arial%27%20font-size%3D%2222%22%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Logo Ministerio de Seguridad"></div>`;
 
 /* ==========================================================================
    2. ESTADOS GLOBALES DE LA APLICACIÓN
@@ -1135,7 +1112,7 @@ window.parrafosSintesisPrueba = [
 ];
 
 /* ==========================================================================
-   3. FUNCIONES AUXILIARES DE NAVEGACIÓN Y EXTRACCIÓN DE DATOS
+   3. ALGORITMO AUTOMÁTICO DE PAGINACIÓN DOM (MÁRGENES REFLEJADOS)
    ========================================================================== */
 function renderGenericDocument(pagesArray) {
   const totalPages = pagesArray.length;
@@ -1144,7 +1121,7 @@ function renderGenericDocument(pagesArray) {
     const isOddPage = (pageNum % 2 !== 0);
     const pageClass = isOddPage ? 'odd-page' : 'even-page';
     const headerHtml = isOddPage ? logoSVG : '';
-    const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - VISTA DE IMPRESIÓN)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - VISTA DE IMPRESIÓN)`;
+    const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - VISTA REFLEJADA)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - VISTA REFLEJADA)`;
 
     return `
       <div class="a4-page ${pageClass}">
@@ -1154,6 +1131,83 @@ function renderGenericDocument(pagesArray) {
       </div>
     `;
   }).join('');
+}
+
+function paginateTextContent(titleHeaderHtml, fullTextHtml, containerClass = 'sangria-cero') {
+  const tempContainer = document.createElement('div');
+  tempContainer.style.position = 'absolute';
+  tempContainer.style.visibility = 'hidden';
+  tempContainer.style.top = '-9999px';
+  tempContainer.style.left = '-9999px';
+  tempContainer.style.width = '210mm';
+  document.body.appendChild(tempContainer);
+
+  const tokens = fullTextHtml.match(/(<[^>]+>|[^<]+)/g) || [fullTextHtml];
+  let wordTokens = [];
+  
+  tokens.forEach(tok => {
+    if (tok.startsWith('<')) {
+      wordTokens.push(tok);
+    } else {
+      let parts = tok.split(/(\s+)/);
+      parts.forEach(p => { if (p) wordTokens.push(p); });
+    }
+  });
+
+  let pagesArray = [];
+  let currentTokens = [];
+  let tokenIndex = 0;
+
+  while (tokenIndex < wordTokens.length) {
+    currentTokens.push(wordTokens[tokenIndex]);
+    tokenIndex++;
+
+    let isFirstPage = (pagesArray.length === 0);
+    let pageClass = isFirstPage ? 'odd-page' : 'even-page';
+    let testContentHtml = currentTokens.join('');
+
+    let testHtml = `
+      <div class="a4-page ${pageClass}" style="box-shadow:none; margin:0; position:relative;">
+        ${isFirstPage ? logoSVG : ''}
+        ${isFirstPage ? titleHeaderHtml : ''}
+        <div class="${containerClass}" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+          ${testContentHtml}
+        </div>
+      </div>
+    `;
+
+    tempContainer.innerHTML = testHtml;
+    const pageElem = tempContainer.firstElementChild;
+    const pElem = pageElem.querySelector(`.${containerClass}`);
+
+    if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
+      currentTokens.pop();
+      tokenIndex--;
+
+      let finalPageContent = `
+        ${isFirstPage ? titleHeaderHtml : ''}
+        <div class="${containerClass}" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+          ${currentTokens.join('')}
+        </div>
+      `;
+      pagesArray.push(finalPageContent);
+      currentTokens = [];
+    }
+  }
+
+  if (currentTokens.length > 0) {
+    let isFirstPage = (pagesArray.length === 0);
+    let finalPageContent = `
+      ${isFirstPage ? titleHeaderHtml : ''}
+      <div class="${containerClass}" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
+        ${currentTokens.join('')}
+      </div>
+    `;
+    pagesArray.push(finalPageContent);
+  }
+
+  document.body.removeChild(tempContainer);
+  return renderGenericDocument(pagesArray);
 }
 
 function getFormValues() {
@@ -1260,15 +1314,80 @@ function getFormValues() {
 }
 
 /* ==========================================================================
-   4. MANEJADORES DE EVENTOS Y VISTAS EN VIVO (MÓDULOS)
+   4. MANEJADORES Y EXPORTACIÓN A EDITORES DE TEXTO (WORD / DOCX)
    ========================================================================== */
+function downloadAsWord() {
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
+  const tabName = activeTab ? activeTab.textContent.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ_ -]/g, '').trim() : 'Documento_Sumarial';
+  const container = document.getElementById('doc-preview-wrapper-container');
+  if (!container) return;
+
+  const clone = container.cloneNode(true);
+  clone.querySelectorAll('.page-break-indicator, button, .indice-controls, .croquis-controls').forEach(el => el.remove());
+
+  const wordHtml = `
+    <html xmlns:o='urn:schemas-microsoft-microsoft-com:office:office' 
+          xmlns:w='urn:schemas-microsoft-microsoft-com:office:word' 
+          xmlns='http://www.w3.org/TR/REC-html40'>
+    <head>
+      <meta charset='utf-8'>
+      <title>${tabName}</title>
+      <style>
+        @page Section1 {
+          size: 595.3pt 841.9pt;
+          margin: 5.0cm 1.5cm 2.5cm 4.0cm;
+          mso-header-margin: 35.4pt;
+          mso-footer-margin: 35.4pt;
+        }
+        div.Section1 { page: Section1; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #000; }
+        p { margin-bottom: 1em; text-align: justify; text-indent: 1.15cm; }
+        .sangria-cero { text-indent: 0cm; text-align: justify; margin-bottom: 1em; }
+        .sangria-estandar { text-indent: 1.15cm; text-align: justify; margin-bottom: 1em; }
+        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 9.5pt; }
+        th, td { border: 1px solid #000; padding: 5px 7px; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .a4-page { page-break-after: always; margin-bottom: 30px; }
+      </style>
+    </head>
+    <body>
+      <div class="Section1">
+        ${clone.innerHTML}
+      </div>
+    </body>
+    </html>
+  `;
+
+  const blob = new Blob(['\ufeff', wordHtml], { type: 'application/msword' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `${tabName}.doc`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+/* ==========================================================================
+   5. MANEJADORES Y EVENTOS INTERACTIVOS EN VIVO
+   ========================================================================== */
+window.actualizarPreviewEnVivoGlobal = function() {
+  const activeTab = document.querySelector('.nav-item-sidebar.active');
+  if (!activeTab) return;
+  const tabKey = activeTab.getAttribute('data-tab');
+  if (tabKey && tabKey !== 'tab-carga_datos') {
+    const container = document.getElementById('doc-preview-wrapper-container');
+    if (container) container.innerHTML = renderDocumentTemplate(tabKey);
+  }
+};
+
 window.actualizarPlantillaColDiv = function() {
   const sel = document.getElementById('tipo-diligencia-col-div');
   const target = document.getElementById('campos-dinamicos-col-div');
   if (sel && target) {
     const valor = sel.value;
     target.innerHTML = `<p style="font-size:0.8rem; color:#0369a1; margin:0;">Diligencia vinculada activa: <b>${valor || 'Ninguna (Elija una opción)'}</b></p>`;
-    
     if (valor && !diligenciasColDiv.includes(valor)) {
       diligenciasColDiv.push(valor);
       const targetContainer = document.getElementById('col-div-diligencias-list-target');
@@ -1280,11 +1399,7 @@ window.actualizarPlantillaColDiv = function() {
 
 window.seleccionarOpcionCFYP = function(filaIdx, colIdx) {
   window.cfypTablaEstado[filaIdx] = colIdx;
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-cfyp') {
-    const container = document.getElementById('doc-preview-wrapper-container');
-    if (container) container.innerHTML = renderDocumentTemplate('tab-cfyp');
-  }
+  window.actualizarPreviewEnVivoGlobal();
 };
 
 window.actualizarModoCarpetas = function(val) {
@@ -1338,11 +1453,8 @@ function renderListaCarpetasMedicas() {
 }
 
 window.actualizarCarpetasEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-carpetas_medicas') {
-    const liveContainer = document.getElementById('carpetas-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderCarpetasA4Content();
-  }
+  const liveContainer = document.getElementById('carpetas-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderCarpetasA4Content();
 };
 
 function renderCarpetasA4Content() {
@@ -1469,40 +1581,31 @@ window.agregarDiligenciaColDiv = function() {
   const valor = select.value;
   if (valor && !diligenciasColDiv.includes(valor)) {
     diligenciasColDiv.push(valor);
-    const activeTab = document.querySelector('.nav-item-sidebar.active');
-    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
-      const targetContainer = document.getElementById('col-div-diligencias-list-target');
-      if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
-      actualizarColDivEnVivo();
-    }
-  }
-};
-
-window.quitarDiligenciaColDiv = function(index) {
-  diligenciasColDiv.splice(index, 1);
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
     const targetContainer = document.getElementById('col-div-diligencias-list-target');
     if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
     actualizarColDivEnVivo();
   }
 };
 
+window.quitarDiligenciaColDiv = function(index) {
+  diligenciasColDiv.splice(index, 1);
+  const targetContainer = document.getElementById('col-div-diligencias-list-target');
+  if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
+  actualizarColDivEnVivo();
+};
+
 function renderDiligenciasColDivHtml() {
   return diligenciasColDiv.map((dil, idx) => `
     <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
       <span style="font-size: 0.78rem;">${dil}</span>
-      <button class="btn-del-row" onclick="quitarDiligenciaColDiv(${idx})" title="Quitar diligencia" style="margin-left: 8px;">✕</button>
+      <button class="btn-del-row" onclick="quitarDiligenciaColDiv(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
     </li>
   `).join('');
 }
 
 window.actualizarColDivEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-col_div') {
-    const liveContainer = document.getElementById('col-div-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderColDivA4Content();
-  }
+  const liveContainer = document.getElementById('col-div-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderColDivA4Content();
 };
 
 function renderColDivA4Content() {
@@ -1538,30 +1641,24 @@ window.agregarDiligenciaCorre = function() {
   const valor = select.value;
   if (valor && !diligenciasCorreAgregado.includes(valor)) {
     diligenciasCorreAgregado.push(valor);
-    const activeTab = document.querySelector('.nav-item-sidebar.active');
-    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
-      const targetContainer = document.getElementById('corre-diligencias-list-target');
-      if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
-      actualizarCorreEnVivo();
-    }
-  }
-};
-
-window.quitarDiligenciaCorre = function(index) {
-  diligenciasCorreAgregado.splice(index, 1);
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
     const targetContainer = document.getElementById('corre-diligencias-list-target');
     if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
     actualizarCorreEnVivo();
   }
 };
 
+window.quitarDiligenciaCorre = function(index) {
+  diligenciasCorreAgregado.splice(index, 1);
+  const targetContainer = document.getElementById('corre-diligencias-list-target');
+  if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
+  actualizarCorreEnVivo();
+};
+
 function renderDiligenciasCorreHtml() {
   return diligenciasCorreAgregado.map((dil, idx) => `
     <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
       <span style="font-size: 0.78rem;">${dil}</span>
-      <button class="btn-del-row" onclick="quitarDiligenciaCorre(${idx})" title="Quitar diligencia" style="margin-left: 8px;">✕</button>
+      <button class="btn-del-row" onclick="quitarDiligenciaCorre(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
     </li>
   `).join('');
 }
@@ -1572,30 +1669,24 @@ window.agregarDestinatarioParte = function() {
   const valor = select.value;
   if (valor && !destinatariosParteEscrito.includes(valor)) {
     destinatariosParteEscrito.push(valor);
-    const activeTab = document.querySelector('.nav-item-sidebar.active');
-    if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
-      const destContainer = document.getElementById('parte-dest-list-target');
-      if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
-      actualizarParteEnVivo();
-    }
-  }
-};
-
-window.quitarDestinatarioParte = function(index) {
-  destinatariosParteEscrito.splice(index, 1);
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
     const destContainer = document.getElementById('parte-dest-list-target');
     if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
     actualizarParteEnVivo();
   }
 };
 
+window.quitarDestinatarioParte = function(index) {
+  destinatariosParteEscrito.splice(index, 1);
+  const destContainer = document.getElementById('parte-dest-list-target');
+  if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
+  actualizarParteEnVivo();
+};
+
 function renderDestinatariosParteHtml() {
   return destinatariosParteEscrito.map((dest, idx) => `
     <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
       <span style="font-size: 0.78rem;">${dest}</span>
-      <button class="btn-del-row destinatarios-controls" onclick="quitarDestinatarioParte(${idx})" title="Quitar destinatario" style="margin-left: 8px;">✕</button>
+      <button class="btn-del-row destinatarios-controls" onclick="quitarDestinatarioParte(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
     </li>
   `).join('');
 }
@@ -1623,19 +1714,16 @@ function renderIndiceDiligenciasListaHtml() {
   return indiceItems.map((item, idx) => `
     <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
       <span style="font-size: 0.78rem; font-weight: 600;">${item.texto}</span>
-      <button class="btn-del-row" onclick="quitarItemIndice(${idx})" title="Quitar elemento" style="margin-left: 8px;">✕</button>
+      <button class="btn-del-row" onclick="quitarItemIndice(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
     </li>
   `).join('');
 }
 
 window.actualizarIndiceEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-indice_diligencias') {
-    const targetContainer = document.getElementById('indice-diligencias-list-target');
-    if (targetContainer) targetContainer.innerHTML = renderIndiceDiligenciasListaHtml();
-    const liveContainer = document.getElementById('indice-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderIndiceA4PagesContent();
-  }
+  const targetContainer = document.getElementById('indice-diligencias-list-target');
+  if (targetContainer) targetContainer.innerHTML = renderIndiceDiligenciasListaHtml();
+  const liveContainer = document.getElementById('indice-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderIndiceA4PagesContent();
 };
 
 function renderIndiceA4PagesContent() {
@@ -1645,7 +1733,6 @@ function renderIndiceA4PagesContent() {
   let totalItems = indiceItems.length;
   let itemIndex = 0;
   let numPagina = 1;
-
   let paginasArray = [];
 
   while (itemIndex < totalItems || totalItems === 0) {
@@ -1661,7 +1748,7 @@ function renderIndiceA4PagesContent() {
             <input type="text" class="input-folio" value="${item.folio || ''}" oninput="actualizarFolioIndice(${actualIndex}, this.value)" placeholder="...">
           </td>
           <td style="width: 40px; text-align: center;" class="indice-controls">
-            <button class="btn-del-row" onclick="quitarItemIndice(${actualIndex})" title="Quitar de la lista">✕</button>
+            <button class="btn-del-row" onclick="quitarItemIndice(${actualIndex})" title="Quitar">✕</button>
           </td>
         </tr>
       `;
@@ -1727,21 +1814,15 @@ window.actualizarCampoParrafoSintesis = function(index, campo, valor) {
 };
 
 function actualizarSintesisEnVivo() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-sintesis_conclusiones') {
-    const listTarget = document.getElementById('sintesis-parrafos-list-target');
-    if (listTarget) listTarget.innerHTML = renderListaControlSintesisHtml();
-    const liveContainer = document.getElementById('sintesis-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
-  }
+  const listTarget = document.getElementById('sintesis-parrafos-list-target');
+  if (listTarget) listTarget.innerHTML = renderListaControlSintesisHtml();
+  const liveContainer = document.getElementById('sintesis-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
 }
 
 function actualizarSintesisEnVivoOnlyPreview() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-sintesis_conclusiones') {
-    const liveContainer = document.getElementById('sintesis-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
-  }
+  const liveContainer = document.getElementById('sintesis-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
 }
 
 function renderListaControlSintesisHtml() {
@@ -1799,43 +1880,28 @@ function renderListaControlSintesisHtml() {
 }
 
 window.actualizarActaEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-acta_constatacion') {
-    const liveContainer = document.getElementById('acta-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderActaA4Content();
-  }
+  const liveContainer = document.getElementById('acta-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderActaA4Content();
 };
 
 window.actualizarTestimonialEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-testimonial') {
-    const liveContainer = document.getElementById('testimonial-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderTestimonialA4Content();
-  }
+  const liveContainer = document.getElementById('testimonial-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderTestimonialA4Content();
 };
 
 window.actualizarInspeccionEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-inspeccion_ocular') {
-    const liveContainer = document.getElementById('inspeccion-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderInspeccionA4Content();
-  }
+  const liveContainer = document.getElementById('inspeccion-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderInspeccionA4Content();
 };
 
 window.actualizarParteEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-parte_escrito') {
-    const liveContainer = document.getElementById('parte-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderParteA4Content();
-  }
+  const liveContainer = document.getElementById('parte-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderParteA4Content();
 };
 
 window.actualizarCorreEnVivo = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-corre_agregado') {
-    const liveContainer = document.getElementById('corre-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderCorreA4Content();
-  }
+  const liveContainer = document.getElementById('corre-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderCorreA4Content();
 };
 
 window.actualizarCroquisUbicacion = function() {
@@ -1872,15 +1938,12 @@ window.quitarRegistroLEP = function(tipo) {
 };
 
 window.actualizarVistaLEP = function() {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (activeTab && activeTab.getAttribute('data-tab') === 'tab-lep') {
-    const container = document.getElementById('doc-preview-wrapper-container');
-    if (container) container.innerHTML = renderDocumentTemplate('tab-lep');
-  }
+  const container = document.getElementById('doc-preview-wrapper-container');
+  if (container) container.innerHTML = renderDocumentTemplate('tab-lep');
 };
 
 /* ==========================================================================
-   5. RENDERIZADORES DE PLANTILLAS A4 (DOCUMENTOS)
+   6. RENDERIZADORES CON MOTOR DOM Y MÁRGENES REFLEJADOS
    ========================================================================== */
 function renderCorreA4Content() {
   const d = getFormValues();
@@ -1912,6 +1975,7 @@ function renderCorreA4Content() {
 
 function renderActaA4Content() {
   const d = getFormValues();
+  const titleHeader = '<div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>';
 
   const textoCompleto = "En la localidad de " + d.localidad + 
     ", partido de " + d.partido + 
@@ -1925,78 +1989,15 @@ function renderActaA4Content() {
     ") , secundado por el " + d.secretario + 
     " (" + d.cargoSecretario + 
     "), ambos numerarios de " + d.dependencia + 
-    " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante." + (d.actaRelato || '') + 
+    " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. " + (d.actaRelato || '') + 
     ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
 
-  const tempContainer = document.createElement('div');
-  tempContainer.style.position = 'absolute';
-  tempContainer.style.visibility = 'hidden';
-  tempContainer.style.top = '-9999px';
-  tempContainer.style.left = '-9999px';
-  tempContainer.style.width = '210mm';
-  document.body.appendChild(tempContainer);
-
-  const words = textoCompleto.split(' ');
-  let pagesArray = [];
-  let currentWords = [];
-  let wordIndex = 0;
-
-  while (wordIndex < words.length) {
-    let testWords = [...currentWords, words[wordIndex]];
-    let isFirstPage = (pagesArray.length === 0);
-    
-    let testHtml = `
-      <div class="a4-page ${isFirstPage ? 'odd-page' : 'even-page'}" style="box-shadow:none; margin:0; position:relative;">
-        ${isFirstPage ? logoSVG : ''}
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>' : ''}
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-          ${testWords.join(' ')}
-        </div>
-      </div>
-    `;
-
-    tempContainer.innerHTML = testHtml;
-    const pageElem = tempContainer.firstElementChild;
-    const pElem = pageElem.querySelector('.sangria-cero');
-
-    if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
-      if (currentWords.length === 0) {
-        currentWords.push(words[wordIndex]);
-        wordIndex++;
-      }
-      
-      let pageContentHtml = `
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>' : ''}
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-          ${currentWords.join(' ')}
-        </div>
-      `;
-      pagesArray.push(pageContentHtml);
-      currentWords = [];
-    } else {
-      currentWords.push(words[wordIndex]);
-      wordIndex++;
-    }
-  }
-
-  if (currentWords.length > 0) {
-    let isFirstPage = (pagesArray.length === 0);
-    let pageContentHtml = `
-      ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>' : ''}
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10.5pt; line-height: 1.5; margin: 0; padding: 0;">
-        ${currentWords.join(' ')}
-      </div>
-    `;
-    pagesArray.push(pageContentHtml);
-  }
-
-  document.body.removeChild(tempContainer);
-
-  return renderGenericDocument(pagesArray);
+  return paginateTextContent(titleHeader, textoCompleto, 'sangria-cero');
 }
 
 function renderTestimonialA4Content() {
   const d = getFormValues();
+  const titleHeader = '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">DECLARACIÓN TESTIMONIAL</div>';
 
   const textoFormulaHtml = "En la localidad de <b>" + (d.localidad || '') + 
     "</b>, partido de <b>" + (d.partido || '') + 
@@ -2005,7 +2006,7 @@ function renderTestimonialA4Content() {
     "</b>, entre calle <b>" + (d.entre1 || '') + 
     "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
     "</b>, siendo las <b>" + (d.horaHecho || '') + 
-    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
+    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
     "</b>, de <b>" + (d.denEdad || '') + 
     "</b> años de edad, nacionalidad <b>" + (d.denNacionalidad || 'ARGENTINA') + 
     "</b>, estado civil <b>" + (d.denEstCivil || 'SOLTERO') + 
@@ -2025,99 +2026,10 @@ function renderTestimonialA4Content() {
     "</b> de la <b>" + (d.cauDestino || d.impDestino || '') + 
     "</b>, en trámite ante <b>" + (d.intervencion || '') + 
     "</b>, incoadas el <b>" + (d.fechaHecho || '') + 
-    "</b>. En esa inteligencia relata <span style='font-weight: normal;'>" + (d.testimonialRelato || '') + 
+    "</b>. En esa inteligencia relata: <span style='font-weight: normal;'>" + (d.testimonialRelato || '') + 
     "</span>. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.";
 
-  const tempContainer = document.createElement('div');
-  tempContainer.style.position = 'absolute';
-  tempContainer.style.visibility = 'hidden';
-  tempContainer.style.top = '-9999px';
-  tempContainer.style.left = '-9999px';
-  tempContainer.style.width = '210mm';
-  document.body.appendChild(tempContainer);
-
-  const tokens = textoFormulaHtml.match(/(<[^>]+>|[^<]+)/g) || [textoFormulaHtml];
-  let wordTokens = [];
-  
-  tokens.forEach(tok => {
-    if (tok.startsWith('<')) {
-      wordTokens.push(tok);
-    } else {
-      let parts = tok.split(/(\s+)/);
-      parts.forEach(p => { if (p) wordTokens.push(p); });
-    }
-  });
-
-  let pagesArray = [];
-  let currentTokens = [];
-  let tokenIndex = 0;
-
-  while (tokenIndex < wordTokens.length) {
-    currentTokens.push(wordTokens[tokenIndex]);
-    tokenIndex++;
-
-    let isFirstPage = (pagesArray.length === 0);
-    let pageClass = isFirstPage ? 'odd-page' : 'even-page';
-    let testContentHtml = currentTokens.join('');
-
-    let testHtml = `
-      <div class="a4-page ${pageClass}" style="box-shadow:none; margin:0; position:relative;">
-        ${isFirstPage ? logoSVG : ''}
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em;">DECLARACIÓN TESTIMONIAL</div>' : ''}
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-          ${testContentHtml}
-        </div>
-      </div>
-    `;
-
-    tempContainer.innerHTML = testHtml;
-    const pageElem = tempContainer.firstElementChild;
-    const pElem = pageElem.querySelector('.sangria-cero');
-
-    if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
-      currentTokens.pop();
-      tokenIndex--;
-
-      let finalPageContent = `
-        ${isFirstPage ? logoSVG : ''}
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em;">DECLARACIÓN TESTIMONIAL</div>' : ''}
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-          ${currentTokens.join('')}
-        </div>
-      `;
-      pagesArray.push(finalPageContent);
-      currentTokens = [];
-    }
-  }
-
-  if (currentTokens.length > 0) {
-    let isFirstPage = (pagesArray.length === 0);
-    let finalPageContent = `
-      ${isFirstPage ? logoSVG : ''}
-      ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em;">DECLARACIÓN TESTIMONIAL</div>' : ''}
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-        ${currentTokens.join('')}
-      </div>
-    `;
-    pagesArray.push(finalPageContent);
-  }
-
-  document.body.removeChild(tempContainer);
-
-  const totalPages = pagesArray.length;
-  return pagesArray.map((pageInnerContent, index) => {
-    const pageNum = index + 1;
-    const isOddPage = (pageNum % 2 !== 0);
-    const pageClass = isOddPage ? 'odd-page' : 'even-page';
-    const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - VISTA DE IMPRESIÓN)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - VISTA DE IMPRESIÓN)`;
-
-    return `
-      <div class="a4-page ${pageClass}">
-        <div class="page-break-indicator">📄 ${pageTypeLabel}</div>
-        ${pageInnerContent}
-      </div>
-    `;
-  }).join('');
+  return paginateTextContent(titleHeader, textoFormulaHtml, 'sangria-cero');
 }
 
 function renderParteA4Content() {
@@ -2176,6 +2088,7 @@ function renderParteA4Content() {
 
 function renderInspeccionA4Content() {
   const d = getFormValues();
+  const titleHeader = '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>';
 
   let textoBloqueEC1 = "";
   if (d.ec1 && d.ec1.trim() !== "") {
@@ -2227,96 +2140,7 @@ function renderInspeccionA4Content() {
     textoBloqueEC2 + 
     " No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.";
 
-  const tempContainer = document.createElement('div');
-  tempContainer.style.position = 'absolute';
-  tempContainer.style.visibility = 'hidden';
-  tempContainer.style.top = '-9999px';
-  tempContainer.style.left = '-9999px';
-  tempContainer.style.width = '210mm';
-  document.body.appendChild(tempContainer);
-
-  const tokens = textoFormulaHtml.match(/(<[^>]+>|[^<]+)/g) || [textoFormulaHtml];
-  let wordTokens = [];
-  
-  tokens.forEach(tok => {
-    if (tok.startsWith('<')) {
-      wordTokens.push(tok);
-    } else {
-      let parts = tok.split(/(\s+)/);
-      parts.forEach(p => { if (p) wordTokens.push(p); });
-    }
-  });
-
-  let pagesArray = [];
-  let currentTokens = [];
-  let tokenIndex = 0;
-
-  while (tokenIndex < wordTokens.length) {
-    currentTokens.push(wordTokens[tokenIndex]);
-    tokenIndex++;
-
-    let isFirstPage = (pagesArray.length === 0);
-    let pageClass = isFirstPage ? 'odd-page' : 'even-page';
-    let testContentHtml = currentTokens.join('');
-
-    let testHtml = `
-      <div class="a4-page ${pageClass}" style="box-shadow:none; margin:0; position:relative;">
-        ${isFirstPage ? logoSVG : ''}
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>' : ''}
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-          ${testContentHtml}
-        </div>
-      </div>
-    `;
-
-    tempContainer.innerHTML = testHtml;
-    const pageElem = tempContainer.firstElementChild;
-    const pElem = pageElem.querySelector('.sangria-cero');
-
-    if (pageElem.scrollHeight > pageElem.clientHeight || pElem.offsetHeight > (pageElem.clientHeight - (isFirstPage ? 250 : 180))) {
-      currentTokens.pop();
-      tokenIndex--;
-
-      let finalPageContent = `
-        ${isFirstPage ? logoSVG : ''}
-        ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>' : ''}
-        <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-          ${currentTokens.join('')}
-        </div>
-      `;
-      pagesArray.push(finalPageContent);
-      currentTokens = [];
-    }
-  }
-
-  if (currentTokens.length > 0) {
-    let isFirstPage = (pagesArray.length === 0);
-    let finalPageContent = `
-      ${isFirstPage ? logoSVG : ''}
-      ${isFirstPage ? '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>' : ''}
-      <div class="sangria-cero" style="text-align: justify; text-justify: inter-word; font-size: 10pt; line-height: 1.45; margin: 0; padding: 0;">
-        ${currentTokens.join('')}
-      </div>
-    `;
-    pagesArray.push(finalPageContent);
-  }
-
-  document.body.removeChild(tempContainer);
-
-  const totalPages = pagesArray.length;
-  return pagesArray.map((pageInnerContent, index) => {
-    const pageNum = index + 1;
-    const isOddPage = (pageNum % 2 !== 0);
-    const pageClass = isOddPage ? 'odd-page' : 'even-page';
-    const pageTypeLabel = isOddPage ? `PÁGINA ${pageNum} DE ${totalPages} (IMPAR - VISTA DE IMPRESIÓN)` : `PÁGINA ${pageNum} DE ${totalPages} (PAR - VISTA DE IMPRESIÓN)`;
-
-    return `
-      <div class="a4-page ${pageClass}">
-        <div class="page-break-indicator">📄 ${pageTypeLabel}</div>
-        ${pageInnerContent}
-      </div>
-    `;
-  }).join('');
+  return paginateTextContent(titleHeader, textoFormulaHtml, 'sangria-cero');
 }
 
 function renderSintesisConclusionesA4Content() {
@@ -2324,35 +2148,23 @@ function renderSintesisConclusionesA4Content() {
 
   let parrafo1 = "Me dirijo a usted afines de de adjuntar y elevar en el computo de ____________________(______) fojas utilizadas. Actuaciones Sumariales Administrativas";
   
-  if (d.encuadre && d.encuadre.trim() !== '') {
-    parrafo1 += " <b>" + d.encuadre + "</b>";
-  }
-  if (d.caratula && d.caratula.trim() !== '') {
-    parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
-  }
+  if (d.encuadre && d.encuadre.trim() !== '') parrafo1 += " <b>" + d.encuadre + "</b>";
+  if (d.caratula && d.caratula.trim() !== '') parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
   if (d.denNombre && d.denNombre.trim() !== '') {
     parrafo1 += ", donde resulta denunciante: <b>" + d.denNombre + "</b>";
-    if (d.denDestino && d.denDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.denDestino + "</b>)";
-    }
+    if (d.denDestino && d.denDestino.trim() !== '') parrafo1 += " (<b>" + d.denDestino + "</b>)";
   }
   if (d.vicNombre && d.vicNombre.trim() !== '') {
     parrafo1 += ", víctima: <b>" + d.vicNombre + "</b>";
-    if (d.vicDestino && d.vicDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.vicDestino + "</b>)";
-    }
+    if (d.vicDestino && d.vicDestino.trim() !== '') parrafo1 += " (<b>" + d.vicDestino + "</b>)";
   }
   if (d.cauNombre && d.cauNombre.trim() !== '') {
     parrafo1 += ", causante: <b>" + d.cauNombre + "</b>";
-    if (d.cauDestino && d.cauDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.cauDestino + "</b>)";
-    }
+    if (d.cauDestino && d.cauDestino.trim() !== '') parrafo1 += " (<b>" + d.cauDestino + "</b>)";
   }
   if (d.impNombre && d.impNombre.trim() !== '') {
     parrafo1 += ", imputado: <b>" + d.impNombre + "</b>";
-    if (d.impDestino && d.impDestino.trim() !== '') {
-      parrafo1 += " (<b>" + d.impDestino + "</b>)";
-    }
+    if (d.impDestino && d.impDestino.trim() !== '') parrafo1 += " (<b>" + d.impDestino + "</b>)";
   }
   if (d.intervencion && d.intervencion.trim() !== '') {
     parrafo1 += ", con intervención de <b>" + d.intervencion + "</b>.";
@@ -2402,7 +2214,7 @@ function renderSintesisConclusionesA4Content() {
     </div>
     <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-top: 1em; margin-bottom: 0.5em;">RESUELVO:</div>
     <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-      Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se dicte la pertinente Resolución mediante la cual se disponga que sea EXCENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES.
+      Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se dicte la pertinente Resolución mediante la cual se disponga que sea EXENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES.
     </div>
     <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-top: 2em;">
       Lo expuesto es todo en cuanto elevo e informo a usted.
@@ -2419,7 +2231,7 @@ function renderDocumentTemplate(tabKey) {
     case 'tab-caratula':
       let rowsHtml = '';
       if (d.exp && d.exp.trim() !== '') {
-        rowsHtml += `<div class="caratula-row"><div class="caratula-label">EXPEDIENTE ELECTRONICO:</div><div class="caratula-val">${d.exp}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">EXPEDIENTE ELECTRÓNICO:</div><div class="caratula-val">${d.exp}</div></div>`;
       }
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">CALIFICACIÓN ADMINISTRATIVA:</div><div class="caratula-val">${d.encuadre || ''}</div></div>`;
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">FECHA DEL HECHO:</div><div class="caratula-val">${d.fechaHecho || ''}</div></div>`;
@@ -2439,14 +2251,14 @@ function renderDocumentTemplate(tabKey) {
       }
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">CTROL. DISCIPLINARIO INTERV.:</div><div class="caratula-val">${d.intervencion || ''}</div></div>`;
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">INSTRUCTOR:</div><div class="caratula-val">${d.instructor || ''}</div></div>`;
-      rowsHtml += `<div class="caratula-row"><div class="caratula-label">SECRETARIO DE ACTUACION:</div><div class="caratula-val">${d.secretario || ''}</div></div>`;
+      rowsHtml += `<div class="caratula-row"><div class="caratula-label">SECRETARIO DE ACTUACIÓN:</div><div class="caratula-val">${d.secretario || ''}</div></div>`;
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">DEPENDENCIA INSTRUCTORA:</div><div class="caratula-val">${d.dependencia || ''}</div></div>`;
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">FECHA DE INICIO:</div><div class="caratula-val">${d.fechaRecepcion || ''}</div></div>`;
 
       const pageCaratulaContent = `
         <div class="caratula-page-body">
           <div>
-            <div class="caratula-titulo-principal">ACTUACION SUMARIAL ADMINISTRATIVA</div>
+            <div class="caratula-titulo-principal">ACTUACIÓN SUMARIAL ADMINISTRATIVA</div>
             <div class="caratula-subtitulo-isa">${d.caratula || ''}</div>
           </div>
           <div class="caratula-tabla-datos">
@@ -2732,7 +2544,7 @@ function renderDocumentTemplate(tabKey) {
       if (d.vicNombre && d.vicNombre.trim() !== '') textoLEP += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
       if (d.cauNombre && d.cauNombre.trim() !== '') textoLEP += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
       if (d.impNombre && d.impNombre.trim() !== '') textoLEP += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales established en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
+      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
 
       if (!window.registrosSeleccionadosLEP) {
         window.registrosSeleccionadosLEP = [];
@@ -2759,7 +2571,7 @@ function renderDocumentTemplate(tabKey) {
           listaGestionHtml += `
             <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1;">
               <span style="font-size: 0.8rem; font-weight: bold; color: #334155;">${item.rol}: <span style="font-weight: normal;">${item.nombre}</span></span>
-              <button class="btn-del-row" onclick="quitarRegistroLEP('${tipo}')" title="Quitar de la tabla" style="margin-left: 8px;">✕</button>
+              <button class="btn-del-row" onclick="quitarRegistroLEP('${tipo}')" title="Quitar" style="margin-left: 8px;">✕</button>
             </li>`;
         }
       });
@@ -2834,7 +2646,7 @@ function renderDocumentTemplate(tabKey) {
         <div class="sangria-cero" style="margin-bottom: 1em; text-align: justify;">
           - Asimismo solicito informe la existencia de denuncias de igual tenor con respecto a Infracción con la Ley 12569.
         </div>
-        <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TERMINO MUY URGENTE.</div>
+        <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TÉRMINO MUY URGENTE.</div>
         <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
       `;
       return renderGenericDocument([pageColIPP]);
@@ -2855,7 +2667,7 @@ function renderDocumentTemplate(tabKey) {
           <li>Si existe registro de alguna Medida Cautelar vigente donde resulte causante el efectivo <b>${d.impNombre}</b>, edad: <b>${d.impEdad}</b>, Documento Nacional de Identidad N°: <b>${d.impDni}</b> en la víspera del <b>${d.fechaHecho}</b>, o posteriores.</li>
           <li>Asimismo solicito informe la existencia de denuncias de igual tenor con respecto a Infracción con la Ley 12.569.</li>
         </ul>
-        <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TERMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad.</div>
+        <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TÉRMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad.</div>
         <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
       `;
       return renderGenericDocument([pageCautelares]);
@@ -2925,7 +2737,7 @@ function renderDocumentTemplate(tabKey) {
           Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.
         </div>
         <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-          Asimismo Informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En case de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.
+          Asimismo Informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En caso de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.
         </div>
         <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">Lo expuesto es todo en cuanto solicito a usted.</div>
       `;
@@ -2981,42 +2793,6 @@ function renderDocumentTemplate(tabKey) {
               <label>CALLE PRINCIPAL MANO:</label>
               <select id="f_insp_art1_mano" onchange="actualizarInspeccionEnVivo();">
                 <option value="doble" ${d.art1Mano === 'doble' ? 'selected' : ''}>doble</option><option value="única" ${d.art1Mano === 'única' ? 'selected' : ''}>única</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 1 TIPO:</label>
-              <select id="f_insp_art2_tipo" onchange="actualizarInspeccionEnVivo();">
-                <option value="asfalto" ${d.art2Tipo === 'asfalto' ? 'selected' : ''}>asfalto</option><option value="tierra" ${d.art2Tipo === 'tierra' ? 'selected' : ''}>tierra</option><option value="empedrado" ${d.art2Tipo === 'empedrado' ? 'selected' : ''}>empedrado</option><option value="hormigón" ${d.art2Tipo === 'hormigón' ? 'selected' : ''}>hormigón</option><option value="mejora" ${d.art2Tipo === 'mejora' ? 'selected' : ''}>mejora</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 1 ESTADO:</label>
-              <select id="f_insp_art2_estado" onchange="actualizarInspeccionEnVivo();">
-                <option value="buen" ${d.art2Estado === 'buen' ? 'selected' : ''}>buen</option><option value="regular" ${d.art2Estado === 'regular' ? 'selected' : ''}>regular</option><option value="malo" ${d.art2Estado === 'malo' ? 'selected' : ''}>malo</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 1 MANO:</label>
-              <select id="f_insp_art2_mano" onchange="actualizarInspeccionEnVivo();">
-                <option value="doble" ${d.art2Mano === 'doble' ? 'selected' : ''}>doble</option><option value="única" ${d.art2Mano === 'única' ? 'selected' : ''}>única</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 2 TIPO:</label>
-              <select id="f_insp_art3_tipo" onchange="actualizarInspeccionEnVivo();">
-                <option value="asfalto" ${d.art3Tipo === 'asfalto' ? 'selected' : ''}>asfalto</option><option value="tierra" ${d.art3Tipo === 'tierra' ? 'selected' : ''}>tierra</option><option value="empedrado" ${d.art3Tipo === 'empedrado' ? 'selected' : ''}>empedrado</option><option value="hormigón" ${d.art3Tipo === 'hormigón' ? 'selected' : ''}>hormigón</option><option value="mejora" ${d.art3Tipo === 'mejora' ? 'selected' : ''}>mejora</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 2 ESTADO:</label>
-              <select id="f_insp_art3_estado" onchange="actualizarInspeccionEnVivo();">
-                <option value="buen" ${d.art3Estado === 'buen' ? 'selected' : ''}>buen</option><option value="regular" ${d.art3Estado === 'regular' ? 'selected' : ''}>regular</option><option value="malo" ${d.art3Estado === 'malo' ? 'selected' : ''}>malo</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>ENTRE CALLE 2 MANO:</label>
-              <select id="f_insp_art3_mano" onchange="actualizarInspeccionEnVivo();">
-                <option value="doble" ${d.art3Mano === 'doble' ? 'selected' : ''}>doble</option><option value="única" ${d.art3Mano === 'única' ? 'selected' : ''}>única</option>
               </select>
             </div>
           </div>
@@ -3173,21 +2949,22 @@ function renderDocumentTemplate(tabKey) {
       </div>`;
 
     default:
-      return renderGenericDocument([`
+      const pageGenerica = `
         <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 2em;">Corresponde a expediente ${d.caratula}</div>
         <div class="sangria-cero" style="font-weight: bold; margin-bottom: 1.5em; text-transform: uppercase;">${d.dependencia || ''}, a los ${d.fechaRecepcion || ''}</div>
         <div style="text-align: center; font-weight: bold; font-size: 14pt; margin: 2em 0; text-transform: uppercase;">
           DOCUMENTO ADMINISTRATIVO SUMARIAL GENERADO
         </div>
         <div class="sangria-estandar">
-          Documento administrativo sumarial correspondiente a la solapa seleccionada, tramitado formalmente acorde al expediente <b>${d.caratula}</b>.
+          Documento administrativo sumarial correspondiente a la solapa seleccionada, tramitado formalmente acorde al expediente <b>${d.caratula}</b> ante <b>${d.intervencion}</b>.
         </div>
-      `]);
+      `;
+      return renderGenericDocument([pageGenerica]);
   }
 }
 
 /* ==========================================================================
-   6. INICIALIZACIÓN Y EVENTOS DOM
+   7. INICIALIZACIÓN Y EVENTOS DOM
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', function() {
   const tabs = document.querySelectorAll('.nav-item-sidebar');
@@ -3216,6 +2993,10 @@ document.addEventListener('DOMContentLoaded', function() {
       select.appendChild(opt);
     });
   });
+
+  // Escuchador global en vista Carga de Datos para actualización en vivo de fórmulas
+  viewCarga.addEventListener('input', window.actualizarPreviewEnVivoGlobal);
+  viewCarga.addEventListener('change', window.actualizarPreviewEnVivoGlobal);
 
   // Eventos Acordeón Carga de Datos
   document.querySelectorAll('.sheet-card-header').forEach(header => {
