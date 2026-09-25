@@ -2227,7 +2227,6 @@ function renderSintesisConclusionesA4Content() {
 function renderInfSeguimientoComportamientoA4Content() {
   const d = getFormValues();
 
-  // Construcción condicional del primer párrafo según la fórmula especificada
   let parrafoIntro = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
   if (d.encuadre && d.encuadre.trim() !== '') parrafoIntro += " " + d.encuadre;
   if (d.caratula && d.caratula.trim() !== '') parrafoIntro += ", caratulado: " + d.caratula;
@@ -2282,10 +2281,126 @@ function renderInfSeguimientoComportamientoA4Content() {
   return paginateTextContent(titleHeader, textoCompleto, 'sangria-cero');
 }
 
+function renderStarHistorialAvlA4Content() {
+  const d = getFormValues();
+
+  let parrafoTexto = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
+  if (d.exp && d.exp.trim() !== '') parrafoTexto += " " + d.exp;
+  if (d.encuadre && d.encuadre.trim() !== '') parrafoTexto += " " + d.encuadre;
+  if (d.caratula && d.caratula.trim() !== '') parrafoTexto += ", caratulado: " + d.caratula;
+  if (d.intervencion && d.intervencion.trim() !== '') {
+    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda. Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", quince (15) minutos antes y quince (15) minutos despues de la hora " + (d.horaHecho || '') + ".";
+  } else {
+    parrafoTexto += ". Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", quince (15) minutos antes y quince (15) minutos despues de la hora " + (d.horaHecho || '') + ".";
+  }
+
+  const pageContent = `
+    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+      REF.: Star. Inf. Historial de AVL<br>
+      ${d.partido || ''}, ${d.fechaRecepcion || ''}
+    </div>
+    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+      AL SEÑOR DIRECTOR<br>
+      DIRECCIÓN SISTEMAS OPERATIVOS Y TECNOLOGÍA
+    </div>
+    <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+      ${parrafoTexto}
+    </div>
+    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
+      Lo expuesto es todo en cuanto solicito a usted.
+    </div>
+  `;
+
+  return renderGenericDocument([pageContent]);
+}
+
+function renderStarValorArancelarioA4Content() {
+  const d = getFormValues();
+
+  let parrafoTexto = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
+  if (d.exp && d.exp.trim() !== '') parrafoTexto += " " + d.exp;
+  if (d.encuadre && d.encuadre.trim() !== '') parrafoTexto += " " + d.encuadre;
+  if (d.caratula && d.caratula.trim() !== '') parrafoTexto += ", caratulado: " + d.caratula;
+  if (d.denNombre && d.denNombre.trim() !== '') parrafoTexto += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+  if (d.vicNombre && d.vicNombre.trim() !== '') parrafoTexto += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+  if (d.cauNombre && d.cauNombre.trim() !== '') parrafoTexto += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+  if (d.impNombre && d.impNombre.trim() !== '') parrafoTexto += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+  if (!d.intervencion || d.intervencion.trim() === '') {
+    parrafoTexto += ".";
+  } else {
+    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda, el VALOR ARANCELARIO DE RESPOSICION del bien patrimonial que más abajo se detalla:";
+  }
+
+  const pageContent = `
+    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+      REF.: Star. Valor Arancelario Reposición<br>
+      ${d.partido || ''}, ${d.fechaRecepcion || ''}
+    </div>
+    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+      AL SEÑOR DIRECTOR<br>
+      DIRECCIÓN LOGÍSTICA Y PATRIMONIO
+    </div>
+    <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+      ${parrafoTexto}
+    </div>
+    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
+      Lo expuesto es todo en cuanto solicito a usted.
+    </div>
+  `;
+
+  return renderGenericDocument([pageContent]);
+}
+
+function renderStarJmdA4Content() {
+  const d = getFormValues();
+
+  let parrafoTexto = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
+  if (d.exp && d.exp.trim() !== '') parrafoTexto += " " + d.exp;
+  if (d.encuadre && d.encuadre.trim() !== '') parrafoTexto += " " + d.encuadre;
+  if (d.caratula && d.caratula.trim() !== '') parrafoTexto += ", caratulado: " + d.caratula;
+  if (d.denNombre && d.denNombre.trim() !== '') parrafoTexto += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+  if (d.vicNombre && d.vicNombre.trim() !== '') parrafoTexto += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+  if (d.cauNombre && d.cauNombre.trim() !== '') parrafoTexto += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+  if (d.impNombre && d.impNombre.trim() !== '') parrafoTexto += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+  if (!d.intervencion || d.intervencion.trim() === '') {
+    parrafoTexto += ".";
+  } else {
+    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda, conforme el “Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la provincia de Buenos Aires, en situaciones de Violencia de Género y Violencia Familiar”, aprobado por RESO-2021-581-GDEBA-MSGP, practique un examen psicológico sobre la persona del " + (d.impNombre || '') + ", a fin de determinar lo siguiente::";
+  }
+
+  const pageContent = `
+    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+      REF.: Star. JMD<br>
+      ${d.partido || ''}, ${d.fechaRecepcion || ''}
+    </div>
+    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+      AL SEÑOR PRESIDENTE<br>
+      JUNTA MÉDICA DISCIPLINARIA
+    </div>
+    <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+      ${parrafoTexto}
+    </div>
+    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
+      Lo expuesto es todo en cuanto solicito a usted.
+    </div>
+  `;
+
+  return renderGenericDocument([pageContent]);
+}
+
 function renderDocumentTemplate(tabKey) {
   const d = getFormValues();
 
   switch(tabKey) {
+    case 'tab-star_historial_avl':
+      return renderStarHistorialAvlA4Content();
+
+    case 'tab-star_valor_arancelario':
+      return renderStarValorArancelarioA4Content();
+
+    case 'tab-star_jmd':
+      return renderStarJmdA4Content();
+
     case 'tab-inf_seguimiento_comportamiento':
       return renderInfSeguimientoComportamientoA4Content();
 
@@ -3091,7 +3206,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (['tab-acta_constatacion', 'tab-testimonial', 'tab-inspeccion_ocular', 'tab-parte_escrito', 'tab-corre_agregado', 'tab-col_div', 'tab-lep', 'tab-carpetas_medicas', 'tab-indice_diligencias', 'tab-sintesis_conclusiones', 'tab-inf_seguimiento_comportamiento'].includes(activeTabKey)) {
+        if (['tab-acta_constatacion', 'tab-testimonial', 'tab-inspeccion_ocular', 'tab-parte_escrito', 'tab-corre_agregado', 'tab-col_div', 'tab-lep', 'tab-carpetas_medicas', 'tab-indice_diligencias', 'tab-sintesis_conclusiones', 'tab-inf_seguimiento_comportamiento', 'tab-star_historial_avl', 'tab-star_valor_arancelario', 'tab-star_jmd'].includes(activeTabKey)) {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
