@@ -2006,7 +2006,7 @@ function renderTestimonialA4Content() {
     "</b>, entre calle <b>" + (d.entre1 || '') + 
     "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
     "</b>, siendo las <b>" + (d.horaHecho || '') + 
-    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo establecido en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
+    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
     "</b>, de <b>" + (d.denEdad || '') + 
     "</b> años de edad, nacionalidad <b>" + (d.denNacionalidad || 'ARGENTINA') + 
     "</b>, estado civil <b>" + (d.denEstCivil || 'SOLTERO') + 
@@ -2224,10 +2224,71 @@ function renderSintesisConclusionesA4Content() {
   return renderGenericDocument([page1Content, page2Content]);
 }
 
+function renderInfSeguimientoComportamientoA4Content() {
+  const d = getFormValues();
+
+  // Construcción condicional del primer párrafo según la fórmula especificada
+  let parrafoIntro = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
+  if (d.encuadre && d.encuadre.trim() !== '') parrafoIntro += " " + d.encuadre;
+  if (d.caratula && d.caratula.trim() !== '') parrafoIntro += ", caratulado: " + d.caratula;
+  if (d.denNombre && d.denNombre.trim() !== '') parrafoIntro += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
+  if (d.vicNombre && d.vicNombre.trim() !== '') parrafoIntro += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
+  if (d.cauNombre && d.cauNombre.trim() !== '') parrafoIntro += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
+  if (d.impNombre && d.impNombre.trim() !== '') parrafoIntro += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
+  if (!d.intervencion || d.intervencion.trim() === '') {
+    parrafoIntro += ".";
+  } else {
+    parrafoIntro += ", con intervención de " + d.intervencion + ". Llevando a su conocimiento los siguientes puntos que más abajo se detallan:";
+  }
+
+  const titleHeader = `
+    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
+      REF.: Inf. Seguimiento y Comportamiento<br>
+      ${d.partido || ''}, ${d.fechaRecepcion || ''}
+    </div>
+    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
+      AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
+      ${d.intervencion ? d.intervencion.toUpperCase() : ''}
+    </div>
+  `;
+
+  const textoCompleto = `
+    <p class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.5; text-indent: 1.15cm;">
+      ${parrafoIntro}
+    </p>
+    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
+      • <b>Situación de Revista y Antecedentes:</b> A la fecha, el efectivo no registra sanciones disciplinarias en su legajo personal. Se encuentra en servicio Activo, cumpliendo funciones como Personal Disponible de manera ininterrumpida y con estricto apego a la normativa vigente.
+    </p>
+    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
+      • <b>Desempeño Operativo:</b> Ha demostrado un sólido compromiso con la disciplina y el respeto a la superioridad. Cumplió con la totalidad de las tareas asignadas, destacándose por su iniciativa. Ejerció su rol bajo estrictos estándares profesionales, garantizando el respeto a los derechos humanos y la integridad de las personas, sin reportes de conductas impropias.
+    </p>
+    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
+      • <b>Disciplina y Ética Profesional:</b> Mantuvo una conducta intachable, alineada a los valores institucionales y al código de ética profesional, sin registrar faltas administrativas ni de servicio durante el período evaluado.
+    </p>
+    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
+      • <b>Perfil Relacional y Social:</b> Su interacción con pares y superiores ha sido colaborativa, mientras que su trato con la ciudadanía fue correcto y empático. No se han recibido quejas, reclamos ni denuncias por su desempeño en la vía pública o en dependencia.
+    </p>
+    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
+      • <b>Aptitud y Presencia:</b> Su porte y presentación de uniforme fueron impecables en todo momento. Asimismo, su estado de salud y aptitud psicofísica para el servicio se mantienen sin novedades, garantizando su plena operatividad.
+    </p>
+    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
+      • <b>Conclusión:</b> Basado en los puntos anteriores, el comportamiento y desempeño del efectivo durante el período de seguimiento se califica como Positivo y Proactivo, demostrando idoneidad para las funciones que desempeña.
+    </p>
+    <p class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5; text-indent: 1.15cm;">
+      Lo expuesto es todo en cuanto informo a usted.
+    </p>
+  `;
+
+  return paginateTextContent(titleHeader, textoCompleto, 'sangria-cero');
+}
+
 function renderDocumentTemplate(tabKey) {
   const d = getFormValues();
 
   switch(tabKey) {
+    case 'tab-inf_seguimiento_comportamiento':
+      return renderInfSeguimientoComportamientoA4Content();
+
     case 'tab-caratula':
       let rowsHtml = '';
       if (d.exp && d.exp.trim() !== '') {
@@ -3030,7 +3091,7 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (['tab-acta_constatacion', 'tab-testimonial', 'tab-inspeccion_ocular', 'tab-parte_escrito', 'tab-corre_agregado', 'tab-col_div', 'tab-lep', 'tab-carpetas_medicas', 'tab-indice_diligencias', 'tab-sintesis_conclusiones'].includes(activeTabKey)) {
+        if (['tab-acta_constatacion', 'tab-testimonial', 'tab-inspeccion_ocular', 'tab-parte_escrito', 'tab-corre_agregado', 'tab-col_div', 'tab-lep', 'tab-carpetas_medicas', 'tab-indice_diligencias', 'tab-sintesis_conclusiones', 'tab-inf_seguimiento_comportamiento'].includes(activeTabKey)) {
           if (card) card.classList.add('full-width-card');
         } else {
           if (card) card.classList.remove('full-width-card');
