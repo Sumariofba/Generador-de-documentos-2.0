@@ -650,7 +650,7 @@ body {
     max-width: 100% !important; 
     background: transparent !important;
   }
-  
+
   .doc-preview-wrapper {
     display: block !important;
     width: 210mm !important;
@@ -758,7 +758,7 @@ body {
 
 <!-- CONTENEDOR PRINCIPAL --> 
 <div class="app-container"> 
-  
+
   <!-- VISTA 1: EXCLUSIVA DE CARGA DE DATOS -->
   <div class="tab-view active-view" id="view-carga_datos">
     <div class="global-controls">
@@ -767,7 +767,7 @@ body {
     </div>
 
     <div class="accordion-container">
-      
+
       <!-- Bloque 1: PROCEDENCIA Y DEPENDENCIA INSTRUCTORA -->
       <div class="sheet-card-block">
         <div class="sheet-card-header">
@@ -1144,7 +1144,7 @@ function paginateTextContent(titleHeaderHtml, fullTextHtml, containerClass = 'sa
 
   const tokens = fullTextHtml.match(/(<[^>]+>|[^<]+)/g) || [fullTextHtml];
   let wordTokens = [];
-  
+
   tokens.forEach(tok => {
     if (tok.startsWith('<')) {
       wordTokens.push(tok);
@@ -1729,7 +1729,7 @@ window.actualizarIndiceEnVivo = function() {
 function renderIndiceA4PagesContent() {
   const ITEMS_POR_PAGINA_PRIMERA = 16;
   const ITEMS_POR_PAGINA_SIGUIENTES = 22;
-  
+
   let totalItems = indiceItems.length;
   let itemIndex = 0;
   let numPagina = 1;
@@ -1738,7 +1738,7 @@ function renderIndiceA4PagesContent() {
   while (itemIndex < totalItems || totalItems === 0) {
     let limite = (numPagina === 1) ? ITEMS_POR_PAGINA_PRIMERA : ITEMS_POR_PAGINA_SIGUIENTES;
     let itemsPagina = indiceItems.slice(itemIndex, itemIndex + limite);
-    
+
     let rowsIndiceHtml = itemsPagina.map((item, idxAbs) => {
       let actualIndex = itemIndex + idxAbs;
       return `
@@ -2147,7 +2147,7 @@ function renderSintesisConclusionesA4Content() {
   const d = getFormValues();
 
   let parrafo1 = "Me dirijo a usted afines de de adjuntar y elevar en el computo de ____________________(______) fojas utilizadas. Actuaciones Sumariales Administrativas";
-  
+
   if (d.encuadre && d.encuadre.trim() !== '') parrafo1 += " <b>" + d.encuadre + "</b>";
   if (d.caratula && d.caratula.trim() !== '') parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
   if (d.denNombre && d.denNombre.trim() !== '') {
@@ -2259,7 +2259,7 @@ function renderInfSeguimientoComportamientoA4Content() {
       • <b>Situación de Revista y Antecedentes:</b> A la fecha, el efectivo no registra sanciones disciplinarias en su legajo personal. Se encuentra en servicio Activo, cumpliendo funciones como Personal Disponible de manera ininterrumpida y con estricto apego a la normativa vigente.
     </p>
     <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
-      • <b>Desempeño Operativo:</b> Ha demostrado un sólido compromiso con la disciplina y el respeto a la superioridad. Cumplió con la totalidad de las tareas asignadas, destacándose por su iniciativa. Ejerció su rol bajo estrictos estándares profesionales, garantizando el respeto a los derechos humanos y la integridad de las personas, sin reportes de conductas impropias.
+      • <b>Desempeño Operativo:</b> Ha demostrado un sólido compromiso con la disciplina y el respeto a la superioridad. Cumplió con la totalidad de las tareas asignadas, destacándose por su iniciativa. Ejerció su rol bajo strictly estándares profesionales, garantizando el respeto a los derechos humanos y la integridad de las personas, sin reportes de conductas impropias.
     </p>
     <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
       • <b>Disciplina y Ética Profesional:</b> Mantuvo una conducta intachable, alineada a los valores institucionales y al código de ética profesional, sin registrar faltas administrativas ni de servicio durante el período evaluado.
@@ -2365,7 +2365,7 @@ function renderStarJmdA4Content() {
   if (!d.intervencion || d.intervencion.trim() === '') {
     parrafoTexto += ".";
   } else {
-    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda, conforme el “Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la provincia de Buenos Aires, en situaciones de Violencia de Género y Violencia Familiar”, aprobado por RESO-2021-581-GDEBA-MSGP, practique un examen psicológico sobre la persona del " + (d.impNombre || '') + ", a fin de determinar lo siguiente::";
+    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda, conforme el “Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la provincia de Buenos Aires, en situaciones de Violencia de Género y Violencia Familiar”, aprobado por RESO-2021-581-GDEBA-MSGP, practique un examen psicológico sobre la persona del " + (d.impNombre || d.cauNombre || '') + ", a fin de determinar lo siguiente:";
   }
 
   const pageContent = `
@@ -2374,14 +2374,26 @@ function renderStarJmdA4Content() {
       ${d.partido || ''}, ${d.fechaRecepcion || ''}
     </div>
     <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-      AL SEÑOR PRESIDENTE<br>
-      JUNTA MÉDICA DISCIPLINARIA
+      AL SEÑOR JEFE<br>
+      DIVISION SANIDAD DELEGACION QUE CORRESPONDA
     </div>
-    <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
+    <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 0; text-align: justify; line-height: 1.5;">
       ${parrafoTexto}
     </div>
+    <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.5; text-align: justify; font-size: 10pt;">
+      <li>Caracterización general de su conducta y estado psíquico.</li>
+      <li>Indicadores de violencia.</li>
+      <li>Indicadores psicológicos prevalentes.</li>
+      <li>Indicadores de consumo de sustancias psicoactivas.</li>
+      <li>Si se encuentra en condiciones de portar un arma de fuego.</li>
+      <li>Si está en condiciones de seguir prestando servicio en su correspondiente agrupamiento, funciones y cargo.</li>
+      <li>Se informe todo dato de interés que surja de la entrevista y que resulte de utilidad en el hecho que se investiga.</li>
+    </ul>
+    <div class="sangria-estandar" style="margin-top: 0; text-align: justify; line-height: 1.5;">
+      Si de la entrevista surgen indicadores de consumo de sustancias psicoactivas, deberá dar intervención a la Dirección de Química de la Superintendencia de Policía Científica. Encarezco la celeridad de lo requerido en atención que resulta dicho informe de vital interés para resolver la situación administrativa del mismo.
+    </div>
     <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
-      Lo expuesto es todo en cuanto solicito a usted.
+      Lo expuesto es todo en cuanto informo a usted.
     </div>
   `;
 
@@ -2611,7 +2623,7 @@ function renderDocumentTemplate(tabKey) {
         <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1em; text-transform: uppercase;">CONCEPTO FUNCIONAL Y PRIVADO</div>
         <div style="font-weight: bold; font-size: 10pt; margin-bottom: 1.2em; text-align: left;">${d.dependencia ? d.dependencia : (d.cauDestino || '')}, a los ${d.fechaRecepcion}</div>
         <div class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.15; font-size: 10pt;">${introCFYP}</div>
-        
+
         <div style="font-size: 9.5pt; line-height: 1.15; margin-bottom: 1.2em; text-align: justify;">
           <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><input type="text" class="input-cfyp-dotted" value="Normal"></div>
           <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><input type="text" class="input-cfyp-dotted" value="13 años, 9 meses y 29 días"></div>
