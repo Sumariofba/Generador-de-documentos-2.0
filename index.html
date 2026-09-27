@@ -302,6 +302,23 @@ body {
   background-color: #dc2626;
 }
 
+/* Estilos para campos auto-ajustables de los nuevos bloques */
+.inline-input-auto {
+  display: inline-block;
+  min-width: 35px;
+  width: auto;
+  border: none;
+  border-bottom: 1px dotted #000;
+  background: transparent;
+  outline: none;
+  font-size: 10pt;
+  padding: 0 4px;
+}
+.inline-input-auto:focus {
+  background-color: #f8fafc;
+  border-bottom: 1px solid #0284c7;
+}
+
 /* ==========================================================================
    6. VISTA DOCUMENTOS / PREVISUALIZACIÓN A4 CON MÁRGENES REFLEJADOS
    ========================================================================== */
@@ -598,6 +615,8 @@ body {
   .inspeccion-form-side, 
   .indice-form-side, 
   .sintesis-form-side, 
+  .arancelario-form-side,
+  .avl-form-side,
   .croquis-controls, 
   .foto-placeholder-hint, 
   .btn-foto-upload, 
@@ -679,7 +698,7 @@ body {
   .a4-page.odd-page { padding: 5cm 1.5cm 2.5cm 4cm !important; }
   .a4-page.even-page { padding: 5cm 4cm 2.5cm 1.5cm !important; }
 
-  .input-folio, .input-cfyp-dotted { 
+  .input-folio, .input-cfyp-dotted, .inline-input-auto { 
     border: none !important; 
     background: transparent !important; 
   }
@@ -1104,6 +1123,11 @@ window.carpetasMedicasEstado = { opcion: 'noposee', lista: [] };
 window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
 window.zonaFotoSeleccionada = 'foto1';
 window.registrosSeleccionadosLEP = null;
+
+window.elementosValorArancelario = [];
+window.itemsHistorialAvl = [];
+window.horaDesdeAvl = '';
+window.horaHastaAvl = '';
 
 window.parrafosSintesisPrueba = [
   { tipo: 'opcion1', foja: '26/26 vta', elemento: 'Concepto Funcional y Personal' },
@@ -1879,6 +1903,101 @@ function renderListaControlSintesisHtml() {
   }).join('');
 }
 
+/* Funciones auxiliares STAR VALOR ARANCELARIO REPOSICIÓN */
+window.agregarElementoValorArancelario = function() {
+  const num = document.getElementById('va_num_input').value;
+  const letras = document.getElementById('va_letras_input').value;
+  const desc = document.getElementById('va_desc_input').value;
+
+  if (!num || !letras || !desc) {
+    alert("Complete los campos requeridos.");
+    return;
+  }
+
+  window.elementosValorArancelario.push({
+    num: num.trim(),
+    letras: letras.trim(),
+    desc: desc.trim()
+  });
+
+  document.getElementById('va_num_input').value = '';
+  document.getElementById('va_letras_input').value = '';
+  document.getElementById('va_desc_input').value = '';
+
+  actualizarValorArancelarioEnVivo();
+};
+
+window.quitarElementoValorArancelario = function(idx) {
+  window.elementosValorArancelario.splice(idx, 1);
+  actualizarValorArancelarioEnVivo();
+};
+
+window.actualizarCampoValorArancelario = function(idx, campo, val) {
+  if (window.elementosValorArancelario[idx]) {
+    if (campo === 'num') val = val.replace(/[^0-9]/g, '');
+    window.elementosValorArancelario[idx][campo] = val;
+    const liveContainer = document.getElementById('arancelario-live-preview-target');
+    if (liveContainer) liveContainer.innerHTML = renderStarValorArancelarioA4Content();
+  }
+};
+
+function actualizarValorArancelarioEnVivo() {
+  const target = document.getElementById('arancelario-list-target');
+  if (target) {
+    target.innerHTML = window.elementosValorArancelario.map((item, idx) => `
+      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
+        <div><b>${item.num} (${item.desc})</b> - ${item.letras}</div>
+        <button class="btn-del-row" onclick="quitarElementoValorArancelario(${idx})">✕</button>
+      </li>
+    `).join('');
+  }
+  const liveContainer = document.getElementById('arancelario-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderStarValorArancelarioA4Content();
+}
+
+/* Funciones auxiliares STAR. INF. HISTORIAL DE AVL */
+window.agregarItemHistorialAvl = function() {
+  const txt = document.getElementById('avl_item_input').value.trim();
+  if (!txt) return;
+  window.itemsHistorialAvl.push(txt);
+  document.getElementById('avl_item_input').value = '';
+  actualizarAvlEnVivo();
+};
+
+window.quitarItemHistorialAvl = function(idx) {
+  window.itemsHistorialAvl.splice(idx, 1);
+  actualizarAvlEnVivo();
+};
+
+window.actualizarCampoAvlItem = function(idx, val) {
+  if (window.itemsHistorialAvl[idx] !== undefined) {
+    window.itemsHistorialAvl[idx] = val;
+    const liveContainer = document.getElementById('avl-live-preview-target');
+    if (liveContainer) liveContainer.innerHTML = renderStarHistorialAvlA4Content();
+  }
+};
+
+window.actualizarHorasAvl = function() {
+  window.horaDesdeAvl = document.getElementById('avl_hora_desde').value;
+  window.horaHastaAvl = document.getElementById('avl_hora_hasta').value;
+  const liveContainer = document.getElementById('avl-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderStarHistorialAvlA4Content();
+};
+
+function actualizarAvlEnVivo() {
+  const target = document.getElementById('avl-list-target');
+  if (target) {
+    target.innerHTML = window.itemsHistorialAvl.map((item, idx) => `
+      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
+        <span style="flex:1;">• ${item}</span>
+        <button class="btn-del-row" onclick="quitarItemHistorialAvl(${idx})">✕</button>
+      </li>
+    `).join('');
+  }
+  const liveContainer = document.getElementById('avl-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderStarHistorialAvlA4Content();
+}
+
 window.actualizarActaEnVivo = function() {
   const liveContainer = document.getElementById('acta-live-preview-target');
   if (liveContainer) liveContainer.innerHTML = renderActaA4Content();
@@ -2214,7 +2333,7 @@ function renderSintesisConclusionesA4Content() {
     </div>
     <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-top: 1em; margin-bottom: 0.5em;">RESUELVO:</div>
     <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-      Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se dicte la pertinente Resolución mediante la cual se disponga que sea EXENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES.
+      Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se disponga que sea EXENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES.
     </div>
     <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-top: 2em;">
       Lo expuesto es todo en cuanto elevo e informo a usted.
@@ -2288,11 +2407,21 @@ function renderStarHistorialAvlA4Content() {
   if (d.exp && d.exp.trim() !== '') parrafoTexto += " " + d.exp;
   if (d.encuadre && d.encuadre.trim() !== '') parrafoTexto += " " + d.encuadre;
   if (d.caratula && d.caratula.trim() !== '') parrafoTexto += ", caratulado: " + d.caratula;
+
+  let textoDesde = window.horaDesdeAvl ? `desde ${window.horaDesdeAvl} hs` : "quince (15) minutos antes";
+  let textoHasta = window.horaHastaAvl ? `hasta ${window.horaHastaAvl} hs` : "quince (15) minutos despues de la hora 08.30 horas";
+
   if (d.intervencion && d.intervencion.trim() !== '') {
-    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda. Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", quince (15) minutos antes y quince (15) minutos despues de la hora " + (d.horaHecho || '') + ".";
+    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda. Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", " + textoDesde + " y " + textoHasta + ".";
   } else {
-    parrafoTexto += ". Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", quince (15) minutos antes y quince (15) minutos despues de la hora " + (d.horaHecho || '') + ".";
+    parrafoTexto += ". Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", " + textoDesde + " y " + textoHasta + ".";
   }
+
+  let itemsVinetados = window.itemsHistorialAvl.map((item, idx) => `
+    <li>
+      <input type="text" class="inline-input-auto" value="${item}" oninput="actualizarCampoAvlItem(${idx}, this.value)">
+    </li>
+  `).join('');
 
   const pageContent = `
     <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
@@ -2306,6 +2435,7 @@ function renderStarHistorialAvlA4Content() {
     <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
       ${parrafoTexto}
     </div>
+    ${itemsVinetados ? `<ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.5; text-align: justify; font-size: 10pt;">${itemsVinetados}</ul>` : ''}
     <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
       Lo expuesto es todo en cuanto solicito a usted.
     </div>
@@ -2331,6 +2461,19 @@ function renderStarValorArancelarioA4Content() {
     parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda, el VALOR ARANCELARIO DE RESPOSICION del bien patrimonial que más abajo se detalla:";
   }
 
+  let elementosHtml = window.elementosValorArancelario.map((item, idx) => {
+    let numLimpio = item.num ? item.num.trim() : 'xx';
+    let letrasLimpio = item.letras ? item.letras.trim() : 'xx';
+    let descLimpio = item.desc ? item.desc.trim() : 'datos del elemento dañado';
+    return `
+      <div style="margin-bottom: 0.5em; line-height: 1.5;">
+        <input type="text" class="inline-input-auto" value="${numLimpio}" oninput="actualizarCampoValorArancelario(${idx}, 'num', this.value)" style="width: 45px; text-align: center;"> 
+        (<input type="text" class="inline-input-auto" value="${letrasLimpio}" oninput="actualizarCampoValorArancelario(${idx}, 'letras', this.value)" style="width: 100px; text-align: center;">) 
+        <input type="text" class="inline-input-auto" value="${descLimpio}" oninput="actualizarCampoValorArancelario(${idx}, 'desc', this.value)" style="width: 250px;">
+      </div>
+    `;
+  }).join('');
+
   const pageContent = `
     <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
       REF.: Star. Valor Arancelario Reposición<br>
@@ -2342,6 +2485,9 @@ function renderStarValorArancelarioA4Content() {
     </div>
     <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
       ${parrafoTexto}
+    </div>
+    <div class="sangria-cero" style="margin-top: 1em; line-height: 1.5;">
+      ${elementosHtml}
     </div>
     <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
       Lo expuesto es todo en cuanto solicito a usted.
@@ -2377,10 +2523,10 @@ function renderStarJmdA4Content() {
       AL SEÑOR JEFE<br>
       DIVISION SANIDAD DELEGACION QUE CORRESPONDA
     </div>
-    <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 0; text-align: justify; line-height: 1.5;">
+    <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 0px; text-align: justify; line-height: 1.5;">
       ${parrafoTexto}
     </div>
-    <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.5; text-align: justify; font-size: 10pt;">
+    <ul style="padding-left: 1.2cm; margin: 0px; line-height: 1.5; text-align: justify; font-size: 10pt;">
       <li>Caracterización general de su conducta y estado psíquico.</li>
       <li>Indicadores de violencia.</li>
       <li>Indicadores psicológicos prevalentes.</li>
@@ -2389,10 +2535,10 @@ function renderStarJmdA4Content() {
       <li>Si está en condiciones de seguir prestando servicio en su correspondiente agrupamiento, funciones y cargo.</li>
       <li>Se informe todo dato de interés que surja de la entrevista y que resulte de utilidad en el hecho que se investiga.</li>
     </ul>
-    <div class="sangria-estandar" style="margin-top: 0; text-align: justify; line-height: 1.5;">
+    <div class="sangria-estandar" style="margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 1.5;">
       Si de la entrevista surgen indicadores de consumo de sustancias psicoactivas, deberá dar intervención a la Dirección de Química de la Superintendencia de Policía Científica. Encarezco la celeridad de lo requerido en atención que resulta dicho informe de vital interés para resolver la situación administrativa del mismo.
     </div>
-    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
+    <div class="sangria-estandar" style="margin-top: 0px; text-align: justify;">
       Lo expuesto es todo en cuanto informo a usted.
     </div>
   `;
@@ -2405,10 +2551,84 @@ function renderDocumentTemplate(tabKey) {
 
   switch(tabKey) {
     case 'tab-star_historial_avl':
-      return renderStarHistorialAvlA4Content();
+      return `
+      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+        <div class="avl-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase;">
+            📄 GESTIÓN DE HISTORIAL DE AVL
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="sheet-row-single">
+              <label>DESDE (HH:MM):</label>
+              <input type="time" id="avl_hora_desde" value="${window.horaDesdeAvl}" onchange="actualizarHorasAvl()">
+            </div>
+            <div class="sheet-row-single">
+              <label>HASTA (HH:MM):</label>
+              <input type="time" id="avl_hora_hasta" value="${window.horaHastaAvl}" onchange="actualizarHorasAvl()">
+            </div>
+          </div>
+          <div class="sheet-row-single" style="width: 100%;">
+            <label>AGREGAR UNIDAD Y DATO:</label>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="avl_item_input" placeholder="Ej: Móvil Orden RO 1234..." style="flex:1;">
+              <button class="btn-secondary" onclick="agregarItemHistorialAvl()">➕ Agregar</button>
+            </div>
+          </div>
+          <div class="sheet-row-single" style="width: 100%;">
+            <label>ITEMS INGRESADOS (VIÑETADOS):</label>
+            <ul id="avl-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;">
+              ${window.itemsHistorialAvl.map((item, idx) => `
+                <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
+                  <span style="flex:1;">• ${item}</span>
+                  <button class="btn-del-row" onclick="quitarItemHistorialAvl(${idx})">✕</button>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        </div>
+        <div style="flex-shrink: 0; display: flex; justify-content: center;">
+          <div id="avl-live-preview-target">${renderStarHistorialAvlA4Content()}</div>
+        </div>
+      </div>`;
 
     case 'tab-star_valor_arancelario':
-      return renderStarValorArancelarioA4Content();
+      return `
+      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
+        <div class="arancelario-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase;">
+            📄 GESTIÓN DE ELEMENTOS DAÑADOS
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+            <div class="sheet-row-single">
+              <label>CANTIDAD NÚMEROS (xx):</label>
+              <input type="text" id="va_num_input" placeholder="Ej: 01" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            </div>
+            <div class="sheet-row-single">
+              <label>CANTIDAD LETRAS (xx):</label>
+              <input type="text" id="va_letras_input" placeholder="Ej: uno" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/g, '');">
+            </div>
+          </div>
+          <div class="sheet-row-single" style="width: 100%;">
+            <label>DATOS ELEMENTO DAÑADO:</label>
+            <input type="text" id="va_desc_input" placeholder="Ej: Espejo retrovisor izquierdo">
+          </div>
+          <button class="btn-secondary" onclick="agregarElementoValorArancelario()" style="background: #0284c7;">➕ Agregar Elemento</button>
+          <div class="sheet-row-single" style="width: 100%;">
+            <label>ELEMENTOS INGRESADOS:</label>
+            <ul id="arancelario-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;">
+              ${window.elementosValorArancelario.map((item, idx) => `
+                <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
+                  <div><b>${item.num} (${item.desc})</b> - ${item.letras}</div>
+                  <button class="btn-del-row" onclick="quitarElementoValorArancelario(${idx})">✕</button>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+        </div>
+        <div style="flex-shrink: 0; display: flex; justify-content: center;">
+          <div id="arancelario-live-preview-target">${renderStarValorArancelarioA4Content()}</div>
+        </div>
+      </div>`;
 
     case 'tab-star_jmd':
       return renderStarJmdA4Content();
