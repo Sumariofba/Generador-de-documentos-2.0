@@ -302,7 +302,6 @@ body {
   background-color: #dc2626;
 }
 
-/* Estilos para campos auto-ajustables de los nuevos bloques */
 .inline-input-auto {
   display: inline-block;
   min-width: 35px;
@@ -374,7 +373,6 @@ body {
   width: 100%;
 }
 
-/* FORMATO A4 CON MÁRGENES SIMÉTRICOS / REFLEJADOS */
 .a4-page {
   background: white;
   width: 210mm;
@@ -392,7 +390,6 @@ body {
   overflow: hidden;
 }
 
-/* MÁRGENES REFLEJADOS EN PANTALLA E IMPRESIÓN */
 .a4-page.odd-page { padding: 5cm 1.5cm 2.5cm 4cm !important; }
 .a4-page.even-page { padding: 5cm 4cm 2.5cm 1.5cm !important; }
 
@@ -423,9 +420,10 @@ body {
 
 .sangria-estandar { margin-bottom: 1em; text-align: justify; text-indent: 1.15cm !important; }
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
+.sangria-imputacion { margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important; }
 
 /* ==========================================================================
-   7. COMPONENTES INTERNOS DE DOCUMENTOS
+   7. COMPONENTES INTERNOS
    ========================================================================== */
 .caratula-page-body {
   display: flex;
@@ -590,7 +588,7 @@ body {
 }
 
 /* ==========================================================================
-   8. REGLAS DE IMPRESIÓN CON MÁRGENES REFLEJADOS
+   8. REGLAS DE IMPRESIÓN
    ========================================================================== */
 @media print {
   @page {
@@ -598,7 +596,6 @@ body {
     margin: 0;
   }
 
-  /* Ocultar UI */
   .sidebar, 
   .card-title, 
   .actions-bar, 
@@ -617,6 +614,7 @@ body {
   .sintesis-form-side, 
   .arancelario-form-side,
   .avl-form-side,
+  .auto-imp-form-side,
   .croquis-controls, 
   .foto-placeholder-hint, 
   .btn-foto-upload, 
@@ -632,7 +630,7 @@ body {
   html, body { 
     background: white !important; 
     overflow: visible !important;
-    margin: 0 !important;
+    margin: 0 !important; 
     padding: 0 !important;
     width: 210mm !important;
     height: auto !important;
@@ -866,14 +864,14 @@ body {
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
-          <div class="sheet-row-single"><label>JERARQUÍA, LEGAJO Y NOMBRES:</label><input type="text" id="f_42_imp_nombre" value=""></div>
-          <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_43_imp_edad" value=""></div>
-          <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_44_imp_dni" value=""></div>
-          <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_45_imp_domicilio" value=""></div>
-          <div class="sheet-row-single"><label>ENTRE CALLES:</label><input type="text" id="f_46_imp_entre_calles" value=""></div>
-          <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" id="f_47_imp_localidad" value=""></div>
-          <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" id="f_48_imp_partido" value=""></div>
-          <div class="sheet-row-single"><label>CONTACTO:</label><input type="text" id="f_49_imp_contacto" value=""></div>
+          <div class="sheet-row-single"><label>JERARQUÍA, LEGAJO Y NOMBRES:</label><input type="text" id="f_42_imp_nombre" value="OFICIAL (E.G.) LEGAJO 188.992 GÓMEZ ROBERTO CARLOS"></div>
+          <div class="sheet-row-single"><label>EDAD:</label><input type="text" id="f_43_imp_edad" value="28"></div>
+          <div class="sheet-row-single"><label>DNI:</label><input type="text" id="f_44_imp_dni" value="39.123.456"></div>
+          <div class="sheet-row-single"><label>DOMICILIO:</label><input type="text" id="f_45_imp_domicilio" value="Av. De Mayo 456"></div>
+          <div class="sheet-row-single"><label>ENTRE CALLES:</label><input type="text" id="f_46_imp_entre_calles" value="Alvear y Mitre"></div>
+          <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" id="f_47_imp_localidad" value="Ramos Mejía"></div>
+          <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" id="f_48_imp_partido" value="La Matanza"></div>
+          <div class="sheet-row-single"><label>CONTACTO:</label><input type="text" id="f_49_imp_contacto" value="11-4455-6677"></div>
           <div class="sheet-row-single"><label>DESTINO:</label><select id="f_50_imp_destino" class="select-destino"></select></div>
           <div class="sheet-row-single"><label>ESCALÓN:</label><input type="text" id="f_50b_imp_escalon" value="-"></div>
           <div class="sheet-row-single"><label>HORARIO DE ENTRADA:</label><input type="text" id="f_50c_imp_entrada" value="-"></div>
@@ -958,15 +956,15 @@ body {
         <div class="sheet-card-body">
           <div class="sheet-row-single" style="grid-column: 1 / -1;">
             <label>RELATO DEL ACTA DE CONSTATACIÓN:</label>
-            <textarea id="f_78_relato_acta">Tomamos conocimiento siendo las 10.30 horas, por parte del OFICIAL (E.G.) LEGAJO 123.456 ROLDAN JOSE LUIS, quien se encuentra cumpliendo en la víspera funciones OFICIAL DE SERVICIO, todos numerarios de la División antes mencionada, que el OFICIAL (E.G.) LEGAJO 123.456 PEREZ JUAN ALBERTO, de 24 años de edad, fecha de nacimiento 01/01/2000, nacionalidad argentina, estado civil soltero, instruido, profesión u ocupación empleado policial, domicilio en Racunda 560 entre calle Vito Dumas y calle Nicolás Paganini, localidad de Virrey del pino, partido de La Matanza, Documento Nacional de Identidad N° 12.345.678, numerario de este elemento, en la fecha, siendo aproximadamente las 9 horas, camino al servicio a bordo de motocicleta marca Bajaj modelo Rowser, dominio AXC123, circulando por la calle San Matías (Ruta Provincial 1001) con sentido ascendente al llegar a la calle Achupallas, al cruzar un charco de agua en la vía rápida de la arteria mencionada, pierde el control del rodado cayendo al suelo, golpeándose brazo derecho, pierna derecha y espalda, produciéndose lesiones a prima facie de carácter leve. Consecuentemente se reincorpora y por propios medios se coloca a un costado de la calle, lugar donde da conocimiento de lo sucedido a su destino. Motivo por el cual se comisionó al lugar al móvil orden OI 123456 marca Ford, modelo Ranger, dominio AB123CD, perteneciente a la flota automotriz de esta división, conducido en la oportunidad por él OFICIAL (E.G.) LEGAJO 123.456 JEREZ JOSE ARMANDO, secundado en la oportunidad por el OFICIAL (E.G.) LEGAJO 123.456 LAME ELSA, quienes lo trasladan hasta la Clínica Modelo de Gregorio Laferrere, sita en la colectora de la Avenida Provincias Unidas entre Esteban Echeverría y Avenida Luro, partido de G. Laferrere, partido de La Matanza, donde lo atiende el Dr/a. Cureta María de los Ángeles Matrícula Nacional Nº 22.345, Matrícula Provincial 12.345, quien tras asistirlo y evaluarlo, diagnóstica que posee traumatismo leves en su cuerpo y para mejor evaluación debe realizar exámenes complementarios por consultorios externos en la especialista traumatología. Seguidamente, ante lo narrado personal de la Subsección Personal del elemento, mantiene comunicación telefónica con el abonado gratuito 0800-333-1333 perteneciente a la Aseguradora de Riesgo del Trabajo Provincia Seguros A.R.T., siendo atendidos en la oportunidad por el operador en turno, a quien puesto en conocimiento de lo sucedido, registra el siniestro bajo N° 123456, informando que el efectivo lesionado continuará con su atención médica en la Clínica Del Buen Pastor, sita en Avenida Mosconi 1716, localidad de Lomas del Mirador, partido de La Matanza. Que, siendo las 14 horas, el OFICIAL (E.G.) LEGAJO 123.456 PEREZ JUAN ALBERTO, se retira franco por sus propios medios desde la Clínica Modelo de G. Laferrere, motivo por el cual no rubricara la presente acta de procedimiento junto a los actuantes. Que, no siendo para más se procede a labrar la presente acta de estilo por razones de logística y medios en la Oficina de la Subsección Personal de la dependencia</textarea>
+            <textarea id="f_78_relato_acta">Tomamos conocimiento siendo las 10.30 horas...</textarea>
           </div>
           <div class="sheet-row-single" style="grid-column: 1 / -1;">
             <label>SÍNTESIS DEL HECHO / PARTE ESCRITO:</label>
-            <textarea id="f_79_sintesis_hecho">se tomó conocimiento a través de la guardia de prevención sobre el siniestro vial acaecido sobre la Ruta Provincial 1001, donde se vio involucrado el personal policial Franco de Servicio, labrándose las actuaciones de rigor y otorgando intervención a la Auditoría General de Asuntos Internos.</textarea>
+            <textarea id="f_79_sintesis_hecho">se tomó conocimiento a través de la guardia de prevención sobre el siniestro vial acaecido sobre la Ruta Provincial 1001...</textarea>
           </div>
           <div class="sheet-row-single" style="grid-column: 1 / -1;">
             <label>DECLARACIÓN TESTIMONIAL (RELATO ESPECÍFICO):</label>
-            <textarea id="f_80_relato_testimonial">que en la fecha y siendo las 08:30 horas se encontraba en la guardia cuando tomó conocimiento del suceso motivo del presente actuado, procediendo a informar a la superioridad y labrar las anotaciones de rigor.</textarea>
+            <textarea id="f_80_relato_testimonial">que en la fecha y siendo las 08:30 horas se encontraba en la guardia cuando tomó conocimiento del suceso motivo del presente actuado...</textarea>
           </div>
         </div>
       </div>
@@ -1098,7 +1096,7 @@ const listaDestinatariosColumnaG = [
 const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27440%27%20height%3D%2790%27%20viewBox%3D%270%200%20440%2090%27%3E%3Crect%20width%3D%27125%27%20height%3D%2750%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%278%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%278%27%20y%3D%2738%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2726%27%20font-family%3D%27Arial%27%20font-size%3D%2712%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2752%27%20font-family%3D%27Arial%27%20font-size%3D%2222%22%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Logo Ministerio de Seguridad"></div>`;
 
 /* ==========================================================================
-   2. ESTADOS GLOBALES DE LA APLICACIÓN
+   2. ESTADOS GLOBALES
    ========================================================================== */
 let diligenciasColDiv = [...listaDiligenciasColumnaC];
 let diligenciasCorreAgregado = [
@@ -1134,6 +1132,38 @@ window.parrafosSintesisPrueba = [
   { tipo: 'opcion1', foja: '28/31 vta', elemento: 'Legajo Electrónico Personal (L.E.P.)' },
   { tipo: 'opcion2', orden: 'SIETE (7)', contenido: 'cumple funciones de Ayudante de Guardia y debe cumplir con una carga horaria de 30 horas semanales según su subescalafón', paginas: '1 a 3', elemento: 'Vademécum - RP21100' }
 ];
+
+/* ESTADO GLOBAL PARA AUTO DE IMPUTACIÓN */
+window.autoImpEstado = {
+  i1_fechaAuto: '10 de abril del 2026',
+  i3_encuadre: 'ARTÍCULO 190 INCISO “C”',
+  h5_contenidoArt: 'De acuerdo a lo estipulado en el artículo 55 de la “Ley de Personal”, las faltas se clasifican en el: inc. c) Faltas graves: las que dan lugar a suspensión del empleo sin goce de haberes de hasta cuarenta y cinco (45) días, aplicables mediante resolución en actuaciones sumariales administrativas, dictada por el Comisario General a cargo de la Policía a la que pertenece el infractor',
+  h8_sintesisHecho: 'que en la fecha siendo las 08:30 hs. el causante fue hallado en estado de negligencia respecto del cuidado de los bienes provistos asignados a su custodia',
+  h26_fundamentoDisc: 'no ejerció el debido resguardo de los elementos de trabajo confiados a su cargo, propiciando el deterioro de los mismos',
+  elementosPrueba: [
+    { tipo: 'opcion1', foja: '01', opcionColC: 'Acta de constatación' },
+    { tipo: 'opcion1', foja: '02', opcionColC: 'Declaración testimonial del Encargado de Logística' },
+    { tipo: 'opcion1', foja: '03/05', opcionColC: 'Placas fotográficas del lugar del hecho' },
+    { tipo: 'opcion1', foja: '06/10', opcionColC: 'Copia certificada con habilitación del Libro de novedades de la guardia' },
+    { tipo: 'opcion1', foja: '13/21', opcionColC: 'Legajo Electrónico Personal (L.E.P.)' },
+    { tipo: 'opcion1', foja: '22/25 vta.', opcionColC: 'Situación de revista del efectivo generado por el Sistema Informático (SIPP)' },
+    { tipo: 'opcion1', foja: '26', opcionColC: 'Concepto Funcional y Personal' },
+    { tipo: 'opcion1', foja: '35', opcionColC: 'Informe de Comportamiento y Seguimiento laboral' },
+    { tipo: 'opcion1', foja: '72/72 vta.', opcionColC: 'Vademécum - RP21100' },
+    {
+      tipo: 'opcion2',
+      orden: '03 obra IF-2024-24813458-GDEBA-CRIABS1MSGP',
+      subitems: [
+        { paginas: '02/03', opcionColC: 'Acta de constatación' },
+        { paginas: '19', opcionColC: 'Concepto Funcional y Personal' },
+        { paginas: '29/45', opcionColC: 'Copia certificada con habilitación del Libro de novedades de la guardia' },
+        { paginas: '46/51', opcionColC: 'Copia certificada con habilitación Libro de presentismo y Co.Re.S.' },
+        { paginas: '53', opcionColC: 'Denuncia a la aseguradora de riesgos del trabajo (A.R.T.)' },
+        { paginas: '64/70', opcionColC: 'Legajo Electrónico Personal (L.E.P.)' }
+      ]
+    }
+  ]
+};
 
 /* ==========================================================================
    3. ALGORITMO AUTOMÁTICO DE PAGINACIÓN DOM (MÁRGENES REFLEJADOS)
@@ -1324,22 +1354,10 @@ function getFormValues() {
     hechoPartido: getVal('f_40_hecho_partido'),
     actaRelato: elemActaRelato ? elemActaRelato.value : '',
     sintesis: elemSintesis ? elemSintesis.value : '',
-    testimonialRelato: elemTestimonial ? elemTestimonial.value : '',
-    art1Tipo: getVal('f_insp_art1_tipo') || 'asfalto',
-    art1Estado: getVal('f_insp_art1_estado') || 'buen',
-    art1Mano: getVal('f_insp_art1_mano') || 'doble',
-    art2Tipo: getVal('f_insp_art2_tipo') || 'asfalto',
-    art2Estado: getVal('f_insp_art2_estado') || 'buen',
-    art2Mano: getVal('f_insp_art2_mano') || 'doble',
-    art3Tipo: getVal('f_insp_art3_tipo') || 'asfalto',
-    art3Estado: getVal('f_insp_art3_estado') || 'buen',
-    art3Mano: getVal('f_insp_art3_mano') || 'doble'
+    testimonialRelato: elemTestimonial ? elemTestimonial.value : ''
   };
 }
 
-/* ==========================================================================
-   FUNCIÓN AUXILIAR GENERAL PARA CONSTRUIR EL PÁRRAFO SUMARIAL
-   ========================================================================== */
 function construirParrafoSumarial(prefijoText, sufijoText, d, opciones = {}) {
   const useBold = opciones.useBold !== undefined ? opciones.useBold : true;
   const wrapTag = (str) => (useBold && str) ? `<b>${str}</b>` : (str || '');
@@ -1386,9 +1404,6 @@ function construirParrafoSumarial(prefijoText, sufijoText, d, opciones = {}) {
   return texto;
 }
 
-/* ==========================================================================
-   4. MANEJADORES Y EXPORTACIÓN A EDITORES DE TEXTO (WORD / DOCX)
-   ========================================================================== */
 function downloadAsWord() {
   const activeTab = document.querySelector('.nav-item-sidebar.active');
   const tabName = activeTab ? activeTab.textContent.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ_ -]/g, '').trim() : 'Documento_Sumarial';
@@ -1409,18 +1424,11 @@ function downloadAsWord() {
         @page Section1 {
           size: 595.3pt 841.9pt;
           margin: 5.0cm 1.5cm 2.5cm 4.0cm;
-          mso-header-margin: 35.4pt;
-          mso-footer-margin: 35.4pt;
         }
         div.Section1 { page: Section1; }
         body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #000; }
         p { margin-bottom: 1em; text-align: justify; text-indent: 1.15cm; }
-        .sangria-cero { text-indent: 0cm; text-align: justify; margin-bottom: 1em; }
-        .sangria-estandar { text-indent: 1.15cm; text-align: justify; margin-bottom: 1em; }
-        table { border-collapse: collapse; width: 100%; margin: 15px 0; font-size: 9.5pt; }
-        th, td { border: 1px solid #000; padding: 5px 7px; }
-        th { background-color: #f2f2f2; font-weight: bold; }
-        .a4-page { page-break-after: always; margin-bottom: 30px; }
+        .sangria-imputacion { margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important; }
       </style>
     </head>
     <body>
@@ -1442,9 +1450,6 @@ function downloadAsWord() {
   URL.revokeObjectURL(url);
 }
 
-/* ==========================================================================
-   5. MANEJADORES Y EVENTOS INTERACTIVOS EN VIVO
-   ========================================================================== */
 window.actualizarPreviewEnVivoGlobal = function() {
   const activeTab = document.querySelector('.nav-item-sidebar.active');
   if (!activeTab) return;
@@ -1455,490 +1460,138 @@ window.actualizarPreviewEnVivoGlobal = function() {
   }
 };
 
-window.actualizarPlantillaColDiv = function() {
-  const sel = document.getElementById('tipo-diligencia-col-div');
-  const target = document.getElementById('campos-dinamicos-col-div');
-  if (sel && target) {
-    const valor = sel.value;
-    target.innerHTML = `<p style="font-size:0.8rem; color:#0369a1; margin:0;">Diligencia vinculada activa: <b>${valor || 'Ninguna (Elija una opción)'}</b></p>`;
-    if (valor && !diligenciasColDiv.includes(valor)) {
-      diligenciasColDiv.push(valor);
-      const targetContainer = document.getElementById('col-div-diligencias-list-target');
-      if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
-      actualizarColDivEnVivo();
-    }
-  }
+/* ==========================================================================
+   4. FUNCIONES EXCLUSIVAS DEL AUTO DE IMPUTACIÓN
+   ========================================================================== */
+window.actualizarCampoAutoImp = function(campo, val) {
+  window.autoImpEstado[campo] = val;
+  window.actualizarAutoImpEnVivoOnlyPreview();
 };
 
-window.seleccionarOpcionCFYP = function(filaIdx, colIdx) {
-  window.cfypTablaEstado[filaIdx] = colIdx;
-  window.actualizarPreviewEnVivoGlobal();
-};
-
-window.actualizarModoCarpetas = function(val) {
-  window.carpetasMedicasEstado.opcion = val;
-  const formDetalle = document.getElementById('carpetas-campos-manuales');
-  if (formDetalle) formDetalle.style.display = (val === 'carpeta') ? 'flex' : 'none';
-  actualizarCarpetasEnVivo();
-};
-
-window.agregarCarpetaMedica = function() {
-  const dias = document.getElementById('cm_dias').value.trim();
-  const art = document.getElementById('cm_art').value.trim();
-  const diag = document.getElementById('cm_diag').value.trim();
-  const fInicio = document.getElementById('cm_inicio').value.trim();
-  const fFin = document.getElementById('cm_fin').value.trim();
-
-  if (!dias || !art || !diag || !fInicio || !fFin) {
-    alert("Por favor complete todos los campos de la carpeta médica.");
-    return;
-  }
-
-  window.carpetasMedicasEstado.lista.push({ dias, art, diag, fInicio, fFin });
-  document.getElementById('cm_dias').value = '';
-  document.getElementById('cm_art').value = '';
-  document.getElementById('cm_diag').value = '';
-  document.getElementById('cm_inicio').value = '';
-  document.getElementById('cm_fin').value = '';
-
-  renderListaCarpetasMedicas();
-  actualizarCarpetasEnVivo();
-};
-
-window.quitarCarpetaMedica = function(idx) {
-  window.carpetasMedicasEstado.lista.splice(idx, 1);
-  renderListaCarpetasMedicas();
-  actualizarCarpetasEnVivo();
-};
-
-function renderListaCarpetasMedicas() {
-  const target = document.getElementById('carpetas-list-target');
-  if (!target) return;
-  target.innerHTML = window.carpetasMedicasEstado.lista.map((c, idx) => `
-    <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; background: #fff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
-      <div>
-        <b>${c.dias} (${c.art})</b> - Diag: ${c.diag}<br>
-        <small style="color: #64748b;">${c.fInicio} al ${c.fFin}</small>
-      </div>
-      <button class="btn-del-row" onclick="quitarCarpetaMedica(${idx})" title="Quitar">✕</button>
-    </li>
-  `).join('');
-}
-
-window.actualizarCarpetasEnVivo = function() {
-  const liveContainer = document.getElementById('carpetas-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderCarpetasA4Content();
-};
-
-function renderCarpetasA4Content() {
-  const d = getFormValues();
-
-  let sufijo = ", licencias médicas vinculadas al hecho en investigación que mas abajo se detalla:";
-  let textoEncabezado = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
-
-  let cuerpoParrafoHtml = '';
-  if (window.carpetasMedicasEstado.opcion === 'noposee' || (window.carpetasMedicasEstado.opcion === 'carpeta' && window.carpetasMedicasEstado.lista.length === 0)) {
-    cuerpoParrafoHtml = `
-      <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-        ${textoEncabezado} informa que el agente:
-      </div>
-      <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6; text-align: justify; font-size: 10pt;">
-        <li>No posee carpetas vinculadas al hecho investigado.</li>
-      </ul>
-    `;
-  } else {
-    let itemsVinetados = window.carpetasMedicasEstado.lista.map(c => 
-      `<li>Carpeta medica por ${c.dias} (${c.art}). Diagnóstico ${c.diag}. Fecha de inicio ${c.fInicio} y fecha de finalización ${c.fFin}.</li>`
-    ).join('');
-
-    cuerpoParrafoHtml = `
-      <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-        ${textoEncabezado}
-      </div>
-      <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6; text-align: justify; font-size: 10pt;">
-        ${itemsVinetados}
-      </ul>
-    `;
-  }
-
-  const htmlContent = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-      REF.: Pcir. Informe de Carpetas médicas<br>
-      ${d.partido || ''}, ${d.fechaRecepcion || ''}
-    </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-      AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
-      ${d.instructor ? d.instructor.toUpperCase() : ''}
-    </div>
-    ${cuerpoParrafoHtml}
-    <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-      Adjunto captura del Sistema Informático del Personal Policial (SIPP) para mejor ilustración de lo informado.
-    </div>
-    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
-      Lo expuesto es todo en cuanto informo a usted.
-    </div>
-  `;
-
-  return renderGenericDocument([htmlContent]);
-}
-
-window.seleccionarZonaFoto = function(idZona) {
-  window.zonaFotoSeleccionada = idZona;
-  document.querySelectorAll('.foto-dropzone').forEach(z => z.classList.remove('selected-zone'));
-  const target = document.getElementById(`zone-${idZona}`);
-  if (target) target.classList.add('selected-zone');
-};
-
-window.cargarImagenEnZona = function(idZona, file) {
-  if (!file || !file.type.startsWith('image/')) return;
-  const reader = new FileReader();
-  reader.onload = function(e) {
-    window.fotosCargadas[idZona] = e.target.result;
-    const dropzone = document.getElementById(`zone-${idZona}`);
-    if (dropzone) {
-      const numVista = idZona.replace('foto', '');
-      dropzone.innerHTML = `
-        <img src="${e.target.result}" alt="Foto ${idZona}">
-        <div class="foto-label-tag">VISTA N° ${numVista}</div>
-      `;
-    }
-  };
-  reader.readAsDataURL(file);
-};
-
-window.handleFileSelectFoto = function(event, idZona) {
-  const file = event.target.files[0];
-  if (file) window.cargarImagenEnZona(idZona, file);
-};
-
-window.handleDragOverFoto = function(event) {
-  event.preventDefault(); event.stopPropagation();
-  event.currentTarget.classList.add('dragover');
-};
-
-window.handleDragLeaveFoto = function(event) {
-  event.preventDefault(); event.stopPropagation();
-  event.currentTarget.classList.remove('dragover');
-};
-
-window.handleDropFoto = function(event, idZona) {
-  event.preventDefault(); event.stopPropagation();
-  event.currentTarget.classList.remove('dragover');
-  window.seleccionarZonaFoto(idZona);
-  const files = event.dataTransfer.files;
-  if (files && files.length > 0) window.cargarImagenEnZona(idZona, files[0]);
-};
-
-document.addEventListener('paste', function(event) {
-  const activeTab = document.querySelector('.nav-item-sidebar.active');
-  if (!activeTab || activeTab.getAttribute('data-tab') !== 'tab-fotos') return;
-  const items = (event.clipboardData || event.originalEvent.clipboardData).items;
-  for (let item of items) {
-    if (item.type.indexOf('image') !== -1) {
-      const blob = item.getAsFile();
-      if (window.zonaFotoSeleccionada) window.cargarImagenEnZona(window.zonaFotoSeleccionada, blob);
-      break;
-    }
-  }
-});
-
-window.agregarDiligenciaColDiv = function() {
-  const select = document.getElementById('select-col-div-c');
-  if (!select) return;
-  const valor = select.value;
-  if (valor && !diligenciasColDiv.includes(valor)) {
-    diligenciasColDiv.push(valor);
-    const targetContainer = document.getElementById('col-div-diligencias-list-target');
-    if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
-    actualizarColDivEnVivo();
-  }
-};
-
-window.quitarDiligenciaColDiv = function(index) {
-  diligenciasColDiv.splice(index, 1);
-  const targetContainer = document.getElementById('col-div-diligencias-list-target');
-  if (targetContainer) targetContainer.innerHTML = renderDiligenciasColDivHtml();
-  actualizarColDivEnVivo();
-};
-
-function renderDiligenciasColDivHtml() {
-  return diligenciasColDiv.map((dil, idx) => `
-    <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
-      <span style="font-size: 0.78rem;">${dil}</span>
-      <button class="btn-del-row" onclick="quitarDiligenciaColDiv(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
-    </li>
-  `).join('');
-}
-
-window.actualizarColDivEnVivo = function() {
-  const liveContainer = document.getElementById('col-div-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderColDivA4Content();
-};
-
-function renderColDivA4Content() {
-  const d = getFormValues();
-  let itemsDiligenciasHtml = diligenciasColDiv.map(dil => `<li>${dil} de <b>${d.impNombre || d.cauNombre}</b>.</li>`).join('');
-
-  const htmlContent = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-      REF.: Star. Colaboración<br>
-      ${d.partido || ''}, ${d.fechaRecepcion || ''}
-    </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase;">
-      AL SEÑOR JEFE<br>
-      ${d.colaboracion || ''}
-    </div>
-    <div class="sangria-estandar" style="margin-bottom: 1em;">
-      Me dirijo a usted, a fin de solicitarle en el marco de Actuaciones Sumariales Administrativas en el marco de <b>${d.caratula}</b> en tramite ante <b>${d.intervencion}</b> realizada el <b>${d.fechaHecho}</b>, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:
-    </div>
-    <ul style="padding-left: 1.2cm; line-height: 1.6; text-align: justify; margin: 1em 0; font-size: 10pt;">
-      ${itemsDiligenciasHtml}
-    </ul>
-    <div class="sangria-estandar" style="margin-top: 2em;">
-      Lo expuesto es todo en cuanto solicito a usted.
-    </div>
-  `;
-
-  return renderGenericDocument([htmlContent]);
-}
-
-window.agregarDiligenciaCorre = function() {
-  const select = document.getElementById('select-corre-columna-m');
-  if (!select) return;
-  const valor = select.value;
-  if (valor && !diligenciasCorreAgregado.includes(valor)) {
-    diligenciasCorreAgregado.push(valor);
-    const targetContainer = document.getElementById('corre-diligencias-list-target');
-    if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
-    actualizarCorreEnVivo();
-  }
-};
-
-window.quitarDiligenciaCorre = function(index) {
-  diligenciasCorreAgregado.splice(index, 1);
-  const targetContainer = document.getElementById('corre-diligencias-list-target');
-  if (targetContainer) targetContainer.innerHTML = renderDiligenciasCorreHtml();
-  actualizarCorreEnVivo();
-};
-
-function renderDiligenciasCorreHtml() {
-  return diligenciasCorreAgregado.map((dil, idx) => `
-    <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
-      <span style="font-size: 0.78rem;">${dil}</span>
-      <button class="btn-del-row" onclick="quitarDiligenciaCorre(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
-    </li>
-  `).join('');
-}
-
-window.agregarDestinatarioParte = function() {
-  const select = document.getElementById('select-destinatario-g');
-  if (!select) return;
-  const valor = select.value;
-  if (valor && !destinatariosParteEscrito.includes(valor)) {
-    destinatariosParteEscrito.push(valor);
-    const destContainer = document.getElementById('parte-dest-list-target');
-    if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
-    actualizarParteEnVivo();
-  }
-};
-
-window.quitarDestinatarioParte = function(index) {
-  destinatariosParteEscrito.splice(index, 1);
-  const destContainer = document.getElementById('parte-dest-list-target');
-  if (destContainer) destContainer.innerHTML = renderDestinatariosParteHtml();
-  actualizarParteEnVivo();
-};
-
-function renderDestinatariosParteHtml() {
-  return destinatariosParteEscrito.map((dest, idx) => `
-    <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
-      <span style="font-size: 0.78rem;">${dest}</span>
-      <button class="btn-del-row destinatarios-controls" onclick="quitarDestinatarioParte(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
-    </li>
-  `).join('');
-}
-
-window.actualizarFolioIndice = function(index, valor) {
-  if (indiceItems[index]) indiceItems[index].folio = valor;
-};
-
-window.agregarItemIndice = function() {
-  const select = document.getElementById('select-columna-m');
-  if (!select) return;
-  const valor = select.value;
-  if (valor) {
-    indiceItems.push({ texto: valor, folio: '' });
-    actualizarIndiceEnVivo();
-  }
-};
-
-window.quitarItemIndice = function(index) {
-  indiceItems.splice(index, 1);
-  actualizarIndiceEnVivo();
-};
-
-function renderIndiceDiligenciasListaHtml() {
-  return indiceItems.map((item, idx) => `
-    <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 4px 8px; border-radius: 4px; border: 1px solid #e2e8f0;">
-      <span style="font-size: 0.78rem; font-weight: 600;">${item.texto}</span>
-      <button class="btn-del-row" onclick="quitarItemIndice(${idx})" title="Quitar" style="margin-left: 8px;">✕</button>
-    </li>
-  `).join('');
-}
-
-window.actualizarIndiceEnVivo = function() {
-  const targetContainer = document.getElementById('indice-diligencias-list-target');
-  if (targetContainer) targetContainer.innerHTML = renderIndiceDiligenciasListaHtml();
-  const liveContainer = document.getElementById('indice-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderIndiceA4PagesContent();
-};
-
-function renderIndiceA4PagesContent() {
-  const ITEMS_POR_PAGINA_PRIMERA = 16;
-  const ITEMS_POR_PAGINA_SIGUIENTES = 22;
-
-  let totalItems = indiceItems.length;
-  let itemIndex = 0;
-  let numPagina = 1;
-  let paginasArray = [];
-
-  while (itemIndex < totalItems || totalItems === 0) {
-    let limite = (numPagina === 1) ? ITEMS_POR_PAGINA_PRIMERA : ITEMS_POR_PAGINA_SIGUIENTES;
-    let itemsPagina = indiceItems.slice(itemIndex, itemIndex + limite);
-
-    let rowsIndiceHtml = itemsPagina.map((item, idxAbs) => {
-      let actualIndex = itemIndex + idxAbs;
-      return `
-        <tr>
-          <td>${item.texto}</td>
-          <td style="text-align: center;">
-            <input type="text" class="input-folio" value="${item.folio || ''}" oninput="actualizarFolioIndice(${actualIndex}, this.value)" placeholder="...">
-          </td>
-          <td style="width: 40px; text-align: center;" class="indice-controls">
-            <button class="btn-del-row" onclick="quitarItemIndice(${actualIndex})" title="Quitar">✕</button>
-          </td>
-        </tr>
-      `;
-    }).join('');
-
-    let encabezadoPagina = numPagina === 1 ? `
-      <div style="text-align: center; font-weight: bold; font-size: 18pt; margin-bottom: 1.2em;">ÍNDICE DE DILIGENCIAS ADMINISTRATIVAS</div>
-    ` : '';
-
-    paginasArray.push(`
-      ${encabezadoPagina}
-      <table class="table-oficial">
-        <thead>
-          <tr>
-            <th>DESCRIPCIÓN DE LA DILIGENCIA ADMINISTRATIVA</th>
-            <th style="width: 80px; text-align: center;">Folio/s</th>
-            <th style="width: 40px; text-align: center;" class="indice-controls">Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${rowsIndiceHtml}
-        </tbody>
-      </table>
-    `);
-
-    itemIndex += limite;
-    numPagina++;
-    if (totalItems === 0) break;
-  }
-
-  return renderGenericDocument(paginasArray);
-}
-
-window.agregarParrafoSintesis = function(tipo) {
+window.agregarElementoPruebaImp = function(tipo) {
   if (tipo === 'opcion1') {
-    window.parrafosSintesisPrueba.push({
+    window.autoImpEstado.elementosPrueba.push({
       tipo: 'opcion1',
       foja: '',
-      elemento: listaDesplegableColumnaM[0] || ''
+      opcionColC: listaDiligenciasColumnaC[0] || ''
     });
   } else if (tipo === 'opcion2') {
-    window.parrafosSintesisPrueba.push({
+    window.autoImpEstado.elementosPrueba.push({
       tipo: 'opcion2',
       orden: '',
-      contenido: '',
-      paginas: '',
-      elemento: listaDesplegableColumnaM[0] || ''
+      subitems: [
+        { paginas: '', opcionColC: listaDiligenciasColumnaC[0] || '' }
+      ]
     });
   }
-  actualizarSintesisEnVivo();
+  window.actualizarAutoImpEnVivo();
 };
 
-window.quitarParrafoSintesis = function(index) {
-  window.parrafosSintesisPrueba.splice(index, 1);
-  actualizarSintesisEnVivo();
+window.quitarElementoPruebaImp = function(idx) {
+  window.autoImpEstado.elementosPrueba.splice(idx, 1);
+  window.actualizarAutoImpEnVivo();
 };
 
-window.actualizarCampoParrafoSintesis = function(index, campo, valor) {
-  if (window.parrafosSintesisPrueba[index]) {
-    window.parrafosSintesisPrueba[index][campo] = valor;
-    actualizarSintesisEnVivoOnlyPreview();
+window.actualizarCampoElemPruebaImp = function(idx, campo, val) {
+  if (window.autoImpEstado.elementosPrueba[idx]) {
+    window.autoImpEstado.elementosPrueba[idx][campo] = val;
+    window.actualizarAutoImpEnVivoOnlyPreview();
   }
 };
 
-function actualizarSintesisEnVivo() {
-  const listTarget = document.getElementById('sintesis-parrafos-list-target');
-  if (listTarget) listTarget.innerHTML = renderListaControlSintesisHtml();
-  const liveContainer = document.getElementById('sintesis-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
+window.agregarSubItemOpcion2Imp = function(elemIdx) {
+  if (window.autoImpEstado.elementosPrueba[elemIdx]) {
+    window.autoImpEstado.elementosPrueba[elemIdx].subitems.push({
+      paginas: '',
+      opcionColC: listaDiligenciasColumnaC[0] || ''
+    });
+    window.actualizarAutoImpEnVivo();
+  }
+};
+
+window.quitarSubItemOpcion2Imp = function(elemIdx, subIdx) {
+  if (window.autoImpEstado.elementosPrueba[elemIdx]) {
+    window.autoImpEstado.elementosPrueba[elemIdx].subitems.splice(subIdx, 1);
+    window.actualizarAutoImpEnVivo();
+  }
+};
+
+window.actualizarSubItemOpcion2Imp = function(elemIdx, subIdx, campo, val) {
+  if (window.autoImpEstado.elementosPrueba[elemIdx] && window.autoImpEstado.elementosPrueba[elemIdx].subitems[subIdx]) {
+    window.autoImpEstado.elementosPrueba[elemIdx].subitems[subIdx][campo] = val;
+    window.actualizarAutoImpEnVivoOnlyPreview();
+  }
+};
+
+function actualizarAutoImpEnVivo() {
+  const formTarget = document.getElementById('auto-imp-elem-list-target');
+  if (formTarget) formTarget.innerHTML = renderListaControlAutoImpElemHtml();
+  const liveContainer = document.getElementById('auto-imp-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderAutoImputacionA4Content();
 }
 
-function actualizarSintesisEnVivoOnlyPreview() {
-  const liveContainer = document.getElementById('sintesis-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderSintesisConclusionesA4Content();
+function actualizarAutoImpEnVivoOnlyPreview() {
+  const liveContainer = document.getElementById('auto-imp-live-preview-target');
+  if (liveContainer) liveContainer.innerHTML = renderAutoImputacionA4Content();
 }
 
-function renderListaControlSintesisHtml() {
-  return window.parrafosSintesisPrueba.map((p, idx) => {
-    let optionsHtml = listaDesplegableColumnaM.map(opt => `<option value="${opt}" ${opt === p.elemento ? 'selected' : ''}>${opt}</option>`).join('');
+function renderListaControlAutoImpElemHtml() {
+  return window.autoImpEstado.elementosPrueba.map((elem, idx) => {
+    let optionsColCHtml = listaDiligenciasColumnaC.map(opt => `<option value="${opt}" ${opt === elem.opcionColC ? 'selected' : ''}>${opt}</option>`).join('');
 
-    if (p.tipo === 'opcion1') {
+    if (elem.tipo === 'opcion1') {
       return `
         <div class="item-parrafo-card">
           <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.78rem; color: #0284c7;">
-            <span>📌 PÁRRAFO OPCIÓN 1 (Fs. xx)</span>
-            <button class="btn-del-row" onclick="quitarParrafoSintesis(${idx})">✕</button>
+            <span>📌 OPCIÓN 1 (Que a Fs. xx, luce...)</span>
+            <button class="btn-del-row" onclick="quitarElementoPruebaImp(${idx})">✕</button>
           </div>
           <div style="display: flex; gap: 6px; align-items: center;">
             <label style="font-size:0.7rem; font-weight:bold;">Foja/s (xx):</label>
-            <input type="text" value="${p.foja}" oninput="actualizarCampoParrafoSintesis(${idx}, 'foja', this.value)" placeholder="Ej: 26/26 vta" style="flex:1; padding:3px 6px; font-size:0.8rem;">
+            <input type="text" value="${elem.foja || ''}" oninput="actualizarCampoElemPruebaImp(${idx}, 'foja', this.value)" placeholder="Ej: 01/01vta" style="flex:1; padding:3px 6px; font-size:0.8rem;">
           </div>
           <div>
-            <label style="font-size:0.7rem; font-weight:bold;">Elemento (yy):</label>
-            <select onchange="actualizarCampoParrafoSintesis(${idx}, 'elemento', this.value)" style="width:100%; padding:3px 6px; font-size:0.78rem; margin-top:2px;">
-              ${optionsHtml}
+            <label style="font-size:0.7rem; font-weight:bold;">Opción (Columna C):</label>
+            <select onchange="actualizarCampoElemPruebaImp(${idx}, 'opcionColC', this.value)" style="width:100%; padding:3px 6px; font-size:0.78rem; margin-top:2px;">
+              ${optionsColCHtml}
             </select>
           </div>
         </div>
       `;
     } else {
+      let subitemsHtml = elem.subitems.map((sub, sIdx) => {
+        let optionsSubHtml = listaDiligenciasColumnaC.map(opt => `<option value="${opt}" ${opt === sub.opcionColC ? 'selected' : ''}>${opt}</option>`).join('');
+        return `
+          <div style="background: #fff; padding: 6px; border: 1px dashed #cbd5e1; border-radius: 4px; margin-top: 4px; display: flex; flex-direction: column; gap: 4px;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size:0.68rem; font-weight:bold; color:#475569;">Sub-item ${sIdx + 1}</span>
+              <button class="btn-del-row" onclick="quitarSubItemOpcion2Imp(${idx}, ${sIdx})" style="padding:1px 4px; font-size:0.68rem;">✕</button>
+            </div>
+            <div style="display: flex; gap: 4px; align-items: center;">
+              <label style="font-size:0.68rem; font-weight:bold;">Página/s:</label>
+              <input type="text" value="${sub.paginas || ''}" oninput="actualizarSubItemOpcion2Imp(${idx}, ${sIdx}, 'paginas', this.value)" placeholder="Ej: 02/03" style="flex:1; padding:2px 4px; font-size:0.75rem;">
+            </div>
+            <select onchange="actualizarSubItemOpcion2Imp(${idx}, ${sIdx}, 'opcionColC', this.value)" style="width:100%; padding:2px 4px; font-size:0.75rem;">
+              ${optionsSubHtml}
+            </select>
+          </div>
+        `;
+      }).join('');
+
       return `
         <div class="item-parrafo-card">
           <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold; font-size: 0.78rem; color: #0369a1;">
-            <span>📌 PÁRRAFO OPCIÓN 2 (Orden xx)</span>
-            <button class="btn-del-row" onclick="quitarParrafoSintesis(${idx})">✕</button>
+            <span>📌 OPCIÓN 2 (Que, a Orden xx conteniendo:...)</span>
+            <button class="btn-del-row" onclick="quitarElementoPruebaImp(${idx})">✕</button>
           </div>
           <div style="display: flex; gap: 6px; align-items: center;">
             <label style="font-size:0.7rem; font-weight:bold;">Orden (xx):</label>
-            <input type="text" value="${p.orden}" oninput="actualizarCampoParrafoSintesis(${idx}, 'orden', this.value)" placeholder="Ej: SIETE (7)" style="flex:1; padding:3px 6px; font-size:0.8rem;">
+            <input type="text" value="${elem.orden || ''}" oninput="actualizarCampoElemPruebaImp(${idx}, 'orden', this.value)" placeholder="Ej: 03 obra IF-2024..." style="flex:1; padding:3px 6px; font-size:0.8rem;">
           </div>
-          <div>
-            <label style="font-size:0.7rem; font-weight:bold;">Contenido (yy):</label>
-            <input type="text" value="${p.contenido}" oninput="actualizarCampoParrafoSintesis(${idx}, 'contenido', this.value)" placeholder="Ej: cumple funciones de..." style="width:100%; padding:3px 6px; font-size:0.8rem; margin-top:2px;">
-          </div>
-          <div style="display: flex; gap: 6px; align-items: center;">
-            <label style="font-size:0.7rem; font-weight:bold;">Página/s (zz):</label>
-            <input type="text" value="${p.paginas}" oninput="actualizarCampoParrafoSintesis(${idx}, 'paginas', this.value)" placeholder="Ej: 12 a 15" style="flex:1; padding:3px 6px; font-size:0.8rem;">
-          </div>
-          <div>
-            <label style="font-size:0.7rem; font-weight:bold;">Elemento (ww):</label>
-            <select onchange="actualizarCampoParrafoSintesis(${idx}, 'elemento', this.value)" style="width:100%; padding:3px 6px; font-size:0.78rem; margin-top:2px;">
-              ${optionsHtml}
-            </select>
+          <div style="margin-top: 4px;">
+            <label style="font-size:0.7rem; font-weight:bold; color:#0369a1;">Páginas y opciones concatenadas con (;):</label>
+            ${subitemsHtml}
+            <button class="btn-secondary" onclick="agregarSubItemOpcion2Imp(${idx})" style="margin-top: 6px; font-size: 0.7rem; padding: 2px 6px; width: 100%;">➕ Agregar Sub-página</button>
           </div>
         </div>
       `;
@@ -1946,650 +1599,199 @@ function renderListaControlSintesisHtml() {
   }).join('');
 }
 
-/* Funciones auxiliares STAR VALOR ARANCELARIO REPOSICIÓN */
-window.agregarElementoValorArancelario = function() {
-  const num = document.getElementById('va_num_input').value;
-  const letras = document.getElementById('va_letras_input').value;
-  const desc = document.getElementById('va_desc_input').value;
-
-  if (!num || !letras || !desc) {
-    alert("Complete los campos requeridos.");
-    return;
-  }
-
-  window.elementosValorArancelario.push({
-    num: num.trim(),
-    letras: letras.trim(),
-    desc: desc.trim()
-  });
-
-  document.getElementById('va_num_input').value = '';
-  document.getElementById('va_letras_input').value = '';
-  document.getElementById('va_desc_input').value = '';
-
-  actualizarValorArancelarioEnVivo();
-};
-
-window.quitarElementoValorArancelario = function(idx) {
-  window.elementosValorArancelario.splice(idx, 1);
-  actualizarValorArancelarioEnVivo();
-};
-
-window.actualizarCampoValorArancelario = function(idx, campo, val) {
-  if (window.elementosValorArancelario[idx]) {
-    if (campo === 'num') val = val.replace(/[^0-9]/g, '');
-    window.elementosValorArancelario[idx][campo] = val;
-    const liveContainer = document.getElementById('arancelario-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderStarValorArancelarioA4Content();
-  }
-};
-
-function actualizarValorArancelarioEnVivo() {
-  const target = document.getElementById('arancelario-list-target');
-  if (target) {
-    target.innerHTML = window.elementosValorArancelario.map((item, idx) => `
-      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
-        <div><b>${item.num} (${item.desc})</b> - ${item.letras}</div>
-        <button class="btn-del-row" onclick="quitarElementoValorArancelario(${idx})">✕</button>
-      </li>
-    `).join('');
-  }
-  const liveContainer = document.getElementById('arancelario-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderStarValorArancelarioA4Content();
-}
-
-/* Funciones auxiliares STAR. INF. HISTORIAL DE AVL */
-window.agregarItemHistorialAvl = function() {
-  const txt = document.getElementById('avl_item_input').value.trim();
-  if (!txt) return;
-  window.itemsHistorialAvl.push(txt);
-  document.getElementById('avl_item_input').value = '';
-  actualizarAvlEnVivo();
-};
-
-window.quitarItemHistorialAvl = function(idx) {
-  window.itemsHistorialAvl.splice(idx, 1);
-  actualizarAvlEnVivo();
-};
-
-window.actualizarCampoAvlItem = function(idx, val) {
-  if (window.itemsHistorialAvl[idx] !== undefined) {
-    window.itemsHistorialAvl[idx] = val;
-    const liveContainer = document.getElementById('avl-live-preview-target');
-    if (liveContainer) liveContainer.innerHTML = renderStarHistorialAvlA4Content();
-  }
-};
-
-window.actualizarHorasAvl = function() {
-  window.horaDesdeAvl = document.getElementById('avl_hora_desde').value;
-  window.horaHastaAvl = document.getElementById('avl_hora_hasta').value;
-  const liveContainer = document.getElementById('avl-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderStarHistorialAvlA4Content();
-};
-
-function actualizarAvlEnVivo() {
-  const target = document.getElementById('avl-list-target');
-  if (target) {
-    target.innerHTML = window.itemsHistorialAvl.map((item, idx) => `
-      <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
-        <span style="flex:1;">• ${item}</span>
-        <button class="btn-del-row" onclick="quitarItemHistorialAvl(${idx})">✕</button>
-      </li>
-    `).join('');
-  }
-  const liveContainer = document.getElementById('avl-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderStarHistorialAvlA4Content();
-}
-
-window.actualizarActaEnVivo = function() {
-  const liveContainer = document.getElementById('acta-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderActaA4Content();
-};
-
-window.actualizarTestimonialEnVivo = function() {
-  const liveContainer = document.getElementById('testimonial-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderTestimonialA4Content();
-};
-
-window.actualizarInspeccionEnVivo = function() {
-  const liveContainer = document.getElementById('inspeccion-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderInspeccionA4Content();
-};
-
-window.actualizarParteEnVivo = function() {
-  const liveContainer = document.getElementById('parte-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderParteA4Content();
-};
-
-window.actualizarCorreEnVivo = function() {
-  const liveContainer = document.getElementById('corre-live-preview-target');
-  if (liveContainer) liveContainer.innerHTML = renderCorreA4Content();
-};
-
-window.actualizarCroquisUbicacion = function() {
-  const inputBuscar = document.getElementById('f_croquis_search_input');
-  const iframeMap = document.getElementById('f_croquis_map_iframe');
-  if (inputBuscar && iframeMap) {
-    const query = inputBuscar.value.trim();
-    if (query) iframeMap.src = `https://maps.google.com/maps?q=${encodeURIComponent(query)}&t=&z=16&ie=UTF8&iwloc=&output=embed`;
-  }
-};
-
-window.abrirGoogleMapsManual = function() {
-  const inputBuscar = document.getElementById('f_croquis_search_input');
-  let query = inputBuscar && inputBuscar.value.trim() ? inputBuscar.value.trim() : `${getFormValues().lugarHecho} y ${getFormValues().ec1}, ${getFormValues().hechoLoc}, ${getFormValues().hechoPartido}`;
-  window.open(`https://www.google.com/maps/search/${encodeURIComponent(query)}`, '_blank');
-};
-
-window.agregarRegistroLEP = function() {
-  const select = document.getElementById('select-lep-personas');
-  if (!select) return;
-  const valor = select.value;
-  if (!window.registrosSeleccionadosLEP) window.registrosSeleccionadosLEP = [];
-  if (valor && !window.registrosSeleccionadosLEP.includes(valor)) {
-    window.registrosSeleccionadosLEP.push(valor);
-    window.actualizarVistaLEP();
-  }
-};
-
-window.quitarRegistroLEP = function(tipo) {
-  if (window.registrosSeleccionadosLEP) {
-    window.registrosSeleccionadosLEP = window.registrosSeleccionadosLEP.filter(r => r !== tipo);
-    window.actualizarVistaLEP();
-  }
-};
-
-window.actualizarVistaLEP = function() {
-  const container = document.getElementById('doc-preview-wrapper-container');
-  if (container) container.innerHTML = renderDocumentTemplate('tab-lep');
-};
-
-/* ==========================================================================
-   6. RENDERIZADORES CON MOTOR DOM Y MÁRGENES REFLEJADOS
-   ========================================================================== */
-function renderCorreA4Content() {
+/* RENDERIZADO DEL CONTENIDO A4 DEL AUTO DE IMPUTACIÓN */
+function renderAutoImputacionA4Content() {
   const d = getFormValues();
-  let itemsDiligenciasHtml = diligenciasCorreAgregado.map(dil => `<li>${dil}</li>`).join('');
+  const st = window.autoImpEstado;
 
-  const pageContent = `
-    <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">
-      Corresponde a expediente ${d.caratula}
-    </div>
-    <div class="sangria-cero" style="margin-top: 1.5em; margin-bottom: 1.2em;">
-      <b>SEÑOR INSTRUCTOR:</b>
-    </div>
-    <div class="sangria-estandar" style="margin-bottom: 1.2em;">
-      Se agrega a continuación, a la presente pieza administrativa las siguientes diligencias que más abajo se detallan:
-    </div>
-    <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6;">
-      ${itemsDiligenciasHtml}
-    </ul>
-    <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 2.5em;">
-      Lo expuesto es todo en cuanto agrego a la presente. CONSTE.
-    </div>
-    <div style="text-align: left; font-weight: bold; margin-top: 2em;">
-      ${d.dependencia}, a los ${d.fechaRecepcion}
-    </div>
-  `;
+  // Lógica Sexta Línea (fórmula estricta requerida)
+  let textoVisto = "VISTO: El presente Expediente";
+  if (d.exp && d.exp.trim() !== "") textoVisto += " " + d.exp.trim();
+  if (d.encuadre && d.encuadre.trim() !== "") textoVisto += " " + d.encuadre.trim();
+  if (d.caratula && d.caratula.trim() !== "") textoVisto += ", caratulado: " + d.caratula.trim();
 
-  return renderGenericDocument([pageContent]);
-}
-
-function renderActaA4Content() {
-  const d = getFormValues();
-  const titleHeader = '<div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 1.5em; text-transform: uppercase;">ACTA DE CONSTATACIÓN</div>';
-
-  const textoCompleto = "En la localidad de " + d.localidad + 
-    ", partido de " + d.partido + 
-    ", provincia de Buenos Aires, República Argentina, en el asiento físico de la " + d.dependencia + 
-    ", sita en " + d.direccion + 
-    ", entre calle " + d.entre1 + 
-    " del mismo medio, a los " + d.fechaRecepcion + 
-    ", siendo las " + d.horaHecho + 
-    " horas, el suscripto " + d.instructor + 
-    " (" + d.cargoInstructor + 
-    ") , secundado por el " + d.secretario + 
-    " (" + d.cargoSecretario + 
-    "), ambos numerarios de " + d.dependencia + 
-    " y conocedores de las penas con que la Ley castiga el Falso Testimonio y Denunciante. " + (d.actaRelato || '') + 
-    ". No siendo para más se da por finalizado el acto, previa e integra lectura que de por si se da de la presente, es firmada y ratificada al pie por todos los que en ella hemos intervenido para legal constancia de lo actuado.";
-
-  return paginateTextContent(titleHeader, textoCompleto, 'sangria-cero');
-}
-
-function renderTestimonialA4Content() {
-  const d = getFormValues();
-  const titleHeader = '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">DECLARACIÓN TESTIMONIAL</div>';
-
-  const textoFormulaHtml = "En la localidad de <b>" + (d.localidad || '') + 
-    "</b>, partido de <b>" + (d.partido || '') + 
-    "</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>" + (d.dependencia || '') + 
-    "</b>, sita en <b>" + (d.direccion || '') + 
-    "</b>, entre calle <b>" + (d.entre1 || '') + 
-    "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
-    "</b>, siendo las <b>" + (d.horaHecho || '') + 
-    "</b> horas, comparece ante el actuante y testigo de actuación, una persona previamente citada a los efectos de recibirle declaración Testimonial, a quien seguidamente se lo ENTERA Y NOTIFICA del contenido del Decreto Reglamentario 1050/09 de la Ley 13982; contenidos en el artículo 190 inc. “d”: “Son Faltas graves de competencia originaria de la Auditoría General de Asuntos Internos: las que dan lugar a sanción de exoneración, cesantía o suspensión del empleo sin goce de haberes de hasta sesenta (60) días, aplicables por resolución fundada en el marco de una investigación sumarial administrativa.”, y artículo 205 inciso “k” del mismo texto legal que reza: “Son faltas graves, que constituyen abuso funcional con intervención originaria de la Auditoría General de Asuntos Internos”, inciso “k”, que reza: “Afirmar una falsedad, negar o callar la verdad en todo o en parte, se relacione o no con actos del servicio, en las declaraciones, informes, diagnósticos, traducciones o interpretaciones que se presten como testigo, perito, intérprete del instructor o en cualquier otro carácter, cuando ello pudiera importar un perjudicio para terceros o para la administración de justicia, o en un proceso administrativo o actuación administrativa. Asimismo, se lo pone en conocimiento del contenido del artículo 100 y 218 del Código Procesal Penal de la provincia de Buenos aires, que comprende y por ello bajo juramento o promesa de decir la verdad, manifiesta que se producirá en todo cuanto supiere, conociere y le fuera preguntado, de acuerdo con sus creencias o convicciones cívicas, con total veracidad, mediante la fórmula: “LO JURO”. Seguidamente se lo pone en conocimiento del contenido del artículo 275 y 276 del Código Penal de La Nación, donde se castiga el “Falso Testimonio”. Seguidamente conforme lo established en el artículo 240 del Código Procesal Penal de la Provincia de Buenos Aires, se le es preguntado por sus nombres, apellidos y demás circunstancias personales, manifestando ser y llamarse: <b>" + (d.denNombre || '') + 
-    "</b>, de <b>" + (d.denEdad || '') + 
-    "</b> años de edad, nacionalidad <b>" + (d.denNacionalidad || 'ARGENTINA') + 
-    "</b>, estado civil <b>" + (d.denEstCivil || 'SOLTERO') + 
-    "</b>, profesión u ocupación <b>" + (d.denProfesion || 'EMPLEADO POLICIAL') + 
-    "</b>, instruido, domicilio en calle <b>" + (d.denDomicilio || '') + 
-    "</b>, entre calle <b>" + (d.denEntreCalles || '') + 
-    "</b> y <b>" + (d.denEntreCalles2 || '') + 
-    "</b> del mismo medio, Documento Nacional de Identidad Nº <b>" + (d.denDni || '') + 
-    "</b>, que si exhibe, que si repite de memoria y que si retiene para sí en este acto. Acto seguido se le es preguntado para que exprese si se encuentra comprendido en lo tipificado en el Código Procesal Penal de la Provincia de Buenos Aires en artículo 234. 'prohibición de declarar', artículo 235. 'facultad de Abstención', por encontrarse comprendido en algún grado de parentesco y artículo 236. 'deber de Abstención' por su estado oficio o profesión del secreto profesional, NO ENCONTRARSE COMPRENDIDO EN NINGUNA DE DICHAS CAUSALES NI POSEER INTERÉS DIRECTO O INDIRECTO EN LA PRESENTE CAUSA. En consecuencia y acorde a lo normado en el artículo 101 del Código Procesal Penal de la provincia de Buenos Aires. SEGUIDAMENTE INTERROGADO SOBRE LOS HECHOS QUE SE INVESTIGAN Y INVITADO A QUE EXPONGA, DECLARA: Que, resulta ser empleado de la Policía de la Provincia de Buenos Aires, ostentando en la actualidad la jerarquía de <b>" + (d.denJerarquia || '') + 
-    "</b>, del escalafón <b>" + (d.denEscalafon || '') + 
-    "</b>, legajo personal N° <b>" + (d.denLegajo || '') + 
-    "</b>, cumpliendo en la actualidad sus servicios en el <b>" + (d.denServicioLugar || '') + 
-    "</b>, como <b>" + (d.denFuncion || '') + 
-    "</b>. En la fecha, se hace presente a los fines de prestar declaración testimonial en <b>" + (d.encuadre || d.caratula || '') + 
-    "</b>, caratulado <b>" + (d.caratula || '') + 
-    "</b>, donde se analiza la conducta del <b>" + (d.cauNombre || d.impNombre || '') + 
-    "</b> de la <b>" + (d.cauDestino || d.impDestino || '') + 
-    "</b>, en trámite ante <b>" + (d.intervencion || '') + 
-    "</b>, incoadas el <b>" + (d.fechaHecho || '') + 
-    "</b>. En esa inteligencia relata: <span style='font-weight: normal;'>" + (d.testimonialRelato || '') + 
-    "</span>. Es todo cuanto declara al respecto. Por lo que no siendo para más el acto, previa e integra lectura que da por sí y no teniendo nada que quitar, tachar, corregir y/o enmendar, ratifica de todo su contenido, firmando al pie para constancia ante el suscripto que certifica todo lo actuado.";
-
-  return paginateTextContent(titleHeader, textoFormulaHtml, 'sangria-cero');
-}
-
-function renderParteA4Content() {
-  const d = getFormValues();
-  let destHtml = destinatariosParteEscrito.map(dest => `<b>${dest}</b>`).join('<br>');
-
-  let parrafo1 = construirParrafoSumarial("Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas", ".", d, { useBold: false });
-
-  let parrafo2 = "SINTESIS DEL HECHO: Los presentes actuados tienen su génesis en " + (d.fechaHecho || '') + ", siendo las " + (d.horaHecho || '') + ", cuando se toma conocimiento que " + (d.sintesis || '') + ".";
-  let parrafo3 = "Atento a lo narrado se labran Actuaciones conforme al Decreto 1050/09 Reglamentario de la Ley del Personal 13982.";
-  let parrafo4 = "Lo expuesto, es todo en cuanto informo a usted.";
-
-  const estiloParrafo = "text-align: justify; text-justify: inter-word; text-indent: 1.15cm; line-height: 1.5; margin-bottom: 1em; font-size: 10.5pt;";
-
-  const pageContent = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 1.5em;">
-      REF.: Ccar. Inicio de Actuaciones Sumariales Administrativas (A.S.A.)<br>
-      ${d.partido || ''}, ${d.fechaRecepcion || ''}
-    </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-size: 10pt; line-height: 1.4;">
-      ${destHtml}
-    </div>
-    <div style="${estiloParrafo}">${parrafo1}</div>
-    <div style="${estiloParrafo}">${parrafo2}</div>
-    <div style="${estiloParrafo}">${parrafo3}</div>
-    <div style="${estiloParrafo}">${parrafo4}</div>
-  `;
-
-  return renderGenericDocument([pageContent]);
-}
-
-function renderInspeccionA4Content() {
-  const d = getFormValues();
-  const titleHeader = '<div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1.2em; text-transform: uppercase;">ACTA DE INSPECCIÓN OCULAR</div>';
-
-  let textoBloqueEC1 = "";
-  if (d.ec1 && d.ec1.trim() !== "") {
-    textoBloqueEC1 = " Que, la arteria <b>" + d.ec1 + 
-      "</b>, resulta ser de <b>" + (d.art2Tipo || '') + 
-      "</b> en <b>" + (d.art2Estado || '') + 
-      "</b> estado de conservación, circulación vehicular de <b>" + (d.art2Mano || '') + 
-      "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial.";
+  if (d.denNombre && d.denNombre.trim() !== "") {
+    let denDest = d.denDestino && d.denDestino.trim() !== "" ? " (" + d.denDestino.trim() + ")" : "";
+    textoVisto += ", donde resulta denunciante: " + d.denNombre.trim() + denDest;
+  }
+  if (d.vicNombre && d.vicNombre.trim() !== "") {
+    let vicDest = d.vicDestino && d.vicDestino.trim() !== "" ? " (" + d.vicDestino.trim() + ")" : "";
+    textoVisto += ", víctima: " + d.vicNombre.trim() + vicDest;
+  }
+  if (d.cauNombre && d.cauNombre.trim() !== "") {
+    let cauDest = d.cauDestino && d.cauDestino.trim() !== "" ? " (" + d.cauDestino.trim() + ")" : "";
+    textoVisto += ", causante: " + d.cauNombre.trim() + cauDest;
+  }
+  if (d.impNombre && d.impNombre.trim() !== "") {
+    let impDest = d.impDestino && d.impDestino.trim() !== "" ? " (" + d.impDestino.trim() + ")" : "";
+    textoVisto += ", imputado: " + d.impNombre.trim() + impDest;
   }
 
-  let textoBloqueEC2 = "";
-  if (d.ec2 && d.ec2.trim() !== "") {
-    textoBloqueEC2 = " Que, la arteria <b>" + d.ec2 + 
-      "</b>, resulta ser de <b>" + (d.art3Tipo || '') + 
-      "</b> en <b>" + (d.art3Estado || '') + 
-      "</b> estado de conservación, circulación vehicular de <b>" + (d.art3Mano || '') + 
-      "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial. No existiendo en el lugar semáforos, si existiendo señales de tránsito.";
+  if (!d.intervencion || d.intervencion.trim() === "") {
+    textoVisto += ".";
+  } else {
+    textoVisto += ", con intervención de " + d.intervencion.trim() + ".";
   }
 
-  const textoFormulaHtml = "En la localidad de <b>" + (d.localidad || '') + 
-    "</b>, partido de <b>" + (d.partido || '') + 
-    "</b>, provincia de Buenos Aires, República Argentina, en el asiento físico de la <b>" + (d.dependencia || '') + 
-    "</b>, sita en <b>" + (d.direccion || '') + 
-    "</b>, entre calle <b>" + (d.entre1 || '') + 
-    "</b> y <b>" + (d.entre2 || '') + 
-    "</b> del mismo medio, a los <b>" + (d.fechaRecepcion || '') + 
-    "</b>, siendo las <b>" + (d.horaHecho || '') + 
-    "</b> horas, el suscripto <b>" + (d.instructor || '') + 
-    "</b> (<b>" + (d.cargoInstructor || '') + 
-    "</b>) , secundado por el <b>" + (d.secretario || '') + 
-    "</b> (<b>" + (d.cargoSecretario || '') + 
-    "</b>), ambos numerarios de <b>" + (d.dependencia || '') + 
-    "</b> y conocedores de las penas con que la Ley castiga el Falso Testimonio. Por orden de la superioridad en relación a Actuaciones Sumariales Administrativas <b>" + (d.encuadre || d.caratula || '') + 
-    "</b> caratuladas <b>" + (d.caratula || '') + 
-    "</b>, donde resultó víctima <b>" + (d.vicNombre || d.cauNombre || '') + 
-    "</b>, numerario de <b>" + (d.vicDestino || d.cauDestino || '') + 
-    "</b>, en trámite ante <b>" + (d.dependencia || '') + 
-    "</b>, nos constituimos en <b>" + (d.lugarHecho || '') + 
-    "</b>, entre <b>" + (d.ec1 || '') + 
-    "</b> y <b>" + (d.ec2 || '') + 
-    "</b>, localidad <b>" + (d.hechoLoc || d.localidad || '') + 
-    "</b> y partido <b>" + (d.hechoPartido || d.partido || '') + 
-    "</b>, lugar donde se dice que ocurrieron los hechos que dieran origen a la formación de las presentes actuaciones, fines de dar cumplimiento a diligencia Inspección Ocular en donde arribó a las siguientes CONCLUSIONES: Que la zona resulta ser zona urbana, poblada con viviendas en su mayoría de una planta y de dos plantas, gozando con todos los adelantos de la época actual (gas natural, red cloacal, agua corriente, luz eléctrica, red telefónica). Que, la arteria <b>" + (d.lugarHecho || '') + 
-    "</b>, que resulta ser de <b>" + (d.art1Tipo || '') + 
-    "</b> en <b>" + (d.art1Estado || '') + 
-    "</b> estado de conservación, circulación vehicular de <b>" + (d.art1Mano || '') + 
-    "</b> mano, con una concurrencia de personas y vehículos particulares de forma muy fluida decayendo en horario nocturno y casi nulo en horas de la madrugada, encontrándose señalizada y contando con una correcta iluminación artificial, no existiendo en el lugar semáforos, si existiendo señales de tránsito." + 
-    textoBloqueEC1 + 
-    textoBloqueEC2 + 
-    " No habiendo más diligencias que realizar en el lugar, procedemos a llevar a cabo apuntes para la posterior confección de un croquis ilustrativo sin escalas y por razones de comodidad y medios nos trasladamos hasta el asiento físico de la división, lugar donde se labra la presente acta, la que una vez finalizada, previa e íntegra lectura de la misma en voz alta, la que es ratificada y firmada al pie para constancia de todo lo actuado.";
-
-  return paginateTextContent(titleHeader, textoFormulaHtml, 'sangria-cero');
-}
-
-function renderSintesisConclusionesA4Content() {
-  const d = getFormValues();
-
-  let parrafo1 = "Me dirijo a usted afines de de adjuntar y elevar Actuaciones Sumariales Administrativas (A.S.A.) en el marco de" + construirParrafoSumarial("", ".", d, { useBold: false }).substring(61);
-
-  let parrafosPruebaHtml = window.parrafosSintesisPrueba.map(p => {
-    if (p.tipo === 'opcion1') {
-      let fojaText = p.foja ? p.foja : 'xx';
-      let elemText = p.elemento ? p.elemento : 'yy';
-      return `<div class="sangria-estandar" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5;">Que a Fs. <b>${fojaText}</b>, luce <b>${elemText}</b>.</div>`;
-    } else {
-      let ordenText = p.orden ? p.orden : 'xx';
-      let contText = p.contenido ? p.contenido : 'yy';
-      let pagText = p.paginas ? p.paginas : 'zz';
-      let elemText = p.elemento ? p.elemento : 'ww';
-      return `<div class="sangria-estandar" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5;">Que a Orden <b>${ordenText}</b>, luce <b>${contText}</b>, que contiene: a página/s <b>${pagText}</b>, <b>${elemText}</b>;</div>`;
+  // Renderizado dinámico de elementos de prueba
+  let elementosPruebaHtml = st.elementosPrueba.map(elem => {
+    if (elem.tipo === 'opcion1') {
+      let f = elem.foja ? elem.foja.trim() : '';
+      let op = elem.opcionColC ? elem.opcionColC.trim() : '';
+      return `<p class="sangria-imputacion">Que a Fs. ${f}, luce ${op}.</p>`;
+    } else if (elem.tipo === 'opcion2') {
+      let ord = elem.orden ? elem.orden.trim() : '';
+      let subStr = elem.subitems.map(sub => {
+        let p = sub.paginas ? sub.paginas.trim() : '';
+        let op = sub.opcionColC ? sub.opcionColC.trim() : '';
+        return `A páginas ${p} obra ${op}`;
+      }).join('; ');
+      return `<p class="sangria-imputacion">Que, a Orden ${ord} conteniendo: ${subStr};</p>`;
     }
+    return '';
   }).join('');
 
   const page1Content = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-      REF.: Evar. Actuaciones Administrativa con Síntesis y Conclusiones<br>${d.partido || ''}, ${d.fechaRecepcion || ''}
+    <div style="text-align: left; font-size: 10pt; margin-bottom: 0.8em;">
+      Corresponde a expediente ${d.caratula || ''}
     </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-      AL SEÑOR COORDINADOR<br>DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO
+    <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 0.2em; text-transform: uppercase;">
+      AUTO DE IMPUTACIÓN ADMINISTRATIVO
     </div>
-    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-      ${parrafo1}
+    <div style="text-align: center; font-size: 10pt; margin-bottom: 1.2em;">
+      (Conf. artículo 288 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982)
     </div>
-    <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">1. SÍNTESIS DEL HECHO:</div>
-    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-      ${d.sintesis || 'se tomó conocimiento a través de la guardia de prevención sobre el siniestro vial acaecido, labrándose las actuaciones de rigor.'}
+    <div style="height: 1.2em;"></div>
+    <div style="text-align: left; font-size: 10pt; margin-bottom: 1.2em;">
+      ${d.dependencia || ''}, ${st.i1_fechaAuto || ''}
     </div>
-    <div class="sangria-cero" style="font-weight: bold; margin-top: 1.5em; margin-bottom: 0.5em;">2. ELEMENTOS DE PRUEBA</div>
-    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 0.8em;">
-      Se fundamenta el administrativo en los siguientes elementos de juicio recolectados y definitivamente incorporados al legajo hasta la fecha:
+
+    <p class="sangria-imputacion">${textoVisto}</p>
+
+    <p class="sangria-imputacion">
+      Las presentes Actuaciones Sumariales Administrativa tienen su génesis el ${d.fechaHecho || ''}, siendo las ${d.horaHecho || ''} horas. ${st.h8_sintesisHecho || ''}
+    </p>
+
+    <p class="sangria-imputacion">
+      De lo actuado hasta el momento en las presentes Actuaciones Sumariales Administrativas, teniendo en cuenta los elementos probatorios reunidos hasta esta instancia, respecto si hay falta administrativa en cuanto a la conducta del sumariado, el instructor sumarial estima que se encuentra prueba suficiente para tener por acreditada la falta disciplinaria normada en el La actitud precedentemente reseñada conforme el encuadramiento legal en el Estatuto de Personal, previsto como FALTA GRAVE en el ARTÍCULO 190 INCISO “C” DEL DECRETO 1050/09 REGLAMENTARIO DE LA LEY DEL PERSONAL 13982, que reza: “De acuerdo a lo estipulado en el artículo 55 de la “Ley de Personal”, las faltas se clasifican en el: inc. c) Faltas graves: las que dan lugar a suspensión del empleo sin goce de haberes de hasta cuarenta y cinco (45) días, aplicables mediante resolución en actuaciones sumariales administrativas, dictada por el Comisario General a cargo de la Policía a la que pertenece el infractor.
+    </p>
+
+    <p class="sangria-imputacion">
+      En tanto que el accionar descripto tiene adecuación típica en la figura del artículo ${st.i3_encuadre || ''}, cuyo texto legal dice: ${st.h5_contenidoArt || ''}.
+    </p>
+
+    <div style="height: 1.2em;"></div>
+
+    <p class="sangria-imputacion">
+      Se funda el llamamiento a prestar descargo administrativo como imputado, en los siguientes elementos de juicio recolectados y definitivamente incorporados al legajo hasta la fecha:
+    </p>
+
+    ${elementosPruebaHtml}
+
+    <div style="height: 1.2em;"></div>
+
+    <div style="text-align: left; font-weight: bold; font-size: 10pt; margin-bottom: 0.5em;">
+      FUNDAMENTO DISCIPLINARIO
     </div>
-    ${parrafosPruebaHtml}
+
+    <p class="sangria-imputacion">
+      Con las constancias obrantes en autos y teniendo en cuenta el hecho que se le imputa al ${d.impNombre || ''}, surge su responsabilidad respecto de la falta administrativa que se le endilga.
+    </p>
+
+    <p class="sangria-imputacion">
+      Todo ello, en cuanto que al momento del hecho ventilado se constató que el imputado: ${st.h26_fundamentoDisc || ''}
+    </p>
+
+    <p class="sangria-imputacion">Por ello;</p>
+
+    <div style="height: 1.2em;"></div>
+
+    <div style="text-align: left; font-weight: bold; font-size: 10pt; margin-bottom: 0.5em;">
+      RESUELVO:
+    </div>
+
+    <p class="sangria-imputacion">
+      Dictar el presente AUTO IMPUTACIÓN, acorde las previsiones del ARTÍCULO 288 del DECRETO 1050/09 REGLAMENTARIO DE LA LEY DEL PERSONAL 13982. Notificar al ${d.impNombre || ''}, para que comparezca al asiento de la dependencia y tome conocimiento del Auto de Imputación, de los elementos que obran en su contra y derechos que le asisten; haciéndole entrega de una copia certificada del presente. Se le hará saber además que dentro del plazo de CINCO (5) DÍAS HÁBILES, podrá presentar su descargo por escrito o por comparendo y ofrecer la prueba que acredite sus manifestaciones. Se lo impondrá acerca de los alcances y efectos del Procedimiento Abreviado previsto por los ARTÍCULOS 245 A 250 DEL DECRETO 1050/09 REGLAMENTARIO DE LA LEY DEL PERSONAL 13982, como así de los derechos que le asisten conforme a lo normado por los ARTÍCULOS 288 A 291 del mismo plexo legal, quedando relevado del juramento de ley prestado en ocasión de testimonios vertidos en autos. Dar cumplimiento a toda otra diligencia que sea menester, no prevista en el presente.
+    </p>
+
+    <div style="text-align: center; font-weight: bold; font-size: 11pt; margin-top: 1.5em; margin-bottom: 1em;">
+      CUMPLA EL ACTUARIO
+    </div>
   `;
 
   const page2Content = `
-    <div class="sangria-cero" style="font-weight: bold; margin-top: 1em; margin-bottom: 0.5em;">3. ATENUANTES Y/O AGRAVANTES</div>
-    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-      Habiendo evaluado todos los ATENUANTES (art. 178), y AGRAVANTES (art. 179) del Decreto 1050/09 Reglamentario del Personal Ley 13982.
+    <div style="text-align: left; font-weight: bold; font-size: 10pt; margin-bottom: 1.2em;">
+      SEÑOR INSTRUCTOR
     </div>
-    <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-top: 1em; margin-bottom: 0.5em;">RESUELVO:</div>
-    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em;">
-      Valorados los elementos incorporados en autos, conforme el principio de amplitud probatoria, y en función de las libres convicciones razonadas (Artículo 229 del Decreto 1050/09 Reglamentario de la Ley de Personal 13982). No surge, a juicio del suscripto se encuentre suficientemente acreditado que el personal policial hubiese transgredido normas disciplinarias en vigencia, razón por la cual corresponde, se disponga que sea EXENTO DE SANCIÓN DISCIPLINARIA y el ARCHIVO DE ACTUACIONES.
-    </div>
-    <div class="sangria-estandar" style="text-align: justify; line-height: 1.5; margin-top: 2em;">
-      Lo expuesto es todo en cuanto elevo e informo a usted.
+
+    <p class="sangria-imputacion">
+      Tomo conocimiento y daré estricto cumplimiento a lo ordenado por usted. Conste.
+    </p>
+
+    <div style="text-align: left; font-size: 10pt; margin-top: 2em;">
+      ${d.dependencia || ''}, ${st.i1_fechaAuto || ''}
     </div>
   `;
 
   return renderGenericDocument([page1Content, page2Content]);
 }
 
-function renderInfSeguimientoComportamientoA4Content() {
-  const d = getFormValues();
-
-  let sufijo = ". Llevando a su conocimiento los siguientes puntos que más abajo se detallan:";
-  let parrafoIntro = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
-
-  const titleHeader = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-      REF.: Inf. Seguimiento y Comportamiento<br>
-      ${d.partido || ''}, ${d.fechaRecepcion || ''}
-    </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-      AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>
-      ${d.intervencion ? d.intervencion.toUpperCase() : ''}
-    </div>
-  `;
-
-  const textoCompleto = `
-    <p class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.5; text-indent: 1.15cm;">
-      ${parrafoIntro}
-    </p>
-    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
-      • <b>Situación de Revista y Antecedentes:</b> A la fecha, el efectivo no registra sanciones disciplinarias en su legajo personal. Se encuentra en servicio Activo, cumpliendo funciones como Personal Disponible de manera ininterrumpida y con estricto apego a la normativa vigente.
-    </p>
-    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
-      • <b>Desempeño Operativo:</b> Ha demostrado un sólido compromiso con la disciplina y el respeto a la superioridad. Cumplió con la totalidad de las tareas asignadas, destacándose por su iniciativa. Ejerció su rol bajo strictly estándares profesionales, garantizando el respeto a los derechos humanos y la integridad de las personas, sin reportes de conductas impropias.
-    </p>
-    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
-      • <b>Disciplina y Ética Profesional:</b> Mantuvo una conducta intachable, alineada a los valores institucionales y al código de ética profesional, sin registrar faltas administrativas ni de servicio durante el período evaluado.
-    </p>
-    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
-      • <b>Perfil Relacional y Social:</b> Su interacción con pares y superiores ha sido colaborativa, mientras que su trato con la ciudadanía fue correcto y empático. No se han recibido quejas, reclamos ni denuncias por su desempeño en la vía pública o en dependencia.
-    </p>
-    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
-      • <b>Aptitud y Presencia:</b> Su porte y presentación de uniforme fueron impecables en todo momento. Asimismo, su estado de salud y aptitud psicofísica para el servicio se mantienen sin novedades, garantizando su plena operatividad.
-    </p>
-    <p class="sangria-cero" style="margin-bottom: 0.8em; text-align: justify; line-height: 1.5; text-indent: 0cm;">
-      • <b>Conclusión:</b> Basado en los puntos anteriores, el comportamiento y desempeño del efectivo durante el período de seguimiento se califica como Positivo y Proactivo, demostrando idoneidad para las funciones que desempeña.
-    </p>
-    <p class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5; text-indent: 1.15cm;">
-      Lo expuesto es todo en cuanto informo a usted.
-    </p>
-  `;
-
-  return paginateTextContent(titleHeader, textoCompleto, 'sangria-cero');
-}
-
-function renderStarHistorialAvlA4Content() {
-  const d = getFormValues();
-
-  let textoDesde = window.horaDesdeAvl ? `desde ${window.horaDesdeAvl}` : "quince (15) minutos antes";
-  let textoHasta = window.horaHastaAvl ? `hasta ${window.horaHastaAvl}` : "quince (15) minutos despues de la hora 08.30 horas";
-
-  let sufijo = `, quiera tener a bien y por ante quien corresponda. Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha ${d.fechaHecho || ''}, ${textoDesde} y ${textoHasta}.`;
-
-  let parrafoTexto = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
-
-  let itemsVinetados = window.itemsHistorialAvl.map((item, idx) => `
-    <li>
-      <input type="text" class="inline-input-auto" value="${item}" oninput="actualizarCampoAvlItem(${idx}, this.value)">
-    </li>
-  `).join('');
-
-  const pageContent = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-      REF.: Star. Inf. Historial de AVL<br>
-      ${d.partido || ''}, ${d.fechaRecepcion || ''}
-    </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-      AL SEÑOR DIRECTOR<br>
-      DIRECCIÓN SISTEMAS OPERATIVOS Y TECNOLOGÍA
-    </div>
-    <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-      ${parrafoTexto}
-    </div>
-    ${itemsVinetados ? `<ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.5; text-align: justify; font-size: 10pt;">${itemsVinetados}</ul>` : ''}
-    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
-      Lo expuesto es todo en cuanto solicito a usted.
-    </div>
-  `;
-
-  return renderGenericDocument([pageContent]);
-}
-
-function renderStarValorArancelarioA4Content() {
-  const d = getFormValues();
-
-  let sufijo = ", quiera tener a bien y por ante quien corresponda, el VALOR ARANCELARIO DE RESPOSICION del bien patrimonial que más abajo se detalla:";
-  let parrafoTexto = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
-
-  let elementosHtml = window.elementosValorArancelario.map((item, idx) => {
-    let numLimpio = item.num ? item.num.trim() : 'xx';
-    let letrasLimpio = item.letras ? item.letras.trim() : 'xx';
-    let descLimpio = item.desc ? item.desc.trim() : 'datos del elemento dañado';
-    return `
-      <div style="margin-bottom: 0.5em; line-height: 1.5;">
-        <input type="text" class="inline-input-auto" value="${numLimpio}" oninput="actualizarCampoValorArancelario(${idx}, 'num', this.value)" style="width: 45px; text-align: center;"> 
-        (<input type="text" class="inline-input-auto" value="${letrasLimpio}" oninput="actualizarCampoValorArancelario(${idx}, 'letras', this.value)" style="width: 100px; text-align: center;">) 
-        <input type="text" class="inline-input-auto" value="${descLimpio}" oninput="actualizarCampoValorArancelario(${idx}, 'desc', this.value)" style="width: 250px;">
-      </div>
-    `;
-  }).join('');
-
-  const pageContent = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-      REF.: Star. Valor Arancelario Reposición<br>
-      ${d.partido || ''}, ${d.fechaRecepcion || ''}
-    </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-      AL SEÑOR DIRECTOR<br>
-      DIRECCIÓN LOGÍSTICA Y PATRIMONIO
-    </div>
-    <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-      ${parrafoTexto}
-    </div>
-    <div class="sangria-cero" style="margin-top: 1em; line-height: 1.5;">
-      ${elementosHtml}
-    </div>
-    <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">
-      Lo expuesto es todo en cuanto solicito a usted.
-    </div>
-  `;
-
-  return renderGenericDocument([pageContent]);
-}
-
-function renderStarJmdA4Content() {
-  const d = getFormValues();
-
-  let sufijo = `, quiera tener a bien y por ante quien corresponda, conforme el “Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la provincia de Buenos Aires, en situaciones de Violencia de Género y Violencia Familiar”, aprobado por RESO-2021-581-GDEBA-MSGP, practique un examen psicológico sobre la persona del ${d.impNombre || ''}, a fin de determinar lo siguiente:`;
-  let parrafoTexto = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
-
-  const pageContent = `
-    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-      REF.: Star. JMD<br>
-      ${d.partido || ''}, ${d.fechaRecepcion || ''}
-    </div>
-    <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-      AL SEÑOR JEFE<br>
-      DIVISION SANIDAD DELEGACION QUE CORRESPONDA
-    </div>
-    <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 0px; text-align: justify; line-height: 1.5;">
-      ${parrafoTexto}
-    </div>
-    <ul style="padding-left: 1.2cm; margin: 0px; line-height: 1.5; text-align: justify; font-size: 10pt;">
-      <li>Caracterización general de su conducta y estado psíquico.</li>
-      <li>Indicadores de violencia.</li>
-      <li>Indicadores psicológicos prevalentes.</li>
-      <li>Indicadores de consumo de sustancias psicoactivas.</li>
-      <li>Si se encuentra en condiciones de portar un arma de fuego.</li>
-      <li>Si está en condiciones de seguir prestando servicio en su correspondiente agrupamiento, funciones y cargo.</li>
-      <li>Se informe todo dato de interés que surja de la entrevista y que resulte de utilidad en el hecho que se investiga.</li>
-    </ul>
-    <div class="sangria-estandar" style="margin-top: 0px; margin-bottom: 0px; text-align: justify; line-height: 1.5;">
-      Si de la entrevista surgen indicadores de consumo de sustancias psicoactivas, deberá dar intervención a la Dirección de Química de la Superintendencia de Policía Científica. Encarezco la celeridad de lo requerido en atención que resulta dicho informe de vital interés para resolver la situación administrativa del mismo.
-    </div>
-    <div class="sangria-estandar" style="margin-top: 0px; text-align: justify;">
-      Lo expuesto es todo en cuanto informo a usted.
-    </div>
-  `;
-
-  return renderGenericDocument([pageContent]);
-}
-
+/* ==========================================================================
+   5. PLANTILLAS DE RENDERIZADO PRINCIPALES
+   ========================================================================== */
 function renderDocumentTemplate(tabKey) {
   const d = getFormValues();
 
   switch(tabKey) {
-    case 'tab-star_historial_avl':
+    case 'tab-auto_imputacion':
       return `
       <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="avl-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
+        <div class="auto-imp-form-side" style="flex: 1; min-width: 340px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
           <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase;">
-            📄 GESTIÓN DE HISTORIAL DE AVL
+            ⚖️ CONFIGURACIÓN DEL AUTO DE IMPUTACIÓN
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div class="sheet-row-single">
-              <label>DESDE (HH:MM):</label>
-              <input type="time" id="avl_hora_desde" value="${window.horaDesdeAvl}" onchange="actualizarHorasAvl()">
-            </div>
-            <div class="sheet-row-single">
-              <label>HASTA (HH:MM):</label>
-              <input type="time" id="avl_hora_hasta" value="${window.horaHastaAvl}" onchange="actualizarHorasAvl()">
-            </div>
+          
+          <div class="sheet-row-single">
+            <label>FECHA DE AUTO DE IMPUTACIÓN (I1):</label>
+            <input type="text" value="${window.autoImpEstado.i1_fechaAuto}" oninput="actualizarCampoAutoImp('i1_fechaAuto', this.value)">
           </div>
+
+          <div class="sheet-row-single">
+            <label>ENCUADRE ADMINISTRATIVO (I3):</label>
+            <input type="text" value="${window.autoImpEstado.i3_encuadre}" oninput="actualizarCampoAutoImp('i3_encuadre', this.value)">
+          </div>
+
+          <div class="sheet-row-single">
+            <label>CONTENIDO DEL ARTÍCULO / INCISO (H5):</label>
+            <textarea style="min-height: 70px;" oninput="actualizarCampoAutoImp('h5_contenidoArt', this.value)">${window.autoImpEstado.h5_contenidoArt}</textarea>
+          </div>
+
+          <div class="sheet-row-single">
+            <label>SÍNTESIS DEL HECHO (H8):</label>
+            <textarea style="min-height: 70px;" oninput="actualizarCampoAutoImp('h8_sintesisHecho', this.value)">${window.autoImpEstado.h8_sintesisHecho}</textarea>
+          </div>
+
+          <div class="sheet-row-single">
+            <label>FUNDAMENTO DISCIPLINARIO (H26):</label>
+            <textarea style="min-height: 70px;" oninput="actualizarCampoAutoImp('h26_fundamentoDisc', this.value)">${window.autoImpEstado.h26_fundamentoDisc}</textarea>
+          </div>
+
           <div class="sheet-row-single" style="width: 100%;">
-            <label>AGREGAR UNIDAD Y DATO:</label>
-            <div style="display: flex; gap: 8px;">
-              <input type="text" id="avl_item_input" placeholder="Ej: Móvil Orden RO 1234..." style="flex:1;">
-              <button class="btn-secondary" onclick="agregarItemHistorialAvl()">➕ Agregar</button>
+            <label>ELEMENTOS DE PRUEBA DE LA IMPUTACIÓN:</label>
+            <div style="display: flex; gap: 8px; margin-top: 4px; flex-wrap: wrap;">
+              <button class="btn-secondary" onclick="agregarElementoPruebaImp('opcion1')" style="flex:1; background:#0284c7;">➕ Opción 1 (Foja/s)</button>
+              <button class="btn-secondary" onclick="agregarElementoPruebaImp('opcion2')" style="flex:1; background:#0369a1;">➕ Opción 2 (Orden)</button>
             </div>
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>ITEMS INGRESADOS (VIÑETADOS):</label>
-            <ul id="avl-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;">
-              ${window.itemsHistorialAvl.map((item, idx) => `
-                <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
-                  <span style="flex:1;">• ${item}</span>
-                  <button class="btn-del-row" onclick="quitarItemHistorialAvl(${idx})">✕</button>
-                </li>
-              `).join('')}
-            </ul>
+            <div id="auto-imp-elem-list-target" style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+              ${renderListaControlAutoImpElemHtml()}
+            </div>
           </div>
         </div>
+
         <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="avl-live-preview-target">${renderStarHistorialAvlA4Content()}</div>
+          <div id="auto-imp-live-preview-target">${renderAutoImputacionA4Content()}</div>
         </div>
       </div>`;
-
-    case 'tab-star_valor_arancelario':
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="arancelario-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase;">
-            📄 GESTIÓN DE ELEMENTOS DAÑADOS
-          </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-            <div class="sheet-row-single">
-              <label>CANTIDAD NÚMEROS (xx):</label>
-              <input type="text" id="va_num_input" placeholder="Ej: 01" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-            </div>
-            <div class="sheet-row-single">
-              <label>CANTIDAD LETRAS (xx):</label>
-              <input type="text" id="va_letras_input" placeholder="Ej: uno" oninput="this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ ]/g, '');">
-            </div>
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>DATOS ELEMENTO DAÑADO:</label>
-            <input type="text" id="va_desc_input" placeholder="Ej: Espejo retrovisor izquierdo">
-          </div>
-          <button class="btn-secondary" onclick="agregarElementoValorArancelario()" style="background: #0284c7;">➕ Agregar Elemento</button>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>ELEMENTOS INGRESADOS:</label>
-            <ul id="arancelario-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;">
-              ${window.elementosValorArancelario.map((item, idx) => `
-                <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
-                  <div><b>${item.num} (${item.desc})</b> -${item.letras}</div>
-                  <button class="btn-del-row" onclick="quitarElementoValorArancelario(${idx})">✕</button>
-                </li>
-              `).join('')}
-            </ul>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="arancelario-live-preview-target">${renderStarValorArancelarioA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-star_jmd':
-      return renderStarJmdA4Content();
-
-    case 'tab-inf_seguimiento_comportamiento':
-      return renderInfSeguimientoComportamientoA4Content();
 
     case 'tab-caratula':
       let rowsHtml = '';
@@ -2631,683 +1833,15 @@ function renderDocumentTemplate(tabKey) {
       `;
       return renderGenericDocument([pageCaratulaContent]);
 
-    case 'tab-reg_inst':
-      let sufijoRegInst = ", el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: “Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”.";
-      let textoRegInst = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoRegInst, d, { useBold: false });
-
-      const pageRegInst = `
-        <div style="margin-top: 1cm; line-height: 1.4; margin-left: 7cm; text-align: left; font-weight: bold;">
-          REF.: Star. Registro Institucional<br>
-          ${(d.partido || '').toUpperCase()}, ${d.fechaRecepcion}
-        </div>
-        <div class="sangria-cero" style="margin-top: 2em; margin-bottom: 2em;">
-          <b>AL SEÑOR JEFE</b><br>
-          <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
-        </div>
-        <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-          ${textoRegInst}
-        </div>
-        <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
-      `;
-      return renderGenericDocument([pageRegInst]);
-
-    case 'tab-indice_diligencias':
-      let optionsHtmlIndice = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="indice-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📋 GESTIÓN DE DILIGENCIAS DEL ÍNDICE
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>SELECCIONAR DILIGENCIA A AGREGAR:</label>
-            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-              <select id="select-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">${optionsHtmlIndice}</select>
-              <button class="btn-secondary" onclick="agregarItemIndice()" style="white-space: nowrap;">➕ Agregar</button>
-            </div>
-            <label style="margin-top: 6px; display: block;">DILIGENCIAS EN EL ÍNDICE:</label>
-            <ul id="indice-diligencias-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0; display: flex; flex-direction: column; gap: 4px;">
-              ${renderIndiceDiligenciasListaHtml()}
-            </ul>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; flex-direction: column; align-items: center;" id="indice-live-preview-target">
-          ${renderIndiceA4PagesContent()}
-        </div>
-      </div>`;
-
-    case 'tab-acta_constatacion':
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="acta-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📑 DATOS PARA EL ACTA DE CONSTATACIÓN
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-            <div class="sheet-row-single"><label>FECHA DE RECEPCIÓN:</label><input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarActaEnVivo();"></div>
-            <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarActaEnVivo();"></div>
-            <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" value="${d.localidad}" oninput="document.getElementById('f_05_localidad').value = this.value; actualizarActaEnVivo();"></div>
-            <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarActaEnVivo();"></div>
-            <div class="sheet-row-single"><label>INSTRUCTOR SUMARIAL:</label><input type="text" value="${d.instructor}" oninput="document.getElementById('f_07_instructor').value = this.value; actualizarActaEnVivo();"></div>
-            <div class="sheet-row-single"><label>CARGO INSTRUCTOR:</label><input type="text" value="${d.cargoInstructor}" oninput="document.getElementById('f_08_cargo_instructor').value = this.value; actualizarActaEnVivo();"></div>
-            <div class="sheet-row-single"><label>SECRETARIO DE ACTUACIONES:</label><input type="text" value="${d.secretario}" oninput="document.getElementById('f_09_secretario').value = this.value; actualizarActaEnVivo();"></div>
-            <div class="sheet-row-single"><label>CARGO SECRETARIO:</label><input type="text" value="${d.cargoSecretario}" oninput="document.getElementById('f_10_cargo_secretario').value = this.value; actualizarActaEnVivo();"></div>
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>RELATO DEL ACTA:</label>
-            <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_78_relato_acta').value = this.value; actualizarActaEnVivo();">${d.actaRelato}</textarea>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="acta-live-preview-target">${renderActaA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-recepcion':
-      let sufijoRecepcion = `, el suscripto <b>${d.instructor || ''}</b>, en mis funciones inherentes como <b>${d.cargoInstructor || ''}</b> de la <b>${d.dependencia || ''}</b>, a párrafo seguido.`;
-      let textoRecepcion = construirParrafoSumarial("RECIBIDO: En la fecha, previo registro en los libros correspondientes y, atento a su contenido en el marco de expediente", sufijoRecepcion, d, { useBold: true });
-
-      const pagRecepcion1 = `
-        <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">Corresponde a expediente ${d.caratula}</div>
-        <div style="text-align: left; font-weight: bold; margin-bottom: 1.2em;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-        <div style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">
-          ${textoRecepcion} Por ello;
-        </div>
-        <div style="text-align: left; font-weight: bold; font-size: 11pt; margin: 1.5em 0;">RESUELVO:</div>
-        <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Designar como secretario de actuaciones a producirse al oficial quién refrenda al pie a continuación para tener legal constancia de lo actuado.</p>
-        <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Dar estricto cumplimiento a todo lo solicitado.</p>
-        <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Cumplir con toda diligencia que sea de menester y/o surja de lo actuado.</p>
-        <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Cumplidas todas las diligencias requeridas por el ente y vuelva para su prosecución.</p>
-        <div style="text-align: center; font-weight: bold; margin-top: 2em;">CUMPLA EL ACTUARIO</div>
-      `;
-      const pagRecepcion2 = `
-        <div style="text-align: left; font-weight: bold; margin-bottom: 1em;">SEÑOR INSTRUCTOR:</div>
-        <div style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Tomo conocimiento y daré estricto cumplimiento a lo ordenado por usted. CONSTE.</div>
-        <div style="text-align: left; font-weight: bold; margin-top: 1em;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-      `;
-      return renderGenericDocument([pagRecepcion1, pagRecepcion2]);
-
-    case 'tab-parte_escrito':
-      let destOptionsHtmlParte = listaDestinatariosColumnaG.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="parte-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📄 EDICIÓN INTERACTIVA DEL PARTE ESCRITO
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-            <div class="sheet-row-single"><label>FECHA DE RECEPCIÓN / PARTE:</label><input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarParteEnVivo();"></div>
-            <div class="sheet-row-single"><label>HORA DEL HECHO / TOMADO CONOCIMIENTO:</label><input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarParteEnVivo();"></div>
-            <div class="sheet-row-single"><label>PARTIDO / LUGAR:</label><input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarParteEnVivo();"></div>
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>GESTIÓN DE DESTINATARIOS:</label>
-            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-              <select id="select-destinatario-g" style="flex: 1; padding: 5px; font-size: 0.8rem;">${destOptionsHtmlParte}</select>
-              <button class="btn-secondary" onclick="agregarDestinatarioParte()" style="white-space: nowrap;">➕ Agregar</button>
-            </div>
-            <ul id="parte-dest-list-target" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
-              ${renderDestinatariosParteHtml()}
-            </ul>
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>SÍNTESIS DEL HECHO:</label>
-            <textarea style="min-height: 180px; font-size: 0.85rem; line-height: 1.4;" oninput="document.getElementById('f_79_sintesis_hecho').value = this.value; actualizarParteEnVivo();">${d.sintesis}</textarea>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="parte-live-preview-target">${renderParteA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-corre_agregado':
-      let optionsCorreColumnaM = listaDesplegableColumnaM.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="corre-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📄 GESTIÓN DE DILIGENCIAS - CORRE AGREGADO
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>SELECCIONAR DILIGENCIA:</label>
-            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-              <select id="select-corre-columna-m" style="flex: 1; padding: 5px; font-size: 0.8rem;">${optionsCorreColumnaM}</select>
-              <button class="btn-secondary" onclick="agregarDiligenciaCorre()" style="white-space: nowrap;">➕ Agregar</button>
-            </div>
-            <ul id="corre-diligencias-list-target" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
-              ${renderDiligenciasCorreHtml()}
-            </ul>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="corre-live-preview-target">${renderCorreA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-cfyp':
-      let sufijoCFYP = ". Respecto a Concepto funcional y privado del infractor, Informo los siguientes puntos del efectivo:";
-      let introCFYP = construirParrafoSumarial("Dando cumplimiento a lo requerido por usted en relación a expediente", sufijoCFYP, d, { useBold: false });
-
-      const aspectosCFYP = [
-        { label: 'CULTURA', desc: '(En cuanto a la función que cumple que le permitan asesorar con idoneidad)' },
-        { label: 'OPERATIVIDAD', desc: '(En resolver situaciones, decisiones apropiadas y correctas)' },
-        { label: 'EFICIENCIA', desc: '(Conocimientos teóricos con aplicación práctica)' },
-        { label: 'CONDUCTA', desc: '(Observancia de la disciplina, ubicación y presencia personal)' },
-        { label: 'SOCIABILIDAD', desc: '(Capacidad en relacionarse con instituciones, sociedades y personas de distintos estratos sociales)' },
-        { label: 'ORGANIZACIÓN', desc: '(A los efectos de una respuesta rápida a la prestación de la tarea cotidiana)' }
-      ];
-
-      const pageCFYP = `
-        <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 1em; text-transform: uppercase;">CONCEPTO FUNCIONAL Y PRIVADO</div>
-        <div style="font-weight: bold; font-size: 10pt; margin-bottom: 1.2em; text-align: left;">${d.dependencia ? d.dependencia : (d.cauDestino || '')}, a los ${d.fechaRecepcion}</div>
-        <div class="sangria-estandar" style="margin-bottom: 1.2em; text-align: justify; line-height: 1.15; font-size: 10pt;">${introCFYP}</div>
-
-        <div style="font-size: 9.5pt; line-height: 1.15; margin-bottom: 1.2em; text-align: justify;">
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">1. CONCEPTO FUNCIONAL Y PERSONAL:</span><input type="text" class="input-cfyp-dotted" value="Normal"></div>
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">2. ANTIGÜEDAD EN LA INSTITUCIÓN:</span><input type="text" class="input-cfyp-dotted" value="13 años, 9 meses y 29 días"></div>
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">3. ANTIGÜEDAD EN EL DESTINO:</span><input type="text" class="input-cfyp-dotted" value="1 años, 2 meses, 26 días"></div>
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">4. DOMICILIO DECLARADO:</span><input type="text" class="input-cfyp-dotted" value="${d.cauDomicilio ? d.cauDomicilio + ' de ' + d.cauLocalidad + '.' : 'Perú 1439 entre Freire y Uruguay de Avellaneda.'}"></div>
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">5. FUNCIÓN PRÁCTICA QUE CUMPLE:</span><input type="text" class="input-cfyp-dotted" value="Jefe de SEC. ZONA DESTACAMENTOS (F.B.A. XIV) II."></div>
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">6. SANCIONES QUE REGISTRA:</span><input type="text" class="input-cfyp-dotted" value="No registra en el presente periodo"></div>
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">7. SUMARIOS ADMINISTRATIVOS:</span><input type="text" class="input-cfyp-dotted" value="No registra en el presente periodo"></div>
-          <div style="display: flex; align-items: center; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">8. REGISTRO DE CARPETAS MÉDICAS:</span><input type="text" class="input-cfyp-dotted" value="No registra en el presente periodo"></div>
-          <div style="display: flex; align-items: center; margin-top: 5px; margin-bottom: 5px;"><span style="font-weight: bold; min-width: 260px; flex-shrink: 0;">OTRAS FUNCIONES QUE CUMPLA:</span><input type="text" class="input-cfyp-dotted" value="Ninguna"></div>
-        </div>
-
-        <table class="table-oficial" style="margin-top: 12px; margin-bottom: 0px; font-size: 8.5pt; line-height: 1.0; border-collapse: collapse; width: 100%;">
-          <thead>
-            <tr style="background-color: #f2f2f2;">
-              <th style="border: 1px solid #000; padding: 6px; text-align: left; text-transform: uppercase;">ASPECTO EVALUADO</th>
-              <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; text-transform: uppercase;">AMPLIA</th>
-              <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; text-transform: uppercase;">NORMAL</th>
-              <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; text-transform: uppercase;">REGULAR</th>
-              <th style="border: 1px solid #000; padding: 6px; text-align: center; width: 12%; text-transform: uppercase;">MALO</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${aspectosCFYP.map((item, filaIdx) => `
-              <tr>
-                <td style="border: 1px solid #000; padding: 5px; text-align: justify; line-height: 1.0;">
-                  <b>${item.label}</b><br><span style="font-size: 7.8pt;">${item.desc}</span>
-                </td>
-                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 0)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 0 ? 'X' : ''}</td>
-                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 1)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 1 ? 'X' : ''}</td>
-                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 2)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 2 ? 'X' : ''}</td>
-                <td class="cell-option-x" onclick="seleccionarOpcionCFYP(${filaIdx}, 3)" style="border: 1px solid #000; padding: 5px; text-align: center; vertical-align: middle;">${window.cfypTablaEstado[filaIdx] === 3 ? 'X' : ''}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-
-        <div style="font-size: 9.5pt; line-height: 1.0; margin-top: 0; margin-bottom: 0; padding-top: 4px; padding-bottom: 4px; display: flex; align-items: center;">
-          <span style="font-weight: bold; min-width: 130px; flex-shrink: 0;">Observaciones:</span>
-          <input type="text" class="input-cfyp-dotted" value="Sin observaciones." style="margin: 0; padding: 2px 4px;">
-        </div>
-
-        <div class="sangria-estandar" style="margin-top: 0; text-align: justify; line-height: 1.0; font-size: 10pt; padding-top: 2px;">
-          Lo expuesto es todo en cuanto informo a usted.
-        </div>
-      `;
-      return renderGenericDocument([pageCFYP]);
-
-    case 'tab-tdh':
-      let sufijoTDH = ", tipos, días, horarios y circunstancias del agente la momento del hecho:";
-      let introTDH = construirParrafoSumarial("Me dirijo a usted afines de informar en el marco de Actuaciones Sumariales Administrativas", sufijoTDH, d, { useBold: false });
-
-      const pageTDH = `
-        <div style="margin-left: 7cm; display: grid; grid-template-columns: auto 1fr; gap: 8px; font-weight: bold; font-size: 10pt; line-height: 1.4; margin-bottom: 2em;">
-          <div>REF.:</div><div>Pcir. Informe tipos, días y horarios</div>
-          <div>${d.partido || ''}</div><div>${d.fechaRecepcion || ''}</div>
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; line-height: 1.4;">
-          AL SEÑOR ${d.cargoInstructor ? d.cargoInstructor.toUpperCase() : ''}<br>${d.instructor ? d.instructor.toUpperCase() : ''}
-        </div>
-        <div class="sangria-estandar" style="margin-top: 1.5em; margin-bottom: 1.5em;">${introTDH}</div>
-        <div class="sangria-cero" style="margin: 1.2em 0 0.5em 0;">Cumpliendo servicios en el escalón denominado <b>${d.cauEscalon}</b></div>
-        <div class="sangria-cero"><b>Modalidad:</b> ${d.cauModalidad}</div>
-        <div class="sangria-cero"><b>Horario de presentación al servicio:</b> ${d.cauEntrada}</div>
-        <div class="sangria-cero" style="margin-bottom: 1.5em;"><b>Horario de finalización:</b> ${d.cauSalida}</div>
-        <div class="sangria-estandar">Cabe destacar que el agente al momento que sucedieron los hechos, se encontraba <b>${d.cauCircunstancias}</b>.</div>
-        <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto informo a usted.</div>
-      `;
-      return renderGenericDocument([pageTDH]);
-
-    case 'tab-col_div':
-      let optionsColDivC = listaDiligenciasColumnaC.map(opt => `<option value="${opt}">${opt}</option>`).join('');
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="col-div-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📄 GESTIÓN DE COLABORACIÓN DIVISIONES
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>SELECCIONAR DILIGENCIA (DESPLEGABLE COLUMNA C):</label>
-            <div style="display: flex; gap: 8px; margin-bottom: 8px;">
-              <select id="select-col-div-c" style="flex: 1; padding: 5px; font-size: 0.8rem;">${optionsColDivC}</select>
-              <button class="btn-secondary" onclick="agregarDiligenciaColDiv()" style="white-space: nowrap;">➕ Agregar</button>
-            </div>
-            <ul id="col-div-diligencias-list-target" style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px;">
-              ${renderDiligenciasColDivHtml()}
-            </ul>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="col-div-live-preview-target">${renderColDivA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-lep':
-      let sufijoLEP = ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:";
-      let textoLEP = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoLEP, d, { useBold: false });
-
-      if (!window.registrosSeleccionadosLEP) {
-        window.registrosSeleccionadosLEP = [];
-        if (d.cauNombre && d.cauNombre.trim() !== '' && !d.cauNombre.toUpperCase().includes('DATOS DEL CAUSANTE')) window.registrosSeleccionadosLEP.push('CAUSANTE');
-        if (d.vicNombre && d.vicNombre.trim() !== '' && !d.vicNombre.toUpperCase().includes('DATOS DE LA VICTIMA')) window.registrosSeleccionadosLEP.push('VICTIMA');
-        if (d.impNombre && d.impNombre.trim() !== '' && !d.impNombre.toUpperCase().includes('DATOS DEL IMPUTADO')) window.registrosSeleccionadosLEP.push('IMPUTADO');
-        if (d.denNombre && d.denNombre.trim() !== '' && !d.denNombre.toUpperCase().includes('DATOS DEL DENUNCIANTE')) window.registrosSeleccionadosLEP.push('DENUNCIANTE');
-        if (window.registrosSeleccionadosLEP.length === 0) window.registrosSeleccionadosLEP.push('CAUSANTE');
-      }
-
-      let filasTablaLEP = '';
-      let listaGestionHtml = '';
-      const mapaPersonas = {
-        'CAUSANTE': { rol: 'CAUSANTE', nombre: d.cauNombre, destino: d.cauDestino || '' },
-        'VICTIMA': { rol: 'VÍCTIMA', nombre: d.vicNombre, destino: d.vicDestino || '' },
-        'IMPUTADO': { rol: 'IMPUTADO', nombre: d.impNombre, destino: d.impDestino || '' },
-        'DENUNCIANTE': { rol: 'DENUNCIANTE', nombre: d.denNombre, destino: d.denDestino || '' }
-      };
-
-      window.registrosSeleccionadosLEP.forEach(tipo => {
-        const item = mapaPersonas[tipo];
-        if (item && item.nombre) {
-          filasTablaLEP += `<tr><td>${item.nombre}</td><td>${item.destino}</td></tr>`;
-          listaGestionHtml += `
-            <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px 10px; border-radius: 4px; border: 1px solid #cbd5e1;">
-              <span style="font-size: 0.8rem; font-weight: bold; color: #334155;">${item.rol}: <span style="font-weight: normal;">${item.nombre}</span></span>
-              <button class="btn-del-row" onclick="quitarRegistroLEP('${tipo}')" title="Quitar" style="margin-left: 8px;">✕</button>
-            </li>`;
-        }
-      });
-
-      if (filasTablaLEP === '') {
-        filasTablaLEP = `<tr><td colspan="2" style="text-align: center; color: #64748b; font-style: italic;">Sin datos seleccionados para mostrar</td></tr>`;
-      }
-
-      const pageLEPContent = `
-        <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-          REF.: Star. Legajo Electrónico Personal (L.E.P.)<br>
-          ${d.partido || ''}, ${d.fechaRecepcion || ''}
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-          AL SEÑOR DIRECTOR<br>
-          DIRECCIÓN DE PERSONAL - REGÍMENES POLICIALES<br>
-          SECCIÓN EXPEDIENTES E INFORMES PERSONAL
-        </div>
-        <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5; text-align: justify;">${textoLEP}</div>
-        <table class="table-oficial" style="margin-top: 1.5em;">
-          <thead>
-            <tr><th>NOMBRES Y APELLIDOS</th><th>DESTINO</th></tr>
-          </thead>
-          <tbody>${filasTablaLEP}</tbody>
-        </table>
-        <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
-      `;
-
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="lep-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📋 SELECCIÓN DE DATOS PARA LA TABLA L.E.P.
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>SELECCIONAR REGISTRO A MOSTRAR / QUITAR:</label>
-            <div style="display: flex; gap: 8px; margin-bottom: 10px;">
-              <select id="select-lep-personas" style="flex: 1; padding: 6px; font-size: 0.82rem;">
-                <option value="CAUSANTE">CAUSANTE (${d.cauNombre || 'Sin datos'})</option>
-                <option value="VICTIMA">VÍCTIMA (${d.vicNombre || 'Sin datos'})</option>
-                <option value="IMPUTADO">IMPUTADO (${d.impNombre || 'Sin datos'})</option>
-                <option value="DENUNCIANTE">DENUNCIANTE (${d.denNombre || 'Sin datos'})</option>
-              </select>
-              <button class="btn-secondary" onclick="agregarRegistroLEP()" style="white-space: nowrap;">➕ Agregar</button>
-            </div>
-            <label style="margin-top: 6px; display: block;">REGISTROS VISIBLES EN LA TABLA:</label>
-            <ul style="list-style: none; padding: 0; margin: 6px 0 0 0; display: flex; flex-direction: column; gap: 4px;">
-              ${listaGestionHtml || '<li style="font-size:0.78rem; color:#94a3b8; font-style:italic;">No hay registros cargados.</li>'}
-            </ul>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          ${renderGenericDocument([pageLEPContent])}
-        </div>
-      </div>`;
-
-    case 'tab-col_ipp':
-      let sufijoColIPP = ", quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:";
-      let textoColIPP = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoColIPP, d, { useBold: false });
-
-      const pageColIPP = `
-        <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-          REF.: Star. informe de Procesos Penales (PP) vinculado<br>
-          ${d.partido || ''}, ${d.fechaRecepcion || ''}
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-          AL SEÑOR AGENTE FISCAL<br>${d.magistrado ? d.magistrado.toUpperCase() : ''}<br>DEPARTAMENTO JUDICIAL ${d.dptoJudicial ? d.dptoJudicial.toUpperCase() : ''}
-        </div>
-        <div class="sangria-estandar">
-          ${textoColIPP}
-        </div>
-        <div class="sangria-cero" style="margin: 1em 0; text-align: justify;">
-          - Si existe registro de algún Proceso Penal en trámite donde resulte denunciado el ciudadano <b>${d.impNombre}</b>, edad: <b>${d.impEdad}</b>, Documento Nacional de Identidad N°: <b>${d.impDni}</b> en la víspera del <b>${d.fechaHecho}</b>, o posteriores, en la arteria <b>${d.lugarHecho}</b>, localidad de <b>${d.hechoLoc}</b>, partido de <b>${d.hechoPartido}</b>.
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1em; text-align: justify;">
-          - Asimismo solicito informe la existencia de denuncias de igual tenor con respecto a Infracción con la Ley 12569.
-        </div>
-        <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TÉRMINO MUY URGENTE.</div>
-        <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
-      `;
-      return renderGenericDocument([pageColIPP]);
-
-    case 'tab-cautelares':
-      let sufijoCautelares = ", quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:";
-      let textoCautelares = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoCautelares, d, { useBold: false });
-
-      const pageCautelares = `
-        <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-          REF.: Star. Medidas cautelares vigentes<br>
-          ${d.partido || ''}, ${d.fechaRecepcion || ''}
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-          AL SEÑOR AGENTE FISCAL<br>RECEPTORIA GENERAL DE EXPEDIENTES<br>DEPARTAMENTO JUDICIAL ${d.dptoJudicial ? d.dptoJudicial.toUpperCase() : ''}
-        </div>
-        <div class="sangria-estandar">
-          ${textoCautelares}
-        </div>
-        <ul style="padding-left: 1.2cm; line-height: 1.5; text-align: justify; margin: 1em 0;">
-          <li>Si existe registro de alguna Medida Cautelar vigente donde resulte causante el efectivo <b>${d.impNombre}</b>, edad: <b>${d.impEdad}</b>, Documento Nacional de Identidad N°: <b>${d.impDni}</b> en la víspera del <b>${d.fechaHecho}</b>, o posteriores.</li>
-          <li>Asimismo solicito informe la existencia de denuncias de igual tenor con respecto a Infracción con la Ley 12.569.</li>
-        </ul>
-        <div class="sangria-estandar">En caso de ser positivo solicito informe número de causa, carátula, estado actual de la misma y temperamento tomado para con el personal policial involucrado. Encarezco el resultado TÉRMINO MUY URGENTE en virtud fenecer los términos otorgados por la Superioridad.</div>
-        <div class="sangria-estandar" style="margin-top: 2em;">Lo expuesto es todo en cuanto solicito a usted.</div>
-      `;
-      return renderGenericDocument([pageCautelares]);
-
-    case 'tab-anmac':
-      let sufijoANMAC = ", quiera tener a bien por intermedio de quien corresponda adune informe de REPAR (conforme el artículo 13 de RESO 581/21 en las actuaciones en que se empleen armas de fuego) a efectos de informar si el agente que más abajo se detalla, posee además del armamento provisto y reglamentario, otra arma de fuego:";
-      let textoANMAC = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoANMAC, d, { useBold: false });
-
-      const pageANMAC = `
-        <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-          REF.: Star. Colaboración<br>${d.partido || ''}, ${d.fechaRecepcion || ''}
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-          AL SEÑOR JEFE<br>SECCIÓN RE.P.AR.
-        </div>
-        <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">${textoANMAC}</div>
-        <table class="table-oficial" style="margin-top: 1.5em;">
-          <thead>
-            <tr><th>NOMBRES</th><th>DNI N°</th><th>DOMICILIO</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>${d.impNombre}</td><td>${d.impDni}</td><td>${d.impDomicilio}, localidad de ${d.impLocalidad}, partido de ${d.impPartido}</td></tr>
-          </tbody>
-        </table>
-        <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify;">Sirva en informar a la brevedad lo solicitado en virtud de que es de vital interés a fin de dictaminar una resolución sobre el sumariado.</div>
-        <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify;">Lo expuesto es todo en cuando solicito a usted.</div>
-      `;
-      return renderGenericDocument([pageANMAC]);
-
-    case 'tab-col_cria':
-      let sufijoColCria = ", quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental de la victima:";
-      let textoColCria = construirParrafoSumarial("Me dirijo a usted a los fines de solicitarle en el marco de", sufijoColCria, d, { useBold: false });
-
-      const pageColCria = `
-        <div style="margin-left: 7cm; text-align: left; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
-          <b>REF.:</b> Star. Inf. De Riesgo y socioambiental víctima.<br><b>${d.partido || ''}</b>, <b>${d.fechaRecepcion || ''}</b>
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; font-weight: bold; font-size: 10.5pt; text-transform: uppercase; line-height: 1.3;">
-          AL SEÑOR/A SUPERINTENDENTE/A<br>SUPERINTENDENCIA DE POLÍTICAS DE GÉNERO
-        </div>
-        <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
-          ${textoColCria}
-        </div>
-        <table class="table-oficial" style="margin-top: 1.5em;">
-          <thead>
-            <tr><th>Nombres completos</th><th>Edad</th><th>DNI</th><th>Domicilio</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><b>${d.vicNombre || ''}</b></td>
-              <td><b>${d.vicEdad || ''}</b></td>
-              <td><b>${d.vicDni || ''}</b></td>
-              <td><b>${d.vicDomicilio || ''}</b>, localidad de <b>${d.vicLocalidad || ''}</b>, partido de <b>${d.vicPartido || ''}</b></td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-          Que deberán ser comunicados en un plazo máximo de diez (10) días corridos, contados a partir del presente requerimiento, con copia a la Dirección Provincial de Políticas de Género y Derechos Humanos en los casos en que la PSVG/F sea personal policial.
-        </div>
-        <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-          Asimismo Informe la existencia de denuncias anteriores con idéntica temática ante Comisaría MYF de jurisdicción. En caso de ser afirmativo aportar número de denuncia, número de Expediente GDEBA generado a raíz de cada uno de los hechos.
-        </div>
-        <div class="sangria-estandar" style="margin-top: 2em; text-align: justify;">Lo expuesto es todo en cuanto solicito a usted.</div>
-      `;
-      return renderGenericDocument([pageColCria]);
-
-    case 'tab-testimonial':
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="testimonial-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📑 DATOS PARA LA DECLARACIÓN TESTIMONIAL
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-            <div class="sheet-row-single"><label>FECHA DE RECEPCIÓN:</label><input type="text" value="${d.fechaRecepcion}" oninput="document.getElementById('f_00_fecha_recepcion').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>HORA DEL HECHO / DECLARACIÓN:</label><input type="text" value="${d.horaHecho}" oninput="document.getElementById('f_18_hecho_hora').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" value="${d.localidad}" oninput="document.getElementById('f_05_localidad').value = this.value; actualizarTestimonialEnVivo();"></div>
-            <div class="sheet-row-single"><label>PARTIDO:</label><input type="text" value="${d.partido}" oninput="document.getElementById('f_06_partido').value = this.value; actualizarTestimonialEnVivo();"></div>
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>DECLARACIÓN TESTIMONIAL (RELATO):</label>
-            <textarea style="min-height: 220px; font-size: 0.85rem; line-height: 1.4; font-weight: normal;" oninput="document.getElementById('f_80_relato_testimonial').value = this.value; actualizarTestimonialEnVivo();">${d.testimonialRelato}</textarea>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="testimonial-live-preview-target">${renderTestimonialA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-inspeccion_ocular':
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="inspeccion-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📑 DATOS PARA LA INSPECCIÓN OCULAR
-          </div>
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
-            <div class="sheet-row-single"><label>LUGAR DEL HECHO (ARTERIA PRINCIPAL):</label><input type="text" value="${d.lugarHecho}" oninput="document.getElementById('f_27_hecho_lugar').value = this.value; actualizarInspeccionEnVivo();"></div>
-            <div class="sheet-row-single"><label>ENTRE CALLE 1:</label><input type="text" value="${d.ec1}" oninput="document.getElementById('f_31_ec1').value = this.value; actualizarInspeccionEnVivo();"></div>
-            <div class="sheet-row-single"><label>ENTRE CALLE 2:</label><input type="text" value="${d.ec2}" oninput="document.getElementById('f_32_ec2').value = this.value; actualizarInspeccionEnVivo();"></div>
-            <div class="sheet-row-single">
-              <label>CALLE PRINCIPAL TIPO:</label>
-              <select id="f_insp_art1_tipo" onchange="actualizarInspeccionEnVivo();">
-                <option value="asfalto" ${d.art1Tipo === 'asfalto' ? 'selected' : ''}>asfalto</option><option value="tierra" ${d.art1Tipo === 'tierra' ? 'selected' : ''}>tierra</option><option value="empedrado" ${d.art1Tipo === 'empedrado' ? 'selected' : ''}>empedrado</option><option value="hormigón" ${d.art1Tipo === 'hormigón' ? 'selected' : ''}>hormigón</option><option value="mejora" ${d.art1Tipo === 'mejora' ? 'selected' : ''}>mejora</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>CALLE PRINCIPAL ESTADO:</label>
-              <select id="f_insp_art1_estado" onchange="actualizarInspeccionEnVivo();">
-                <option value="buen" ${d.art1Estado === 'buen' ? 'selected' : ''}>buen</option><option value="regular" ${d.art1Estado === 'regular' ? 'selected' : ''}>regular</option><option value="malo" ${d.art1Estado === 'malo' ? 'selected' : ''}>malo</option>
-              </select>
-            </div>
-            <div class="sheet-row-single">
-              <label>CALLE PRINCIPAL MANO:</label>
-              <select id="f_insp_art1_mano" onchange="actualizarInspeccionEnVivo();">
-                <option value="doble" ${d.art1Mano === 'doble' ? 'selected' : ''}>doble</option><option value="única" ${d.art1Mano === 'única' ? 'selected' : ''}>única</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="inspeccion-live-preview-target">${renderInspeccionA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-croquis':
-      let textoLugarArmado = `${d.lugarHecho}`;
-      if (d.ec1 || d.ec2) textoLugarArmado += ` entre ${d.ec1} y ${d.ec2}`;
-      let queryInscripcion = `${d.lugarHecho} y ${d.ec1}, ${d.hechoLoc}, ${d.hechoPartido}`;
-
-      const pageCroquis = `
-        <div style="text-align: center; font-weight: bold; font-size: 20pt; margin-bottom: 0.5em;">CROQUIS ILUSTRATIVO DEL LUGAR DEL HECHO</div>
-        <div class="croquis-controls" style="margin-bottom: 10px; display: flex; gap: 8px; align-items: center; background: #f1f5f9; padding: 8px; border-radius: 4px; border: 1px solid #cbd5e1;">
-          <input type="text" id="f_croquis_search_input" style="flex: 1; padding: 5px 8px; font-size: 0.8rem; border: 1px solid #cbd5e1; border-radius: 4px;" value="${queryInscripcion}" placeholder="Buscar calle o intersección manual...">
-          <button class="btn-secondary" onclick="actualizarCroquisUbicacion()" style="white-space: nowrap;">🔍 Actualizar Mapa</button>
-          <button class="btn-secondary" onclick="abrirGoogleMapsManual()" style="white-space: nowrap; background-color: #0284c7;">📍 Abrir / Marcar en Google Maps</button>
-        </div>
-        <div style="border: 2px solid #cbd5e1; border-radius: 6px; height: 175mm; width: 100%; overflow: hidden; margin-bottom: 1em; background-color: #f8fafc;">
-          <iframe id="f_croquis_map_iframe" width="100%" height="100%" style="border:0;" loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${encodeURIComponent(queryInscripcion)}&t=&z=16&ie=UTF8&iwloc=&output=embed"></iframe>
-        </div>
-        <div class="sangria-cero" style="font-size: 9.5pt;"><b>Lugar del hecho:</b> ${textoLugarArmado} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
-        <div class="sangria-cero" style="font-size: 9.5pt; font-weight: bold;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-      `;
-      return renderGenericDocument([pageCroquis]);
-
-    case 'tab-fotos':
-      const pageFotos1 = `
-        <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 0.5em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1cm; flex: 1; min-height: 0;">
-          <div id="zone-foto1" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto1' ? 'selected-zone' : ''}" onclick="seleccionarZonaFoto('foto1')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto1')">
-            ${window.fotosCargadas.foto1 ? `<img src="${window.fotosCargadas.foto1}" alt="Foto 1"><div class="foto-label-tag">VISTA N° 1</div>` : `
-              <div class="foto-placeholder-hint">📸 <b>VISTA N° 1</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
-              <input type="file" id="input-foto1" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto1')">
-              <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto1').click();">📁 Buscar Imagen</button>
-              <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 1</div>
-            `}
-          </div>
-          <div id="zone-foto2" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto2' ? 'selected-zone' : ''}" onclick="seleccionarZonaFoto('foto2')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto2')">
-            ${window.fotosCargadas.foto2 ? `<img src="${window.fotosCargadas.foto2}" alt="Foto 2"><div class="foto-label-tag">VISTA N° 2</div>` : `
-              <div class="foto-placeholder-hint">📸 <b>VISTA N° 2</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
-              <input type="file" id="input-foto2" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto2')">
-              <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto2').click();">📁 Buscar Imagen</button>
-              <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 2</div>
-            `}
-          </div>
-        </div>
-        <div class="sangria-cero" style="font-size: 9pt; margin-top: 0; margin-bottom: 0;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
-        <div class="sangria-cero" style="font-size: 9pt; font-weight: bold; margin-top: 1.2em; margin-bottom: 0;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-      `;
-
-      const pageFotos2 = `
-        <div style="text-align: center; font-weight: bold; font-size: 16pt; margin-bottom: 0.5em;">PLACAS FOTOGRÁFICAS DEL LUGAR DEL HECHO</div>
-        <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 1cm; flex: 1; min-height: 0;">
-          <div id="zone-foto3" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto3' ? 'selected-zone' : ''}" onclick="seleccionarZonaFoto('foto3')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto3')">
-            ${window.fotosCargadas.foto3 ? `<img src="${window.fotosCargadas.foto3}" alt="Foto 3"><div class="foto-label-tag">VISTA N° 3</div>` : `
-              <div class="foto-placeholder-hint">📸 <b>VISTA N° 3</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
-              <input type="file" id="input-foto3" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto3')">
-              <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto3').click();">📁 Buscar Imagen</button>
-              <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 3</div>
-            `}
-          </div>
-          <div id="zone-foto4" class="foto-dropzone ${window.zonaFotoSeleccionada === 'foto4' ? 'selected-zone' : ''}" onclick="seleccionarZonaFoto('foto4')" ondragover="handleDragOverFoto(event)" ondragleave="handleDragLeaveFoto(event)" ondrop="handleDropFoto(event, 'foto4')">
-            ${window.fotosCargadas.foto4 ? `<img src="${window.fotosCargadas.foto4}" alt="Foto 4"><div class="foto-label-tag">VISTA N° 4</div>` : `
-              <div class="foto-placeholder-hint">📸 <b>VISTA N° 4</b><br>Arrastra y suelta una imagen aquí (JPG, PNG, etc.),<br>o haz clic para seleccionar y presiona <b>Ctrl + V</b> para pegar.</div>
-              <input type="file" id="input-foto4" accept="image/*" style="display:none;" onchange="handleFileSelectFoto(event, 'foto4')">
-              <button class="btn-secondary btn-foto-upload" style="margin-top: 6px; padding: 4px 8px; font-size: 0.75rem;" onclick="event.stopPropagation(); document.getElementById('input-foto4').click();">📁 Buscar Imagen</button>
-              <div class="foto-label-tag" style="position: absolute; bottom: 4px;">VISTA N° 4</div>
-            `}
-          </div>
-        </div>
-        <div class="sangria-cero" style="font-size: 9pt; margin-top: 0; margin-bottom: 0;"><b>Lugar del hecho:</b> ${d.lugarHecho} | <b>Localidad:</b> ${d.hechoLoc} | <b>Partido:</b> ${d.hechoPartido}</div>
-        <div class="sangria-cero" style="font-size: 9pt; font-weight: bold; margin-top: 1.2em; margin-bottom: 0;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-      `;
-
-      return renderGenericDocument([pageFotos1, pageFotos2]);
-
-    case 'tab-carpetas_medicas':
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="carpetas-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            🏥 OPCIONES DE CARPETAS MÉDICAS
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>SELECCIONAR SITUACIÓN DE LICENCIAS:</label>
-            <select id="select-modo-carpetas" onchange="actualizarModoCarpetas(this.value)" style="padding: 6px; font-size: 0.82rem; margin-top: 4px;">
-              <option value="noposee" ${window.carpetasMedicasEstado.opcion === 'noposee' ? 'selected' : ''}>No posee carpetas vinculadas al hecho investigado.</option>
-              <option value="carpeta" ${window.carpetasMedicasEstado.opcion === 'carpeta' ? 'selected' : ''}>Carpeta medica por xx (xx). Diagnóstico xx. Fecha de inicio xx y fecha de finalización xx.</option>
-            </select>
-          </div>
-          <div id="carpetas-campos-manuales" style="display: ${window.carpetasMedicasEstado.opcion === 'carpeta' ? 'flex' : 'none'}; flex-direction: column; gap: 10px; background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #cbd5e1;">
-            <div style="font-weight: bold; font-size: 0.8rem; color: #334155;">DATOS DE LA CARPETA MÉDICA (DATOS MANUALES):</div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-              <div><label style="font-size: 0.7rem; font-weight: bold; color: #475569;">DÍAS:</label><input type="text" id="cm_dias" placeholder="Ej: 30 días" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;"></div>
-              <div><label style="font-size: 0.7rem; font-weight: bold; color: #475569;">ART. / PARÁMETRO:</label><input type="text" id="cm_art" placeholder="Ej: Art. 44 inc. A" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;"></div>
-            </div>
-            <div><label style="font-size: 0.7rem; font-weight: bold; color: #475569;">DIAGNÓSTICO:</label><input type="text" id="cm_diag" placeholder="Ej: Traumatismo leve" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;"></div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-              <div><label style="font-size: 0.7rem; font-weight: bold; color: #475569;">FECHA INICIO:</label><input type="text" id="cm_inicio" placeholder="Ej: 05/04/2026" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;"></div>
-              <div><label style="font-size: 0.7rem; font-weight: bold; color: #475569;">FECHA FIN:</label><input type="text" id="cm_fin" placeholder="Ej: 04/05/2026" style="width: 100%; padding: 4px 8px; font-size: 0.8rem;"></div>
-            </div>
-            <button class="btn-secondary" onclick="agregarCarpetaMedica()" style="margin-top: 4px; background: #0284c7; font-weight: bold;">➕ Agregar Licencia a la Lista</button>
-            <div style="margin-top: 8px;">
-              <label style="font-size: 0.72rem; font-weight: bold; color: #475569; text-transform: uppercase;">CARPETAS INGRESADAS:</label>
-              <ul id="carpetas-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;"></ul>
-            </div>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="carpetas-live-preview-target">${renderCarpetasA4Content()}</div>
-        </div>
-      </div>`;
-
-    case 'tab-cierre':
-      const pageCierre = `
-        <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 2em;">Corresponde a expediente ${d.caratula}</div>
-        <div class="sangria-cero" style="font-weight: bold; margin-bottom: 1.5em; text-transform: uppercase;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
-        <div class="sangria-cero" style="text-align: justify; line-height: 1.5; margin-bottom: 1.2em; text-indent: 3.5cm !important;">
-          <b>VISTO:</b> Lo actuado hasta la fecha, y no habiendo otra diligencia que cumplimentar, la instrucción, a párrafo seguidamente;
-        </div>
-        <div class="sangria-cero" style="margin-bottom: 1.8em; text-indent: 3.5cm !important;">Por ello,</div>
-        <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-bottom: 1em;">RESUELVO:</div>
-        <div class="sangria-cero" style="text-align: justify; line-height: 1.5; text-indent: 3.5cm !important;">
-          Proceder al cierre de las presentes Actuaciones Sumariales Administrativas en el estado en que se encuentra y remitir a la mayor consideración y posterior resolución del <b>${d.intervencion ? d.intervencion.toUpperCase() : ''}</b>.
-        </div>
-      `;
-      return renderGenericDocument([pageCierre]);
-
-    case 'tab-sintesis_conclusiones':
-      return `
-      <div style="display: flex; gap: 20px; width: 100%; align-items: flex-start; justify-content: space-between;">
-        <div class="sintesis-form-side" style="flex: 1; min-width: 320px; background: white; padding: 18px; border-radius: 8px; border: 1px solid var(--border); box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; flex-direction: column; gap: 14px; position: sticky; top: 16px; max-height: calc(100vh - 100px); overflow-y: auto;">
-          <div style="font-weight: 800; font-size: 0.9rem; color: var(--primary-dark); border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
-            📝 GESTIÓN DE PÁRRAFOS DE ELEMENTOS DE PRUEBA
-          </div>
-          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-            <button class="btn-secondary" onclick="agregarParrafoSintesis('opcion1')" style="flex: 1; background: #0284c7; white-space: nowrap;">➕ Agregar Opción 1 (Fs. xx)</button>
-            <button class="btn-secondary" onclick="agregarParrafoSintesis('opcion2')" style="flex: 1; background: #0369a1; white-space: nowrap;">➕ Agregar Opción 2 (Orden xx)</button>
-          </div>
-          <div class="sheet-row-single" style="width: 100%;">
-            <label>LISTA DE PÁRRAFOS CONFIGURADOS:</label>
-            <div id="sintesis-parrafos-list-target" style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px;">
-              ${renderListaControlSintesisHtml()}
-            </div>
-          </div>
-        </div>
-        <div style="flex-shrink: 0; display: flex; justify-content: center;">
-          <div id="sintesis-live-preview-target">${renderSintesisConclusionesA4Content()}</div>
-        </div>
-      </div>`;
-
     default:
       const pageGenerica = `
-        <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 2em;">Corresponde a expediente ${d.caratula}</div>
+        <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 2em;">Corresponde a expediente ${d.caratula || ''}</div>
         <div class="sangria-cero" style="font-weight: bold; margin-bottom: 1.5em; text-transform: uppercase;">${d.dependencia || ''}, a los ${d.fechaRecepcion || ''}</div>
         <div style="text-align: center; font-weight: bold; font-size: 14pt; margin: 2em 0; text-transform: uppercase;">
           DOCUMENTO ADMINISTRATIVO SUMARIAL GENERADO
         </div>
         <div class="sangria-estandar">
-          Documento administrativo sumarial correspondiente a la solapa seleccionada, tramitado formalmente acorde al expediente <b>${d.caratula}</b> ante <b>${d.intervencion}</b>.
+          Documento administrativo sumarial correspondiente a la solapa seleccionada, tramitado formalmente acorde al expediente <b>${d.caratula || ''}</b> ante <b>${d.intervencion || ''}</b>.
         </div>
       `;
       return renderGenericDocument([pageGenerica]);
@@ -3315,7 +1849,7 @@ function renderDocumentTemplate(tabKey) {
 }
 
 /* ==========================================================================
-   7. INICIALIZACIÓN Y EVENTOS DOM
+   6. INICIALIZACIÓN DOM
    ========================================================================== */
 document.addEventListener('DOMContentLoaded', function() {
   const tabs = document.querySelectorAll('.nav-item-sidebar');
@@ -3324,7 +1858,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const previewTitle = document.getElementById('note-preview-title');
   const previewContainer = document.getElementById('doc-preview-wrapper-container');
 
-  // Inicializar Selects Desplegables
   document.querySelectorAll('.select-dependencia, .select-destino').forEach(select => {
     select.innerHTML = '';
     listaDestinos.forEach(item => {
@@ -3345,11 +1878,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Escuchador global en vista Carga de Datos para actualización en vivo de fórmulas
   viewCarga.addEventListener('input', window.actualizarPreviewEnVivoGlobal);
   viewCarga.addEventListener('change', window.actualizarPreviewEnVivoGlobal);
 
-  // Eventos Acordeón Carga de Datos
   document.querySelectorAll('.sheet-card-header').forEach(header => {
     header.addEventListener('click', function() {
       this.parentElement.classList.toggle('collapsed');
@@ -3364,7 +1895,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.sheet-card-block').forEach(block => block.classList.add('collapsed'));
   });
 
-  // Evento Cambio de Pestañas
   tabs.forEach(tab => {
     tab.addEventListener('click', function() {
       tabs.forEach(t => t.classList.remove('active'));
@@ -3381,22 +1911,12 @@ document.addEventListener('DOMContentLoaded', function() {
         viewResto.classList.add('active-view');
         previewTitle.textContent = `DOCUMENTO GENERADO - ${this.textContent.trim()}`;
 
-        if (['tab-acta_constatacion', 'tab-testimonial', 'tab-inspeccion_ocular', 'tab-parte_escrito', 'tab-corre_agregado', 'tab-col_div', 'tab-lep', 'tab-carpetas_medicas', 'tab-indice_diligencias', 'tab-sintesis_conclusiones', 'tab-inf_seguimiento_comportamiento', 'tab-star_historial_avl', 'tab-star_valor_arancelario', 'tab-star_jmd'].includes(activeTabKey)) {
-          if (card) card.classList.add('full-width-card');
-        } else {
-          if (card) card.classList.remove('full-width-card');
-        }
-
+        if (card) card.classList.add('full-width-card');
         previewContainer.innerHTML = renderDocumentTemplate(activeTabKey);
-
-        if (activeTabKey === 'tab-carpetas_medicas') {
-          renderListaCarpetasMedicas();
-        }
       }
     });
   });
 
-  // Cargar vista por defecto
   viewCarga.classList.add('active-view');
 });
 </script>
