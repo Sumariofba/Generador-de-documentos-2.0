@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generador Automático de Notas Sumariales PAR</title>
 
+<!-- ==========================================================================
+   ESTILOS CSS GENERALES
+   ========================================================================== -->
 <style>
 /* ==========================================================================
    1. VARIABLES DE TEMA Y RESETS
@@ -711,7 +714,9 @@ body {
 
 <body> 
 
-<!-- MENÚ LATERAL IZQUIERDO --> 
+<!-- ==========================================================================
+   BLOQUE: MENÚ LATERAL IZQUIERDO (SIDEBAR)
+   ========================================================================== -->
 <aside class="sidebar"> 
   <div class="sidebar-header"> 
     <div class="sidebar-title">GENERADOR DE NOTAS PAR</div> 
@@ -773,10 +778,14 @@ body {
   </div>
 </aside> 
 
-<!-- CONTENEDOR PRINCIPAL --> 
+<!-- ==========================================================================
+   BLOQUE: CONTENEDOR PRINCIPAL
+   ========================================================================== -->
 <div class="app-container"> 
 
-  <!-- VISTA 1: EXCLUSIVA DE CARGA DE DATOS -->
+  <!-- ==========================================================================
+     BLOQUE: VISTA 1: EXCLUSIVA DE CARGA DE DATOS
+     ========================================================================== -->
   <div class="tab-view active-view" id="view-carga_datos">
     <div class="global-controls">
       <button class="btn-secondary" id="btn-expand-all">📂 Expandir Todos</button>
@@ -936,7 +945,7 @@ body {
       <!-- Bloque 7: MAGISTRADO Y CAUSA PENAL -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
-          <span>⚖️ 7. MAGISTRADO Y CAUSA PENAL</span>
+          <span>⚖️️ 7. MAGISTRADO Y CAUSA PENAL</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
@@ -972,7 +981,9 @@ body {
     </div>
   </div>
 
-  <!-- VISTA 2: EXCLUSIVA DE DOCUMENTOS -->
+  <!-- ==========================================================================
+     BLOQUE: VISTA 2: EXCLUSIVA DE DOCUMENTOS
+     ========================================================================== -->
   <div class="tab-view" id="view-resto-solapas">
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
@@ -990,6 +1001,9 @@ body {
 
 </div> 
 
+<!-- ==========================================================================
+   BLOQUE: SCRIPT DE FUNCIONALIDADES Y LÓGICA JAVASCRIPT
+   ========================================================================== -->
 <script>
 /* ==========================================================================
    1. CONSTANTES Y DATOS GLOBALES
@@ -1604,7 +1618,6 @@ function renderAutoImputacionA4Content() {
   const d = getFormValues();
   const st = window.autoImpEstado;
 
-  // Lógica Sexta Línea (fórmula estricta requerida)
   let textoVisto = "VISTO: El presente Expediente";
   if (d.exp && d.exp.trim() !== "") textoVisto += " " + d.exp.trim();
   if (d.encuadre && d.encuadre.trim() !== "") textoVisto += " " + d.encuadre.trim();
@@ -1633,7 +1646,6 @@ function renderAutoImputacionA4Content() {
     textoVisto += ", con intervención de " + d.intervencion.trim() + ".";
   }
 
-  // Renderizado dinámico de elementos de prueba
   let elementosPruebaHtml = st.elementosPrueba.map(elem => {
     if (elem.tipo === 'opcion1') {
       let f = elem.foja ? elem.foja.trim() : '';
