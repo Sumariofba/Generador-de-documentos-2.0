@@ -1338,6 +1338,55 @@ function getFormValues() {
 }
 
 /* ==========================================================================
+   FUNCIÓN AUXILIAR GENERAL PARA CONSTRUIR EL PÁRRAFO SUMARIAL
+   ========================================================================== */
+function construirParrafoSumarial(prefijoText, sufijoText, d, opciones = {}) {
+  const useBold = opciones.useBold !== undefined ? opciones.useBold : true;
+  const wrapTag = (str) => (useBold && str) ? `<b>${str}</b>` : (str || '');
+
+  let texto = prefijoText;
+
+  if (d.exp && d.exp.trim() !== '') {
+    texto += " " + wrapTag(d.exp.trim());
+  }
+  if (d.encuadre && d.encuadre.trim() !== '') {
+    texto += " " + wrapTag(d.encuadre.trim());
+  }
+  if (d.caratula && d.caratula.trim() !== '') {
+    texto += ", caratulado: " + wrapTag(d.caratula.trim());
+  }
+  if (d.denNombre && d.denNombre.trim() !== '') {
+    let denDestStr = d.denDestino && d.denDestino.trim() !== '' ? " (" + d.denDestino.trim() + ")" : "";
+    texto += ", donde resulta denunciante: " + wrapTag(d.denNombre.trim() + denDestStr);
+  }
+  if (d.vicNombre && d.vicNombre.trim() !== '') {
+    let vicDestStr = d.vicDestino && d.vicDestino.trim() !== '' ? " (" + d.vicDestino.trim() + ")" : "";
+    texto += ", víctima: " + wrapTag(d.vicNombre.trim() + vicDestStr);
+  }
+  if (d.cauNombre && d.cauNombre.trim() !== '') {
+    let cauDestStr = d.cauDestino && d.cauDestino.trim() !== '' ? " (" + d.cauDestino.trim() + ")" : "";
+    texto += ", causante: " + wrapTag(d.cauNombre.trim() + cauDestStr);
+  }
+  if (d.impNombre && d.impNombre.trim() !== '') {
+    let impDestStr = d.impDestino && d.impDestino.trim() !== '' ? " (" + d.impDestino.trim() + ")" : "";
+    texto += ", imputado: " + wrapTag(d.impNombre.trim() + impDestStr);
+  }
+
+  if (!d.intervencion || d.intervencion.trim() === '') {
+    texto += ".";
+  } else {
+    texto += ", con intervención de " + wrapTag(d.intervencion.trim());
+    if (sufijoText) {
+      texto += sufijoText;
+    } else {
+      texto += ".";
+    }
+  }
+
+  return texto;
+}
+
+/* ==========================================================================
    4. MANEJADORES Y EXPORTACIÓN A EDITORES DE TEXTO (WORD / DOCX)
    ========================================================================== */
 function downloadAsWord() {
@@ -1484,20 +1533,14 @@ window.actualizarCarpetasEnVivo = function() {
 function renderCarpetasA4Content() {
   const d = getFormValues();
 
-  let textoEncabezado = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-  if (d.encuadre && d.encuadre.trim() !== '') textoEncabezado += " " + d.encuadre;
-  if (d.caratula && d.caratula.trim() !== '') textoEncabezado += ", caratulado: " + d.caratula;
-  if (d.denNombre && d.denNombre.trim() !== '') textoEncabezado += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-  if (d.vicNombre && d.vicNombre.trim() !== '') textoEncabezado += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-  if (d.cauNombre && d.cauNombre.trim() !== '') textoEncabezado += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-  if (d.impNombre && d.impNombre.trim() !== '') textoEncabezado += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-  textoEncabezado += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", " : ", ";
+  let sufijo = ", licencias médicas vinculadas al hecho en investigación que mas abajo se detalla:";
+  let textoEncabezado = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
 
   let cuerpoParrafoHtml = '';
   if (window.carpetasMedicasEstado.opcion === 'noposee' || (window.carpetasMedicasEstado.opcion === 'carpeta' && window.carpetasMedicasEstado.lista.length === 0)) {
     cuerpoParrafoHtml = `
       <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-        ${textoEncabezado}informa que el agente:
+        ${textoEncabezado} informa que el agente:
       </div>
       <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6; text-align: justify; font-size: 10pt;">
         <li>No posee carpetas vinculadas al hecho investigado.</li>
@@ -1510,7 +1553,7 @@ function renderCarpetasA4Content() {
 
     cuerpoParrafoHtml = `
       <div class="sangria-estandar" style="margin-top: 1.5em; text-align: justify; line-height: 1.5;">
-        ${textoEncabezado}licencias médicas vinculadas al hecho en investigación que mas abajo se detalla:
+        ${textoEncabezado}
       </div>
       <ul style="padding-left: 1.2cm; margin: 1em 0; line-height: 1.6; text-align: justify; font-size: 10pt;">
         ${itemsVinetados}
@@ -2155,46 +2198,21 @@ function renderParteA4Content() {
   const d = getFormValues();
   let destHtml = destinatariosParteEscrito.map(dest => `<b>${dest}</b>`).join('<br>');
 
-  let parrafo1 = "Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas";
-  if (d.encuadre && d.encuadre.trim() !== '') parrafo1 += " <b>" + d.encuadre + "</b>";
-  if (d.caratula && d.caratula.trim() !== '') parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
-  if (d.denNombre && d.denNombre.trim() !== '') {
-    parrafo1 += ", donde resulta denunciante: <b>" + d.denNombre + "</b>";
-    if (d.denDestino && d.denDestino.trim() !== '') parrafo1 += " (<b>" + d.denDestino + "</b>)";
-  }
-  if (d.vicNombre && d.vicNombre.trim() !== '') {
-    parrafo1 += ", víctima: <b>" + d.vicNombre + "</b>";
-    if (d.vicDestino && d.vicDestino.trim() !== '') parrafo1 += " (<b>" + d.vicDestino + "</b>)";
-  }
-  if (d.cauNombre && d.cauNombre.trim() !== '') {
-    parrafo1 += ", causante: <b>" + d.cauNombre + "</b>";
-    if (d.cauDestino && d.cauDestino.trim() !== '') parrafo1 += " (<b>" + d.cauDestino + "</b>)";
-  }
-  if (d.impNombre && d.impNombre.trim() !== '') {
-    parrafo1 += ", imputado: <b>" + d.impNombre + "</b>";
-    if (d.impDestino && d.impDestino.trim() !== '') parrafo1 += " (<b>" + d.impDestino + "</b>)";
-  }
-  if (d.intervencion && d.intervencion.trim() !== '') {
-    parrafo1 += ", con intervención de <b>" + d.intervencion + "</b>.";
-  } else {
-    parrafo1 += ".";
-  }
+  let parrafo1 = construirParrafoSumarial("Me dirijo a usted a fines de informar el inicio de Actuaciones Sumariales Administrativas", ".", d, { useBold: false });
 
-  let parrafo2 = "SINTESIS DEL HECHO: Los presentes actuados tienen su génesis en <b>" + (d.fechaHecho || '') + "</b>, siendo las <b>" + (d.horaHecho || '') + "</b>,cuando se toma conocimiento que <b>" + (d.sintesis || '') + "</b>.";
+  let parrafo2 = "SINTESIS DEL HECHO: Los presentes actuados tienen su génesis en " + (d.fechaHecho || '') + ", siendo las " + (d.horaHecho || '') + ", cuando se toma conocimiento que " + (d.sintesis || '') + ".";
   let parrafo3 = "Atento a lo narrado se labran Actuaciones conforme al Decreto 1050/09 Reglamentario de la Ley del Personal 13982.";
   let parrafo4 = "Lo expuesto, es todo en cuanto informo a usted.";
 
   const estiloParrafo = "text-align: justify; text-justify: inter-word; text-indent: 1.15cm; line-height: 1.5; margin-bottom: 1em; font-size: 10.5pt;";
 
   const pageContent = `
-    <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">
+    <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 1.5em;">
+      REF.: Ccar. Inicio de Actuaciones Sumariales Administrativas (A.S.A.)<br>
       ${d.partido || ''}, ${d.fechaRecepcion || ''}
     </div>
     <div class="sangria-cero" style="margin-bottom: 1.8em; font-size: 10pt; line-height: 1.4;">
       ${destHtml}
-    </div>
-    <div class="sangria-cero" style="font-weight: bold; font-size: 11pt; margin-bottom: 1.5em; text-align: center;">
-      COMUNICACIÓN ADMINISTRATIVA - PARTE ESCRITO
     </div>
     <div style="${estiloParrafo}">${parrafo1}</div>
     <div style="${estiloParrafo}">${parrafo2}</div>
@@ -2265,31 +2283,7 @@ function renderInspeccionA4Content() {
 function renderSintesisConclusionesA4Content() {
   const d = getFormValues();
 
-  let parrafo1 = "Me dirijo a usted afines de de adjuntar y elevar en el computo de ____________________(______) fojas utilizadas. Actuaciones Sumariales Administrativas";
-
-  if (d.encuadre && d.encuadre.trim() !== '') parrafo1 += " <b>" + d.encuadre + "</b>";
-  if (d.caratula && d.caratula.trim() !== '') parrafo1 += ", caratulado: <b>" + d.caratula + "</b>";
-  if (d.denNombre && d.denNombre.trim() !== '') {
-    parrafo1 += ", donde resulta denunciante: <b>" + d.denNombre + "</b>";
-    if (d.denDestino && d.denDestino.trim() !== '') parrafo1 += " (<b>" + d.denDestino + "</b>)";
-  }
-  if (d.vicNombre && d.vicNombre.trim() !== '') {
-    parrafo1 += ", víctima: <b>" + d.vicNombre + "</b>";
-    if (d.vicDestino && d.vicDestino.trim() !== '') parrafo1 += " (<b>" + d.vicDestino + "</b>)";
-  }
-  if (d.cauNombre && d.cauNombre.trim() !== '') {
-    parrafo1 += ", causante: <b>" + d.cauNombre + "</b>";
-    if (d.cauDestino && d.cauDestino.trim() !== '') parrafo1 += " (<b>" + d.cauDestino + "</b>)";
-  }
-  if (d.impNombre && d.impNombre.trim() !== '') {
-    parrafo1 += ", imputado: <b>" + d.impNombre + "</b>";
-    if (d.impDestino && d.impDestino.trim() !== '') parrafo1 += " (<b>" + d.impDestino + "</b>)";
-  }
-  if (d.intervencion && d.intervencion.trim() !== '') {
-    parrafo1 += ", con intervención de <b>" + d.intervencion + "</b>.";
-  } else {
-    parrafo1 += ".";
-  }
+  let parrafo1 = "Me dirijo a usted afines de de adjuntar y elevar Actuaciones Sumariales Administrativas (A.S.A.) en el marco de" + construirParrafoSumarial("", ".", d, { useBold: false }).substring(61);
 
   let parrafosPruebaHtml = window.parrafosSintesisPrueba.map(p => {
     if (p.tipo === 'opcion1') {
@@ -2346,18 +2340,8 @@ function renderSintesisConclusionesA4Content() {
 function renderInfSeguimientoComportamientoA4Content() {
   const d = getFormValues();
 
-  let parrafoIntro = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-  if (d.encuadre && d.encuadre.trim() !== '') parrafoIntro += " " + d.encuadre;
-  if (d.caratula && d.caratula.trim() !== '') parrafoIntro += ", caratulado: " + d.caratula;
-  if (d.denNombre && d.denNombre.trim() !== '') parrafoIntro += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-  if (d.vicNombre && d.vicNombre.trim() !== '') parrafoIntro += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-  if (d.cauNombre && d.cauNombre.trim() !== '') parrafoIntro += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-  if (d.impNombre && d.impNombre.trim() !== '') parrafoIntro += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-  if (!d.intervencion || d.intervencion.trim() === '') {
-    parrafoIntro += ".";
-  } else {
-    parrafoIntro += ", con intervención de " + d.intervencion + ". Llevando a su conocimiento los siguientes puntos que más abajo se detallan:";
-  }
+  let sufijo = ". Llevando a su conocimiento los siguientes puntos que más abajo se detallan:";
+  let parrafoIntro = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
 
   const titleHeader = `
     <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
@@ -2403,19 +2387,12 @@ function renderInfSeguimientoComportamientoA4Content() {
 function renderStarHistorialAvlA4Content() {
   const d = getFormValues();
 
-  let parrafoTexto = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-  if (d.exp && d.exp.trim() !== '') parrafoTexto += " " + d.exp;
-  if (d.encuadre && d.encuadre.trim() !== '') parrafoTexto += " " + d.encuadre;
-  if (d.caratula && d.caratula.trim() !== '') parrafoTexto += ", caratulado: " + d.caratula;
+  let textoDesde = window.horaDesdeAvl ? `desde ${window.horaDesdeAvl}` : "quince (15) minutos antes";
+  let textoHasta = window.horaHastaAvl ? `hasta ${window.horaHastaAvl}` : "quince (15) minutos despues de la hora 08.30 horas";
 
-  let textoDesde = window.horaDesdeAvl ? `desde ${window.horaDesdeAvl} hs` : "quince (15) minutos antes";
-  let textoHasta = window.horaHastaAvl ? `hasta ${window.horaHastaAvl} hs` : "quince (15) minutos despues de la hora 08.30 horas";
+  let sufijo = `, quiera tener a bien y por ante quien corresponda. Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha ${d.fechaHecho || ''}, ${textoDesde} y ${textoHasta}.`;
 
-  if (d.intervencion && d.intervencion.trim() !== '') {
-    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda. Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", " + textoDesde + " y " + textoHasta + ".";
-  } else {
-    parrafoTexto += ". Remitir a esta dependencia historial de recorrido de AVL de la/s unidad/es que más abajo se detalla/n, a fin de determinar la localización y velocidad en que circulaban en fecha " + (d.fechaHecho || '') + ", " + textoDesde + " y " + textoHasta + ".";
-  }
+  let parrafoTexto = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
 
   let itemsVinetados = window.itemsHistorialAvl.map((item, idx) => `
     <li>
@@ -2447,19 +2424,8 @@ function renderStarHistorialAvlA4Content() {
 function renderStarValorArancelarioA4Content() {
   const d = getFormValues();
 
-  let parrafoTexto = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-  if (d.exp && d.exp.trim() !== '') parrafoTexto += " " + d.exp;
-  if (d.encuadre && d.encuadre.trim() !== '') parrafoTexto += " " + d.encuadre;
-  if (d.caratula && d.caratula.trim() !== '') parrafoTexto += ", caratulado: " + d.caratula;
-  if (d.denNombre && d.denNombre.trim() !== '') parrafoTexto += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-  if (d.vicNombre && d.vicNombre.trim() !== '') parrafoTexto += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-  if (d.cauNombre && d.cauNombre.trim() !== '') parrafoTexto += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-  if (d.impNombre && d.impNombre.trim() !== '') parrafoTexto += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-  if (!d.intervencion || d.intervencion.trim() === '') {
-    parrafoTexto += ".";
-  } else {
-    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda, el VALOR ARANCELARIO DE RESPOSICION del bien patrimonial que más abajo se detalla:";
-  }
+  let sufijo = ", quiera tener a bien y por ante quien corresponda, el VALOR ARANCELARIO DE RESPOSICION del bien patrimonial que más abajo se detalla:";
+  let parrafoTexto = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
 
   let elementosHtml = window.elementosValorArancelario.map((item, idx) => {
     let numLimpio = item.num ? item.num.trim() : 'xx';
@@ -2500,19 +2466,8 @@ function renderStarValorArancelarioA4Content() {
 function renderStarJmdA4Content() {
   const d = getFormValues();
 
-  let parrafoTexto = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-  if (d.exp && d.exp.trim() !== '') parrafoTexto += " " + d.exp;
-  if (d.encuadre && d.encuadre.trim() !== '') parrafoTexto += " " + d.encuadre;
-  if (d.caratula && d.caratula.trim() !== '') parrafoTexto += ", caratulado: " + d.caratula;
-  if (d.denNombre && d.denNombre.trim() !== '') parrafoTexto += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-  if (d.vicNombre && d.vicNombre.trim() !== '') parrafoTexto += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-  if (d.cauNombre && d.cauNombre.trim() !== '') parrafoTexto += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-  if (d.impNombre && d.impNombre.trim() !== '') parrafoTexto += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-  if (!d.intervencion || d.intervencion.trim() === '') {
-    parrafoTexto += ".";
-  } else {
-    parrafoTexto += ", con intervención de " + d.intervencion + ", quiera tener a bien y por ante quien corresponda, conforme el “Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la provincia de Buenos Aires, en situaciones de Violencia de Género y Violencia Familiar”, aprobado por RESO-2021-581-GDEBA-MSGP, practique un examen psicológico sobre la persona del " + (d.impNombre || d.cauNombre || '') + ", a fin de determinar lo siguiente:";
-  }
+  let sufijo = `, quiera tener a bien y por ante quien corresponda, conforme el “Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la provincia de Buenos Aires, en situaciones de Violencia de Género y Violencia Familiar”, aprobado por RESO-2021-581-GDEBA-MSGP, practique un examen psicológico sobre la persona del ${d.impNombre || ''}, a fin de determinar lo siguiente:`;
+  let parrafoTexto = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijo, d, { useBold: false });
 
   const pageContent = `
     <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
@@ -2618,7 +2573,7 @@ function renderDocumentTemplate(tabKey) {
             <ul id="arancelario-list-target" style="list-style: none; padding: 0; margin: 4px 0 0 0;">
               ${window.elementosValorArancelario.map((item, idx) => `
                 <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; background: #fff; padding: 6px; border-radius: 4px; border: 1px solid #cbd5e1; font-size: 0.78rem;">
-                  <div><b>${item.num} (${item.desc})</b> - ${item.letras}</div>
+                  <div><b>${item.num} (${item.desc})</b> -${item.letras}</div>
                   <button class="btn-del-row" onclick="quitarElementoValorArancelario(${idx})">✕</button>
                 </li>
               `).join('')}
@@ -2677,6 +2632,9 @@ function renderDocumentTemplate(tabKey) {
       return renderGenericDocument([pageCaratulaContent]);
 
     case 'tab-reg_inst':
+      let sufijoRegInst = ", el registro institucional de las actuaciones, conforme lo established en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: “Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”.";
+      let textoRegInst = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoRegInst, d, { useBold: false });
+
       const pageRegInst = `
         <div style="margin-top: 1cm; line-height: 1.4; margin-left: 7cm; text-align: left; font-weight: bold;">
           REF.: Star. Registro Institucional<br>
@@ -2687,7 +2645,7 @@ function renderDocumentTemplate(tabKey) {
           <b>MESA GENERAL DE ENTRADAS – SALIDAS Y ARCHIVO</b>
         </div>
         <div class="sangria-estandar" style="margin-top: 1.5em; line-height: 1.5;">
-          Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el registro institucional de las actuaciones, conforme lo establecido en el Decreto 3040/77 “Reglamento de Trámite y Correspondencia” en su Artículo 61, cuyo texto reza: <i>“Toda correspondencia o comunicación dirigida oficialmente al Jefe Subjefe de Policía y Organismos Superiores de conducción, asesoramiento y asistencia, cuya clasificación sea Pública o Reservada, será tramitada por la Mesa General de Entradas mediante número único de registro”</i>.
+          ${textoRegInst}
         </div>
         <div class="sangria-estandar" style="margin-top: 2em; line-height: 1.5;">Lo expuesto es todo en cuanto solicito a usted.</div>
       `;
@@ -2746,11 +2704,14 @@ function renderDocumentTemplate(tabKey) {
       </div>`;
 
     case 'tab-recepcion':
+      let sufijoRecepcion = `, el suscripto <b>${d.instructor || ''}</b>, en mis funciones inherentes como <b>${d.cargoInstructor || ''}</b> de la <b>${d.dependencia || ''}</b>, a párrafo seguido.`;
+      let textoRecepcion = construirParrafoSumarial("RECIBIDO: En la fecha, previo registro en los libros correspondientes y, atento a su contenido en el marco de expediente", sufijoRecepcion, d, { useBold: true });
+
       const pagRecepcion1 = `
         <div style="text-align: right; font-weight: bold; font-size: 10pt; margin-bottom: 1.5em;">Corresponde a expediente ${d.caratula}</div>
         <div style="text-align: left; font-weight: bold; margin-bottom: 1.2em;">${d.dependencia}, a los ${d.fechaRecepcion}</div>
         <div style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">
-          <b>RECIBIDO:</b> En la fecha, previo registro en los libros correspondientes y, atento a su contenido en el marco de expediente <b>${d.encuadre || d.caratula}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, el suscripto <b>${d.instructor}</b>, en mis funciones inherentes como <b>${d.cargoInstructor}</b> de la <b>${d.dependencia}</b>, a párrafo seguido. Por ello;
+          ${textoRecepcion} Por ello;
         </div>
         <div style="text-align: left; font-weight: bold; font-size: 11pt; margin: 1.5em 0;">RESUELVO:</div>
         <p style="margin-bottom: 1em; text-align: justify; text-indent: 3.5cm !important;">Designar como secretario de actuaciones a producirse al oficial quién refrenda al pie a continuación para tener legal constancia de lo actuado.</p>
@@ -2824,11 +2785,8 @@ function renderDocumentTemplate(tabKey) {
       </div>`;
 
     case 'tab-cfyp':
-      let introCFYP = "Dando cumplimiento a lo requerido por usted en relación a expediente";
-      if (d.encuadre && d.encuadre.trim() !== '') introCFYP += " " + d.encuadre;
-      if (d.caratula && d.caratula.trim() !== '') introCFYP += ", caratulado: " + d.caratula;
-      if (d.intervencion && d.intervencion.trim() !== '') introCFYP += ", con intervención de " + d.intervencion;
-      introCFYP += ". Respecto a Concepto funcional y privado del infractor, informo los siguientes puntos del efectivo:";
+      let sufijoCFYP = ". Respecto a Concepto funcional y privado del infractor, Informo los siguientes puntos del efectivo:";
+      let introCFYP = construirParrafoSumarial("Dando cumplimiento a lo requerido por usted en relación a expediente", sufijoCFYP, d, { useBold: false });
 
       const aspectosCFYP = [
         { label: 'CULTURA', desc: '(En cuanto a la función que cumple que le permitan asesorar con idoneidad)' },
@@ -2893,14 +2851,8 @@ function renderDocumentTemplate(tabKey) {
       return renderGenericDocument([pageCFYP]);
 
     case 'tab-tdh':
-      let introTDH = "Me dirijo a usted afines de informar en el marco de Actuaciones Sumariales Administrativas";
-      if (d.encuadre && d.encuadre.trim() !== '') introTDH += " " + d.encuadre;
-      if (d.caratula && d.caratula.trim() !== '') introTDH += ", caratulado: " + d.caratula;
-      if (d.denNombre && d.denNombre.trim() !== '') introTDH += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-      if (d.vicNombre && d.vicNombre.trim() !== '') introTDH += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-      if (d.cauNombre && d.cauNombre.trim() !== '') introTDH += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-      if (d.impNombre && d.impNombre.trim() !== '') introTDH += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-      introTDH += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", tipos, días, horarios y circunstancias del agente la momento del hecho:" : ".";
+      let sufijoTDH = ", tipos, días, horarios y circunstancias del agente la momento del hecho:";
+      let introTDH = construirParrafoSumarial("Me dirijo a usted afines de informar en el marco de Actuaciones Sumariales Administrativas", sufijoTDH, d, { useBold: false });
 
       const pageTDH = `
         <div style="margin-left: 7cm; display: grid; grid-template-columns: auto 1fr; gap: 8px; font-weight: bold; font-size: 10pt; line-height: 1.4; margin-bottom: 2em;">
@@ -2945,14 +2897,8 @@ function renderDocumentTemplate(tabKey) {
       </div>`;
 
     case 'tab-lep':
-      let textoLEP = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-      if (d.encuadre && d.encuadre.trim() !== '') textoLEP += " " + d.encuadre;
-      if (d.caratula && d.caratula.trim() !== '') textoLEP += ", caratulado: " + d.caratula;
-      if (d.denNombre && d.denNombre.trim() !== '') textoLEP += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-      if (d.vicNombre && d.vicNombre.trim() !== '') textoLEP += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-      if (d.cauNombre && d.cauNombre.trim() !== '') textoLEP += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-      if (d.impNombre && d.impNombre.trim() !== '') textoLEP += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-      textoLEP += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:" : ".";
+      let sufijoLEP = ", quiera tener a bien remitir Legajo Electrónico Personal (LEP) a los efectos de informar antecedentes profesionales y personales establecidos en el Artículo 287 del Decreto Reglamentario 1050/09 de la Ley de Personal 13982 del Agente que mas abajo se detalla:";
+      let textoLEP = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoLEP, d, { useBold: false });
 
       if (!window.registrosSeleccionadosLEP) {
         window.registrosSeleccionadosLEP = [];
@@ -3037,6 +2983,9 @@ function renderDocumentTemplate(tabKey) {
       </div>`;
 
     case 'tab-col_ipp':
+      let sufijoColIPP = ", quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:";
+      let textoColIPP = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoColIPP, d, { useBold: false });
+
       const pageColIPP = `
         <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
           REF.: Star. informe de Procesos Penales (PP) vinculado<br>
@@ -3046,7 +2995,7 @@ function renderDocumentTemplate(tabKey) {
           AL SEÑOR AGENTE FISCAL<br>${d.magistrado ? d.magistrado.toUpperCase() : ''}<br>DEPARTAMENTO JUDICIAL ${d.dptoJudicial ? d.dptoJudicial.toUpperCase() : ''}
         </div>
         <div class="sangria-estandar">
-          Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, quiera tener a bien y ante quien corresponda informe:
+          ${textoColIPP}
         </div>
         <div class="sangria-cero" style="margin: 1em 0; text-align: justify;">
           - Si existe registro de algún Proceso Penal en trámite donde resulte denunciado el ciudadano <b>${d.impNombre}</b>, edad: <b>${d.impEdad}</b>, Documento Nacional de Identidad N°: <b>${d.impDni}</b> en la víspera del <b>${d.fechaHecho}</b>, o posteriores, en la arteria <b>${d.lugarHecho}</b>, localidad de <b>${d.hechoLoc}</b>, partido de <b>${d.hechoPartido}</b>.
@@ -3060,6 +3009,9 @@ function renderDocumentTemplate(tabKey) {
       return renderGenericDocument([pageColIPP]);
 
     case 'tab-cautelares':
+      let sufijoCautelares = ", quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:";
+      let textoCautelares = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoCautelares, d, { useBold: false });
+
       const pageCautelares = `
         <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
           REF.: Star. Medidas cautelares vigentes<br>
@@ -3069,7 +3021,7 @@ function renderDocumentTemplate(tabKey) {
           AL SEÑOR AGENTE FISCAL<br>RECEPTORIA GENERAL DE EXPEDIENTES<br>DEPARTAMENTO JUDICIAL ${d.dptoJudicial ? d.dptoJudicial.toUpperCase() : ''}
         </div>
         <div class="sangria-estandar">
-          Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas <b>${d.encuadre}</b>, caratulado: <b>${d.caratula}</b>, donde resulta denunciante: <b>${d.denNombre} (${d.denDestino})</b>, víctima: <b>${d.vicNombre} (${d.vicDestino})</b>, causante: <b>${d.cauNombre} (${d.cauDestino})</b>, imputado: <b>${d.impNombre} (${d.impDestino})</b>, con intervención de <b>${d.intervencion}</b>, quiera tener a bien y ante quien corresponda realice las siguientes diligencias que se detallan mas abajo:
+          ${textoCautelares}
         </div>
         <ul style="padding-left: 1.2cm; line-height: 1.5; text-align: justify; margin: 1em 0;">
           <li>Si existe registro de alguna Medida Cautelar vigente donde resulte causante el efectivo <b>${d.impNombre}</b>, edad: <b>${d.impEdad}</b>, Documento Nacional de Identidad N°: <b>${d.impDni}</b> en la víspera del <b>${d.fechaHecho}</b>, o posteriores.</li>
@@ -3081,14 +3033,8 @@ function renderDocumentTemplate(tabKey) {
       return renderGenericDocument([pageCautelares]);
 
     case 'tab-anmac':
-      let textoANMAC = "Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas";
-      if (d.encuadre && d.encuadre.trim() !== '') textoANMAC += " " + d.encuadre;
-      if (d.caratula && d.caratula.trim() !== '') textoANMAC += ", caratulado: " + d.caratula;
-      if (d.denNombre && d.denNombre.trim() !== '') textoANMAC += ", donde resulta denunciante: " + d.denNombre + (d.denDestino ? " (" + d.denDestino + ")" : "");
-      if (d.vicNombre && d.vicNombre.trim() !== '') textoANMAC += ", víctima: " + d.vicNombre + (d.vicDestino ? " (" + d.vicDestino + ")" : "");
-      if (d.cauNombre && d.cauNombre.trim() !== '') textoANMAC += ", causante: " + d.cauNombre + (d.cauDestino ? " (" + d.cauDestino + ")" : "");
-      if (d.impNombre && d.impNombre.trim() !== '') textoANMAC += ", imputado: " + d.impNombre + (d.impDestino ? " (" + d.impDestino + ")" : "");
-      textoANMAC += (d.intervencion && d.intervencion.trim() !== '') ? ", con intervención de " + d.intervencion + ", quiera tener a bien por intermedio de quien corresponda adune informe de REPAR (conforme el artículo 13 de RESO 581/21 en las actuaciones en que se empleen armas de fuego) a efectos de informar si el agente que más abajo se detalla, posee además del armamento provisto y reglamentario, otra arma de fuego:" : ".";
+      let sufijoANMAC = ", quiera tener a bien por intermedio de quien corresponda adune informe de REPAR (conforme el artículo 13 de RESO 581/21 en las actuaciones en que se empleen armas de fuego) a efectos de informar si el agente que más abajo se detalla, posee además del armamento provisto y reglamentario, otra arma de fuego:";
+      let textoANMAC = construirParrafoSumarial("Me dirijo a usted afines de solicitar en el marco de Actuaciones Sumariales Administrativas", sufijoANMAC, d, { useBold: false });
 
       const pageANMAC = `
         <div style="margin-left: 7cm; text-align: left; font-weight: bold; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
@@ -3112,11 +3058,8 @@ function renderDocumentTemplate(tabKey) {
       return renderGenericDocument([pageANMAC]);
 
     case 'tab-col_cria':
-      let encuadrePart = (d.encuadre && d.encuadre.trim() !== '') ? ` <b>${d.encuadre}</b>` : '';
-      let caratulaPart = (d.caratula && d.caratula.trim() !== '') ? `, caratulado: <b>${d.caratula}</b>` : '';
-      let cauPart = (d.cauNombre && d.cauNombre.trim() !== '') ? `, donde evalúa la conducta del <b>${d.cauNombre}</b>` : '';
-      let cauDestPart = (d.cauDestino && d.cauDestino.trim() !== '') ? `, numerario de la <b>${d.cauDestino}</b>` : '';
-      let intervPart = (d.intervencion && d.intervencion.trim() !== '') ? `, en trámite ante el <b>${d.intervencion}</b>` : '';
+      let sufijoColCria = ", quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por la RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental de la victima:";
+      let textoColCria = construirParrafoSumarial("Me dirijo a usted a los fines de solicitarle en el marco de", sufijoColCria, d, { useBold: false });
 
       const pageColCria = `
         <div style="margin-left: 7cm; text-align: left; line-height: 1.4; font-size: 10pt; margin-bottom: 2em;">
@@ -3126,7 +3069,7 @@ function renderDocumentTemplate(tabKey) {
           AL SEÑOR/A SUPERINTENDENTE/A<br>SUPERINTENDENCIA DE POLÍTICAS DE GÉNERO
         </div>
         <div class="sangria-estandar" style="margin-top: 1em; text-align: justify; line-height: 1.5;">
-          Me dirijo a usted a los fines de solicitarle en el marco de Actuaciones Sumariales Administrativas${encuadrePart}${caratulaPart}${cauPart}${cauDestPart}${intervPart}, quiera tener a bien de realizar a través de los profesionales de sus equipos interdisciplinarios, a tenor de lo normado en el artículo 9 del Protocolo para el Abordaje, la Evaluación y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en situaciones de Violencia de Género y Violencia Familiar, aprobado por a RESO-2021-581-GDEBA-MSGP, un informe de evaluación de riesgo y socio ambiental a la ciudadana/o:
+          ${textoColCria}
         </div>
         <table class="table-oficial" style="margin-top: 1.5em;">
           <thead>
