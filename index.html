@@ -944,7 +944,7 @@ body {
       <!-- Subbloque 7: MAGISTRADO Y CAUSA PENAL -->
       <div class="sheet-card-block collapsed">
         <div class="sheet-card-header">
-          <span>⚖️ 7. MAGISTRADO Y CAUSA PENAL</span>
+          <span>⚖️️ 7. MAGISTRADO Y CAUSA PENAL</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
@@ -1364,19 +1364,19 @@ function construirParrafoSumarial(prefijoText, sufijoText, d, opciones = {}) {
     texto += ", caratulado: " + wrapTag(d.caratula.trim());
   }
   if (d.denNombre && d.denNombre.trim() !== '') {
-    let denDestStr = d.denDestino && d.denDestino.trim() !== '' ? " (" + d.denDestino.trim() + ")" : "";
+    let denDestStr = d.denDestino && d.denDestino.trim() !== '' ? "<br>" + d.denDestino.trim() : "";
     texto += ", donde resulta denunciante: " + wrapTag(d.denNombre.trim() + denDestStr);
   }
   if (d.vicNombre && d.vicNombre.trim() !== '') {
-    let vicDestStr = d.vicDestino && d.vicDestino.trim() !== '' ? " (" + d.vicDestino.trim() + ")" : "";
+    let vicDestStr = d.vicDestino && d.vicDestino.trim() !== '' ? "<br>" + d.vicDestino.trim() : "";
     texto += ", víctima: " + wrapTag(d.vicNombre.trim() + vicDestStr);
   }
   if (d.cauNombre && d.cauNombre.trim() !== '') {
-    let cauDestStr = d.cauDestino && d.cauDestino.trim() !== '' ? " (" + d.cauDestino.trim() + ")" : "";
+    let cauDestStr = d.cauDestino && d.cauDestino.trim() !== '' ? "<br>" + d.cauDestino.trim() : "";
     texto += ", causante: " + wrapTag(d.cauNombre.trim() + cauDestStr);
   }
   if (d.impNombre && d.impNombre.trim() !== '') {
-    let impDestStr = d.impDestino && d.impDestino.trim() !== '' ? " (" + d.impDestino.trim() + ")" : "";
+    let impDestStr = d.impDestino && d.impDestino.trim() !== '' ? "<br>" + d.impDestino.trim() : "";
     texto += ", imputado: " + wrapTag(d.impNombre.trim() + impDestStr);
   }
 
@@ -2608,17 +2608,16 @@ function renderDocumentTemplate(tabKey) {
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">FECHA DEL HECHO:</div><div class="caratula-val">${d.fechaHecho || ''}</div></div>`;
 
       if (d.denNombre && d.denNombre.trim() !== '') {
-        rowsHtml += `<div class="caratula-row"><div class="caratula-label">DENUNCIANTE:</div><div class="caratula-val">${d.denNombre}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">DENUNCIANTE:</div><div class="caratula-val">${d.denNombre}${d.denDestino ? '<br>' + d.denDestino : ''}</div></div>`;
       }
       if (d.vicNombre && d.vicNombre.trim() !== '') {
-        rowsHtml += `<div class="caratula-row"><div class="caratula-label">VÍCTIMA:</div><div class="caratula-val">${d.vicNombre}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">VÍCTIMA:</div><div class="caratula-val">${d.vicNombre}${d.vicDestino ? '<br>' + d.vicDestino : ''}</div></div>`;
       }
       if (d.cauNombre && d.cauNombre.trim() !== '') {
-        rowsHtml += `<div class="caratula-row"><div class="caratula-label">CAUSANTE:</div><div class="caratula-val">${d.cauNombre}</div></div>`;
-        rowsHtml += `<div class="caratula-row"><div class="caratula-label">DESTINO AL MOMENTO DEL HECHO:</div><div class="caratula-val">${d.cauDestino || ''}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">CAUSANTE:</div><div class="caratula-val">${d.cauNombre}${d.cauDestino ? '<br>' + d.cauDestino : ''}</div></div>`;
       }
       if (d.impNombre && d.impNombre.trim() !== '') {
-        rowsHtml += `<div class="caratula-row"><div class="caratula-label">IMPUTADO:</div><div class="caratula-val">${d.impNombre}</div></div>`;
+        rowsHtml += `<div class="caratula-row"><div class="caratula-label">IMPUTADO:</div><div class="caratula-val">${d.impNombre}${d.impDestino ? '<br>' + d.impDestino : ''}</div></div>`;
       }
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">CTROL. DISCIPLINARIO INTERV.:</div><div class="caratula-val">${d.intervencion || ''}</div></div>`;
       rowsHtml += `<div class="caratula-row"><div class="caratula-label">INSTRUCTOR:</div><div class="caratula-val">${d.instructor || ''}</div></div>`;
