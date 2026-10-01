@@ -7,7 +7,7 @@
 
 <style>
 /* ==========================================================================
-   1. VARIABLES DE TEMA Y RESETS
+    1. VARIABLES DE TEMA Y RESETS
    ========================================================================== */
 :root {
   --primary: #0284c7;
@@ -37,7 +37,7 @@ body {
 }
 
 /* ==========================================================================
-   2. MENÚ LATERAL IZQUIERDO (SIDEBAR)
+    2. MENÚ LATERAL IZQUIERDO (SIDEBAR)
    ========================================================================== */
 .sidebar {
   width: var(--sidebar-width);
@@ -123,7 +123,7 @@ body {
 }
 
 /* ==========================================================================
-   3. CONTENEDOR PRINCIPAL Y VISTAS
+    3. CONTENEDOR PRINCIPAL Y VISTAS
    ========================================================================== */
 .app-container {
   display: flex;
@@ -145,7 +145,7 @@ body {
 }
 
 /* ==========================================================================
-   4. VISTA CARGA DE DATOS (ACORDEÓN Y FORMULARIOS)
+    4. VISTA CARGA DE DATOS (ACORDEÓN Y FORMULARIOS)
    ========================================================================== */
 #view-carga_datos {
   width: 100%;
@@ -253,7 +253,7 @@ body {
 }
 
 /* ==========================================================================
-   5. BOTONES GENERALES
+    5. BOTONES GENERALES
    ========================================================================== */
 .btn {
   border: none;
@@ -320,7 +320,7 @@ body {
 }
 
 /* ==========================================================================
-   6. VISTA DOCUMENTOS / PREVISUALIZACIÓN A4 CON MÁRGENES REFLEJADOS
+    6. VISTA DOCUMENTOS / PREVISUALIZACIÓN A4 CON MÁRGENES REFLEJADOS
    ========================================================================== */
 #view-resto-solapas {
   width: 100%;
@@ -425,7 +425,7 @@ body {
 .sangria-cero { margin-bottom: 1em; text-align: justify; text-indent: 0cm !important; }
 
 /* ==========================================================================
-   7. COMPONENTES INTERNOS DE DOCUMENTOS
+    7. COMPONENTES INTERNOS DE DOCUMENTOS
    ========================================================================== */
 .caratula-page-body {
   display: flex;
@@ -590,7 +590,7 @@ body {
 }
 
 /* ==========================================================================
-   8. REGLAS DE IMPRESIÓN CON MÁRGENES REFLEJADOS
+    8. REGLAS DE IMPRESIÓN CON MÁRGENES REFLEJADOS
    ========================================================================== */
 @media print {
   @page {
@@ -714,8 +714,8 @@ body {
 <body> 
 
 <!-- ==========================================================================
-     BLOQUE: MENÚ LATERAL IZQUIERDO (SIDEBAR)
-     ========================================================================== -->
+      BLOQUE: MENÚ LATERAL IZQUIERDO (SIDEBAR)
+      ========================================================================== -->
 <aside class="sidebar"> 
   <div class="sidebar-header"> 
     <div class="sidebar-title">GENERADOR DE NOTAS PAR</div> 
@@ -761,7 +761,7 @@ body {
 
   <!-- SECCIÓN 3 -->
   <div class="menu-section">
-    <div class="menu-section-title">⚖️ Diligencias Administrativas Auto de Imputación</div>
+    <div class="menu-section-title">⚖️️ Diligencias Administrativas Auto de Imputación</div>
     <ul class="nav-list-sidebar"> 
       <li class="nav-item-sidebar" data-tab="tab-auto_imputacion">📄 AUTO DE IMPUTACIÓN</li> 
       <li class="nav-item-sidebar" data-tab="tab-acta_not_auto_imputacion">📄 ACTA NOT. AUTO DE IMPUTACIÓN</li> 
@@ -778,14 +778,14 @@ body {
 </aside> 
 
 <!-- ==========================================================================
-     BLOQUE: CONTENEDOR PRINCIPAL
-     ========================================================================== -->
+      BLOQUE: CONTENEDOR PRINCIPAL
+      ========================================================================== -->
 <div class="app-container"> 
 
 
   <!-- ==========================================================================
-       BLOQUE: VISTA 1 - CARGA DE DATOS (ACORDEÓN Y FORMULARIOS)
-       ========================================================================== -->
+        BLOQUE: VISTA 1 - CARGA DE DATOS (ACORDEÓN Y FORMULARIOS)
+        ========================================================================== -->
   <div class="tab-view active-view" id="view-carga_datos">
     <div class="global-controls">
       <button class="btn-secondary" id="btn-expand-all">📂 Expandir Todos</button>
@@ -918,7 +918,7 @@ body {
             <label>CIRCUNSTANCIAS AL MOMENTO DEL HECHO:</label>
             <div style="display: flex; gap: 6px; align-items: center;">
               <select id="f_50f_imp_circunstancias" class="select-circunstancias" style="flex: 1;"></select>
-              <button class="btn-secondary" type="button" onclick="document.getElementById('f_50f_imp_circunstancias').selectedIndex = 0; document.getElementById('f_50f_imp_circunstancias').value = '';" style="padding: 6px 10px; font-size: 0.75rem;" title="Dejar vacío">🗑️ Vaciar</button>
+              <button class="btn-secondary" type="button" onclick="document.getElementById('f_50f_imp_circunstancias').selectedIndex = 0; document.getElementById('f_50f_imp_circunstancias').value = '';" style="padding: 6px 10px; font-size: 0.75rem;" title="Dejar vacío">🗑️️ Vaciar</button>
             </div>
           </div>
         </div>
@@ -1000,7 +1000,7 @@ body {
             <label>CIRCUNSTANCIAS AL MOMENTO DEL HECHO:</label>
             <div style="display: flex; gap: 6px; align-items: center;">
               <select id="f_21f_cau_circunstancias" class="select-circunstancias" style="flex: 1;"></select>
-              <button class="btn-secondary" type="button" onclick="document.getElementById('f_21f_cau_circunstancias').selectedIndex = 0; document.getElementById('f_21f_cau_circunstancias').value = '';" style="padding: 6px 10px; font-size: 0.75rem;" title="Dejar vacío">🗑️ Vaciar</button>
+              <button class="btn-secondary" type="button" onclick="document.getElementById('f_21f_cau_circunstancias').selectedIndex = 0; document.getElementById('f_21f_cau_circunstancias').value = '';" style="padding: 6px 10px; font-size: 0.75rem;" title="Dejar vacío">🗑️️ Vaciar</button>
             </div>
           </div>
         </div>
@@ -1031,8 +1031,8 @@ body {
   </div>
 
   <!-- ==========================================================================
-       BLOQUE: VISTA 2 - EXCLUSIVA DE DOCUMENTOS
-       ========================================================================== -->
+        BLOQUE: VISTA 2 - EXCLUSIVA DE DOCUMENTOS
+        ========================================================================== -->
   <div class="tab-view" id="view-resto-solapas">
     <div class="right-preview-panel" id="main-right-preview-panel">
       <div class="card full-width-card" id="main-preview-card"> 
