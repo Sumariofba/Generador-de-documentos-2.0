@@ -1089,57 +1089,193 @@ const listaDestinos = [
   "CONFIDENCIAL",
   "CIVIL"
 ];
-
 const listaCircunstanciasColumnaO = [
-  "Servicio de Policia Adicional (PolAd)",
+  "Servicio de Policía Adicional (Pol.Ad)",
   "Servicio Ordinario",
   "Servicio Co.Re.S.",
   "Franco de servicio -en cumplimiento del deber-",
   "Franco de servicio -camino a su domicilio-",
   "Franco de servicio -camino a su lugar de trabajo-",
-  "Franco de servicio -uso particular-",
+  "-Seleccionar una opción",
   "Disponibilidad",
   "Retiro Activo"
 ];
-
 const listaDesplegableColumnaM = [
-  "Stud. Registro Institucional",
+  "Acta de Acuerdo de Procedimiento Abreviado",
   "Acta de constatación",
-  "Denuncia a la aseguradora de riesgos del trabajo (A.R.T.)",
-  "Decreto inicio actuaciones administrativas",
-  "Comunicación Administrativa -Parte Escrito-",
-  "Corre agregado",
-  "Captura del Sistema Informático del Personal Policial (SIPP) - INFO DEL EFECTIVO",
-  "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
-  "Vademécum - RP21100",
-  "Concepto Funcional y Personal",
-  "Informe de tipo, días y horario de servicio",
-  "Stud. Legajo Electrónico Personal (L.E.P.)",
-  "Legajo Electrónico Personal (L.E.P.)",
-  "Copia certificada con habilitación del Libro de novedades de la guardia",
-  "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
+  "Acta de Explosivos Ley Nacional 20429 de armas y explosivos y modificatorias, afines de establecer si posee en forma particular material incluido 'homologado como armamento provisto', rubricada por el [DATOS VICTIMA]",
+  "Acta de Explosivos Ley Nacional 20429 de armas y explosivos y modificatorias, afines de establecer si posee en forma particular material incluido 'homologado como armamento provisto', rubricada por el [DATOS IMPUTADO]",
+  "Acta de Explosivos Ley Nacional 20429 de armas y explosivos y modificatorias, afines de establecer si posee en forma particular material incluido 'homologado como armamento provisto', rubricada por el [DATOS DENUNCIANTE]",
+  "Acta de Explosivos Ley Nacional 20429 de armas y explosivos y modificatorias, afines de establecer si posee en forma particular material incluido 'homologado como armamento provisto', rubricada por el [DATOS CAUSANTE]",
+  "Acta de Incomparecencia y Decaimiento de Derecho de Defensa.",
   "Acta de Inspección ocular del lugar de los hechos",
-  "Croquis ilustrativo sin escalas del lugar del hechos",
-  "Placas fotográficas del lugar del hecho",
-  "Declaración testimonial del Encargado de Logística",
-  "Declaración testimonial del causante",
-  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa",
-  "Historia Clínica del causante",
-  "Copia certificado de constancia de ALTA / FIN DE TRATAMIENTO ART del causante",
-  "Stud. Reconocimiento Médico Legal (R.M.L.) al causante",
-  "Reconocimiento Médico Legal (R.M.L.) del causante",
+  "Adune informe de Comportamiento y Seguimiento tanto en la faz laboral por parte del superior directo del [DATOS VICTIMA]",
+  "Adune informe de Comportamiento y Seguimiento tanto en la faz laboral por parte del superior directo del [DATOS IMPUTADO]",
+  "Adune informe de Comportamiento y Seguimiento tanto en la faz laboral por parte del superior directo del [DATOS DENUNCIANTE]",
+  "Adune informe de Comportamiento y Seguimiento tanto en la faz laboral por parte del superior directo del [DATOS CAUSANTE]",
+  "Auto de elevación",
+  "auto de imputación",
+  "Captura del Sistema Informatico del Personal Policial (SIPP) - INFO DEL EFECTIVO del [DATOS VICTIMA]",
+  "Captura del Sistema Informatico del Personal Policial (SIPP) - INFO DEL EFECTIVO del [DATOS IMPUTADO]",
+  "Captura del Sistema Informatico del Personal Policial (SIPP) - INFO DEL EFECTIVO del [DATOS DENUNCIANTE]",
+  "Captura del Sistema Informatico del Personal Policial (SIPP) - INFO DEL EFECTIVO del [DATOS CAUSANTE]",
+  "Captura de pantalla del Sistema Informatico del Personal Policial (SIPP) - PARTES DE ENFERMO del [DATOS VICTIMA]",
+  "Captura de pantalla del Sistema Informatico del Personal Policial (SIPP) - PARTES DE ENFERMO del [DATOS IMPUTADO]",
+  "Captura de pantalla del Sistema Informatico del Personal Policial (SIPP) - PARTES DE ENFERMO del [DATOS DENUNCIANTE]",
+  "Captura de pantalla del Sistema Informatico del Personal Policial (SIPP) - PARTES DE ENFERMO del [DATOS CAUSANTE]",
+  "Captura de Pantalla del Sistema Informatico del Personal Policial (SIPP) - SANCIONES DIRECTAS del [DATOS VICTIMA]",
+  "Captura de Pantalla del Sistema Informatico del Personal Policial (SIPP) - SANCIONES DIRECTAS del [DATOS IMPUTADO]",
+  "Captura de Pantalla del Sistema Informatico del Personal Policial (SIPP) - SANCIONES DIRECTAS del [DATOS DENUNCIANTE]",
+  "Captura de Pantalla del Sistema Informatico del Personal Policial (SIPP) - SANCIONES DIRECTAS del [DATOS CAUSANTE]",
+  "Certifica de Revista legible generado por el Sistema Informático del Personal (SIPP) del [DATOS VICTIMA]",
+  "Certifica de Revista legible generado por el Sistema Informático del Personal (SIPP) del [DATOS IMPUTADO]",
+  "Certifica de Revista legible generado por el Sistema Informático del Personal (SIPP) del [DATOS DENUNCIANTE]",
+  "Certifica de Revista legible generado por el Sistema Informático del Personal (SIPP) del [DATOS CAUSANTE]",
+  "Certificar denuncias anteriores con idéntica temática ante dicha Dependencia (Cría de la Familia), debiendo además consignarse el número de EE generado a raíz de cada uno de los oficios mencionados. En caso de ser positivo informe el estado actual de la causa de familia e IPP, debiendo informar situación procesal del agente involucrado (plasmar dicha diligencia mediante declaración testimonial y/o informe judicial).",
   "Cierre de actuaciones administrativas",
-  "Síntesis y conclusiones"
-];
-
-const listaDiligenciasColumnaC = [
-  "Informe de tipo, días y horario de servicio",
-  "Concepto Funcional y Personal",
-  "Copia certificada con habilitación del Libro de novedades de la guardia",
-  "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
-  "Legajo Electrónico Personal (L.E.P.)",
-  "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
-  "Informe de Comportamiento y Seguimiento laboral"
+  "comunicación Administrativa -Parte Escrito-",
+  "Concepto Funcional y Personal firmado por superior directo del [DATOS VICTIMA]",
+  "Concepto Funcional y Personal firmado por superior directo del [DATOS IMPUTADO]",
+  "Concepto Funcional y Personal firmado por superior directo del [DATOS DENUNCIANTE]",
+  "Concepto Funcional y Personal firmado por superior directo del [DATOS CAUSANTE]",
+  "Copia certificada y legible con habilitación del Libro de Novedades de la guardia de fecha [FECHA HECHO]",
+  "Copia certificada y legible con habilitación del Libro de Presentismo y Co.Re.S. de fecha [FECHA HECHO]",
+  "Copia certificada y legible de CONSTANCIA DE ALTA/ FIN DE TRATAMIENTO de la Aseguradora de Riesgos del Trabajo (A.R.T.) del [DATOS VICTIMA]",
+  "Copia certificada y legible de CONSTANCIA DE ALTA/ FIN DE TRATAMIENTO de la Aseguradora de Riesgos del Trabajo (A.R.T.) del [DATOS IMPUTADO]",
+  "Copia certificada y legible de CONSTANCIA DE ALTA/ FIN DE TRATAMIENTO de la Aseguradora de Riesgos del Trabajo (A.R.T.) del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de CONSTANCIA DE ALTA/ FIN DE TRATAMIENTO de la Aseguradora de Riesgos del Trabajo (A.R.T.) del [DATOS CAUSANTE]",
+  "Copia certificada y legible de Declaración Jurada (DDJJ) expedida por sistema informatico de Personal (SIPP) de vehículos firmada por el [DATOS VICTIMA]",
+  "Copia certificada y legible de Declaración Jurada (DDJJ) expedida por sistema informatico de Personal (SIPP) de vehículos firmada por el [DATOS IMPUTADO]",
+  "Copia certificada y legible de Declaración Jurada (DDJJ) expedida por sistema informatico de Personal (SIPP) de vehículos firmada por el [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de Declaración Jurada (DDJJ) expedida por sistema informatico de Personal (SIPP) de vehículos firmada por el [DATOS CAUSANTE]",
+  "Copia certificada y legible de denuncia a la aseguradora (DL6) de la unidad del dia [FECHA HECHO]",
+  "Copia certificada y legible de denuncia de accidente de trabajo o enfermedad profesional a la Asegurador Provincia A.R.T del [DATOS VICTIMA]",
+  "Copia certificada y legible de denuncia de accidente de trabajo o enfermedad profesional a la Asegurador Provincia A.R.T del [DATOS IMPUTADO]",
+  "Copia certificada y legible de denuncia de accidente de trabajo o enfermedad profesional a la Asegurador Provincia A.R.T del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de denuncia de accidente de trabajo o enfermedad profesional a la Asegurador Provincia A.R.T del [DATOS CAUSANTE]",
+  "Copia certificada y legible de Historia Clínica del [DATOS VICTIMA]",
+  "Copia certificada y legible de Historia Clínica del [DATOS IMPUTADO]",
+  "Copia certificada y legible de Historia Clínica del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de Historia Clínica del [DATOS CAUSANTE]",
+  "Copia certificada y legible de Libre de Deuda de la vestimenta y elementos provistos por la institución. En caso de que se encuentren secuestrados en las actuaciones de mención, realice informe firmado por el titular del elemento adjuntando copia certificada y legible de solicitud de Libramiento y restitución al magistrado judicial interviniente.",
+  "Copia certificada y legible de Licencia de conducir del [DATOS VICTIMA]",
+  "Copia certificada y legible de Licencia de conducir del [DATOS IMPUTADO]",
+  "Copia certificada y legible de Licencia de conducir del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de Licencia de conducir del [DATOS CAUSANTE]",
+  "Copia certificada y legible de Licencia de conducir habilitante del [DATOS VICTIMA]",
+  "Copia certificada y legible de Licencia de conducir habilitante del [DATOS IMPUTADO]",
+  "Copia certificada y legible de Licencia de conducir habilitante del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de Licencia de conducir habilitante del [DATOS CAUSANTE]",
+  "copia certificada y legible de orden de servicio vigente en la vispera del [FECHA HECHO]",
+  "Copia certificada y legible de resolución de autorización para Manejo de Móviles Oficiales de la Dirección de Automotores Oficiales (D.A.O.) del [DATOS VICTIMA]",
+  "Copia certificada y legible de resolución de autorización para Manejo de Móviles Oficiales de la Dirección de Automotores Oficiales (D.A.O.) del [DATOS IMPUTADO]",
+  "Copia certificada y legible de resolución de autorización para Manejo de Móviles Oficiales de la Dirección de Automotores Oficiales (D.A.O.) del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de resolución de autorización para Manejo de Móviles Oficiales de la Dirección de Automotores Oficiales (D.A.O.) del [DATOS CAUSANTE]",
+  "Copia certificada y legible del cargo personal de chaleco de protección balística del [DATOS VICTIMA]",
+  "Copia certificada y legible del cargo personal de chaleco de protección balística del [DATOS IMPUTADO]",
+  "Copia certificada y legible del cargo personal de chaleco de protección balística del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible del cargo personal de chaleco de protección balística del [DATOS CAUSANTE]",
+  "Copia certificada y legible del cargo personal del elemento provisto del [DATOS VICTIMA]",
+  "Copia certificada y legible del cargo personal del elemento provisto del [DATOS IMPUTADO]",
+  "Copia certificada y legible del cargo personal del elemento provisto del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible del cargo personal del elemento provisto del [DATOS CAUSANTE]",
+  "Copia certificada y legible del Seguro Obligatorio para circular del momento del hecho del rodado del [DATOS VICTIMA]",
+  "Copia certificada y legible del Seguro Obligatorio para circular del momento del hecho del rodado del [DATOS IMPUTADO]",
+  "Copia certificada y legible del Seguro Obligatorio para circular del momento del hecho del rodado del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible del Seguro Obligatorio para circular del momento del hecho del rodado del [DATOS CAUSANTE]",
+  "Copia certificada de la Declaración Jurada (DDJJ) de Co.Re.S y Pol.Ad del [DATOS VICTIMA]",
+  "Copia certificada de la Declaración Jurada (DDJJ) de Co.Re.S y Pol.Ad del [DATOS IMPUTADO]",
+  "Copia certificada de la Declaración Jurada (DDJJ) de Co.Re.S y Pol.Ad del [DATOS DENUNCIANTE]",
+  "Copia certificada de la Declaración Jurada (DDJJ) de Co.Re.S y Pol.Ad del [DATOS CAUSANTE]",
+  "Corre agregado de Diligencias",
+  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa del [DATOS VICTIMA]",
+  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa del [DATOS IMPUTADO]",
+  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa del [DATOS DENUNCIANTE]",
+  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa del [DATOS CAUSANTE]",
+  "Croquis ilustrativo sin escalas del lugar de los hechos",
+  "Declaración testimonial del [DATOS VICTIMA] bajo juramento de decir la verdad donde narre el recorrido habitual que realiza habitualmente desde el domicilio al lugar donde presta servicio acompañado con croquis ilustrativo señalando el domicilio declarado del agente, lugar del siniestro y lugar de trabajo",
+  "Declaración testimonial del [DATOS IMPUTADO] bajo juramento de decir la verdad donde narre el recorrido habitual que realiza habitualmente desde el domicilio al lugar donde presta servicio acompañado con croquis ilustrativo señalando el domicilio declarado del agente, lugar del siniestro y lugar de trabajo",
+  "Declaración testimonial del [DATOS DENUNCIANTE] bajo juramento de decir la verdad donde narre el recorrido habitual que realiza habitualmente desde el domicilio al lugar donde presta servicio acompañado con croquis ilustrativo señalando el domicilio declarado del agente, lugar del siniestro y lugar de trabajo",
+  "Declaración testimonial del [DATOS CAUSANTE] bajo juramento de decir la verdad donde narre el recorrido habitual que realiza habitualmente desde el domicilio al lugar donde presta servicio acompañado con croquis ilustrativo señalando el domicilio declarado del agente, lugar del siniestro y lugar de trabajo",
+  "Declaración testimonial del Encargado de Logistica",
+  "Declaración testimonial del Jefe de la Subsección Logística, informando puntualmente: origen patrimonial de la unidad; si la unidad fue radiada de servicio y/o dado de baja patrimonial. En el caso de haberse reparado el vehículo a la fecha, forma en que se ha efectuado tal tarea, como así mismo origen de los fondos y si ello ha generado erogación al fisco y su monto.",
+  "Declaración testimonial del Secretario de Actuaciones Sumariales Administrativas",
+  "Declaración testimonial al Jefe de la División",
+  "Declaración Testimonial y/o Oficio Judicial, informando existencia de medidas cautelares y si siguen en vigencia las medidas restrictivas dispuestas por el Juzgado.",
+  "Decreto inicio actuaciones administrativas",
+  "Denuncia 0800 a AGAI, que diera genesis a los presentes actuados",
+  "Denuncia On-line en el Ministerio publico Fiscal que diera genesis a los presentes actuados",
+  "Informe de tipos, dias, horarios y modalidad de servicio del [DATOS VICTIMA]",
+  "Informe de tipos, dias, horarios y modalidad de servicio del [DATOS IMPUTADO]",
+  "Informe de tipos, dias, horarios y modalidad de servicio del [DATOS DENUNCIANTE]",
+  "Informe de tipos, dias, horarios y modalidad de servicio del [DATOS CAUSANTE]",
+  "Informe si usufructuó licencia médica, copia certificada y legible del sistema informatico (SIPP) resaltando las que correspondan al hecho en pesquisa del [DATOS VICTIMA]",
+  "Informe si usufructuó licencia médica, copia certificada y legible del sistema informatico (SIPP) resaltando las que correspondan al hecho en pesquisa del [DATOS IMPUTADO]",
+  "Informe si usufructuó licencia médica, copia certificada y legible del sistema informatico (SIPP) resaltando las que correspondan al hecho en pesquisa del [DATOS DENUNCIANTE]",
+  "Informe si usufructuó licencia médica, copia certificada y legible del sistema informatico (SIPP) resaltando las que correspondan al hecho en pesquisa del [DATOS CAUSANTE]",
+  "Stud. del Legajo Electrónico Personal (L.E.P.) del [DATOS VICTIMA]",
+  "Stud. del Legajo Electrónico Personal (L.E.P.) del [DATOS IMPUTADO]",
+  "Stud. del Legajo Electrónico Personal (L.E.P.) del [DATOS DENUNCIANTE]",
+  "Stud. del Legajo Electrónico Personal (L.E.P.) del [DATOS CAUSANTE]",
+  "Legajo Electrónico Personal (L.E.P.) del [DATOS VICTIMA]",
+  "Legajo Electrónico Personal (L.E.P.) del [DATOS IMPUTADO]",
+  "Legajo Electrónico Personal (L.E.P.) del [DATOS DENUNCIANTE]",
+  "Legajo Electrónico Personal (L.E.P.) del [DATOS CAUSANTE]",
+  "Stud. Reconocimiento Médico Legal (R.M.L.) del [DATOS VICTIMA]",
+  "Stud. Reconocimiento Médico Legal (R.M.L.) del [DATOS IMPUTADO]",
+  "Stud. Reconocimiento Médico Legal (R.M.L.) del [DATOS DENUNCIANTE]",
+  "Stud. Reconocimiento Médico Legal (R.M.L.) del [DATOS CAUSANTE]",
+  "Reconocimiento Médico Legal (RML) procticado sobre el [DATOS VICTIMA]",
+  "Reconocimiento Médico Legal (RML) procticado sobre el [DATOS IMPUTADO]",
+  "Reconocimiento Médico Legal (RML) procticado sobre el [DATOS DENUNCIANTE]",
+  "Reconocimiento Médico Legal (RML) procticado sobre el [DATOS CAUSANTE]",
+  "STUD. Junta Medica Departamental (JMD), al [DATOS VICTIMA], afines de establecer si: a. Se hallan en condiciones psicofísicas de continuar realizando tareas inherentes a su subescalafón, grado y cargo. b. Si se encuentran apto para portar armas de fuego. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. d. Establecer en su perfil psicológico signos de poseer problemas de consumo problemático de sustancias prohibidas.",
+  "STUD. Junta Medica Departamental (JMD), al [DATOS IMPUTADO], afines de establecer si: a. Se hallan en condiciones psicofísicas de continuar realizando tareas inherentes a su subescalafón, grado y cargo. b. Si se encuentran apto para portar armas de fuego. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. d. Establecer en su perfil psicológico signos de poseer problemas de consumo problemático de sustancias prohibidas.",
+  "STUD. Junta Medica Departamental (JMD), al [DATOS DENUNCIANTE], afines de establecer si: a. Se hallan en condiciones psicofísicas de continuar realizando tareas inherentes a su subescalafón, grado y cargo. b. Si se encuentran apto para portar armas de fuego. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. d. Establecer en su perfil psicológico signos de poseer problemas de consumo problemático de sustancias prohibidas.",
+  "STUD. Junta Medica Departamental (JMD), al [DATOS CAUSANTE], afines de establecer si: a. Se hallan en condiciones psicofísicas de continuar realizando tareas inherentes a su subescalafón, grado y cargo. b. Si se encuentran apto para portar armas de fuego. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. c. Establecer en su perfil psicológico rasgos de persona violenta, resultando peligroso para sí o para terceros. d. Establecer en su perfil psicológico signos de poseer problemas de consumo problemático de sustancias prohibidas.",
+  "Informe de ANMAC-REPAR, del [DATOS VICTIMA]conforme artículo 13 Protocolo para el Abordaje, la Evaluación, y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en Situaciones de Violencia de Género y Violencia Familiar”, aprobado por Resolución del Ministerio de Seguridad Nº 581/2021” (en las actuaciones en que se empleen armas de fuego) a efectos de informar si posee además del armamento provisto y reglamentario, otra arma de fuego.",
+  "Informe de ANMAC-REPAR, del [DATOS IMPUTADO]conforme artículo 13 Protocolo para el Abordaje, la Evaluación, y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en Situaciones de Violencia de Género y Violencia Familiar”, aprobado por Resolución del Ministerio de Seguridad Nº 581/2021” (en las actuaciones en que se empleen armas de fuego) a efectos de informar si posee además del armamento provisto y reglamentario, otra arma de fuego.",
+  "Informe de ANMAC-REPAR, del [DATOS DENUNCIANTE]conforme artículo 13 Protocolo para el Abordaje, la Evaluación, y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en Situaciones de Violencia de Género y Violencia Familiar”, aprobado por Resolución del Ministerio de Seguridad Nº 581/2021” (en las actuaciones en que se empleen armas de fuego) a efectos de informar si posee además del armamento provisto y reglamentario, otra arma de fuego.",
+  "Informe de ANMAC-REPAR, del [DATOS CAUSANTE]conforme artículo 13 Protocolo para el Abordaje, la Evaluación, y el Tratamiento del Personal de las Policías de la Provincia de Buenos Aires en Situaciones de Violencia de Género y Violencia Familiar”, aprobado por Resolución del Ministerio de Seguridad Nº 581/2021” (en las actuaciones en que se empleen armas de fuego) a efectos de informar si posee además del armamento provisto y reglamentario, otra arma de fuego.",
+  "Copia certificada y legible de Denuncia a la aseguradora de riesgos del trabajo (A.R.T.) del [DATOS VICTIMA]",
+  "Copia certificada y legible de Denuncia a la aseguradora de riesgos del trabajo (A.R.T.) del [DATOS IMPUTADO]",
+  "Copia certificada y legible de Denuncia a la aseguradora de riesgos del trabajo (A.R.T.) del [DATOS DENUNCIANTE]",
+  "Copia certificada y legible de Denuncia a la aseguradora de riesgos del trabajo (A.R.T.) del [DATOS CAUSANTE]",
+  "Denuncia por correo electronico a AGAI, que diera genesis a los presentes actuados.",
+  "Copia certificada del constancia de atención del nosocomio que realizó la atención primaria del [DATOS VICTIMA]",
+  "Copia certificada del constancia de atención del nosocomio que realizó la atención primaria del [DATOS IMPUTADO]",
+  "Copia certificada del constancia de atención del nosocomio que realizó la atención primaria del [DATOS DENUNCIANTE]",
+  "Copia certificada del constancia de atención del nosocomio que realizó la atención primaria del [DATOS CAUSANTE]",
+  "Individualizacion del presunto autor por la Direccion de Denuncias y Asesoramiento",
+  "Informe de valor arancelario de Reposición",
+  "Efectuar el pertinente contacto con la denunciante con el objetivo de incorporar a estos todos aquellos elementos que a su criterio tiendan a esclarecer el suceso ahora ventilado, pregunte si aún persisten los hechos denunciados, si tuvo contacto posterior con el denunciado, si volvió a sufrir hechos de violencia. Asimismo, se le pregunte si posee testigos presenciales o testigos de referencia (familiares, vecinas/os, personal de asistencia social, pero tengan conocimiento de los hechos de la Ley 12569). Y de ser así, se les recepcione declaración.",
+  "Informe evaluación de riesgo y socio ambiental de las persona en situación de violencia, [DATOS VICTIMA]por razones de género y/o familiar y grupo familiar elaborado por el equipo Interdisciplinario de Comisaria de la Familia que corresponda por jurisdicción.",
+  "Informe evaluación de riesgo y socio ambiental de las persona en situación de violencia, [DATOS IMPUTADO]por razones de género y/o familiar y grupo familiar elaborado por el equipo Interdisciplinario de Comisaria de la Familia que corresponda por jurisdicción.",
+  "Informe evaluación de riesgo y socio ambiental de las persona en situación de violencia, [DATOS DENUNCIANTE]por razones de género y/o familiar y grupo familiar elaborado por el equipo Interdisciplinario de Comisaria de la Familia que corresponda por jurisdicción.",
+  "Informe evaluación de riesgo y socio ambiental de las persona en situación de violencia, [DATOS CAUSANTE]por razones de género y/o familiar y grupo familiar elaborado por el equipo Interdisciplinario de Comisaria de la Familia que corresponda por jurisdicción.",
+  "Informe existencia de Procesos Penales vinculados a los presentes actuados. En caso de ser positivo informe número de causa, caratula, magistrado interviniente, estado en el que se encuentra y temperamento legal adoptado para con el personal policial interviniente. En caso de encontrarse archivadas, informe fecha, legajo y/o acompañe copia certificada del auto que así lo dispone. Solicito se disponga que la información producida y/o actividad desarrollada por el personal, sea volcada mediante Declaración Testimonial, bajo juramento de ley y demás prescripciones legales.",
+  "Notificación de Auto de Elevacion",
+  "notificación de auto de imputación",
+  "Placas fotográficas del lugar del hecho",
+  "Placas fotográficas del móvil del día de los hechos",
+  "Presentacion de Defensa",
+  "Presupuesto de taller que cotice el costo de las reparaciones de los daños padecidos al móvil policial.",
+  "Providencia que declina AGAI competencia de la faz disciplinaria a la Dirección de control Disciplinario que corresponda.",
+  "Providencia que declina de Direccion Control Disciplinario que ordena la instrucción de la pieza administrativa.",
+  "Resolucion de Defensa",
+  "Stud. de Acogimiento a Procedimiento Abreviado",
+  "Stud. Registro Institucional",
+  "Vademecum - RP21100",
+  "Stud. de Informe de valor arancelario de Reposición del bien patrimonial",
+  "Síntesis y conclusiones",
+  "Copia certificada de Declaración Jurada (DDJJ) de Teléfonos firmada del [DATOS VICTIMA]",
+  "Copia certificada de Declaración Jurada (DDJJ) de Teléfonos firmada del [DATOS IMPUTADO]",
+  "Copia certificada de Declaración Jurada (DDJJ) de Teléfonos firmada del [DATOS DENUNCIANTE]",
+  "Copia certificada de Declaración Jurada (DDJJ) de Teléfonos firmada del [DATOS CAUSANTE]",
+  "Copia certificada de Declaración Jurada (DDJJ) de Vehiculos firmada del [DATOS VICTIMA]",
+  "Copia certificada de Declaración Jurada (DDJJ) de Vehiculos firmada del [DATOS IMPUTADO]",
+  "Copia certificada de Declaración Jurada (DDJJ) de Vehiculos firmada del [DATOS DENUNCIANTE]",
+  "Copia certificada de Declaración Jurada (DDJJ) de Vehiculos firmada del [DATOS CAUSANTE]"
 ];
 
 const listaDestinatariosColumnaG = [
@@ -1154,6 +1290,47 @@ const listaDestinatariosColumnaG = [
 ];
 
 const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27440%27%20height%3D%2790%27%20viewBox%3D%270%200%20440%2090%27%3E%3Crect%20width%3D%27125%27%20height%3D%2750%27%20fill%3D%27%237FD1D6%27%2F%3E%3Ctext%20x%3D%278%27%20y%3D%2722%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3EMINISTERIO%20DE%3C%2Ftext%3E%3Ctext%20x%3D%278%27%20y%3D%2738%27%20font-family%3D%27Arial%27%20font-size%3D%2711%27%20font-weight%3D%27bold%27%20fill%3D%27white%27%3ESEGURIDAD%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2726%27%20font-family%3D%27Arial%27%20font-size%3D%2712%27%20font-weight%3D%27bold%27%20fill%3D%27%23666666%27%3EGOBIERNO%20DE%20LA%20PROVINCIA%20DE%3C%2Ftext%3E%3Ctext%20x%3D%27220%27%20y%3D%2752%27%20font-family%3D%27Arial%27%20font-size%3D%2222%22%20font-weight%3D%27900%27%20fill%3D%27%2351C2D5%27%3EBUENOS%20AIRES%3C%2Ftext%3E%3C%2Fsvg%3E" alt="Logo Ministerio de Seguridad"></div>`;
+
+/* ==========================================================================
+   2. ESTADOS GLOBALES DE LA APLICACIÓN Y REEMPLAZO INTELIGENTE
+   ========================================================================== */
+function reemplazarComodines(texto, d) {
+  if (!texto) return '';
+  return texto
+    .replace(/\[DATOS IMPUTADO\]/g, d.impNombre || '[IMPUTADO]')
+    .replace(/\[DATOS CAUSANTE\]/g, d.cauNombre || '[CAUSANTE]')
+    .replace(/\[DATOS VICTIMA\]/g, d.vicNombre || '[VÍCTIMA]')
+    .replace(/\[DATOS DENUNCIANTE\]/g, d.denNombre || '[DENUNCIANTE]')
+    .replace(/\[FECHA HECHO\]/g, d.fechaHecho || '[FECHA HECHO]');
+}
+
+let diligenciasColDiv = [
+  "Acta de constatación",
+  "Informe de tipos, dias, horarios y modalidad de servicio del [DATOS IMPUTADO]",
+  "Legajo Electrónico Personal (L.E.P.) del [DATOS IMPUTADO]"
+];
+let diligenciasCorreAgregado = [
+  "Stud. Registro Institucional",
+  "Acta de constatación",
+  "Decreto inicio actuaciones administrativas",
+  "comunicación Administrativa -Parte Escrito-"
+];
+let destinatariosParteEscrito = [
+  "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
+  "AL SEÑOR COORDINADOR DEL DEPARTAMENTO DE COORDINACION Y CONTROL DISCIPLINARIO"
+];
+let indiceItems = listaDesplegableColumnaM.slice(0, 10).map(texto => ({ texto, folio: '' }));
+window.cfypTablaEstado = [1, 1, 1, 1, 1, 1];
+window.carpetasMedicasEstado = { opcion: 'noposee', lista: [] };
+window.fotosCargadas = { foto1: null, foto2: null, foto3: null, foto4: null };
+window.zonaFotoSeleccionada = 'foto1';
+window.registrosSeleccionadosLEP = null;
+window.elementosValorArancelario = [];
+window.itemsHistorialAvl = [];
+window.parrafosSintesisPrueba = [
+  { tipo: 'opcion1', foja: '26/26 vta', elemento: 'Concepto Funcional y Personal' },
+  { tipo: 'opcion1', foja: '28/31 vta', elemento: 'Legajo Electrónico Personal (L.E.P.)' }
+];
 
 /* ==========================================================================
    2. ESTADOS GLOBALES DE LA APLICACIÓN
