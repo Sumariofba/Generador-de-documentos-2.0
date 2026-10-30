@@ -811,7 +811,6 @@ body {
           <div class="sheet-row-single"><label>CARGO INSTRUCTOR SUMARIAL:</label><input type="text" id="f_08_cargo_instructor" value="SUBDIRECTOR"></div>
           <div class="sheet-row-single"><label>SECRETARIO DE ACTUACIONES:</label><input type="text" id="f_09_secretario" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
           <div class="sheet-row-single"><label>CARGO DEL SECRETARIO DE ACTUACIONES:</label><input type="text" id="f_10_cargo_secretario" value="DISPONIBLE"></div>
-          <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
           <div class="sheet-row-single"><label>COLABORACIÓN A:</label><select id="f_12_colaboracion" class="select-destino"></select></div>
         </div>
       </div>
@@ -834,6 +833,7 @@ body {
           </div>
           <div class="sheet-row-single"><label>LUGAR DEL HECHO:</label><input type="text" id="f_27_hecho_lugar" value="Ruta Provincial 1001"></div>
           <div class="sheet-row-single"><label>FECHA DEL HECHO:</label><input type="text" id="f_22_hecho_fecha" value="2 de abril del 2026"></div>
+          <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
           <div class="sheet-row-single"><label>ENTRE CALLE 1:</label><input type="text" id="f_31_ec1" value="Achupallas"></div>
           <div class="sheet-row-single"><label>ENTRE CALLE 2:</label><input type="text" id="f_32_ec2" value="B. Llorente"></div>
           <div class="sheet-row-single"><label>LOCALIDAD:</label><input type="text" id="f_39_hecho_loc" value="González Catán"></div>
@@ -1041,15 +1041,15 @@ const listaDestinos = [
 ];
 
 const listaCircunstanciasColumnaO = [
-  "Servicio de Policia Adicional (PolAd)",
+  "Servicio de Policia Adicional (Pol.Ad)",
   "Servicio Ordinario",
   "Servicio Co.Re.S.",
   "Franco de servicio -en cumplimiento del deber-",
   "Franco de servicio -camino a su domicilio-",
   "Franco de servicio -camino a su lugar de trabajo-",
-  "Franco de servicio -uso particular-",
+  "Franco de servicio",
   "Disponibilidad",
-  "Retiro Activo"
+  " "
 ];
 
 const listaDesplegableColumnaM = [
@@ -1083,13 +1083,33 @@ const listaDesplegableColumnaM = [
 ];
 
 const listaDiligenciasColumnaC = [
-  "Informe de tipo, días y horario de servicio",
+  "Stud. Registro Institucional",
+  "Acta de constatación",
+  "Denuncia a la aseguradora de riesgos del trabajo (A.R.T.)",
+  "Decreto inicio actuaciones administrativas",
+  "Comunicación Administrativa -Parte Escrito-",
+  "Corre agregado",
+  "Captura del Sistema Informático del Personal Policial (SIPP) - INFO DEL EFECTIVO",
+  "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
+  "Vademécum - RP21100",
   "Concepto Funcional y Personal",
+  "Informe de tipo, días y horario de servicio",
+  "Stud. Legajo Electrónico Personal (L.E.P.)",
+  "Legajo Electrónico Personal (L.E.P.)",
   "Copia certificada con habilitación del Libro de novedades de la guardia",
   "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
-  "Legajo Electrónico Personal (L.E.P.)",
-  "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
-  "Informe de Comportamiento y Seguimiento laboral"
+  "Acta de Inspección ocular del lugar de los hechos",
+  "Croquis ilustrativo sin escalas del lugar del hechos",
+  "Placas fotográficas del lugar del hecho",
+  "Declaración testimonial del Encargado de Logística",
+  "Declaración testimonial del causante",
+  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa",
+  "Historia Clínica del causante",
+  "Copia certificado de constancia de ALTA / FIN DE TRATAMIENTO ART del causante",
+  "Stud. Reconocimiento Médico Legal (R.M.L.) al causante",
+  "Reconocimiento Médico Legal (R.M.L.) del causante",
+  "Cierre de actuaciones administrativas",
+  "Síntesis y conclusiones"
 ];
 
 const listaDestinatariosColumnaG = [
@@ -1110,12 +1130,33 @@ const logoSVG = `<div class="doc-header-logo"><img src="data:image/svg+xml;chars
    ========================================================================== */
 let diligenciasColDiv = [...listaDiligenciasColumnaC];
 let diligenciasCorreAgregado = [
+  "Stud. Registro Institucional",
+  "Acta de constatación",
+  "Denuncia a la aseguradora de riesgos del trabajo (A.R.T.)",
+  "Decreto inicio actuaciones administrativas",
+  "Comunicación Administrativa -Parte Escrito-",
+  "Corre agregado",
+  "Captura del Sistema Informático del Personal Policial (SIPP) - INFO DEL EFECTIVO",
+  "Situación de revista del efectivo generado por el Sistema Informático (SIPP)",
+  "Vademécum - RP21100",
   "Concepto Funcional y Personal",
   "Informe de tipo, días y horario de servicio",
   "Stud. Legajo Electrónico Personal (L.E.P.)",
   "Legajo Electrónico Personal (L.E.P.)",
   "Copia certificada con habilitación del Libro de novedades de la guardia",
-  "Copia certificada con habilitación Libro de presentismo y Co.Re.S."
+  "Copia certificada con habilitación Libro de presentismo y Co.Re.S.",
+  "Acta de Inspección ocular del lugar de los hechos",
+  "Croquis ilustrativo sin escalas del lugar del hechos",
+  "Placas fotográficas del lugar del hecho",
+  "Declaración testimonial del Encargado de Logística",
+  "Declaración testimonial del causante",
+  "Croquis ilustrativo del recorrido del causante de su domicilio a su destino laboral y viceversa",
+  "Historia Clínica del causante",
+  "Copia certificado de constancia de ALTA / FIN DE TRATAMIENTO ART del causante",
+  "Stud. Reconocimiento Médico Legal (R.M.L.) al causante",
+  "Reconocimiento Médico Legal (R.M.L.) del causante",
+  "Cierre de actuaciones administrativas",
+  "Síntesis y conclusiones"
 ];
 let destinatariosParteEscrito = [
   "AL SEÑOR AUDITOR DE LA AUDITORIA GENERAL DE ASUNTOS INTERNOS",
