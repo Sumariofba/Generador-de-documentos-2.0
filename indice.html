@@ -671,7 +671,6 @@ body {
           <div class="sheet-row-single"><label>CARGO INSTRUCTOR SUMARIAL:</label><input type="text" id="f_08_cargo_instructor" value="SUBDIRECTOR"></div>
           <div class="sheet-row-single"><label>SECRETARIO DE ACTUACIONES:</label><input type="text" id="f_09_secretario" value="OFICIAL SUBAYUDANTE (CDO.) FLORENCIA MILENA ZALAZAR"></div>
           <div class="sheet-row-single"><label>CARGO DEL SECRETARIO DE ACTUACIONES:</label><input type="text" id="f_10_cargo_secretario" value="DISPONIBLE"></div>
-          <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
           <div class="sheet-row-single"><label>COLABORACION A:</label><select id="f_12_colaboracion" class="select-destino"></select></div>
         </div>
       </div>
@@ -684,6 +683,7 @@ body {
         </div>
         <div class="sheet-card-body">
           <div class="sheet-row-single"><label>FECHA DEL HECHO:</label><input type="text" id="f_22_hecho_fecha" value="2 de abril del 2026"></div>
+          <div class="sheet-row-single"><label>HORA DEL HECHO:</label><input type="text" id="f_18_hecho_hora" value="08.30 horas"></div>
           <div class="sheet-row-single"><label>EXP. ELECTRONICO N°:</label><input type="text" id="f_23_exp_elec" value="EX-2026-16420475- -GDEBA-DDPRYGEMSGP"></div>
           <div class="sheet-row-single"><label>CARATULA ADMINISTRATIVA:</label><input type="text" id="f_24_caratula" value="21100 - 082162/2026 - DN154527"></div>
           <div class="sheet-row-single"><label>ENCUADRE ADMINISTRATIVO:</label><input type="text" id="f_25_encuadre" value="-sin encuadre administrativo-"></div>
@@ -749,10 +749,10 @@ body {
         </div>
       </div>
 
-      <!-- Bloque 5: DATOS DEL DENUNCIANTE / TESTIGO -->
+      <!-- Bloque 5: DATOS DEL DENUNCIANTE -->
       <div class="sheet-card-block">
         <div class="sheet-card-header">
-          <span>📢 5. DATOS DEL DENUNCIANTE / TESTIGO</span>
+          <span>📢 5. DATOS DEL DENUNCIANTE</span>
           <span class="toggle-icon">▼</span>
         </div>
         <div class="sheet-card-body">
@@ -904,9 +904,9 @@ const listaCircunstanciasColumnaO = [
   "Franco de servicio -en cumplimiento del deber-",
   "Franco de servicio -camino a su domicilio-",
   "Franco de servicio -camino a su lugar de trabajo-",
-  "Franco de servicio -uso particular-",
+  "Franco de servicio",
   "Disponibilidad",
-  "Retiro Activo"
+  ""
 ];
 
 const listaDesplegableColumnaM = [
